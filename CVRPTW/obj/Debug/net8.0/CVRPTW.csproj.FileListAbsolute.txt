@@ -1,0 +1,15 @@
+D:\CSharpProjects\CVRPTW\CVRPTW\bin\Debug\net8.0\CVRPTW.exe
+D:\CSharpProjects\CVRPTW\CVRPTW\bin\Debug\net8.0\CVRPTW.deps.json
+D:\CSharpProjects\CVRPTW\CVRPTW\bin\Debug\net8.0\CVRPTW.runtimeconfig.json
+D:\CSharpProjects\CVRPTW\CVRPTW\bin\Debug\net8.0\CVRPTW.dll
+D:\CSharpProjects\CVRPTW\CVRPTW\bin\Debug\net8.0\CVRPTW.pdb
+D:\CSharpProjects\CVRPTW\CVRPTW\obj\Debug\net8.0\CVRPTW.GeneratedMSBuildEditorConfig.editorconfig
+D:\CSharpProjects\CVRPTW\CVRPTW\obj\Debug\net8.0\CVRPTW.AssemblyInfoInputs.cache
+D:\CSharpProjects\CVRPTW\CVRPTW\obj\Debug\net8.0\CVRPTW.AssemblyInfo.cs
+D:\CSharpProjects\CVRPTW\CVRPTW\obj\Debug\net8.0\CVRPTW.csproj.CoreCompileInputs.cache
+D:\CSharpProjects\CVRPTW\CVRPTW\obj\Debug\net8.0\CVRPTW.sourcelink.json
+D:\CSharpProjects\CVRPTW\CVRPTW\obj\Debug\net8.0\CVRPTW.dll
+D:\CSharpProjects\CVRPTW\CVRPTW\obj\Debug\net8.0\refint\CVRPTW.dll
+D:\CSharpProjects\CVRPTW\CVRPTW\obj\Debug\net8.0\CVRPTW.pdb
+D:\CSharpProjects\CVRPTW\CVRPTW\obj\Debug\net8.0\CVRPTW.genruntimeconfig.cache
+D:\CSharpProjects\CVRPTW\CVRPTW\obj\Debug\net8.0\ref\CVRPTW.dll

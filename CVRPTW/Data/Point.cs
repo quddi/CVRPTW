@@ -1,11 +1,5 @@
 ﻿namespace CVRPTW;
 
-/*
- * comps - unic position index\id\latitude\longitude\demand\[open tw\
- * close tw у секундах від початку доби (можуть бути + tw)]\service time\
- * -\late penalty - штраф за одну хвилину запізнення, додається до цільової
- * функції\wait штраф\-\-\-\-
- */
 public class Point
 {
     public int Comp { get; set; }

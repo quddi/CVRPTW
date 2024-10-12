@@ -27,12 +27,13 @@ public class CarDataParser : DataParser<Car>
         ParseMaxCapacityPenalty();
         ParseTariff();
         ParseMaxTripsCount();
+        ParseWaitBetweenTrips();
         
         var car = _result;
         
         ClearState();
         
-        return car;
+        return car!;
     }
 
     private void ParseId()
@@ -80,7 +81,7 @@ public class CarDataParser : DataParser<Car>
         
         foreach (var element in subSplit)
         {
-            _result!.PointsInfos.Add(new PointInfo
+            _result!.PointsInfos.Add(new PointVisitInfo
             (
                 element == Constants.AnyPointElementValue ? null : int.Parse(element)
             ));

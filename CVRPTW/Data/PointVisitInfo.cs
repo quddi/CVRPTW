@@ -1,6 +1,6 @@
 ﻿namespace CVRPTW;
 
-public struct PointInfo(int? id)
+public struct PointVisitInfo(int? id)
 {
     public int? Id { get; set; } = id;
 

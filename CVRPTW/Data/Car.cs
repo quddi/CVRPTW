@@ -11,7 +11,7 @@ public class Car
     
     public int OverloadPenalty { get; set; }
     
-    public List<PointInfo> PointsInfos { get; set; }
+    public List<PointVisitInfo> PointsInfos { get; set; }
     
     public int DriverOvertimePenalty { get; set; }
     
