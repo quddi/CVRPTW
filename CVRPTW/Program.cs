@@ -1,3 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using CVRPTW;
+using CVRPTW.ParserParameters;
 
-Console.WriteLine("Hello, World!");
+CarDataParser carDataParser = new();
+
+var car = carDataParser.Parse(Console.ReadLine()!, new DataParserParameters { Demand = 1 });
+
+Console.WriteLine(car);

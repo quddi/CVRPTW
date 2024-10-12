@@ -1,6 +1,6 @@
-﻿namespace CVRPTW.Data;
+﻿namespace CVRPTW;
 
-public class Tariffs : IData
+public class Tariffs
 {
     private Dictionary<int, Dictionary<int, Dictionary<int, double>>> _tariffs;
 

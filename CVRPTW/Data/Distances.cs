@@ -1,6 +1,6 @@
-﻿namespace CVRPTW.Data;
+﻿namespace CVRPTW;
 
-public class Distances : IData
+public class Distances
 {
     private Dictionary<int, Dictionary<int, Dictionary<int, double>>> _distances;
 

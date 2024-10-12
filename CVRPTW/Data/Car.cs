@@ -1,13 +1,7 @@
-﻿namespace CVRPTW.Data;
+﻿namespace CVRPTW;
 
-/*
- * id\capacity (* demand)\tw open\tw close\overload penalty\
- * (start point id; *; end point id)\-\driver overtime penalty\
- * can start late (-?)\max capacity (Ukraine only)\max capacity
- * penalty\тариф\max trip count (always 1)\wait between trips
- * (always 0)\-\-\-\-\-\-\-\-\-
- */
-public class Car : IData
+
+public class Car
 {
     public int Id { get; set; }
     
@@ -17,11 +11,9 @@ public class Car : IData
     
     public int OverloadPenalty { get; set; }
     
-    public IdsList PointsIds { get; set; }
+    public List<PointInfo> PointsInfos { get; set; }
     
     public int DriverOvertimePenalty { get; set; }
-    
-    public bool CanStartLate { get; set; }
     
     public int MaxCapacity { get; set; }
     

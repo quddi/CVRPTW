@@ -1,4 +1,4 @@
-﻿namespace CVRPTW.Data;
+﻿namespace CVRPTW;
 
 /*
  * comps - unic position index\id\latitude\longitude\demand\[open tw\
@@ -6,7 +6,7 @@
  * -\late penalty - штраф за одну хвилину запізнення, додається до цільової
  * функції\wait штраф\-\-\-\-
  */
-public class Point : IData
+public class Point
 {
     public int Comp { get; set; }
     

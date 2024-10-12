@@ -1,6 +1,6 @@
-﻿namespace CVRPTW.Data;
+﻿namespace CVRPTW;
 
-public class TimeWindow : IData
+public class TimeWindow
 {
     public int Start { get; set; }
     

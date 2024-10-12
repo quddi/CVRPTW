@@ -1,6 +1,6 @@
-﻿namespace CVRPTW.Data;
+﻿namespace CVRPTW;
 
-public class AlternativePoints : IData
+public class AlternativePoints
 {
     private Dictionary<int, int> _alternativePoint;
 

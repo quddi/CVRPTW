@@ -1,6 +1,6 @@
-﻿namespace CVRPTW.Data;
+﻿namespace CVRPTW;
 
-public class Times : IData
+public class Times
 {
     private Dictionary<int, Dictionary<int, Dictionary<int, double>>> _times;
 
