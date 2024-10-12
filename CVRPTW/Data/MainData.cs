@@ -10,7 +10,15 @@ public class MainData
     
     public int MaxCompsOverload { get; set; }
     
-    public List<Point> Points { get; set; }
+    public Distances Distances { get; set; }
     
-    public List<Car> Cars { get; set; }
+    public Tariffs Tariffs { get; set; }
+    
+    public Times Times { get; set; }
+    
+    public AlternativePoints AlternativePoints { get; set; }
+    
+    public List<Point> Points { get; set; } = new();
+
+    public List<Car> Cars { get; set; } = new();
 }

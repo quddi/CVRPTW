@@ -2,7 +2,7 @@
 
 namespace CVRPTW;
 
-public class DistancesDataParser : MatrixDataParser<Distances>
+public class DistancesDataParser : LinedStreamDataParser<Distances>
 {
     protected override void ManageLine(string lastReadLine, Distances distances)
     {

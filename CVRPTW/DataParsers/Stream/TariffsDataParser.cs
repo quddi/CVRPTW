@@ -2,7 +2,7 @@
 
 namespace CVRPTW;
 
-public class TariffsDataParser : MatrixDataParser<Tariffs>
+public class TariffsDataParser : LinedStreamDataParser<Tariffs>
 {
     protected override void ManageLine(string lastReadLine, Tariffs tariffs)
     {

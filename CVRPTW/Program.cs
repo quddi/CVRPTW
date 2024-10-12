@@ -1,5 +1,4 @@
 ﻿using CVRPTW;
-using CVRPTW.ParserParameters;
 
 PointDataParser carDataParser = new();
 

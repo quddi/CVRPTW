@@ -1,6 +1,4 @@
-﻿using CVRPTW.ParserParameters;
-
-namespace CVRPTW;
+﻿namespace CVRPTW;
 
 public abstract class LineDataParser<T> where T : class, new()
 {

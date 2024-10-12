@@ -1,6 +1,4 @@
-﻿using CVRPTW.ParserParameters;
-
-namespace CVRPTW;
+﻿namespace CVRPTW;
 
 /*
  * id\capacity (* demand)\tw open\tw close\overload penalty\

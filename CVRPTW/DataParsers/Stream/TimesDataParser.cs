@@ -1,6 +1,6 @@
 ﻿namespace CVRPTW;
 
-public class TimesDataParser : MatrixDataParser<Times>
+public class TimesDataParser : LinedStreamDataParser<Times>
 {
     protected override void ManageLine(string lastReadLine, Times times)
     {

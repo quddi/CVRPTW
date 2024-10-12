@@ -1,4 +1,4 @@
-﻿namespace CVRPTW.ParserParameters;
+﻿namespace CVRPTW;
 
 public struct DataParserParameters
 {
