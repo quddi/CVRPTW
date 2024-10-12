@@ -1,7 +1,17 @@
-﻿using CVRPTW;
+﻿namespace CVRPTW;
 
-PointDataParser carDataParser = new();
+static class Program
+{
+    private static void Main()
+    {
+        var path = @"C:\Users\Admin\Desktop\Диплом\original.txt";
+        MainData mainData;
 
-var point = carDataParser.Parse(Console.ReadLine()!, new DataParserParameters { Demand = 1 });
+        using (var streamReader = new StreamReader(path))
+        {
+            mainData = Singleton.OfType<MainParser>().Parse(streamReader);
+        }
 
-Console.WriteLine(point);
+        Console.WriteLine(mainData);
+    }
+}

@@ -6,7 +6,7 @@ public class DistancesDataParser : LinedStreamDataParser<Distances>
 {
     protected override void ManageLine(string lastReadLine, Distances distances)
     {
-        var split = lastReadLine.Split();
+        var split = lastReadLine.Split(Constants.DefaultSplitDividers);
         var matrixIndex = int.Parse(split[0]);
         var firstPointId = int.Parse(split[1]);
         var secondPointId = int.Parse(split[2]);

@@ -16,6 +16,7 @@ public class MainParser : StreamDataParser<MainData>
         ParseDistances(mainData, streamReader);
         ParseTimes(mainData, streamReader);
         ParseTariffs(mainData, streamReader);
+        SkipSection(streamReader);
         ParseAlternativePoints(mainData, streamReader);
         
         return mainData;
@@ -70,6 +71,8 @@ public class MainParser : StreamDataParser<MainData>
 
     private void ParseCommonParameters(MainData mainData, StreamReader streamReader)
     {
+        SkipLines(streamReader, 1);
+        
         mainData.MaxOverload = int.Parse(streamReader.ReadLine()!.Split(Constants.DefaultSplitDividers)[1]);
         mainData.MaxCompsOverload = int.Parse(streamReader.ReadLine()!.Split(Constants.DefaultSplitDividers)[1]);
         
@@ -101,6 +104,17 @@ public class MainParser : StreamDataParser<MainData>
         for (int i = 0; i < count; i++)
         {
             streamReader.ReadLine();
+        }
+    }
+    
+    private void SkipSection(StreamReader streamReader)
+    {
+        while (true)
+        {
+            var line = streamReader.ReadLine();
+            
+            if (string.IsNullOrEmpty(line) || line.IsDividerLine())
+                return;
         }
     }
 }

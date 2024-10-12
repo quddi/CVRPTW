@@ -12,6 +12,7 @@ public abstract class LinedStreamDataParser<T> : StreamDataParser<T> where T : c
         while (!string.IsNullOrEmpty(lastReadLine) && !lastReadLine.IsDividerLine())
         {
             ManageLine(lastReadLine, t);
+            lastReadLine = streamReader.ReadLine();
         }
 
         return t;

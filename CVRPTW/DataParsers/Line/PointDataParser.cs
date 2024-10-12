@@ -62,7 +62,7 @@ public class PointDataParser : LineDataParser<Point>
     
     private void ParseDemand()
     {
-        _result!.Demand = int.Parse(_split![_splitIndex!.Value]);
+        _result!.Demand = double.Parse(_split![_splitIndex!.Value], CultureInfo.InvariantCulture);
 
         _splitIndex++;
     }
@@ -83,7 +83,7 @@ public class PointDataParser : LineDataParser<Point>
             );
         }
 
-        _splitIndex += _result!.Demand * 2;
+        _splitIndex += _parameters!.Value.Demand * 2;
     }
     
     private void ParseServiceTime()

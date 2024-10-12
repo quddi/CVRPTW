@@ -10,7 +10,7 @@ public class Point
     
     public double Longitude { get; set; }
     
-    public int Demand { get; set; }
+    public double Demand { get; set; }
     
     public List<TimeWindow> TimeWindows { get; set; }
     
