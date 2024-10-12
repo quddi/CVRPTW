@@ -9,7 +9,7 @@ namespace CVRPTW;
  * penalty\тариф\max trip count (always 1)\wait between trips
  * (always 0)\-\-\-\-\-\-\-\-\-
  */
-public class CarDataParser : DataParser<Car>
+public class CarDataParser : LineDataParser<Car>
 {
     public override Car Parse(string line, DataParserParameters dataParserParameters)
     {

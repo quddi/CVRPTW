@@ -6,12 +6,11 @@ public class MainData
     
     public int TimeWindows { get; set; }
     
+    public int MaxOverload { get; set; }
+    
+    public int MaxCompsOverload { get; set; }
+    
     public List<Point> Points { get; set; }
     
     public List<Car> Cars { get; set; }
-    
-    public MainData(StreamReader streamReader)
-    {
-        
-    }
 }

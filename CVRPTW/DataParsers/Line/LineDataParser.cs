@@ -2,7 +2,7 @@
 
 namespace CVRPTW;
 
-public abstract class DataParser<T> where T : class, new()
+public abstract class LineDataParser<T> where T : class, new()
 {
     protected string? _line;
     protected DataParserParameters? _parameters;

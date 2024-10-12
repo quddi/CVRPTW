@@ -9,7 +9,7 @@ namespace CVRPTW;
  * -\late penalty - штраф за одну хвилину запізнення, додається до цільової
  * функції\wait штраф\-\-\-\-
  */
-public class PointDataParser : DataParser<Point>
+public class PointDataParser : LineDataParser<Point>
 {
     public override Point Parse(string line, DataParserParameters dataParserParameters)
     {
