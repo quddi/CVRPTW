@@ -16,8 +16,7 @@ public class PointDataParser : LineDataParser<Point>
 
         ParseComp();
         ParseId();
-        ParseLatitude();
-        ParseLongitude();
+        ParseCoordinates();
         ParseDemand();
         ParseTimeWindows();
         ParseServiceTime();
@@ -46,18 +45,16 @@ public class PointDataParser : LineDataParser<Point>
         _splitIndex++;
     }
     
-    private void ParseLatitude()
+    private void ParseCoordinates()
     {
-        _result!.Latitude = double.Parse(_split![_splitIndex!.Value], CultureInfo.InvariantCulture);
+        var coordinates = new Coordinates();
+        
+        coordinates.Latitude = double.Parse(_split![_splitIndex!.Value], CultureInfo.InvariantCulture);
+        coordinates.Latitude = double.Parse(_split![_splitIndex!.Value + 1], CultureInfo.InvariantCulture);
 
-        _splitIndex++;
-    }
-    
-    private void ParseLongitude()
-    {
-        _result!.Longitude = double.Parse(_split![_splitIndex!.Value], CultureInfo.InvariantCulture);
+        _result!.Coordinates = coordinates;
 
-        _splitIndex++;
+        _splitIndex += 2;
     }
     
     private void ParseDemand()

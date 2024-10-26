@@ -16,9 +16,11 @@ public class MainData
     
     public Times Times { get; set; }
     
-    public AlternativePoints AlternativePoints { get; set; }
+    public Point DepoPoint { get; set; }
     
     public List<Point> Points { get; set; } = new();
+    
+    public AlternativePoints AlternativePoints { get; set; }
 
     public List<Car> Cars { get; set; } = new();
 }
