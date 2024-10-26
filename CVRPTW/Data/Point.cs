@@ -17,4 +17,9 @@ public class Point
     public int LatePenalty { get; set; }
 
     public int WaitPenalty { get; set; }
+
+    public override string ToString()
+    {
+        return $"{nameof(Point)}: {Id}, {Coordinates}";
+    }
 }

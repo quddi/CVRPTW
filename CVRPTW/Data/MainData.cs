@@ -18,7 +18,7 @@ public class MainData
     
     public Point DepoPoint { get; set; }
     
-    public List<Point> Points { get; set; } = new();
+    public Dictionary<int, Point> Points { get; set; } = new();
     
     public AlternativePoints AlternativePoints { get; set; }
 

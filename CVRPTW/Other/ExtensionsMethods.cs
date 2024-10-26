@@ -12,6 +12,12 @@ public static class ExtensionsMethods
         return list[System.Random.Shared.Next(list.Count)];
     }
     
+    public static T2 RandomValue<T2>(this Dictionary<int,T2> dictionary)
+    {
+        return dictionary[System.Random.Shared.Next(dictionary.Count)];
+    }
+
+    
     public static void Shuffle<T>(this IList<T> list)
     {
         int n = list.Count;  
@@ -34,6 +40,4 @@ public static class ExtensionsMethods
 
         return first;
     }
-    
-    
 }

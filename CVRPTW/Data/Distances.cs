@@ -2,23 +2,30 @@
 
 public class Distances
 {
-    private Dictionary<int, Dictionary<int, Dictionary<int, double>>> _distances = new();
+    public Dictionary<int, Dictionary<int, Dictionary<int, double>>> Matrix { get; private set; } = new();
 
-    public int MatricesCount => _distances.Count;
+    public int MatricesCount => Matrix.Count;
     
     public double GetDistance(int matrixIndex, int firstPointId, int secondPointId)
     {
-        return _distances[matrixIndex][firstPointId][secondPointId];
+        return Matrix[matrixIndex][firstPointId][secondPointId];
     }
 
     public void AddDistance(int matrixIndex, int firstPointId, int secondPointId, double distance)
     {
-        if (!_distances.ContainsKey(matrixIndex)) 
-            _distances[matrixIndex] = new();
+        if (!Matrix.ContainsKey(matrixIndex)) 
+            Matrix[matrixIndex] = new();
         
-        if (!_distances[matrixIndex].ContainsKey(firstPointId)) 
-            _distances[matrixIndex][firstPointId] = new();
+        if (!Matrix[matrixIndex].ContainsKey(firstPointId)) 
+            Matrix[matrixIndex][firstPointId] = new();
         
-        _distances[matrixIndex][firstPointId][secondPointId] = distance;
+        Matrix[matrixIndex][firstPointId][secondPointId] = distance;
+    }
+
+    public int GetNearestPointId(int matrixIndex, int fromPointId)
+    {
+        var toPointsDistances = Matrix[matrixIndex][fromPointId];
+
+        return toPointsDistances.MinBy(pair => pair.Value).Key;
     }
 }

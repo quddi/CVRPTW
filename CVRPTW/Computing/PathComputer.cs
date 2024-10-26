@@ -4,7 +4,7 @@ public abstract class PathComputer
 {
     protected MainData? _mainData;
 
-    public List<CarResult> Compute(MainData mainData)
+    public virtual List<CarResult> Compute(MainData mainData)
     {
         _mainData = mainData;
 

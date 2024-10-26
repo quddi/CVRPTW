@@ -10,13 +10,14 @@ static class Program
         //2opt) Покращити 1, 
         var path = @"C:\Users\Admin\Desktop\Диплом\original.txt";
         MainData mainData;
-
         using (var streamReader = new StreamReader(path))
         {
             mainData = Singleton.OfType<MainParser>().Parse(streamReader);
         }
 
-        var result = Singleton.OfType<SimplePathComputer>().Compute(mainData);
+        //mainData.Cars = mainData.Cars.Take(1).ToList();
+
+        var result = Singleton.OfType<NearestPathComputer>().Compute(mainData);
         
         Console.WriteLine(string.Join("\n", result));
     }
