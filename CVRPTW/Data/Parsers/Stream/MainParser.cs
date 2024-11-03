@@ -55,6 +55,8 @@ public class MainParser : StreamDataParser<MainData>
     private void ParsePoints(MainData result, StreamReader streamReader, DataParserParameters parserParameters)
     {
         var parser = Singleton.OfType<PointDataParser>();
+
+        var index = 0;
         
         while (true)
         {
@@ -65,8 +67,11 @@ public class MainParser : StreamDataParser<MainData>
 
             var point = parser.Parse(line, parserParameters);
 
+            point.Index = index;
+            index++;
+            
             if (point.Id == Constants.DepoPointId) result.DepoPoint = point;
-            else result.Points.Add(point.Id, point);
+            else result.Points.Add(point.Index, point);
         }
     }
 

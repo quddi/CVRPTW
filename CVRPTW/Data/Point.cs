@@ -6,6 +6,8 @@ public class Point
     
     public int Id { get; set; }
     
+    public int Index { get; set; }
+    
     public Coordinates Coordinates { get; set; }
     
     public double Demand { get; set; }
@@ -20,6 +22,6 @@ public class Point
 
     public override string ToString()
     {
-        return $"{nameof(Point)}: {Id}, {Coordinates}";
+        return $"{nameof(Point)}: {Id}, {Index}, {Coordinates}";
     }
 }

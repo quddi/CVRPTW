@@ -14,26 +14,27 @@ public abstract class VisitingPathComputer : IteratedPathComputer
         _notVisitedPoints.Shuffle();
 
         var carResult = new CarResult(car);
+        carResult.Path.StartPointId = startPoint.Index;
+        carResult.Path.EndPointId = startPoint.Index;
 
         while (_notVisitedPoints.Any())
         {
             var nextPoint = GetNextPoint(currentPoint);
 
             var distance = _mainData.Distances.GetDistance(Constants.DefaultMatrixId,
-                currentPoint.Id, nextPoint.Id);
+                currentPoint.Index, nextPoint.Index);
 
             carResult.PathCost += distance;
-            carResult.PathPointsIds.Add(currentPoint.Id);
+            carResult.Path.PathPointsIds.Add(nextPoint.Index);
             _notVisitedPoints.Remove(nextPoint);
 
             currentPoint = nextPoint;
         }
 
         var returnDistance = _mainData.Distances.GetDistance(Constants.DefaultMatrixId,
-            carResult.PathPointsIds.Last(), startPoint.Id);
+            carResult.Path.PathPointsIds.Last(), startPoint.Index);
 
         carResult.PathCost += returnDistance;
-        carResult.PathPointsIds.Add(startPoint.Id);
 
         _notVisitedPoints.Clear();
         
