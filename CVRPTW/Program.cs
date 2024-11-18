@@ -1,4 +1,6 @@
 ﻿using CVRPTW.Computing;
+using CVRPTW.Computing.Estimators;
+using CVRPTW.Computing.Optimizers;
 
 namespace CVRPTW;
 
@@ -15,10 +17,18 @@ static class Program
             mainData = Singleton.OfType<MainParser>().Parse(streamReader);
         }
 
-        //mainData.Cars = mainData.Cars.Take(1).ToList();
+        var results = Singleton.OfType<NearestPathComputer>().Compute(mainData);
+        var optimizer = new CarResultOptimizer(new DistancePathEstimator(mainData));
 
-        var result = Singleton.OfType<NearestPathComputer>().Compute(mainData);
-        
-        Console.WriteLine(string.Join("\n", result));
+        foreach (var carResult in results)
+        {
+            Console.WriteLine($"Default: {carResult}");
+            
+            optimizer.Optimize(carResult);
+            
+            Console.WriteLine($"Optimized: {carResult}");
+
+            Console.WriteLine();
+        }
     }
 }
