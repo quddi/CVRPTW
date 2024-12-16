@@ -1,4 +1,6 @@
-﻿namespace CVRPTW;
+﻿using System.Collections;
+
+namespace CVRPTW;
 
 public static class ExtensionsMethods
 {
@@ -39,5 +41,47 @@ public static class ExtensionsMethods
         list.RemoveAt(0);
 
         return first;
+    }
+
+    public static void Invert<T>(this IList[] array, int fromIndex, int toIndex)
+    {
+        ArgumentNullException.ThrowIfNull(array);
+
+        if (fromIndex < 0)
+            throw new ArgumentOutOfRangeException(nameof(fromIndex), "fromIndex is less than 0.");
+
+        if (toIndex >= array.Length)
+            throw new ArgumentOutOfRangeException(nameof(toIndex), "toIndex is greater than or equal to the array length.");
+
+        if (fromIndex > toIndex)
+            throw new ArgumentException("fromIndex is greater than toIndex.");
+
+        while (fromIndex < toIndex)
+        {
+            (array[fromIndex], array[toIndex]) = (array[toIndex], array[fromIndex]);
+            fromIndex++;
+            toIndex--;
+        }
+    }
+    
+    public static void Invert(this CarPath path, int fromIndex, int toIndex)
+    {
+        ArgumentNullException.ThrowIfNull(path);
+
+        if (fromIndex < 0)
+            throw new ArgumentOutOfRangeException(nameof(fromIndex), "fromIndex is less than 0.");
+
+        if (toIndex >= path.Length)
+            throw new ArgumentOutOfRangeException(nameof(toIndex), "toIndex is greater than or equal to the array length.");
+
+        if (fromIndex > toIndex)
+            throw new ArgumentException("fromIndex is greater than toIndex.");
+
+        while (fromIndex < toIndex)
+        {
+            (path[fromIndex], path[toIndex]) = (path[toIndex], path[fromIndex]);
+            fromIndex++;
+            toIndex--;
+        }
     }
 }

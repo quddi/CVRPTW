@@ -9,7 +9,7 @@ public class CarPath
     public List<int> PathPointsIds { get; set; } = new();
 
     public int Length => PathPointsIds.Count + 2;
-
+    
     public int this[int index]
     {
         get

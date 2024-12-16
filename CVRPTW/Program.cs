@@ -18,7 +18,7 @@ static class Program
         }
 
         var results = Singleton.OfType<NearestPathComputer>().Compute(mainData);
-        var optimizer = new CarResultOptimizer(new DistancePathEstimator(mainData));
+        var optimizer = new Opt2CartResultOptimizer(new DistancePathEstimator(mainData));
 
         foreach (var carResult in results)
         {
