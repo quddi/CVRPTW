@@ -16,9 +16,10 @@ static class Program
         {
             mainData = Singleton.OfType<MainParser>().Parse(streamReader);
         }
+        var estimator = new DistancePathEstimator(mainData);
 
-        var results = Singleton.OfType<NearestPathComputer>().Compute(mainData);
-        var optimizer = new Opt2CartResultOptimizer(new DistancePathEstimator(mainData));
+        var results = Singleton.OfType<NearestPathComputer>().Compute(mainData, estimator);
+        var optimizer = new Opt2CarResultOptimizer(estimator);
 
         foreach (var carResult in results)
         {

@@ -21,8 +21,7 @@ public abstract class VisitingPathComputer : IteratedPathComputer
         {
             var nextPoint = GetNextPoint(currentPoint);
 
-            var distance = _mainData.Distances.GetDistance(Constants.DefaultMatrixId,
-                currentPoint.Index, nextPoint.Index);
+            var distance = _pathEstimator!.Estimate(currentPoint.Id, nextPoint.Id);
 
             carResult.PathCost += distance;
             carResult.Path.PathPointsIds.Add(nextPoint.Index);
@@ -31,8 +30,7 @@ public abstract class VisitingPathComputer : IteratedPathComputer
             currentPoint = nextPoint;
         }
 
-        var returnDistance = _mainData.Distances.GetDistance(Constants.DefaultMatrixId,
-            carResult.Path.PathPointsIds.Last(), startPoint.Index);
+        var returnDistance = _pathEstimator!.Estimate(carResult.Path.PathPointsIds.Last(), startPoint.Id);
 
         carResult.PathCost += returnDistance;
 

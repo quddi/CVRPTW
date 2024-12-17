@@ -2,7 +2,6 @@
 
 public abstract class LineDataParser<T> where T : class, new()
 {
-    protected string? _line;
     protected DataParserParameters? _parameters;
     protected int? _splitIndex;
     protected string[]? _split;
