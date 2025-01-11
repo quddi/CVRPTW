@@ -27,6 +27,18 @@ public class CarPath
             else PathPointsIds[index - 1] = value;
         }
     }
+    
+    public void SetPath(params int[] totalPath)
+    {
+        if (totalPath == null || totalPath.Length < 2)
+        {
+            throw new ArgumentException("Path must contain at least a start and an end point.");
+        }
+
+        StartPointId = totalPath[0];
+        EndPointId = totalPath[totalPath.Length - 1];
+        PathPointsIds = totalPath.Skip(1).Take(totalPath.Length - 2).ToList();
+    }
 
     public CarPath Clone()
     {
@@ -41,5 +53,15 @@ public class CarPath
     public override string ToString()
     {
         return $"[{StartPointId} [{string.Join(", ", PathPointsIds)}] {EndPointId}]";
+    }
+    
+    public static implicit operator int[](CarPath carPath)
+    {
+        var result = new int[carPath.Length];
+        for (int i = 0; i < carPath.Length; i++)
+        {
+            result[i] = carPath[i];
+        }
+        return result;
     }
 }
