@@ -16,18 +16,20 @@ public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
         while (improved)
         {
             improved = false;
-            for (int i = 1; i < bestPathArray.Length - 2; i++)
+            for (int i = 0; i < bestPathArray.Length - 2; i++)
             {
                 for (int j = i + 1; j < bestPathArray.Length - 1; j++)
                 {
-                    for (int k = j + 1; k < bestPathArray.Length; k++)
+                    for (int k = j + 1; k <= bestPathArray.Length; k++)
                     {
                         newPath.SetPath(Apply3OptSwap(bestPathArray, i, j, k));
 
-                        if (!(_pathEstimator.Estimate(newPath) < bestCost)) continue;
+                        var estimate = _pathEstimator.Estimate(newPath);
+                        
+                        if (!(estimate < bestCost)) continue;
                         
                         bestPathArray = newPath;
-                        bestCost = _pathEstimator.Estimate(newPath);
+                        bestCost = estimate;
                         improved = true;
                     }
                 }
@@ -38,23 +40,24 @@ public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
         carResult.PathCost = bestCost;
     }
     
-    private static int[] Apply3OptSwap(int[] path, int i, int j, int k)
+    private int[] Apply3OptSwap(int[] path, int i, int j, int k)
     {
         var segment1 = path.Take(i).ToArray();
         var segment2 = path.Skip(i).Take(j - i).ToArray();
         var segment3 = path.Skip(j).Take(k - j).ToArray();
         var segment4 = path.Skip(k).ToArray();
 
-        int[][] newPaths =
-        [
+        int[][] newPaths = {
+            segment1.Concat(segment2).Concat(segment3).Concat(segment4).ToArray(),
             segment1.Concat(segment2.Reverse()).Concat(segment3).Concat(segment4).ToArray(),
             segment1.Concat(segment2).Concat(segment3.Reverse()).Concat(segment4).ToArray(),
+            segment1.Concat(segment2.Reverse()).Concat(segment3.Reverse()).Concat(segment4).ToArray(),
             segment1.Concat(segment3).Concat(segment2).Concat(segment4).ToArray(),
-            segment1.Concat(segment3.Reverse()).Concat(segment2.Reverse()).Concat(segment4).ToArray(),
+            segment1.Concat(segment3.Reverse()).Concat(segment2).Concat(segment4).ToArray(),
             segment1.Concat(segment3).Concat(segment2.Reverse()).Concat(segment4).ToArray(),
-            segment1.Concat(segment2.Reverse()).Concat(segment3.Reverse()).Concat(segment4).ToArray()
-        ];
+            segment1.Concat(segment3.Reverse()).Concat(segment2.Reverse()).Concat(segment4).ToArray(),
+        };
 
-        return newPaths.MinBy(pathToEvaluate => pathToEvaluate.Sum())!;
+        return newPaths.MinBy(_pathEstimator.Estimate)!;
     }
 }

@@ -12,4 +12,14 @@ public class CarResult(Car car)
     {
         return $"CarResult: {nameof(Car)}: {Car.Id}, {nameof(PathCost)}: {PathCost}";
     }
+    
+    public CarResult Clone()
+    {
+        return new CarResult(Car)
+        {
+            PathCost = this.PathCost,
+            Path = this.Path.Clone(),
+            Car = this.Car
+        };
+    }
 }

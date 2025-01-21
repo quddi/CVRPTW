@@ -6,5 +6,7 @@ public abstract class PathEstimator(MainData mainData)
 
     public abstract double Estimate(CarPath path);
 
+    public abstract double Estimate(int[] path);
+
     public abstract double Estimate(int firstPointId, int secondPointId);
 }

@@ -17,6 +17,18 @@ public class DistancePathEstimator(MainData mainData) : PathEstimator(mainData)
         return sum;
     }
 
+    public override double Estimate(int[] path)
+    {
+        var sum = 0d;
+
+        for (int i = 0; i < path.Length - 1; i++)
+        {
+            sum += Estimate(path[i], path[i + 1]);
+        }
+
+        return sum;
+    }
+
     public override double Estimate(int firstPointId, int secondPointId)
     {
         return _mainData.Distances.GetDistance(Constants.DefaultMatrixId, firstPointId, secondPointId);
