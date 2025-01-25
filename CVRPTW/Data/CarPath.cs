@@ -27,6 +27,11 @@ public class CarPath
             else PathPointsIds[index - 1] = value;
         }
     }
+
+    public void AddNextPoint(int pointId)
+    {
+        PathPointsIds.Add(pointId);
+    }
     
     public void SetPath(params int[] totalPath)
     {
@@ -36,7 +41,7 @@ public class CarPath
         }
 
         StartPointId = totalPath[0];
-        EndPointId = totalPath[totalPath.Length - 1];
+        EndPointId = totalPath[^1];
         PathPointsIds = totalPath.Skip(1).Take(totalPath.Length - 2).ToList();
     }
 

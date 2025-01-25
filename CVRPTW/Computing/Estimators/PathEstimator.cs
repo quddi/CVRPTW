@@ -1,8 +1,16 @@
 ﻿namespace CVRPTW.Computing.Estimators;
 
-public abstract class PathEstimator(MainData mainData)
+public abstract class PathEstimator
 {
-    protected MainData _mainData = mainData;
+    protected readonly MainData _mainData;
+    protected readonly Dictionary<int, int> _idToIndex;
+
+    protected PathEstimator(MainData mainData)
+    {
+        _mainData = mainData;
+        _idToIndex = _mainData.Points.Values.ToDictionary(point => point.Id, point => point.Index);
+        _idToIndex[_mainData.DepoPoint.Id] = _mainData.DepoPoint.Index;
+    }
 
     public abstract double Estimate(CarPath path);
 

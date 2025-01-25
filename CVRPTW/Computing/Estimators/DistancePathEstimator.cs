@@ -31,6 +31,9 @@ public class DistancePathEstimator(MainData mainData) : PathEstimator(mainData)
 
     public override double Estimate(int firstPointId, int secondPointId)
     {
-        return _mainData.Distances.GetDistance(Constants.DefaultMatrixId, firstPointId, secondPointId);
+        var firstPointIndex = _idToIndex[firstPointId];
+        var secondPointIndex = _idToIndex[secondPointId];
+        
+        return _mainData.Distances.GetDistance(Constants.DefaultMatrixId, firstPointIndex, secondPointIndex);
     }
 }

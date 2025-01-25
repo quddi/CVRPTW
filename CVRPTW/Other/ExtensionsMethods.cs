@@ -19,7 +19,12 @@ public static class ExtensionsMethods
         return dictionary[System.Random.Shared.Next(dictionary.Count)];
     }
 
-    
+    public static void AddRange<T>(this HashSet<T> hashSet, IEnumerable<T> collection)
+    {
+        foreach (var item in collection)
+            hashSet.Add(item);
+    }
+
     public static void Shuffle<T>(this IList<T> list)
     {
         int n = list.Count;  
@@ -41,6 +46,20 @@ public static class ExtensionsMethods
         list.RemoveAt(0);
 
         return first;
+    }
+
+    public static string ToString<T>(this IList<T> array)
+    {
+        var sb = Constants.SharedStringBuilder;
+        
+        foreach (var item in array)
+            sb.AppendLine(item?.ToString());
+        
+        var result = Constants.SharedStringBuilder.ToString();
+        
+        Constants.SharedStringBuilder.Clear();
+        
+        return result;
     }
 
     public static void Invert<T>(this IList[] array, int fromIndex, int toIndex)

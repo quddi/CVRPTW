@@ -10,31 +10,31 @@ static class Program
     {
         var path = @"C:\Users\Admin\Desktop\Диплом\original.txt";
         MainData mainData;
+        var parser = new MainParser();
+        
         using (var streamReader = new StreamReader(path))
         {
-            mainData = Singleton.OfType<MainParser>().Parse(streamReader);
+            mainData = parser.Parse(streamReader);
         }
+
         var estimator = new DistancePathEstimator(mainData);
+        var computer = new StartPathComputer();
 
-        var results = Singleton.OfType<NearestPathComputer>().Compute(mainData, estimator);
-        var optimizer2 = new Opt2CarResultOptimizer(estimator);
-        var optimizer3 = new Opt3CarResultOptimizer(estimator);
+        var results = computer.Compute(mainData, estimator).ToList();
 
-        foreach (var carResult in results)
+        Console.WriteLine(results.ToString<CarResult>());
+
+        Console.WriteLine("\n===========================================\n");
+        
+        var optimizer = new Opt2CarResultOptimizer(estimator);
+        
+        foreach (var result in results)
         {
-            var clone = carResult.Clone();
+            if (result.Path.Length <= 2) continue;
             
-            Console.WriteLine($"Default: {carResult}");
-            
-            optimizer2.Optimize(carResult);
-            
-            Console.WriteLine($"Optimized 2: {carResult}");
-            
-            optimizer3.Optimize(clone);
-            
-            Console.WriteLine($"Optimized 3: {clone}");
-
-            Console.WriteLine();
+            optimizer.Optimize(result);
         }
+        
+        Console.WriteLine(results.ToString<CarResult>());
     }
 }

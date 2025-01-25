@@ -6,11 +6,13 @@ public class CarResult(Car car)
 
     public double PathCost { get; set; }
 
+    public double RemainedFreeSpace { get; set; }
+    
     public CarPath Path { get; set; } = new();
     
     public override string ToString()
     {
-        return $"CarResult: {nameof(Car)}: {Car.Id}, {nameof(PathCost)}: {PathCost}";
+        return $"CarResult: {nameof(Car)}: {Car.Id}, Capacity: {Car.Capacities[0]}, {nameof(PathCost)}: {PathCost}, {nameof(Path.Length)}: {Path.Length}";
     }
     
     public CarResult Clone()

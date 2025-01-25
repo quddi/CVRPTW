@@ -1,4 +1,6 @@
-﻿namespace CVRPTW;
+﻿using System.Text;
+
+namespace CVRPTW;
 
 public static class Constants
 {
@@ -9,4 +11,6 @@ public static class Constants
         
     public static readonly char[] DefaultSplitDividers = [','];
     public static readonly char[] PointsSplitDividers = ['(', ';', ')'];
+    
+    public static StringBuilder SharedStringBuilder = new StringBuilder();
 }

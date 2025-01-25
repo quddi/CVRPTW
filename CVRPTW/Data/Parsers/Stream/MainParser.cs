@@ -2,6 +2,13 @@
 
 public class MainParser : StreamDataParser<MainData>
 {
+    private readonly CarDataParser _carDataParser = new();
+    private readonly PointDataParser _pointDataParser = new();
+    private readonly DistancesDataParser _distancesDataParser = new();
+    private readonly TimesDataParser _timesDataParser = new();
+    private readonly TariffsDataParser _tariffsDataParser = new();
+    private readonly AlternativePointsDataParser _alternativePointsDataParser = new();
+    
     public override MainData Parse(StreamReader streamReader)
     {
         var mainData = new MainData();
@@ -37,8 +44,6 @@ public class MainParser : StreamDataParser<MainData>
 
     private void ParseCars(MainData result, StreamReader streamReader, DataParserParameters parserParameters)
     {
-        var parser = Singleton.OfType<CarDataParser>();
-        
         while (true)
         {
             var line = streamReader.ReadLine();
@@ -46,7 +51,7 @@ public class MainParser : StreamDataParser<MainData>
             if (string.IsNullOrEmpty(line) || line.IsDividerLine()) 
                 return;
 
-            var car = parser.Parse(line, parserParameters);
+            var car = _carDataParser.Parse(line, parserParameters);
             
             result.Cars.Add(car);
         }
@@ -54,8 +59,6 @@ public class MainParser : StreamDataParser<MainData>
     
     private void ParsePoints(MainData result, StreamReader streamReader, DataParserParameters parserParameters)
     {
-        var parser = Singleton.OfType<PointDataParser>();
-
         var index = 0;
         
         while (true)
@@ -65,7 +68,7 @@ public class MainParser : StreamDataParser<MainData>
             if (string.IsNullOrEmpty(line) || line.IsDividerLine()) 
                 return;
 
-            var point = parser.Parse(line, parserParameters);
+            var point = _pointDataParser.Parse(line, parserParameters);
 
             point.Index = index;
             index++;
@@ -87,22 +90,22 @@ public class MainParser : StreamDataParser<MainData>
 
     private void ParseDistances(MainData mainData, StreamReader streamReader)
     {
-        mainData.Distances = Singleton.OfType<DistancesDataParser>().Parse(streamReader);
+        mainData.Distances = _distancesDataParser.Parse(streamReader);
     }
     
     private void ParseTimes(MainData mainData, StreamReader streamReader)
     {
-        mainData.Times = Singleton.OfType<TimesDataParser>().Parse(streamReader);
+        mainData.Times = _timesDataParser.Parse(streamReader);
     }
     
     private void ParseTariffs(MainData mainData, StreamReader streamReader)
     {
-        mainData.Tariffs = Singleton.OfType<TariffsDataParser>().Parse(streamReader);
+        mainData.Tariffs = _tariffsDataParser.Parse(streamReader);
     }
 
     private void ParseAlternativePoints(MainData mainData, StreamReader streamReader)
     {
-        mainData.AlternativePoints = Singleton.OfType<AlternativePointsDataParser>().Parse(streamReader);
+        mainData.AlternativePoints = _alternativePointsDataParser.Parse(streamReader);
     }
     
     private void SkipLines(StreamReader streamReader, int count)

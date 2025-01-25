@@ -14,13 +14,13 @@ public class Opt2CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
         var pathLength = carResult.Path.Length;
         //test for [1, N-1]
 
-        for (int index = 1; index < pathLength - 4; index++)
+        for (int index = 1; index < pathLength - 2; index++)
         {
             TryOptimize(carResult, index, pathLength - 1);
         }
 
         //test for [(0 to N - 6), N-2]
-        for (int beginIndex = 0; beginIndex < pathLength - 5; beginIndex++)
+        for (int beginIndex = 0; beginIndex < pathLength - 4; beginIndex++)
         {
             for (int endIndex = beginIndex + 4; endIndex < pathLength - 1; endIndex++)
             {
