@@ -8,12 +8,12 @@ public class SwapCarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
 
     public override void Optimize(CarResult carResult)
     {
-        if (carResult.Path.Length < 4)
+        if (carResult.Path.Count < 4)
             throw new ArgumentException("Trying to optimize a path with less then 4 points!");
         
         var path = carResult.Path;
         var cost = carResult.PathCost;
-        var pathLength = carResult.Path.Length;
+        var pathLength = carResult.Path.Count;
         
         for (var i = 1; i < pathLength - 1; i++)
         {

@@ -6,7 +6,7 @@ public class DistancePathEstimator(MainData mainData) : PathEstimator(mainData)
     {
         var sum = 0d;
 
-        for (int i = 0; i < path.Length - 1; i++)
+        for (int i = 0; i < path.Count - 1; i++)
         {
             var firstPointId = path[i];
             var secondPointId = path[i + 1];

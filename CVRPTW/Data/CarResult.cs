@@ -12,7 +12,7 @@ public class CarResult(Car car)
     
     public override string ToString()
     {
-        return $"CarResult: {nameof(Car)}: {Car.Id}, Capacity: {Car.Capacities[0]}, {nameof(PathCost)}: {PathCost}, {nameof(Path.Length)}: {Path.Length}";
+        return $"CarResult: {nameof(Car)}: {Car.Id}, Capacity: {Car.Capacities[0]}, {nameof(PathCost)}: {PathCost}, {nameof(Path.Count)}: {Path.Count}";
     }
     
     public CarResult Clone()

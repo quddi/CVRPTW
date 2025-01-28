@@ -13,8 +13,8 @@ public static class ExtensionsMethods
     {
         return list[System.Random.Shared.Next(list.Count)];
     }
-    
-    public static T2 RandomValue<T2>(this Dictionary<int,T2> dictionary)
+
+    public static T2 RandomValue<T2>(this Dictionary<int, T2> dictionary)
     {
         return dictionary[System.Random.Shared.Next(dictionary.Count)];
     }
@@ -27,22 +27,22 @@ public static class ExtensionsMethods
 
     public static void Shuffle<T>(this IList<T> list)
     {
-        int n = list.Count;  
-            
-        while (n > 1) 
-        {  
+        int n = list.Count;
+
+        while (n > 1)
+        {
             n--;
-                
-            int k = System.Random.Shared.Next(n + 1);  
-                
+
+            int k = System.Random.Shared.Next(n + 1);
+
             (list[k], list[n]) = (list[n], list[k]);
-        }  
+        }
     }
 
     public static T SnatchFirst<T>(this List<T> list)
     {
         var first = list.First();
-        
+
         list.RemoveAt(0);
 
         return first;
@@ -51,14 +51,14 @@ public static class ExtensionsMethods
     public static string ToString<T>(this IList<T> array)
     {
         var sb = Constants.SharedStringBuilder;
-        
+
         foreach (var item in array)
             sb.AppendLine(item?.ToString());
-        
+
         var result = Constants.SharedStringBuilder.ToString();
-        
+
         Constants.SharedStringBuilder.Clear();
-        
+
         return result;
     }
 
@@ -70,7 +70,8 @@ public static class ExtensionsMethods
             throw new ArgumentOutOfRangeException(nameof(fromIndex), "fromIndex is less than 0.");
 
         if (toIndex >= array.Length)
-            throw new ArgumentOutOfRangeException(nameof(toIndex), "toIndex is greater than or equal to the array length.");
+            throw new ArgumentOutOfRangeException(nameof(toIndex),
+                "toIndex is greater than or equal to the array length.");
 
         if (fromIndex > toIndex)
             throw new ArgumentException("fromIndex is greater than toIndex.");
@@ -82,7 +83,7 @@ public static class ExtensionsMethods
             toIndex--;
         }
     }
-    
+
     public static void Invert(this CarPath path, int fromIndex, int toIndex)
     {
         ArgumentNullException.ThrowIfNull(path);
@@ -90,8 +91,9 @@ public static class ExtensionsMethods
         if (fromIndex < 0)
             throw new ArgumentOutOfRangeException(nameof(fromIndex), "fromIndex is less than 0.");
 
-        if (toIndex >= path.Length)
-            throw new ArgumentOutOfRangeException(nameof(toIndex), "toIndex is greater than or equal to the array length.");
+        if (toIndex >= path.Count)
+            throw new ArgumentOutOfRangeException(nameof(toIndex),
+                "toIndex is greater than or equal to the array length.");
 
         if (fromIndex > toIndex)
             throw new ArgumentException("fromIndex is greater than toIndex.");
@@ -101,6 +103,57 @@ public static class ExtensionsMethods
             (path[fromIndex], path[toIndex]) = (path[toIndex], path[fromIndex]);
             fromIndex++;
             toIndex--;
+        }
+    }
+
+    public static void SwapSegments<T>(this IList<T> list, int i, int j, int m, int n)
+    {
+        if (i < 0 || j >= list.Count || m < 0 || n >= list.Count || i > j || m > n)
+            throw new ArgumentException("Неверные индексы.");
+
+        if (j >= m && i <= n)
+            throw new ArgumentException("Сегменты пересекаются.");
+
+        var length1 = j - i + 1;
+        var length2 = n - m + 1;
+
+        for (int k = 0; k < Math.Min(length1, length2); k++)
+        {
+            (list[i + k], list[m + k]) = (list[m + k], list[i + k]);
+        }
+
+        if (length1 == length2) return;
+
+        var difference = Math.Abs(length1 - length2);
+        
+        if (length1 < length2)
+        {
+            for (int k = 0; k < difference; k++)
+            {
+                var removeIndex = m + length1 + k;
+                var insertIndex = i + length1 + k;
+
+                Console.WriteLine($"{removeIndex} {insertIndex}");
+                var element = list[removeIndex];
+                
+                list.RemoveAt(removeIndex);
+                
+                list.Insert(insertIndex, element);
+            }
+        }
+        else
+        {
+            for (int k = 0; k < difference; k++)
+            {
+                var removeIndex = i + length2;
+                var insertIndex = m + length2 - 1;
+                
+                var element = list[removeIndex];
+                
+                list.RemoveAt(removeIndex);
+                
+                list.Insert(insertIndex, element);
+            }
         }
     }
 }
