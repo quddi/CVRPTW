@@ -1,8 +1,4 @@
-﻿using CVRPTW.Computing;
-using CVRPTW.Computing.Estimators;
-using CVRPTW.Computing.Optimizers;
-
-namespace CVRPTW;
+﻿namespace CVRPTW;
 
 static class Program
 {
