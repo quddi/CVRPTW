@@ -38,7 +38,18 @@ public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
     
     public override void Optimize(CarResult carResult)
     {
-        
+        var pathLength = carResult.Path.Count;
+
+        for (int aStart = 0; aStart < pathLength - 5; aStart++)
+        {
+            for (int bStart = aStart + 2; bStart < pathLength - 3; bStart++)
+            {
+                for (int cStart = bStart + 2; cStart < pathLength - 1; cStart++)
+                {
+                    CheckAllVariants(carResult, aStart, bStart, cStart);
+                }
+            }
+        }
     }
 
     // a, b, c - edges
@@ -63,7 +74,7 @@ public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
             
             command.Undo(path, aStart, bStart, cStart);
         }
-        
+
         if (bestCommand != -1) _commands[bestCommand].Do(path, aStart, bStart, cStart);
     }
 }

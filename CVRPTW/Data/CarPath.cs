@@ -2,7 +2,7 @@
 
 namespace CVRPTW;
 
-public class CarPath : IList<int>
+public class CarPath : IList<int>, IEnumerable<int>
 {
     public int StartPointId { get; set; }
     
@@ -32,6 +32,13 @@ public class CarPath : IList<int>
         }
     }
 
+    public CarPath() { }
+
+    public CarPath(params int[] path)
+    {
+        SetPath(path);
+    }
+
     public void AddNextPoint(int pointId)
     {
         PathPointsIds.Add(pointId);
@@ -51,17 +58,35 @@ public class CarPath : IList<int>
 
     public void Reverse(int fromIndex, int toIndex)
     {
-        if (fromIndex < 0 || toIndex >= Count || fromIndex >= toIndex)
+        if (fromIndex < 0 || toIndex >= Count)
         {
-            throw new ArgumentOutOfRangeException("Invalid indices for reversing the path.");
+            throw new ArgumentOutOfRangeException($"Invalid indices for reversing the path. {fromIndex} {toIndex}");
         }
 
-        var segment = PathPointsIds.Skip(fromIndex - 1).Take(toIndex - fromIndex + 1).ToList();
-        segment.Reverse();
+        if (fromIndex > toIndex) (fromIndex, toIndex) = (toIndex, fromIndex);
 
-        for (int i = 0; i < segment.Count; i++)
+        if (fromIndex == 0 && toIndex == Count - 1)
         {
-            PathPointsIds[fromIndex - 1 + i] = segment[i];
+            (StartPointId, EndPointId) = (EndPointId, StartPointId);
+            PathPointsIds.Reverse();
+            return;
+        }
+
+        if (fromIndex == 0)
+        {
+            (StartPointId, this[toIndex]) = (this[toIndex], StartPointId);
+
+            PathPointsIds.Reverse(0, toIndex - 1);
+        }
+        else if (toIndex == Count - 1)
+        {
+            (this[fromIndex], EndPointId) = (EndPointId, this[fromIndex]);
+            
+            PathPointsIds.Reverse(fromIndex, toIndex - fromIndex - 1);
+        }
+        else
+        {
+            PathPointsIds.Reverse(fromIndex - 1, toIndex - fromIndex + 1);
         }
     }
 

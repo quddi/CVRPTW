@@ -106,13 +106,24 @@ public static class ExtensionsMethods
         }
     }
 
+    public static string ToFormattedString(this double value)
+    {
+        return value.ToString("#,0.00");
+    }
+
     public static void SwapSegments<T>(this IList<T> list, int i, int j, int m, int n)
     {
-        if (i < 0 || j >= list.Count || m < 0 || n >= list.Count || i > j || m > n)
-            throw new ArgumentException("Неверные индексы.");
+        if (i < 0 || j >= list.Count || m < 0 || n >= list.Count)
+            throw new ArgumentException($"Invalid indices: {i}, {j}, {m}, {n}");
 
         if (j >= m && i <= n)
-            throw new ArgumentException("Сегменты пересекаются.");
+            throw new ArgumentException("Segments are intersecting.");
+        
+        if (i > j) (i, j) = (j, i);
+        
+        if (m > n) (m, n) = (n, m);
+
+        if (j > m) (i, j, m, n) = (m, n, i, j);
 
         var length1 = j - i + 1;
         var length2 = n - m + 1;
@@ -132,8 +143,7 @@ public static class ExtensionsMethods
             {
                 var removeIndex = m + length1 + k;
                 var insertIndex = i + length1 + k;
-
-                Console.WriteLine($"{removeIndex} {insertIndex}");
+                
                 var element = list[removeIndex];
                 
                 list.RemoveAt(removeIndex);

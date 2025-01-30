@@ -12,15 +12,10 @@ public class Opt2CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
             throw new ArgumentException("Trying to optimize a path with less then 4 points!");
 
         var pathLength = carResult.Path.Count;
-        
-        for (int index = 1; index < pathLength - 2; index++)
-        {
-            TryOptimize(carResult, index, pathLength - 1);
-        }
 
-        for (int beginIndex = 0; beginIndex < pathLength - 4; beginIndex++)
+        for (int beginIndex = 0; beginIndex < pathLength - 3; beginIndex++)
         {
-            for (int endIndex = beginIndex + 4; endIndex < pathLength - 1; endIndex++)
+            for (int endIndex = beginIndex + 3; endIndex < pathLength - 1; endIndex++)
             {
                 TryOptimize(carResult, beginIndex, endIndex);
             }
