@@ -24,4 +24,6 @@ public class Car
     public int MaxTripsCount { get; set; }
     
     public int WaitBetweenTrips { get; set; }
+
+    public int Capacity => Capacities[0];
 }

@@ -1,6 +1,6 @@
 ﻿namespace CVRPTW.Computing.Optimizers;
 
-public class SwapSegmentsOptimizerCommand : SymmetricOptimizerCommand
+public class SwapSegmentsPathOptimizerCommand : SymmetricPathOptimizerCommand
 {
     protected override void SymmetricDo(CarPath path, int aStart, int bStart, int cStart)
     {

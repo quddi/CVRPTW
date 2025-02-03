@@ -40,5 +40,7 @@ public class Opt2CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
         result.PathCost = result.PathCost - currentPrice + potentialPrice;
         
         result.Path.Invert(fromIndex + 1, toIndex - 1);
+        
+        result.PathCost = _pathEstimator.Estimate(result.Path);
     }
 }

@@ -2,16 +2,16 @@
 
 public abstract class IteratedPathComputer : PathComputer
 {
-    protected override List<CarResult> Compute()
+    protected override MainResult Compute()
     {
-        var list = new List<CarResult>();
+        var result = new MainResult();
         
         foreach (var car in _mainData!.Cars)
         {
-            list.Add(GetCarResult(car));
+            result.Results.Add(car, GetCarResult(car));
         }
 
-        return list;
+        return result;
     }
 
     protected abstract CarResult GetCarResult(Car car);

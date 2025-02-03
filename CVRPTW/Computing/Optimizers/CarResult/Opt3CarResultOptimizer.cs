@@ -4,32 +4,32 @@ namespace CVRPTW.Computing.Optimizers;
 
 public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOptimizer(pathEstimator)
 {
-    private readonly List<IOptimizerCommand> _commands =
+    private readonly List<IPathOptimizerCommand> _commands =
     [
-        new ABReverseOptimizerCommand(),
-        new BCReverseOptimizerCommand(),
-        new ACReverseOptimizerCommand(),
-        new SwapSegmentsOptimizerCommand(),
-        new SequentialOptimizerCommand
+        new ABReversePathOptimizerCommand(),
+        new BCReversePathOptimizerCommand(),
+        new ACReversePathOptimizerCommand(),
+        new SwapSegmentsPathOptimizerCommand(),
+        new SequentialPathOptimizerCommand
         (
             [
-                new ABReverseOptimizerCommand(),
-                new SwapSegmentsOptimizerCommand()
+                new ABReversePathOptimizerCommand(),
+                new SwapSegmentsPathOptimizerCommand()
             ]
         ),
-        new SequentialOptimizerCommand
+        new SequentialPathOptimizerCommand
         (
             [
-                new BCReverseOptimizerCommand(),
-                new SwapSegmentsOptimizerCommand()
+                new BCReversePathOptimizerCommand(),
+                new SwapSegmentsPathOptimizerCommand()
             ]
         ),
-        new SequentialOptimizerCommand
+        new SequentialPathOptimizerCommand
         (
             [
-                new ABReverseOptimizerCommand(),
-                new BCReverseOptimizerCommand(),
-                new SwapSegmentsOptimizerCommand()
+                new ABReversePathOptimizerCommand(),
+                new BCReversePathOptimizerCommand(),
+                new SwapSegmentsPathOptimizerCommand()
             ]
         )
     ];

@@ -1,6 +1,6 @@
 ﻿namespace CVRPTW.Computing.Optimizers;
 
-public class SequentialOptimizerCommand(List<IOptimizerCommand> commands) : IOptimizerCommand
+public class SequentialPathOptimizerCommand(List<IPathOptimizerCommand> commands) : IPathOptimizerCommand
 {
     public void Do(CarPath path, int aStart, int bStart, int cStart)
     {

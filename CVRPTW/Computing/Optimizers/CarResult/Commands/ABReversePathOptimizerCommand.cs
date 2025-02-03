@@ -1,9 +1,9 @@
 ﻿namespace CVRPTW.Computing.Optimizers;
 
-public class BCReverseOptimizerCommand : SymmetricOptimizerCommand
+public class ABReversePathOptimizerCommand : SymmetricPathOptimizerCommand
 {
     protected override void SymmetricDo(CarPath path, int aStart, int bStart, int cStart)
     {
-        path.Reverse(bStart + 1, cStart);
+        path.Reverse(aStart + 1, bStart);
     }
 }

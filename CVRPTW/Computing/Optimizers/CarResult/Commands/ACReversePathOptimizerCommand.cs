@@ -1,6 +1,6 @@
 ﻿namespace CVRPTW.Computing.Optimizers;
 
-public class ACReverseOptimizerCommand : SymmetricOptimizerCommand
+public class ACReversePathOptimizerCommand : SymmetricPathOptimizerCommand
 {
     protected override void SymmetricDo(CarPath path, int aStart, int bStart, int cStart)
     {

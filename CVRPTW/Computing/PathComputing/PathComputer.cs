@@ -7,7 +7,7 @@ public abstract class PathComputer
     protected MainData? _mainData;
     protected PathEstimator? _pathEstimator;
 
-    public virtual List<CarResult> Compute(MainData mainData, PathEstimator pathEstimator)
+    public virtual MainResult Compute(MainData mainData, PathEstimator pathEstimator)
     {
         _mainData = mainData;
         _pathEstimator = pathEstimator;
@@ -19,7 +19,7 @@ public abstract class PathComputer
         return result;
     }
 
-    protected abstract List<CarResult> Compute();
+    protected abstract MainResult Compute();
 
     protected virtual void ClearState()
     {

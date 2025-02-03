@@ -10,17 +10,17 @@ public class MainData
     
     public int MaxCompsOverload { get; set; }
     
-    public Distances Distances { get; set; }
+    public Distances? Distances { get; set; }
     
-    public Tariffs Tariffs { get; set; }
+    public Tariffs? Tariffs { get; set; }
     
-    public Times Times { get; set; }
+    public Times? Times { get; set; }
     
-    public Point DepoPoint { get; set; }
+    public Point? DepoPoint { get; set; }
     
-    public Dictionary<int, Point> Points { get; set; } = new();
+    public Dictionary<int, Point> PointsByIds { get; set; } = new();
     
-    public AlternativePoints AlternativePoints { get; set; }
+    public AlternativePoints? AlternativePoints { get; set; }
 
     public List<Car> Cars { get; set; } = new();
 }

@@ -166,4 +166,26 @@ public static class ExtensionsMethods
             }
         }
     }
+
+    public static void SetDefaults<T>(this IList<T?> list)
+    {
+        for (var i = 0; i < list.Count; i++)
+        {
+            list[i] = default;
+        }
+    }
+
+    public static bool ArePermutations(CarPath firstPath, CarPath secondPath)
+    {
+        var firstPointsCounts = firstPath
+            .Distinct()
+            .ToDictionary(pointId => pointId, pointId => firstPath.Count(point => point == pointId));
+        
+        var secondsPointsCounts = secondPath
+            .Distinct()
+            .ToDictionary(pointId => pointId, pointId => secondPath.Count(point => point == pointId));
+        
+        return firstPointsCounts.All(pair => pair.Value == secondsPointsCounts[pair.Key]) &&
+               secondsPointsCounts.All(pair => pair.Value == firstPointsCounts[pair.Key]);
+    }
 }

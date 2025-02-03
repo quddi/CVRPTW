@@ -6,16 +6,16 @@ public class StartPathComputer : IteratedPathComputer
 {
     private Dictionary<int, Point> _notVisitedPoints;
 
-    protected override List<CarResult> Compute()
+    protected override MainResult Compute()
     {
-        _notVisitedPoints = new Dictionary<int, Point>(_mainData!.Points);
+        _notVisitedPoints = new Dictionary<int, Point>(_mainData!.PointsByIds);
         
         return base.Compute();
     }
 
     protected override CarResult GetCarResult(Car car)
     {
-        var freeSpace = car.Capacities.First() * 1.0;
+        var freeSpace = car.Capacity * 1.0;
         var currentPointId = _mainData!.DepoPoint.Id;
         var result = new CarResult(car)
         {

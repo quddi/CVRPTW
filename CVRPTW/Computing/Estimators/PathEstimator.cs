@@ -8,7 +8,7 @@ public abstract class PathEstimator
     protected PathEstimator(MainData mainData)
     {
         _mainData = mainData;
-        _idToIndex = _mainData.Points.Values.ToDictionary(point => point.Id, point => point.Index);
+        _idToIndex = _mainData.PointsByIds.Values.ToDictionary(point => point.Id, point => point.Index);
         _idToIndex[_mainData.DepoPoint.Id] = _mainData.DepoPoint.Index;
     }
 
