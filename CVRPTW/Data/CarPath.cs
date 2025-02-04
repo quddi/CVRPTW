@@ -2,7 +2,7 @@
 
 namespace CVRPTW;
 
-public class CarPath : IList<int>, IEnumerable<int>
+public class CarPath : IList<int>
 {
     public int StartPointId { get; set; }
     
