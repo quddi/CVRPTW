@@ -25,7 +25,7 @@ static class Program
 
         Console.WriteLine(optimizedResult);
 
-        Console.WriteLine("====================== Opt2 ======================\n");
+        /*Console.WriteLine("====================== Opt2 ======================\n");
 
         CarResultOptimizer optimizer = new Opt2CarResultOptimizer(estimator);
 
@@ -49,6 +49,14 @@ static class Program
             optimizer.Optimize(carResult);
         }
 
+        Console.WriteLine(optimizedResult);*/
+        
+        Console.WriteLine("====================== MainResultOptimizer ======================\n");
+        
+        var mainResultOptimizer = new PointTransposeMainResultOptimizer(estimator);
+        
+        mainResultOptimizer.Optimize(optimizedResult, mainData);
+
         Console.WriteLine(optimizedResult);
         
         Console.WriteLine("====================== ReEstimation ======================\n");
@@ -57,7 +65,7 @@ static class Program
         {
             if (carResult.Path.Count <= 2) continue;
             
-            carResult.PathCost = estimator.Estimate(carResult.Path);
+            carResult.ReEstimate(estimator);
         }
 
         Console.WriteLine(optimizedResult);

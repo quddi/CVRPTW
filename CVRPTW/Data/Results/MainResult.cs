@@ -16,7 +16,7 @@ public class MainResult
     
     public override string ToString()
     {
-        Constants.SharedStringBuilder.AppendLine($"{nameof(MainResult)}:");
+        Constants.SharedStringBuilder.AppendLine($"{nameof(MainResult)} (total estimation: {Estimation.ToFormattedString()}):");
 
         foreach (var (car, carResult) in Results)
         {

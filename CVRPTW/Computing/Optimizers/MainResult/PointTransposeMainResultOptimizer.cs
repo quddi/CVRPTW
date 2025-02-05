@@ -62,16 +62,22 @@ public class PointTransposeMainResultOptimizer(PathEstimator _pathEstimator) : M
         
         var targetResult = _mainResult!.Results[targetCar];
         var targetPath = targetResult.Path;
+
+        var previous = sourceResult.PathCost;
         
         sourceResult.Path.RemoveAt(sourcePointIndex);
         
-        ReEstimate(sourceResult);
+        sourceResult.ReEstimate(_pathEstimator);
 
-        for (int i = 1; i < targetPath.Count - 1; i++)
+        var current = sourceResult.PathCost;
+
+        var diff = previous - current;
+        
+        for (int i = 1; i < targetPath.Count; i++)
         {
             targetPath.Insert(i, sourcePointId);
             
-            ReEstimate(targetResult);
+            targetResult.ReEstimate(_pathEstimator);
 
             if (_mainResult.Estimation < bestEstimation)
             {
@@ -81,19 +87,14 @@ public class PointTransposeMainResultOptimizer(PathEstimator _pathEstimator) : M
             
             targetPath.RemoveAt(i);
             
-            ReEstimate(targetResult);
+            targetResult.ReEstimate(_pathEstimator);
         }
         
         sourceResult.Path.Insert(sourcePointIndex, sourcePointId);
         
-        ReEstimate(sourceResult);
+        sourceResult.ReEstimate(_pathEstimator);
         
         return (bestPositionIndex, bestEstimation);
-    }
-
-    private void ReEstimate(CarResult result)
-    {
-        result.PathCost = _pathEstimator.Estimate(result.Path);
     }
 
     private bool CanTranspose(Car targetCar, int pointId)

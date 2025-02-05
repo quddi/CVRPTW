@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using CVRPTW.Computing.Estimators;
 
 namespace CVRPTW;
 
@@ -187,5 +188,12 @@ public static class ExtensionsMethods
         
         return firstPointsCounts.All(pair => pair.Value == secondsPointsCounts[pair.Key]) &&
                secondsPointsCounts.All(pair => pair.Value == firstPointsCounts[pair.Key]);
+    }
+
+    public static void ReEstimate(this CarResult result, PathEstimator estimator)
+    {
+        result.PathCost = result.Path.Count == 2 
+            ? 0
+            : estimator.Estimate(result.Path);
     }
 }
