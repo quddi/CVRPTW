@@ -2,26 +2,19 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-using SubResult = (int index, double estimation);
+using SubResult = (Car targetCar, int targetIndex, double estimation);
 
 public class PointTransposeMainResultOptimizer(PathEstimator _pathEstimator) : MainResultOptimizer
 {
     private MainResult? _mainResult;
     private MainData? _mainData;
 
+    private const int SameBestPointIndex = -1;
+    
     public override void Optimize(MainResult mainResult, MainData mainData)
     {
         _mainData = mainData;
         _mainResult = mainResult;
-
-        var bestSubResults = 
-            mainData.Cars.ToDictionary(car => car, _ =>
-                mainData.Cars.ToDictionary(car => car, _ => default(SubResult?)));
-        
-        foreach (var (car, subDictionary) in bestSubResults)
-        {
-            subDictionary.Remove(car);
-        }
         
         for (var i = 0; i < _mainData.Cars.Count; i++)
         {
@@ -30,19 +23,52 @@ public class PointTransposeMainResultOptimizer(PathEstimator _pathEstimator) : M
             
             if (sourceResult.Path.Count <= 2) continue;
 
-            for (int j = 0; j < _mainData.Cars.Count; j++)
+            var results = new List<(int sourceIndex, SubResult sub)>();
+            
+            for (var sourceIndex = 1; sourceIndex < sourceResult.Path.Count - 1; sourceIndex++)
             {
-                if (i == j) continue;
+                var subResults = new List<SubResult>();
                 
-                var targetCar = _mainData.Cars[j];
-                var currentResults = new List<SubResult>();
-                
-                for (var k = 1; k < sourceResult.Path.Count - 1; k++)
+                for (int j = 0; j < _mainData.Cars.Count; j++)
                 {
-                    currentResults.Add(GetBestPosition(targetCar, sourceCar, k));
+                    if (i == j) continue;
+                    
+                    var targetCar = _mainData.Cars[j];
+                    
+                    subResults.Add(GetBest(targetCar, sourceCar, sourceIndex));
+                }
+                
+                results.Add((sourceIndex, subResults.MinBy(x => x.estimation)));
+            }
+            
+            //Apply
+            for (var j = 0; j < results.Count; j++)
+            {
+                var (sourceIndex, (targetCar, targetIndex, _)) = results[j];
+                
+                if (targetCar == sourceCar || targetIndex == SameBestPointIndex) continue;
+
+                var targetResult = _mainResult.Results[targetCar];
+
+                //Take from source
+                var pointId = sourceResult.Path.TakeAt(sourceIndex);
+
+                //Put to target
+                targetResult.Path.Insert(targetIndex, pointId);
+
+                //Shift nextIndices
+                for (int k = j + 1; k < results.Count; k++)
+                {
+                    var sub = targetCar == results[k].sub.targetCar
+                        ? (results[k].sub.targetCar, results[k].sub.targetIndex + 1, results[k].sub.estimation)
+                        : results[k].sub;
+                    
+                    results[k] = (results[k].sourceIndex - 1, sub);
                 }
 
-                bestSubResults[sourceCar][targetCar] = currentResults.MinBy(result => result.estimation);
+                //ReEstimate both
+                targetResult.ReEstimate(_pathEstimator);
+                sourceResult.ReEstimate(_pathEstimator);
             }
         }
         
@@ -50,28 +76,22 @@ public class PointTransposeMainResultOptimizer(PathEstimator _pathEstimator) : M
         _mainResult = null;
     }
     
-    private SubResult GetBestPosition(Car targetCar, Car sourceCar, int sourcePointIndex)
+    private SubResult GetBest(Car targetCar, Car sourceCar, int sourcePointIndex)
     {
         var sourceResult = _mainResult!.Results[sourceCar];
         var sourcePointId = sourceResult.Path[sourcePointIndex];
-        var bestPositionIndex = -1;
+        var bestPositionIndex = SameBestPointIndex;
         var startEstimation = _mainResult.Estimation;
         var bestEstimation = startEstimation; 
 
-        if (!CanTranspose(targetCar, sourcePointId)) return (bestPositionIndex, bestEstimation);
+        if (!CanTranspose(targetCar, sourcePointId)) return (sourceCar, bestPositionIndex, bestEstimation);
         
         var targetResult = _mainResult!.Results[targetCar];
         var targetPath = targetResult.Path;
-
-        var previous = sourceResult.PathCost;
         
         sourceResult.Path.RemoveAt(sourcePointIndex);
         
         sourceResult.ReEstimate(_pathEstimator);
-
-        var current = sourceResult.PathCost;
-
-        var diff = previous - current;
         
         for (int i = 1; i < targetPath.Count; i++)
         {
@@ -94,7 +114,7 @@ public class PointTransposeMainResultOptimizer(PathEstimator _pathEstimator) : M
         
         sourceResult.ReEstimate(_pathEstimator);
         
-        return (bestPositionIndex, bestEstimation);
+        return (targetCar, bestPositionIndex, bestEstimation);
     }
 
     private bool CanTranspose(Car targetCar, int pointId)

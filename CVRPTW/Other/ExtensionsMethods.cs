@@ -186,8 +186,8 @@ public static class ExtensionsMethods
             .Distinct()
             .ToDictionary(pointId => pointId, pointId => secondPath.Count(point => point == pointId));
         
-        return firstPointsCounts.All(pair => pair.Value == secondsPointsCounts[pair.Key]) &&
-               secondsPointsCounts.All(pair => pair.Value == firstPointsCounts[pair.Key]);
+        return firstPointsCounts.All(pair => secondsPointsCounts.ContainsKey(pair.Key) && pair.Value == secondsPointsCounts[pair.Key]) &&
+               secondsPointsCounts.All(pair => firstPointsCounts.ContainsKey(pair.Key) &&  pair.Value == firstPointsCounts[pair.Key]);
     }
 
     public static void ReEstimate(this CarResult result, PathEstimator estimator)
@@ -195,5 +195,44 @@ public static class ExtensionsMethods
         result.PathCost = result.Path.Count == 2 
             ? 0
             : estimator.Estimate(result.Path);
+    }
+
+    public static T TakeAt<T>(this IList<T> list, int index)
+    {
+        var result = list[index];
+        
+        list.RemoveAt(index);
+        
+        return result;
+    }
+    
+    public static void Write<T>(this T[] arr)
+    {
+        foreach (var x in arr)
+        {
+            Console.Write(x + " ");
+        }
+
+        Console.WriteLine();
+    }
+
+    public static void Write(this CarPath path)
+    {
+        foreach (var point in path)
+        {
+            Console.Write(point + " ");
+        }
+
+        Console.WriteLine();
+    }
+
+    public static void Write<T>(this IList<T> list)
+    {
+        foreach (var x in list)
+        {
+            Console.Write(x + " ");
+        }
+
+        Console.WriteLine();
     }
 }
