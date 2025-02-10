@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOptimizer(pathEstimator)
+public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOptimizer
 {
     private readonly List<IPathOptimizerCommand> _commands =
     [

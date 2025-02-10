@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class SwapCarResultOptimizer(PathEstimator pathEstimator) : CarResultOptimizer(pathEstimator)
+public class SwapCarResultOptimizer(PathEstimator pathEstimator) : CarResultOptimizer
 {
     private readonly PathEstimator _pathEstimator = pathEstimator;
 

@@ -1,17 +1,30 @@
-﻿namespace CVRPTW;
+﻿using System.Collections;
 
-public class AlternativePoints
+namespace CVRPTW;
+
+public class AlternativePoints : IEnumerable<KeyValuePair<int, int>>
 {
-    private readonly Dictionary<int, int> _alternativePoint = new();
+    public readonly Dictionary<int, int> AlternativePoint = new();
+    public readonly Dictionary<int, int> InverseAlternativePoint = new();
 
     public int? GetAlternativePoint(int point)
     {
-        return _alternativePoint.TryGetValue(point, out var value) ? value : null;
+        if (AlternativePoint.TryGetValue(point, out var value1))
+            return value1;
+
+        if (InverseAlternativePoint.TryGetValue(point, out var value2))
+            return value2;
+        
+        return null;
     }
 
     public void AddAlternativePoint(int firstPointId, int secondPointId)
     {
-        _alternativePoint.Add(firstPointId, secondPointId);
-        _alternativePoint.Add(secondPointId, firstPointId);
+        AlternativePoint.Add(firstPointId, secondPointId);
+        InverseAlternativePoint.Add(secondPointId, firstPointId);
     }
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public IEnumerator<KeyValuePair<int, int>> GetEnumerator() => AlternativePoint.GetEnumerator();
 }

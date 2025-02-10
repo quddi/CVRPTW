@@ -1,8 +1,6 @@
-﻿using CVRPTW.Computing.Estimators;
+﻿namespace CVRPTW.Computing.Optimizers;
 
-namespace CVRPTW.Computing.Optimizers;
-
-public abstract class CarResultOptimizer(PathEstimator pathEstimator)
+public abstract class CarResultOptimizer : IOptimizer
 {
     public abstract void Optimize(CarResult carResult);
 }

@@ -1,6 +1,3 @@
-﻿var dict = Enumerable.Range(0, 10).ToDictionary(x => x, x => x * x);
+﻿using CVRPTW;
 
-foreach (var keyValuePair in dict)
-{
-    
-}
+var path = new CarPath();
