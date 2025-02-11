@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "D:\\CSharpProjects\\CVRPTW\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\datadiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
-      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\datadiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
+      "AbsoluteMoniker": "D:0:0:{825BA445-95D8-436E-A8A2-C6A493F9C378}|VisualizationApplication\\VisualizationApplication.csproj|d:\\csharpprojects\\cvrptw\\visualizationapplication\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{825BA445-95D8-436E-A8A2-C6A493F9C378}|VisualizationApplication\\VisualizationApplication.csproj|solutionrelative:visualizationapplication\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,13 +43,13 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DataDiagram.cd",
-              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\DataDiagram.cd",
-              "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\DataDiagram.cd",
-              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\DataDiagram.cd",
-              "RelativeToolTip": "CVRPTW\\Other\\Diagrams\\DataDiagram.cd",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
-              "WhenOpened": "2024-10-19T17:04:42.656Z",
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "VisualizationApplication\\MainWindow.xaml",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\MainWindow.xaml",
+              "RelativeToolTip": "VisualizationApplication\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-11T19:32:03.433Z",
               "EditorCaption": ""
             }
           ]

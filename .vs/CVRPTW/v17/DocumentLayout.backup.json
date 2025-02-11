@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\CSharpProjects\\CVRPTW\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{825BA445-95D8-436E-A8A2-C6A493F9C378}|VisualizationApplication\\VisualizationApplication.csproj|d:\\csharpprojects\\cvrptw\\visualizationapplication\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{825BA445-95D8-436E-A8A2-C6A493F9C378}|VisualizationApplication\\VisualizationApplication.csproj|solutionrelative:visualizationapplication\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,6 +39,18 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "VisualizationApplication\\MainWindow.xaml",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\MainWindow.xaml*",
+              "RelativeToolTip": "VisualizationApplication\\MainWindow.xaml*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-11T19:32:03.433Z",
+              "EditorCaption": ""
             }
           ]
         }
