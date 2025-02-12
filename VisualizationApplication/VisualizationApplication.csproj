@@ -12,4 +12,17 @@
       <PackageReference Include="ScottPlot.WPF" Version="5.0.54" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CVRPTW\CVRPTW.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="MainWindowResetHandler.cs">
+        <DependentUpon>MainWindow.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="MainWindowReactionHandler.cs">
+        <DependentUpon>MainWindow.xaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

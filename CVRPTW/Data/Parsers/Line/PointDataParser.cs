@@ -47,10 +47,11 @@ public class PointDataParser : LineDataParser<Point>
     
     private void ParseCoordinates()
     {
-        var coordinates = new Coordinates();
-        
-        coordinates.Latitude = double.Parse(_split![_splitIndex!.Value], CultureInfo.InvariantCulture);
-        coordinates.Latitude = double.Parse(_split![_splitIndex!.Value + 1], CultureInfo.InvariantCulture);
+        var coordinates = new Coordinates
+        {
+            Latitude = double.Parse(_split![_splitIndex!.Value], CultureInfo.InvariantCulture),
+            Longitude = double.Parse(_split![_splitIndex!.Value + 1], CultureInfo.InvariantCulture)
+        };
 
         _result!.Coordinates = coordinates;
 

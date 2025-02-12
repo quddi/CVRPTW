@@ -58,3 +58,8 @@ D:\CSharpProjects\CVRPTW\VisualizationApplication\obj\Debug\net8.0-windows\refin
 D:\CSharpProjects\CVRPTW\VisualizationApplication\obj\Debug\net8.0-windows\VisualizationApplication.pdb
 D:\CSharpProjects\CVRPTW\VisualizationApplication\obj\Debug\net8.0-windows\VisualizationApplication.genruntimeconfig.cache
 D:\CSharpProjects\CVRPTW\VisualizationApplication\obj\Debug\net8.0-windows\ref\VisualizationApplication.dll
+D:\CSharpProjects\CVRPTW\VisualizationApplication\bin\Debug\net8.0-windows\CVRPTW.deps.json
+D:\CSharpProjects\CVRPTW\VisualizationApplication\bin\Debug\net8.0-windows\CVRPTW.runtimeconfig.json
+D:\CSharpProjects\CVRPTW\VisualizationApplication\bin\Debug\net8.0-windows\CVRPTW.exe
+D:\CSharpProjects\CVRPTW\VisualizationApplication\bin\Debug\net8.0-windows\CVRPTW.dll
+D:\CSharpProjects\CVRPTW\VisualizationApplication\bin\Debug\net8.0-windows\CVRPTW.pdb
