@@ -2,7 +2,7 @@
 
 public class CompositeMainResultOptimizer(List<IOptimizer> optimizers, bool report) : MainResultOptimizer
 {
-    public override void Optimize(MainResult mainResult, MainData mainData)
+    public override void Optimize(MainResult mainResult)
     {
         foreach (var optimizer in optimizers)
         {
@@ -12,7 +12,7 @@ public class CompositeMainResultOptimizer(List<IOptimizer> optimizers, bool repo
                     OptimizeCarResults(carResultOptimizer, mainResult);
                     break;
                 case MainResultOptimizer mainResultOptimizer:
-                    mainResultOptimizer.Optimize(mainResult, mainData);
+                    mainResultOptimizer.Optimize(mainResult);
                     break;
             }
 

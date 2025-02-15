@@ -12,7 +12,7 @@ public class MainWindowResetHandler(MainWindowElements mainWindowElements)
     private void ResetMainPlot()
     {
         mainWindowElements.FilterPlot.Plot.Clear();
-        mainWindowElements.FilterPlot.Reset();
+        mainWindowElements.FilterPlot.Refresh();
         mainWindowElements.FilterPlot.Plot.XLabel("Latitude");
         mainWindowElements.FilterPlot.Plot.YLabel("Longitude");
     }

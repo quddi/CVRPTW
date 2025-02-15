@@ -2,27 +2,10 @@
 
 namespace CVRPTW.Computing;
 
-public abstract class PathComputer
+public abstract class PathComputer(MainData mainData, PathEstimator pathEstimator)
 {
-    protected MainData? _mainData;
-    protected PathEstimator? _pathEstimator;
+    protected MainData _mainData = mainData;
+    protected PathEstimator _pathEstimator = pathEstimator;
 
-    public virtual MainResult Compute(MainData mainData, PathEstimator pathEstimator)
-    {
-        _mainData = mainData;
-        _pathEstimator = pathEstimator;
-
-        var result = Compute();
-        
-        ClearState();
-
-        return result;
-    }
-
-    protected abstract MainResult Compute();
-
-    protected virtual void ClearState()
-    {
-        _mainData = null;
-    }
+    public abstract MainResult Compute();
 }

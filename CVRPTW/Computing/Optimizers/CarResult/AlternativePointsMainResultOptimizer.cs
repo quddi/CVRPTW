@@ -2,9 +2,9 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class AlternativePointsMainResultOptimizer(PathEstimator pathEstimator) : MainResultOptimizer
+public class AlternativePointsMainResultOptimizer(PathEstimator pathEstimator, MainData mainData) : MainResultOptimizer
 {
-    public override void Optimize(MainResult mainResult, MainData mainData)
+    public override void Optimize(MainResult mainResult)
     {
         foreach (var (firstPointId, secondPointId) in mainData.AlternativePoints!)
         {

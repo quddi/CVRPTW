@@ -3,15 +3,13 @@ using ScottPlot.WPF;
 
 namespace VisualizationApplication.Other;
 
-public class MainWindowElements
+public class MainWindowElements(Button loadDataButton, WpfPlot filterPlot, Button optimizeButton, TextBox inputTextBox)
 {
-    public Button LoadDataButton { get; set; }
+    public Button LoadDataButton { get; set; } = loadDataButton;
 
-    public WpfPlot FilterPlot { get; set; }
+    public WpfPlot FilterPlot { get; set; } = filterPlot;
 
-    public MainWindowElements(Button loadDataButton, WpfPlot filterPlot)
-    {
-        LoadDataButton = loadDataButton;
-        FilterPlot = filterPlot;
-    }
+    public Button OptimizeButton { get; set; } = optimizeButton;
+
+    public TextBox InputTextBox { get; set; } = inputTextBox;
 }

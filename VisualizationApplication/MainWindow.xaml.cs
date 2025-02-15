@@ -12,7 +12,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        _elements = new MainWindowElements(LoadDataButton, MainPlot);
+        _elements = new MainWindowElements(LoadDataButton, MainPlot, OptimizeButton, InputTextBox);
         _reactionHandler = new MainWindowReactionHandler(_elements);
     }
 }

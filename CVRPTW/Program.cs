@@ -18,9 +18,9 @@ static class Program
         }
 
         var estimator = new DistancePathEstimator(mainData);
-        var computer = new StartPathComputer();
+        var computer = new StartPathComputer(mainData, estimator);
 
-        var optimizedResult = computer.Compute(mainData, estimator);
+        var optimizedResult = computer.Compute();
         var startResult = optimizedResult.Clone();
 
         Console.WriteLine(optimizedResult);
@@ -79,9 +79,9 @@ static class Program
     {
         Console.WriteLine("====================== Point Transpose ======================\n");
         
-        var mainResultOptimizer = new PointTransposeMainResultOptimizer(estimator);
+        var mainResultOptimizer = new PointTransposeMainResultOptimizer(estimator, mainData);
         
-        mainResultOptimizer.Optimize(optimizedResult, mainData);
+        mainResultOptimizer.Optimize(optimizedResult);
     }
 
     private static void Opt2(DistancePathEstimator estimator, MainResult optimizedResult)

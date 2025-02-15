@@ -2,11 +2,11 @@
 
 namespace CVRPTW.Computing;
 
-public class StartPathComputer : IteratedPathComputer
+public class StartPathComputer(MainData mainData, PathEstimator pathEstimator) : IteratedPathComputer(mainData, pathEstimator)
 {
-    private Dictionary<int, Point> _notVisitedPoints;
+    private Dictionary<int, Point> _notVisitedPoints = new();
 
-    protected override MainResult Compute()
+    public override MainResult Compute()
     {
         _notVisitedPoints = new Dictionary<int, Point>(_mainData!.PointsByIds);
         
@@ -16,7 +16,7 @@ public class StartPathComputer : IteratedPathComputer
     protected override CarResult GetCarResult(Car car)
     {
         var freeSpace = car.Capacity * 1.0;
-        var currentPointId = _mainData!.DepoPoint.Id;
+        var currentPointId = _mainData!.DepoPoint!.Id;
         var result = new CarResult(car)
         {
             PathCost = 0,

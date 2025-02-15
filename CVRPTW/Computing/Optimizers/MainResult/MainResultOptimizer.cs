@@ -4,5 +4,5 @@ namespace CVRPTW.Computing.Optimizers;
 
 public abstract class MainResultOptimizer : IOptimizer
 {
-    public abstract void Optimize(MainResult mainResult, MainData mainData);
+    public abstract void Optimize(MainResult mainResult);
 }

@@ -9,5 +9,7 @@
     <Grid>
         <wpf:WpfPlot x:Name="MainPlot" FontSize="20" Margin="0,45,0,0"/>
         <Button x:Name="LoadDataButton" Content="Заватнажити дані" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="30" Width="117"/>
+        <Button x:Name="OptimizeButton" Content="Оптимізувати"  HorizontalAlignment="Left" Margin="132,10,0,0" VerticalAlignment="Top" Width="120" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="InputTextBox" HorizontalAlignment="Left" Margin="257,10,0,0" VerticalAlignment="Top" Height="30" Width="117" TextWrapping="Wrap"/>
     </Grid>
 </Window>
