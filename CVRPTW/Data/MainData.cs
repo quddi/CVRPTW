@@ -23,4 +23,11 @@ public class MainData
     public AlternativePoints? AlternativePoints { get; set; }
 
     public List<Car> Cars { get; set; } = new();
+
+    public Point GetPoint(int id)
+    {
+        if (id == Constants.DepoPointId) return DepoPoint!;
+
+        return PointsByIds[id];
+    }
 }
