@@ -2,7 +2,7 @@
 
 public class MainResult
 {
-    public double Estimation => Results.Values.Sum(result => result.PathCost);
+    public double Estimation { get; set; }
     
     public Dictionary<Car, CarResult> Results { get; set; } = new();
 

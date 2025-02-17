@@ -197,6 +197,11 @@ public static class ExtensionsMethods
             : estimator.Estimate(result.Path);
     }
 
+    public static void ReEstimate(this MainResult mainResult, MainResultEstimator estimator)
+    {
+        mainResult.Estimation = estimator.Estimate(mainResult);
+    }
+    
     public static T TakeAt<T>(this IList<T> list, int index)
     {
         var result = list[index];

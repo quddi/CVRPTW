@@ -17,44 +17,39 @@ static class Program
             mainData = parser.Parse(streamReader);
         }
 
-        var estimator = new DistancePathEstimator(mainData);
-        var computer = new StartPathComputer(mainData, estimator);
+        var pathEstimator = new DistancePathEstimator(mainData);
+        var mainResultEstimator = new SumMainResultEstimator(mainData, pathEstimator);
+        var computer = new StartPathComputer(mainData, mainResultEstimator);
 
         var optimizedResult = computer.Compute();
         var startResult = optimizedResult.Clone();
 
         Console.WriteLine(optimizedResult);
 
-
-        Opt2(estimator, optimizedResult);
+        Opt2(pathEstimator, optimizedResult);
         
         Console.WriteLine(optimizedResult);
 
-        Opt3(estimator, optimizedResult);
+        Opt3(pathEstimator, optimizedResult);
         
         Console.WriteLine(optimizedResult);
 
         CheckPermutations(optimizedResult, startResult);
         
-        PointTranspose(estimator, optimizedResult, mainData);
+        PointTranspose(mainResultEstimator, optimizedResult, mainData);
 
         Console.WriteLine(optimizedResult);
         
-        ReEstimate(optimizedResult, estimator);
+        ReEstimate(optimizedResult, mainResultEstimator);
 
         Console.WriteLine(optimizedResult);
     }
 
-    private static void ReEstimate(MainResult optimizedResult, DistancePathEstimator estimator)
+    private static void ReEstimate(MainResult result, MainResultEstimator mainResultEstimator)
     {
         Console.WriteLine("====================== ReEstimation ======================\n");
 
-        foreach (var (car, carResult) in optimizedResult.Results)
-        {
-            if (carResult.Path.Count <= 2) continue;
-            
-            carResult.ReEstimate(estimator);
-        }
+        result.ReEstimate(mainResultEstimator);
     }
 
     private static void CheckPermutations(MainResult optimizedResult, MainResult startResult)
@@ -75,7 +70,7 @@ static class Program
         Console.ResetColor();
     }
 
-    private static void PointTranspose(DistancePathEstimator estimator, MainResult optimizedResult, MainData mainData)
+    private static void PointTranspose(MainResultEstimator estimator, MainResult optimizedResult, MainData mainData)
     {
         Console.WriteLine("====================== Point Transpose ======================\n");
         
@@ -84,7 +79,7 @@ static class Program
         mainResultOptimizer.Optimize(optimizedResult);
     }
 
-    private static void Opt2(DistancePathEstimator estimator, MainResult optimizedResult)
+    private static void Opt2(PathEstimator estimator, MainResult optimizedResult)
     {
         Console.WriteLine("====================== Opt 2 ======================\n");
 
@@ -98,7 +93,7 @@ static class Program
         }
     }
 
-    private static void Opt3(DistancePathEstimator estimator, MainResult optimizedResult)
+    private static void Opt3(PathEstimator estimator, MainResult optimizedResult)
     {
         Console.WriteLine("====================== Opt 3 ======================\n");
         

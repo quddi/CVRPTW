@@ -11,24 +11,12 @@ public class AlternativePointsMainResultOptimizer(PathEstimator pathEstimator, M
             var (firstCar, firstIndex) = GetContainingPath(mainResult, firstPointId);
             var (secondCar, secondIndex) = GetContainingPath(mainResult, secondPointId);
             
-            var previousEstimation = mainResult.Estimation;
-            
             var firstPath = mainResult.Results[firstCar].Path;
             var secondPath = mainResult.Results[secondCar].Path;
             
-            (firstPath[firstIndex], secondPath[secondIndex]) = (secondPath[secondIndex], firstPath[firstIndex]);
+            var takenFirst = firstPath.TakeAt(firstIndex);
             
-            mainResult.Results[firstCar].ReEstimate(pathEstimator);
-            mainResult.Results[secondCar].ReEstimate(pathEstimator);
             
-            var currentEstimation = mainResult.Estimation;
-            
-            if (currentEstimation < previousEstimation) continue;
-            
-            (firstPath[firstIndex], secondPath[secondIndex]) = (secondPath[secondIndex], firstPath[firstIndex]);
-            
-            mainResult.Results[firstCar].ReEstimate(pathEstimator);
-            mainResult.Results[secondCar].ReEstimate(pathEstimator);
         } 
     }
     

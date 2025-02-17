@@ -17,6 +17,7 @@ public class MainWindowReactionHandler : IDisposable
     private MainData? _mainData;
     private MainResult? _mainResult;
     private PathEstimator? _pathEstimator;
+    private MainResultEstimator? _mainResultEstimator;
     private PathComputer? _pathComputer;
     
     private Dictionary<CarResult, Color>? _resultColors;
@@ -72,17 +73,18 @@ public class MainWindowReactionHandler : IDisposable
         _mainData = DataLoader.LoadData();
 
         _pathEstimator = new DistancePathEstimator(_mainData!);
+        _mainResultEstimator = new SumMainResultEstimator(_mainData!, _pathEstimator);
+        
         _pathComputer = new OptimizedPathComputer
         (
-            new StartPathComputer(_mainData!, _pathEstimator),
+            new StartPathComputer(_mainData!, _mainResultEstimator),
             new CompositeMainResultOptimizer(
             [
-                new PointTransposeMainResultOptimizer(_pathEstimator, _mainData!),
+                new PointTransposeMainResultOptimizer(_mainResultEstimator, _mainData!),
                 new Opt3CarResultOptimizer(_pathEstimator),
             ], 
             report: false),
-            _mainData!,
-            _pathEstimator
+            _mainData!
         );
         SetPoints();
     }

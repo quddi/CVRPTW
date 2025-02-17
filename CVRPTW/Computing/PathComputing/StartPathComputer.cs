@@ -2,9 +2,10 @@
 
 namespace CVRPTW.Computing;
 
-public class StartPathComputer(MainData mainData, PathEstimator pathEstimator) : IteratedPathComputer(mainData, pathEstimator)
+public class StartPathComputer(MainData mainData, MainResultEstimator mainResultEstimator) : IteratedPathComputer(mainData, mainResultEstimator)
 {
     private Dictionary<int, Point> _notVisitedPoints = new();
+    private readonly MainResultEstimator _mainResultEstimator = mainResultEstimator;
 
     public override MainResult Compute()
     {
@@ -31,13 +32,13 @@ public class StartPathComputer(MainData mainData, PathEstimator pathEstimator) :
         {
             var nextPointPair = _notVisitedPoints
                 .Where(CanVisit)
-                .MinBy(point => _pathEstimator!.Estimate(currentPointId, point.Value.Id));
+                .MinBy(point => _mainResultEstimator.PathEstimator.Estimate(currentPointId, point.Value.Id));
 
             _notVisitedPoints.Remove(nextPointPair.Key);
                 
             freeSpace -= nextPointPair.Value.Demand;
                 
-            result.PathCost += _pathEstimator!.Estimate(currentPointId, nextPointPair.Value.Id);
+            result.PathCost += _mainResultEstimator.PathEstimator.Estimate(currentPointId, nextPointPair.Value.Id);
             result.Path.AddNextPoint(nextPointPair.Value.Id);
         }
             

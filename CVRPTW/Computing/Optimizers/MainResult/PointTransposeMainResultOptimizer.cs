@@ -4,7 +4,7 @@ namespace CVRPTW.Computing.Optimizers;
 
 using SubResult = (Car targetCar, int targetIndex, double estimation);
 
-public class PointTransposeMainResultOptimizer(PathEstimator pathEstimator, MainData mainData) : MainResultOptimizer
+public class PointTransposeMainResultOptimizer(MainResultEstimator mainResultEstimator,  MainData mainData) : MainResultOptimizer
 {
     private MainResult? _mainResult;
     private MainData? _mainData;
@@ -67,8 +67,7 @@ public class PointTransposeMainResultOptimizer(PathEstimator pathEstimator, Main
                 }
 
                 //ReEstimate both
-                targetResult.ReEstimate(pathEstimator);
-                sourceResult.ReEstimate(pathEstimator);
+                _mainResult.ReEstimate(mainResultEstimator);
             }
         }
         
@@ -82,22 +81,22 @@ public class PointTransposeMainResultOptimizer(PathEstimator pathEstimator, Main
         var sourcePointId = sourceResult.Path[sourcePointIndex];
         var bestPositionIndex = SameBestPointIndex;
         var startEstimation = _mainResult.Estimation;
-        var bestEstimation = startEstimation; 
 
-        if (!CanTranspose(targetCar, sourcePointId)) return (sourceCar, bestPositionIndex, bestEstimation);
+        if (!CanTranspose(targetCar, sourcePointId)) return (sourceCar, bestPositionIndex, startEstimation);
         
+        var bestEstimation = startEstimation; 
         var targetResult = _mainResult!.Results[targetCar];
         var targetPath = targetResult.Path;
         
         sourceResult.Path.RemoveAt(sourcePointIndex);
         
-        sourceResult.ReEstimate(pathEstimator);
+        _mainResult.ReEstimate(mainResultEstimator);
         
         for (int i = 1; i < targetPath.Count; i++)
         {
             targetPath.Insert(i, sourcePointId);
             
-            targetResult.ReEstimate(pathEstimator);
+            _mainResult.ReEstimate(mainResultEstimator);
 
             if (_mainResult.Estimation < bestEstimation)
             {
@@ -107,12 +106,12 @@ public class PointTransposeMainResultOptimizer(PathEstimator pathEstimator, Main
             
             targetPath.RemoveAt(i);
             
-            targetResult.ReEstimate(pathEstimator);
+            _mainResult.ReEstimate(mainResultEstimator);
         }
         
         sourceResult.Path.Insert(sourcePointIndex, sourcePointId);
         
-        sourceResult.ReEstimate(pathEstimator);
+        _mainResult.ReEstimate(mainResultEstimator);
         
         return (targetCar, bestPositionIndex, bestEstimation);
     }

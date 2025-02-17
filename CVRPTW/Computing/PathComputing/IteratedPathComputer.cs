@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing;
 
-public abstract class IteratedPathComputer(MainData mainData, PathEstimator pathEstimator) : PathComputer(mainData, pathEstimator)
+public abstract class IteratedPathComputer(MainData mainData, MainResultEstimator mainResultEstimator) : PathComputer(mainData)
 {
     public override MainResult Compute()
     {
@@ -13,6 +13,8 @@ public abstract class IteratedPathComputer(MainData mainData, PathEstimator path
             result.Results.Add(car, GetCarResult(car));
         }
 
+        result.ReEstimate(mainResultEstimator);
+        
         return result;
     }
 

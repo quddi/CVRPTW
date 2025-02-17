@@ -4,8 +4,6 @@ namespace CVRPTW.Computing.Optimizers;
 
 public class Opt2CarResultOptimizer(PathEstimator pathEstimator) : CarResultOptimizer
 {
-    private readonly PathEstimator _pathEstimator = pathEstimator;
-
     public override void Optimize(CarResult carResult)
     {
         if (carResult.Path.Count < 4)
@@ -29,16 +27,16 @@ public class Opt2CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
         var secondPairFirstPointId = result.Path[toIndex - 1];
         var secondPairSecondPointId = result.Path[toIndex];
 
-        var currentPrice = _pathEstimator.Estimate(firstPairFirstPointId, firstPairSecondPointId) +
-                                 _pathEstimator.Estimate(secondPairFirstPointId, secondPairSecondPointId);
+        var currentPrice = pathEstimator.Estimate(firstPairFirstPointId, firstPairSecondPointId) +
+                                 pathEstimator.Estimate(secondPairFirstPointId, secondPairSecondPointId);
         
-        var potentialPrice = _pathEstimator.Estimate(firstPairFirstPointId, secondPairFirstPointId) +
-                             _pathEstimator.Estimate(firstPairSecondPointId, secondPairSecondPointId);
+        var potentialPrice = pathEstimator.Estimate(firstPairFirstPointId, secondPairFirstPointId) +
+                             pathEstimator.Estimate(firstPairSecondPointId, secondPairSecondPointId);
 
         if (potentialPrice >= currentPrice) return;
         
         result.Path.Invert(fromIndex + 1, toIndex - 1);
         
-        result.ReEstimate(_pathEstimator);
+        result.ReEstimate(pathEstimator);
     }
 }
