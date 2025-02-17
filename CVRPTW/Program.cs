@@ -40,6 +40,10 @@ static class Program
 
         Console.WriteLine(optimizedResult);
         
+        AlternativePoints(mainResultEstimator, mainData, optimizedResult);
+        
+        Console.WriteLine(optimizedResult);
+        
         ReEstimate(optimizedResult, mainResultEstimator);
 
         Console.WriteLine(optimizedResult);
@@ -105,6 +109,15 @@ static class Program
 
             optimizer.Optimize(carResult);
         }
+    }
+
+    private static void AlternativePoints(MainResultEstimator estimator, MainData mainData, MainResult result)
+    {
+        Console.WriteLine("====================== Alternative Points ======================\n");
+
+        var optimizer = new AlternativePointsMainResultOptimizer(estimator, mainData);
+        
+        optimizer.Optimize(result);
     }
 
     private static bool AreResultsPathsPermutations(MainResult optimizedResult, MainResult startResult)

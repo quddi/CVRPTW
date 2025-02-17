@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class AlternativePointsMainResultOptimizer(PathEstimator pathEstimator, MainData mainData) : MainResultOptimizer
+public class AlternativePointsMainResultOptimizer(MainResultEstimator mainResultEstimator, MainData mainData) : MainResultOptimizer
 {
     public override void Optimize(MainResult mainResult)
     {
@@ -14,9 +14,23 @@ public class AlternativePointsMainResultOptimizer(PathEstimator pathEstimator, M
             var firstPath = mainResult.Results[firstCar].Path;
             var secondPath = mainResult.Results[secondCar].Path;
             
-            var takenFirst = firstPath.TakeAt(firstIndex);
+            var firstTaken = firstPath.TakeAt(firstIndex);
+
+            var firstEstimation = mainResultEstimator.Estimate(mainResult);
             
+            firstPath.Insert(firstIndex, firstTaken);
             
+            var secondTaken = secondPath.TakeAt(secondIndex);
+            
+            mainResult.ReEstimate(mainResultEstimator);
+            
+            if (mainResult.Estimation < firstEstimation) continue;
+            
+            secondPath.Insert(secondIndex, secondTaken);
+            
+            firstPath.RemoveAt(firstIndex);
+            
+            mainResult.ReEstimate(mainResultEstimator);
         } 
     }
     

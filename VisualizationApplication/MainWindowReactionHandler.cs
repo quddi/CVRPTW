@@ -45,6 +45,7 @@ public class MainWindowReactionHandler : IDisposable
 
         _mainWindowElements.FilterPlot.Plot.Add.Scatter(xs, ys).LineWidth = 0;
         _mainWindowElements.FilterPlot.Refresh();
+        _mainWindowElements.FilterPlot.Plot.Axes.AutoScale();
     }
 
     private void SetAllResults()
@@ -97,6 +98,8 @@ public class MainWindowReactionHandler : IDisposable
             .ToDictionary(carResult => carResult, _ => Color.RandomHue());
         
         _resetHandler.ResetAll(_mainResult);
+
+        _mainWindowElements.VisualizationComboBox.SelectedIndex = AllResultsIndex;
     }
 
     private void VisualizationComboBoxSelectionChangedHandler(object _, SelectionChangedEventArgs __)
