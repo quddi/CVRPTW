@@ -4,12 +4,9 @@ namespace CVRPTW.Computing.Optimizers;
 
 public class SwapCarResultOptimizer(PathEstimator pathEstimator) : CarResultOptimizer
 {
-    private readonly PathEstimator _pathEstimator = pathEstimator;
-
     public override void Optimize(CarResult carResult)
     {
-        if (carResult.Path.Count < 4)
-            throw new ArgumentException("Trying to optimize a path with less then 4 points!");
+        if (carResult.Path.Count < 4) return;
         
         var path = carResult.Path;
         var cost = carResult.PathCost;
@@ -23,7 +20,7 @@ public class SwapCarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
                 
                 (path[i], path[j]) = (path[j], path[i]);
 
-                var newCost = _pathEstimator.Estimate(path);
+                var newCost = pathEstimator.Estimate(path);
 
                 if (newCost < cost) cost = newCost;
                 else (path[i], path[j]) = (path[j], path[i]);

@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing;
 
-public class StartPathComputer(MainData mainData, MainResultEstimator mainResultEstimator) : IteratedPathComputer(mainData, mainResultEstimator)
+public class StartMainComputer(MainData mainData, MainResultEstimator mainResultEstimator) : IteratedMainComputer(mainData, mainResultEstimator)
 {
     private Dictionary<int, Point> _notVisitedPoints = new();
     private readonly MainResultEstimator _mainResultEstimator = mainResultEstimator;

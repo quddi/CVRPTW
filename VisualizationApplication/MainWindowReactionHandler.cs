@@ -7,6 +7,9 @@ using CVRPTW.Computing.Optimizers;
 using ScottPlot;
 using VisualizationApplication.Other;
 using VisualizationApplication.Tools;
+using Coordinates = ScottPlot.Coordinates;
+
+// ReSharper disable CoVariantArrayConversion
 
 namespace VisualizationApplication;
 
@@ -16,15 +19,13 @@ public class MainWindowReactionHandler : IDisposable
     private readonly MainWindowElements _mainWindowElements;
     private MainData? _mainData;
     private MainResult? _mainResult;
-    private PathEstimator? _pathEstimator;
+    private MainComputer? _startMainComputer;
     private MainResultEstimator? _mainResultEstimator;
-    private PathComputer? _pathComputer;
-    
-    private Dictionary<CarResult, Color>? _resultColors;
 
-    private const int OnlyPointsIndex = 0;
-    private const int AllResultsIndex = 1;
-    private const int ServiceIndexesCount = 2;
+    private Dictionary<CarResult, Color>? _resultColors;
+    private IOptimizer[]? _optimizers;
+
+    private PathEstimator? PathEstimator => _mainResultEstimator?.PathEstimator;
     
     public MainWindowReactionHandler(MainWindowElements mainWindowElements)
     {
@@ -32,7 +33,8 @@ public class MainWindowReactionHandler : IDisposable
         _resetHandler = new MainWindowResetHandler(mainWindowElements);
         
         FollowUiEvents();
-        _resetHandler.ResetAll(_mainResult);
+        
+        _resetHandler.ResetAll(_mainResult, _optimizers);
     }
 
     private void SetPoints()
@@ -43,20 +45,39 @@ public class MainWindowReactionHandler : IDisposable
         var xs = points.Select(point => point.Coordinates.Latitude).ToArray();
         var ys = points.Select(point => point.Coordinates.Longitude).ToArray();
 
-        _mainWindowElements.FilterPlot.Plot.Add.Scatter(xs, ys).LineWidth = 0;
+        AddDepoPoint();
+        
+        _mainWindowElements.FilterPlot.Plot.Add.Scatter(xs, ys, VisualizationConstants.DefaultPointsColor).LineWidth = 0;
+
         _mainWindowElements.FilterPlot.Refresh();
         _mainWindowElements.FilterPlot.Plot.Axes.AutoScale();
+    }
+
+    private void AddDepoPoint()
+    {
+        var depoPoint = _mainData!.DepoPoint;
+        var depoCoordinates = depoPoint!.Coordinates.ToScottCoordinates();
+        
+        var circle = _mainWindowElements.FilterPlot.Plot.Add.Ellipse(depoCoordinates, 
+            VisualizationConstants.DepoPointRadiusX, VisualizationConstants.DepoPointRadiusY);
+        
+        circle.FillColor = VisualizationConstants.DepoPointFillColor;
+        circle.LineColor = VisualizationConstants.DepoPointLineColor;
     }
 
     private void SetAllResults()
     {
         foreach (var (_, result) in _mainResult!.Results)
         {
-            SetResult(result);
+            SetResult(result, addDepoPoint: false);
         }
+        
+        AddDepoPoint();
+        
+        _mainWindowElements.FilterPlot.Refresh();
     }
 
-    private void SetResult(CarResult carResult)
+    private void SetResult(CarResult carResult, bool addDepoPoint = true)
     {
         var color = _resultColors![carResult];
 
@@ -64,42 +85,64 @@ public class MainWindowReactionHandler : IDisposable
         var xs = points.Select(point => point.Coordinates.Latitude).ToArray();
         var ys = points.Select(point => point.Coordinates.Longitude).ToArray();
 
+        if (addDepoPoint) AddDepoPoint();
+        
         _mainWindowElements.FilterPlot.Plot.Add.Scatter(xs, ys, color);
         _mainWindowElements.FilterPlot.Refresh();
     }
 
     private void LoadDataButtonClickHandler(object _, RoutedEventArgs __)
     {
-        _resetHandler.ResetAll(_mainResult);
+        _resetHandler.ResetAll(_mainResult, _optimizers);
         _mainData = DataLoader.LoadData();
 
-        _pathEstimator = new DistancePathEstimator(_mainData!);
-        _mainResultEstimator = new SumMainResultEstimator(_mainData!, _pathEstimator);
-        
-        _pathComputer = new OptimizedPathComputer
-        (
-            new StartPathComputer(_mainData!, _mainResultEstimator),
-            new CompositeMainResultOptimizer(
-            [
-                new PointTransposeMainResultOptimizer(_mainResultEstimator, _mainData!),
-                new Opt3CarResultOptimizer(_pathEstimator),
-            ], 
-            report: false),
-            _mainData!
-        );
+        SetUpFunctionality();
         SetPoints();
-    }
-
-    private void ComputeButtonClickHandler(object _, RoutedEventArgs __)
-    {
-        _mainResult = _pathComputer!.Compute();
+        
+        _resetHandler.ResetOptimizationComboBox(_optimizers);
+        
+        _mainResult = _startMainComputer!.Compute();
         
         _resultColors = _mainResult!.Results.Values
             .ToDictionary(carResult => carResult, _ => Color.RandomHue());
         
-        _resetHandler.ResetAll(_mainResult);
+        _resetHandler.ResetAll(_mainResult, _optimizers);
 
-        _mainWindowElements.VisualizationComboBox.SelectedIndex = AllResultsIndex;
+        _mainWindowElements.VisualizationComboBox.SelectedIndex = Constants.OnlyPointsIndex;
+    }
+
+    private void SetUpFunctionality()
+    {
+        _mainResultEstimator = new SumMainResultEstimator(_mainData!, new DistancePathEstimator(_mainData!));
+        
+        _startMainComputer = new StartMainComputer(_mainData!, _mainResultEstimator);
+        
+        _optimizers = 
+        [
+            new Opt2CarResultOptimizer(PathEstimator!) { Name = "Opt 2"},
+            new Opt3CarResultOptimizer(PathEstimator!) { Name = "Opt 3" },
+            new SwapCarResultOptimizer(PathEstimator!) { Name = "Swap Car" },
+            new AlternativePointsMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Видалення альтернативних"},
+            new PointTransposeMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Перекидування точок"}
+        ];
+    }
+
+    private void ComputeButtonClickHandler(object _, RoutedEventArgs __)
+    {
+        if (_optimizers == null || _mainResult == null || _mainResultEstimator == null) return;
+
+        if (_mainWindowElements.OptimizationComboBox.SelectedIndex == Constants.NotSelectedIndex)
+        {
+            MessageBox.Show("Оберіть оптимізатор!");
+            
+            return;
+        }
+
+        var selectedOptimizer = _optimizers[_mainWindowElements.OptimizationComboBox.SelectedIndex];
+        
+        _mainResult.Optimize(selectedOptimizer, _mainResultEstimator!);
+        
+        _resetHandler.ResetAll(_mainResult, _optimizers);
     }
 
     private void VisualizationComboBoxSelectionChangedHandler(object _, SelectionChangedEventArgs __)
@@ -108,13 +151,13 @@ public class MainWindowReactionHandler : IDisposable
 
         switch (comboBoxSelectionIndex)
         {
-            case OnlyPointsIndex:
+            case Constants.OnlyPointsIndex:
                 _resetHandler.ResetMainPlot();
                 SetPoints();
                 _mainWindowElements.PathCostLabel.Content = string.Empty;
                 break;
 
-            case AllResultsIndex:
+            case Constants.AllResultsIndex:
                 _resetHandler.ResetMainPlot();
                 SetAllResults();
                 _mainWindowElements.PathCostLabel.Content = $"Загальна вартість шляхів: {_mainResult!.Estimation}";
@@ -123,7 +166,7 @@ public class MainWindowReactionHandler : IDisposable
             case not Constants.NotSelectedIndex:
                 _resetHandler.ResetMainPlot();
                 SetPoints();
-                var chosenResult = _mainResult!.Results.Values.ElementAt(comboBoxSelectionIndex - ServiceIndexesCount);
+                var chosenResult = _mainResult!.Results.Values.ElementAt(comboBoxSelectionIndex - Constants.ServiceIndexesCount);
                 SetResult(chosenResult);
                 _mainWindowElements.PathCostLabel.Content = $"Вартість шляху: {chosenResult.PathCost}";
                 break;

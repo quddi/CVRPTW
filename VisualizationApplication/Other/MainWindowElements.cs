@@ -4,7 +4,7 @@ using ScottPlot.WPF;
 namespace VisualizationApplication.Other;
 
 public class MainWindowElements(Button loadDataButton, WpfPlot filterPlot, Button computeButton, 
-    ComboBox visualizationComboBox, Label pathCostLabel)
+    ComboBox visualizationComboBox, Label pathCostLabel, ComboBox optimizationComboBox)
 {
     public Button LoadDataButton { get; set; } = loadDataButton;
 
@@ -15,4 +15,6 @@ public class MainWindowElements(Button loadDataButton, WpfPlot filterPlot, Butto
     public ComboBox VisualizationComboBox { get; set; } = visualizationComboBox;
     
     public Label PathCostLabel { get; set; } = pathCostLabel;
+    
+    public ComboBox OptimizationComboBox { get; set; } = optimizationComboBox;
 }

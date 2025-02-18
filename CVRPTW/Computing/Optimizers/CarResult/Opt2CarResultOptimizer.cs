@@ -6,8 +6,7 @@ public class Opt2CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
 {
     public override void Optimize(CarResult carResult)
     {
-        if (carResult.Path.Count < 4)
-            throw new ArgumentException("Trying to optimize a path with less then 4 points!");
+        if (carResult.Path.Count < 4) return;
 
         var pathLength = carResult.Path.Count;
 

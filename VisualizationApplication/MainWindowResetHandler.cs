@@ -1,4 +1,5 @@
 ﻿using CVRPTW;
+using CVRPTW.Computing.Optimizers;
 using VisualizationApplication.Other;
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -6,10 +7,11 @@ namespace VisualizationApplication;
 
 public class MainWindowResetHandler(MainWindowElements mainWindowElements)
 {
-    public void ResetAll(MainResult? mainResult)
+    public void ResetAll(MainResult? mainResult, INamed[]? optimizers)
     {
         ResetMainPlot();
         ResetVisualizationComboBox(mainResult);
+        ResetOptimizationComboBox(optimizers);
     }
 
     public void ResetMainPlot()
@@ -26,6 +28,8 @@ public class MainWindowResetHandler(MainWindowElements mainWindowElements)
     {
         var comboBox = mainWindowElements.VisualizationComboBox;
 
+        var previousIndex = comboBox.SelectedIndex;
+        
         comboBox.SelectedIndex = Constants.NotSelectedIndex;
         
         comboBox.Items.Clear();
@@ -42,6 +46,26 @@ public class MainWindowResetHandler(MainWindowElements mainWindowElements)
             }
         }
 
-        comboBox.SelectedIndex = 0;
+        comboBox.SelectedIndex = previousIndex;
+    }
+
+    public void ResetOptimizationComboBox(INamed[]? optimizers)
+    {
+        var comboBox = mainWindowElements.OptimizationComboBox;
+        
+        var previousIndex = comboBox.SelectedIndex;
+        
+        comboBox.SelectedIndex = Constants.NotSelectedIndex;
+        
+        comboBox.Items.Clear();
+        
+        if (optimizers == null) return;
+
+        foreach (var optimizer in optimizers)
+        {
+            comboBox.Items.Add(optimizer.Name);
+        }
+
+        comboBox.SelectedIndex = previousIndex;
     }
 }

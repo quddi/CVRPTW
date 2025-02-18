@@ -13,7 +13,8 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         
-        _elements = new MainWindowElements(LoadDataButton, MainPlot, ComputeButton, VisualizationComboBox, PathCostLabel); 
+        _elements = new MainWindowElements(LoadDataButton, MainPlot, ComputeButton, VisualizationComboBox, 
+            PathCostLabel, OptimizationMethodComboBox); 
         
         _reactionHandler = new MainWindowReactionHandler(_elements);
     }

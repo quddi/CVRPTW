@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing;
 
-public abstract class PathComputer(MainData mainData)
+public abstract class MainComputer(MainData mainData)
 {
     protected MainData _mainData = mainData;
 

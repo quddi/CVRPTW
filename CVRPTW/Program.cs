@@ -19,7 +19,7 @@ static class Program
 
         var pathEstimator = new DistancePathEstimator(mainData);
         var mainResultEstimator = new SumMainResultEstimator(mainData, pathEstimator);
-        var computer = new StartPathComputer(mainData, mainResultEstimator);
+        var computer = new StartMainComputer(mainData, mainResultEstimator);
 
         var optimizedResult = computer.Compute();
         var startResult = optimizedResult.Clone();

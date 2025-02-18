@@ -34,8 +34,6 @@ public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
         )
     ];
     
-    private readonly PathEstimator _pathEstimator = pathEstimator;
-    
     public override void Optimize(CarResult carResult)
     {
         var pathLength = carResult.Path.Count;
@@ -64,7 +62,7 @@ public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
             
             command.Do(path, aStart, bStart, cStart);
             
-            var estimation = _pathEstimator.Estimate(path);
+            var estimation = pathEstimator.Estimate(path);
 
             if (estimation < carResult.PathCost)
             {

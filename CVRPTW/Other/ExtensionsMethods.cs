@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using CVRPTW.Computing.Estimators;
+using CVRPTW.Computing.Optimizers;
 
 namespace CVRPTW;
 
@@ -239,5 +240,26 @@ public static class ExtensionsMethods
         }
 
         Console.WriteLine();
+    }
+
+    public static void Optimize(this MainResult mainResult, IOptimizer optimizer, MainResultEstimator mainResultEstimator)
+    {
+        if (optimizer is CarResultOptimizer carResultOptimizer)
+        {
+            foreach (var (_, carResult) in mainResult.Results)
+            {
+                carResultOptimizer.Optimize(carResult);
+            }
+        }
+        else if (optimizer is MainResultOptimizer mainResultOptimizer)
+        {
+            mainResultOptimizer.Optimize(mainResult);
+        }
+        else
+        {
+            throw new ArgumentException($"Unknown optimizer type: {optimizer.GetType()}");
+        }
+        
+        mainResult.ReEstimate(mainResultEstimator);
     }
 }

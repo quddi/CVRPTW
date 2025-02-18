@@ -3,7 +3,7 @@ using CVRPTW.Computing.Optimizers;
 
 namespace CVRPTW.Computing;
 
-public class OptimizedPathComputer(PathComputer baseComputer, MainResultOptimizer optimizer, MainData mainData) : PathComputer(mainData)
+public class OptimizedMainComputer(MainComputer baseComputer, MainResultOptimizer optimizer, MainData mainData) : MainComputer(mainData)
 {
     public override MainResult Compute()
     {
