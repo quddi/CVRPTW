@@ -64,9 +64,9 @@ public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
             
             var estimation = pathEstimator.Estimate(path);
 
-            if (estimation < carResult.PathCost)
+            if (estimation < carResult.Estimation)
             {
-                carResult.PathCost = estimation;
+                carResult.Estimation = estimation;
                 bestCommand = i;
             }
             

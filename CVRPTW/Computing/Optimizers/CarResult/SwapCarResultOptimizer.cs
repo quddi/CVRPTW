@@ -9,7 +9,7 @@ public class SwapCarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
         if (carResult.Path.Count < 4) return;
         
         var path = carResult.Path;
-        var cost = carResult.PathCost;
+        var cost = carResult.Estimation;
         var pathLength = carResult.Path.Count;
         
         for (var i = 1; i < pathLength - 1; i++)
@@ -27,6 +27,6 @@ public class SwapCarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
             }
         }
 
-        carResult.PathCost = cost;
+        carResult.Estimation = cost;
     }
 }

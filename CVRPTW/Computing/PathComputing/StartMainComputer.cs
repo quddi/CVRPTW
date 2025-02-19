@@ -20,7 +20,7 @@ public class StartMainComputer(MainData mainData, MainResultEstimator mainResult
         var currentPointId = _mainData!.DepoPoint!.Id;
         var result = new CarResult(car)
         {
-            PathCost = 0,
+            Estimation = 0,
             Path = new CarPath
             {
                 StartPointId = car.PointsInfos.First().Id!.Value,
@@ -38,7 +38,7 @@ public class StartMainComputer(MainData mainData, MainResultEstimator mainResult
                 
             freeSpace -= nextPointPair.Value.Demand;
                 
-            result.PathCost += _mainResultEstimator.PathEstimator.Estimate(currentPointId, nextPointPair.Value.Id);
+            result.Estimation += _mainResultEstimator.PathEstimator.Estimate(currentPointId, nextPointPair.Value.Id);
             result.Path.AddNextPoint(nextPointPair.Value.Id);
         }
             

@@ -121,6 +121,7 @@ public class MainWindowReactionHandler : IDisposable
         [
             new Opt2CarResultOptimizer(PathEstimator!) { Name = "Opt 2"},
             new Opt3CarResultOptimizer(PathEstimator!) { Name = "Opt 3" },
+            new OrOptCarResultOptimizer(PathEstimator!) { Name = "Or Opt" },
             new SwapCarResultOptimizer(PathEstimator!) { Name = "Swap Car" },
             new AlternativePointsMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Видалення альтернативних"},
             new PointTransposeMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Перекидування точок"}
@@ -168,7 +169,7 @@ public class MainWindowReactionHandler : IDisposable
                 SetPoints();
                 var chosenResult = _mainResult!.Results.Values.ElementAt(comboBoxSelectionIndex - Constants.ServiceIndexesCount);
                 SetResult(chosenResult);
-                _mainWindowElements.PathCostLabel.Content = $"Вартість шляху: {chosenResult.PathCost}";
+                _mainWindowElements.PathCostLabel.Content = $"Вартість шляху: {chosenResult.Estimation}";
                 break;
         }
     }

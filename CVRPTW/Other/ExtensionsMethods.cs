@@ -193,7 +193,7 @@ public static class ExtensionsMethods
 
     public static void ReEstimate(this CarResult result, PathEstimator estimator)
     {
-        result.PathCost = result.Path.Count == 2 
+        result.Estimation = result.Path.Count == 2 
             ? 0
             : estimator.Estimate(result.Path);
     }

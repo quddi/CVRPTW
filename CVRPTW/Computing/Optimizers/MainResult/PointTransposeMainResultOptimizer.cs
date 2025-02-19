@@ -118,7 +118,7 @@ public class PointTransposeMainResultOptimizer(MainResultEstimator mainResultEst
 
     private bool CanTranspose(Car targetCar, int pointId)
     {
-        var currentCapacity = _mainResult!.Results[targetCar].PathCost;
+        var currentCapacity = _mainResult!.Results[targetCar].Estimation;
         
         return targetCar.Capacity - currentCapacity >  _mainData!.PointsByIds[pointId].Demand;
     }

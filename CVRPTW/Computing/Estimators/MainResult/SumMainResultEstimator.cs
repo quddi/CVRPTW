@@ -11,6 +11,6 @@ public class SumMainResultEstimator(MainData mainData, PathEstimator pathEstimat
             carResult.ReEstimate(pathEstimator);
         }
 
-        return mainResult.Results.Values.Sum(x => x.PathCost);
+        return mainResult.Results.Values.Sum(x => x.Estimation);
     }
 }
