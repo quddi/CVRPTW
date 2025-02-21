@@ -21,18 +21,16 @@ public class Opt2CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
     
     private void TryOptimize(CarResult result, int fromIndex, int toIndex)
     {
-        var firstPairFirstPointId = result.Path[fromIndex];
-        var firstPairSecondPointId = result.Path[fromIndex + 1];
-        var secondPairFirstPointId = result.Path[toIndex - 1];
-        var secondPairSecondPointId = result.Path[toIndex];
-
-        var currentPrice = pathEstimator.Estimate(firstPairFirstPointId, firstPairSecondPointId) +
-                                 pathEstimator.Estimate(secondPairFirstPointId, secondPairSecondPointId);
+        var previousEstimation = result.Estimation;
         
-        var potentialPrice = pathEstimator.Estimate(firstPairFirstPointId, secondPairFirstPointId) +
-                             pathEstimator.Estimate(firstPairSecondPointId, secondPairSecondPointId);
+        result.Path.Invert(fromIndex + 1, toIndex - 1);
+        
+        result.ReEstimate(pathEstimator);
 
-        if (potentialPrice >= currentPrice) return;
+        var newEstimation = result.Estimation;
+        
+        if (newEstimation < previousEstimation)
+            return;
         
         result.Path.Invert(fromIndex + 1, toIndex - 1);
         

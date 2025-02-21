@@ -6,6 +6,13 @@ namespace CVRPTW;
 
 public static class ExtensionsMethods
 {
+    public static double DistanceTo(this Coordinates first, Coordinates second)
+    {
+        return Math.Sqrt(Math.Pow(first.Latitude - second.Latitude, 2) + 
+                         Math.Pow(first.Longitude - second.Longitude, 2));
+        
+    }
+    
     public static bool IsDividerLine(this string line)
     {
         return line.Contains(Constants.TitleDividerSymbol);

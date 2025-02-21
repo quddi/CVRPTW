@@ -113,7 +113,8 @@ public class MainWindowReactionHandler : IDisposable
 
     private void SetUpFunctionality()
     {
-        _mainResultEstimator = new SumMainResultEstimator(_mainData!, new DistancePathEstimator(_mainData!));
+        var pathEstimator = new EuclidesPathEstimator(_mainData!);
+        _mainResultEstimator = new SumMainResultEstimator(_mainData!, pathEstimator);
         
         _startMainComputer = new StartMainComputer(_mainData!, _mainResultEstimator);
         
@@ -122,7 +123,7 @@ public class MainWindowReactionHandler : IDisposable
             new Opt2CarResultOptimizer(PathEstimator!) { Name = "Opt 2"},
             new Opt3CarResultOptimizer(PathEstimator!) { Name = "Opt 3" },
             new OrOptCarResultOptimizer(PathEstimator!) { Name = "Or Opt" },
-            new SwapCarResultOptimizer(PathEstimator!) { Name = "Swap Car" },
+            new SwapCarResultOptimizer(PathEstimator!) { Name = "Swap" },
             new AlternativePointsMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Видалення альтернативних"},
             new PointTransposeMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Перекидування точок"}
         ];
