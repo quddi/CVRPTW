@@ -11,7 +11,7 @@ public class Car
     
     public int OverloadPenalty { get; set; }
     
-    public List<PointVisitInfo> PointsInfos { get; set; }
+    public List<PointVisitData> PointsDatas { get; set; }
     
     //TODO : per minute, transform to seconds
     public int DriverOvertimePenalty { get; set; }

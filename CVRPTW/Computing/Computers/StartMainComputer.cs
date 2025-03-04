@@ -23,8 +23,8 @@ public class StartMainComputer(MainData mainData, MainResultEstimator mainResult
             Estimation = 0,
             Path = new CarPath
             {
-                StartPointId = car.PointsInfos.First().Id!.Value,
-                EndPointId = car.PointsInfos.Last().Id!.Value
+                StartPoint = new(car.PointsDatas.First().Id!.Value),
+                EndPoint = new(car.PointsDatas.Last().Id!.Value)
             }
         };
 
@@ -39,7 +39,7 @@ public class StartMainComputer(MainData mainData, MainResultEstimator mainResult
             freeSpace -= nextPointPair.Value.Demand;
                 
             result.Estimation += _mainResultEstimator.PathEstimator.Estimate(currentPointId, nextPointPair.Value.Id);
-            result.Path.AddNextPoint(nextPointPair.Value.Id);
+            result.Path.AddNextPoint(new(nextPointPair.Value.Id));
         }
             
         result.RemainedFreeSpace = freeSpace;

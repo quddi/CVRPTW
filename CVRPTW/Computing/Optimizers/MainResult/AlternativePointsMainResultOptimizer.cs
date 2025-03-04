@@ -36,7 +36,8 @@ public class AlternativePointsMainResultOptimizer(MainResultEstimator mainResult
     
     private (Car car, int inPathIndex) GetContainingPath(MainResult mainResult, int pointId)
     {
-        var car = mainResult.Results.FirstOrDefault(pair => pair.Value.Path.Contains(pointId)).Key;
+        var car = mainResult.Results
+            .FirstOrDefault(pair => pair.Value.Path.Contains(pointId)).Key;
         
         return (car, mainResult.Results[car].Path.IndexOf(pointId));
     }

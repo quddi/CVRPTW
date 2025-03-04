@@ -80,7 +80,7 @@ public class MainWindowReactionHandler : IDisposable
     {
         var color = _resultColors![carResult];
 
-        var points = carResult.Path.Select(pointId => _mainData!.GetPoint(pointId)).ToList();
+        var points = carResult.Path.Select(pointVisitResult => _mainData!.GetPoint(pointVisitResult.Id)).ToList();
         var xs = points.Select(point => point.Coordinates.Latitude).ToArray();
         var ys = points.Select(point => point.Coordinates.Longitude).ToArray();
 

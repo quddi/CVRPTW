@@ -12,6 +12,7 @@ public static class Constants
     public const int OnlyPointsIndex = 0;
     public const int AllResultsIndex = 1;
     public const int ServiceIndexesCount = 2;
+    public const double DoubleComparisonTolerance = 0.000001;
         
     public static readonly char[] DefaultSplitDividers = [','];
     public static readonly char[] PointsSplitDividers = ['(', ';', ')'];

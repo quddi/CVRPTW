@@ -2,58 +2,58 @@
 
 namespace CVRPTW;
 
-public class CarPath : IList<int>
+public class CarPath : IList<PointVisitResult>
 {
-    public int StartPointId { get; set; }
+    public PointVisitResult StartPoint { get; set; }
     
-    public int EndPointId { get; set; }
+    public PointVisitResult EndPoint { get; set; }
     
-    public List<int> PathPointsIds { get; set; } = new();
+    public List<PointVisitResult> PathPoints { get; set; } = new();
 
-    public int Count => PathPointsIds.Count + 2;
+    public int Count => PathPoints.Count + 2;
     
     public bool IsReadOnly => false;
 
-    public int this[int index]
+    public PointVisitResult this[int index]
     {
         get
         {
-            if (index == 0) return StartPointId;
+            if (index == 0) return StartPoint;
             
-            if (index == Count - 1) return EndPointId;
+            if (index == Count - 1) return EndPoint;
             
-            return PathPointsIds[index - 1];
+            return PathPoints[index - 1];
         }
         set
         {
-            if (index == 0) StartPointId = value; 
-            else if (index == Count - 1) EndPointId = value;
-            else PathPointsIds[index - 1] = value;
+            if (index == 0) StartPoint = value; 
+            else if (index == Count - 1) EndPoint = value;
+            else PathPoints[index - 1] = value;
         }
     }
 
     public CarPath() { }
 
-    public CarPath(params int[] path)
+    public CarPath(params PointVisitResult[] path)
     {
         SetPath(path);
     }
 
-    public void AddNextPoint(int pointId)
+    public void AddNextPoint(PointVisitResult result)
     {
-        PathPointsIds.Add(pointId);
+        PathPoints.Add(result);
     }
 
-    public void SetPath(params int[] totalPath)
+    public void SetPath(params PointVisitResult[] totalPath)
     {
         if (totalPath == null || totalPath.Length < 2)
         {
             throw new ArgumentException("Path must contain at least a start and an end point.");
         }
 
-        StartPointId = totalPath[0];
-        EndPointId = totalPath[^1];
-        PathPointsIds = totalPath.Skip(1).Take(totalPath.Length - 2).ToList();
+        StartPoint = totalPath[0];
+        EndPoint = totalPath[^1];
+        PathPoints = totalPath.Skip(1).Take(totalPath.Length - 2).ToList();
     }
 
     public void Reverse(int fromIndex, int toIndex)
@@ -67,26 +67,26 @@ public class CarPath : IList<int>
 
         if (fromIndex == 0 && toIndex == Count - 1)
         {
-            (StartPointId, EndPointId) = (EndPointId, StartPointId);
-            PathPointsIds.Reverse();
+            (StartPoint, EndPoint) = (EndPoint, StartPoint);
+            PathPoints.Reverse();
             return;
         }
 
         if (fromIndex == 0)
         {
-            (StartPointId, this[toIndex]) = (this[toIndex], StartPointId);
+            (StartPoint, this[toIndex]) = (this[toIndex], StartPoint);
 
-            PathPointsIds.Reverse(0, toIndex - 1);
+            PathPoints.Reverse(0, toIndex - 1);
         }
         else if (toIndex == Count - 1)
         {
-            (this[fromIndex], EndPointId) = (EndPointId, this[fromIndex]);
+            (this[fromIndex], EndPoint) = (EndPoint, this[fromIndex]);
             
-            PathPointsIds.Reverse(fromIndex, toIndex - fromIndex - 1);
+            PathPoints.Reverse(fromIndex, toIndex - fromIndex - 1);
         }
         else
         {
-            PathPointsIds.Reverse(fromIndex - 1, toIndex - fromIndex + 1);
+            PathPoints.Reverse(fromIndex - 1, toIndex - fromIndex + 1);
         }
     }
 
@@ -94,39 +94,46 @@ public class CarPath : IList<int>
     {
         return new CarPath
         {
-            StartPointId = this.StartPointId,
-            EndPointId = this.EndPointId,
-            PathPointsIds = [..PathPointsIds]
+            StartPoint = this.StartPoint,
+            EndPoint = this.EndPoint,
+            PathPoints = [..PathPoints]
         };
     }
 
-    public int IndexOf(int item)
+    public int IndexOf(PointVisitResult item)
     {
-        if (item == StartPointId) return 0;
-        if (item == EndPointId) return Count - 1;
-        return PathPointsIds.IndexOf(item) + 1;
+        if (item == StartPoint) return 0;
+        if (item == EndPoint) return Count - 1;
+        return PathPoints.IndexOf(item) + 1;
     }
 
-    public void Insert(int index, int item)
+    public int IndexOf(int id)
+    {
+        if (id == StartPoint.Id) return 0;
+        if (id == EndPoint.Id) return Count - 1;
+        return PathPoints.FindIndex(point => point.Id == id) + 1;
+    }
+
+    public void Insert(int index, PointVisitResult item)
     {
         if (index < 0 || index > Count)
             throw new ArgumentOutOfRangeException("Invalid index for insertion.");
 
         if (index == 0)
         {
-            PathPointsIds.Insert(0, StartPointId);
-            StartPointId = item;
+            PathPoints.Insert(0, StartPoint);
+            StartPoint = item;
             return;
         }
 
         if (index == Count)
         {
-            PathPointsIds.Add(EndPointId);
-            EndPointId = item;
+            PathPoints.Add(EndPoint);
+            EndPoint = item;
             return;
         }
         
-        PathPointsIds.Insert(index - 1, item);
+        PathPoints.Insert(index - 1, item);
     }
 
     public void RemoveAt(int index)
@@ -136,39 +143,44 @@ public class CarPath : IList<int>
         
         if (index == 0)
         {
-            StartPointId = PathPointsIds[0];
-            PathPointsIds.RemoveAt(0);
+            StartPoint = PathPoints[0];
+            PathPoints.RemoveAt(0);
             return;
         }
 
         if (index == Count - 1)
         {
-            EndPointId = PathPointsIds[^1];
-            PathPointsIds.RemoveAt(PathPointsIds.Count - 1);
+            EndPoint = PathPoints[^1];
+            PathPoints.RemoveAt(PathPoints.Count - 1);
             return;
         }
         
-        PathPointsIds.RemoveAt(index - 1);
+        PathPoints.RemoveAt(index - 1);
     }
 
-    public void Add(int item)
+    public void Add(PointVisitResult item)
     {
         Insert(Count, item);
     }
 
     public void Clear()
     {
-        StartPointId = 0;
-        EndPointId = 0;
-        PathPointsIds.Clear();
+        StartPoint = default;
+        EndPoint = default;
+        PathPoints.Clear();
     }
 
-    public bool Contains(int item)
+    public bool Contains(PointVisitResult item)
     {
-        return PathPointsIds.Contains(item) || StartPointId == item || EndPointId == item;
+        return PathPoints.Contains(item) || StartPoint == item || EndPoint == item;
+    }
+    
+    public bool Contains(int pointId)
+    {
+        return PathPoints.Any(pointResult => pointResult.Id == pointId) || StartPoint.Id == pointId || EndPoint.Id == pointId;
     }
 
-    public void CopyTo(int[] array, int arrayIndex)
+    public void CopyTo(PointVisitResult[] array, int arrayIndex)
     {
         if (array == null)
             throw new ArgumentNullException(nameof(array));
@@ -179,12 +191,12 @@ public class CarPath : IList<int>
         if (array.Length - arrayIndex < Count)
             throw new ArgumentException("The number of elements in the source is greater than the available space from arrayIndex to the end of the destination array.");
     
-        array[arrayIndex] = StartPointId;
-        PathPointsIds.CopyTo(array, arrayIndex + 1);
-        array[arrayIndex + Count - 1] = EndPointId;
+        array[arrayIndex] = StartPoint;
+        PathPoints.CopyTo(array, arrayIndex + 1);
+        array[arrayIndex + Count - 1] = EndPoint;
     }
 
-    public bool Remove(int item)
+    public bool Remove(PointVisitResult item)
     {
         var index = IndexOf(item);
         
@@ -197,14 +209,14 @@ public class CarPath : IList<int>
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public IEnumerator<int> GetEnumerator()
+    public IEnumerator<PointVisitResult> GetEnumerator()
     {
         return new CarPathEnumerator(this);
     }
 
-    public static implicit operator int[](CarPath carPath)
+    public static implicit operator PointVisitResult[](CarPath carPath)
     {
-        var result = new int[carPath.Count];
+        var result = new PointVisitResult[carPath.Count];
         for (int i = 0; i < carPath.Count; i++)
         {
             result[i] = carPath[i];
@@ -214,6 +226,6 @@ public class CarPath : IList<int>
 
     public override string ToString()
     {
-        return $"[{StartPointId} [{string.Join(", ", PathPointsIds)}] {EndPointId}]";
+        return $"[{StartPoint} [{string.Join(", ", PathPoints)}] {EndPoint}]";
     }
 }

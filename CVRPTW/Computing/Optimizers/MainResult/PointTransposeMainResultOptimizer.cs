@@ -78,11 +78,11 @@ public class PointTransposeMainResultOptimizer(MainResultEstimator mainResultEst
     private SubResult GetBest(Car targetCar, Car sourceCar, int sourcePointIndex)
     {
         var sourceResult = _mainResult!.Results[sourceCar];
-        var sourcePointId = sourceResult.Path[sourcePointIndex];
+        var sourcePointResult = sourceResult.Path[sourcePointIndex];
         var bestPositionIndex = SameBestPointIndex;
         var startEstimation = _mainResult.Estimation;
 
-        if (!CanTranspose(targetCar, sourcePointId)) return (sourceCar, bestPositionIndex, startEstimation);
+        if (!CanTranspose(targetCar, sourcePointResult.Id)) return (sourceCar, bestPositionIndex, startEstimation);
         
         var bestEstimation = startEstimation; 
         var targetResult = _mainResult!.Results[targetCar];
@@ -94,7 +94,7 @@ public class PointTransposeMainResultOptimizer(MainResultEstimator mainResultEst
         
         for (int i = 1; i < targetPath.Count; i++)
         {
-            targetPath.Insert(i, sourcePointId);
+            targetPath.Insert(i, sourcePointResult);
             
             _mainResult.ReEstimate(mainResultEstimator);
 
@@ -109,7 +109,7 @@ public class PointTransposeMainResultOptimizer(MainResultEstimator mainResultEst
             _mainResult.ReEstimate(mainResultEstimator);
         }
         
-        sourceResult.Path.Insert(sourcePointIndex, sourcePointId);
+        sourceResult.Path.Insert(sourcePointIndex, sourcePointResult);
         
         _mainResult.ReEstimate(mainResultEstimator);
         

@@ -2,11 +2,11 @@
 
 namespace CVRPTW;
 
-public class CarPathEnumerator(CarPath carPath) : IEnumerator<int>
+public class CarPathEnumerator(CarPath carPath) : IEnumerator<PointVisitResult>
 {
     private int _position = -1;
 
-    public int Current
+    public PointVisitResult Current
     {
         get
         {

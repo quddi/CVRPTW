@@ -73,13 +73,13 @@ public class CarDataParser : LineDataParser<Car>
 
     private void ParsePointsInfos()
     {
-        _result!.PointsInfos = new();
+        _result!.PointsDatas = new();
 
         var subSplit = _split![_splitIndex!.Value].Split(Constants.PointsSplitDividers, StringSplitOptions.RemoveEmptyEntries);
         
         foreach (var element in subSplit)
         {
-            _result!.PointsInfos.Add(new PointVisitInfo
+            _result!.PointsDatas.Add(new PointVisitData
             (
                 element == Constants.AnyPointElementValue ? null : int.Parse(element)
             ));

@@ -8,10 +8,10 @@ public class DistancePathEstimator(MainData mainData) : PathEstimator(mainData)
 
         for (int i = 0; i < path.Count - 1; i++)
         {
-            var firstPointId = path[i];
-            var secondPointId = path[i + 1];
+            var firstPointResult = path[i];
+            var secondPointResult = path[i + 1];
 
-            sum += Estimate(firstPointId, secondPointId);
+            sum += Estimate(firstPointResult.Id, secondPointResult.Id);
         }
 
         return sum;
