@@ -7,7 +7,6 @@ using CVRPTW.Computing.Optimizers;
 using ScottPlot;
 using VisualizationApplication.Other;
 using VisualizationApplication.Tools;
-using Coordinates = ScottPlot.Coordinates;
 
 // ReSharper disable CoVariantArrayConversion
 
@@ -113,7 +112,7 @@ public class MainWindowReactionHandler : IDisposable
 
     private void SetUpFunctionality()
     {
-        var pathEstimator = new EuclidesPathEstimator(_mainData!);
+        var pathEstimator = new DistancePathEstimator(_mainData!);
         _mainResultEstimator = new SumMainResultEstimator(_mainData!, pathEstimator);
         
         _startMainComputer = new StartMainComputer(_mainData!, _mainResultEstimator);

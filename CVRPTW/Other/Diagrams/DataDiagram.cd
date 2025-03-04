@@ -1,29 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="CVRPTW.MainData">
-    <Position X="4.75" Y="0.5" Width="1.75" />
+  <Class Name="CVRPTW.AlternativePoints" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACAAAACAACAgAAAAAAAgAgIAAAABAJAAAAAAAAAAAA=</HashCode>
-      <FileName>Data\MainData.cs</FileName>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAACAABAAAEAEAAAAAAAAAAE=</HashCode>
+      <FileName>Data\AlternativePoints.cs</FileName>
     </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Property Name="Cars" />
-      <Property Name="Points" />
-    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="CVRPTW.Car">
-    <Position X="1.75" Y="2.25" Width="2" />
+  <Class Name="CVRPTW.Car" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gBADQBAAIAAAAAAAAAAAAAAAAABAAAAAAAAAAIABAAI=</HashCode>
+      <HashCode>gBADQBAAIAAAAAAAAAAAAAACAABAAAAAAAAAAIABAAI=</HashCode>
       <FileName>Data\Car.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CVRPTW.Point">
-    <Position X="7.5" Y="2.25" Width="1.5" />
+  <Class Name="CVRPTW.CarPath" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACCAAEAAEEAAAAAAAAIAAABAAAAAAAAAAAEAAAAAAQ=</HashCode>
+      <HashCode>AGIAAkAAAAAAABAUCAAABAQBQAAAIAAECAACAARQIBA=</HashCode>
+      <FileName>Data\CarPath.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CVRPTW.Distances" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAQAAAgIAAAAAAACAAAAAA=</HashCode>
+      <FileName>Data\Distances.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.MainData">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAIAACAACAAAAAAAAAoAgIAAAABAJAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\MainData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.Point" Collapsed="true">
+    <Position X="9" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAEAAAEAAAAEAAAAAAABIAAAAAAAAAEEAAAAAAQ=</HashCode>
       <FileName>Data\Point.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="CVRPTW.Tariffs" Collapsed="true">
+    <Position X="3.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAACCACAAA=</HashCode>
+      <FileName>Data\Tariffs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.Times" Collapsed="true">
+    <Position X="6" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Data\Times.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.TimeWindow" Collapsed="true">
+    <Position X="7.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\TimeWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="CVRPTW.Coordinates" Collapsed="true">
+    <Position X="9" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Coordinates.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CVRPTW.PointVisitInfo" Collapsed="true">
+    <Position X="9.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Data\PointVisitInfo.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

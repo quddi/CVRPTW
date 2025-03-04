@@ -10,7 +10,7 @@ public class Opt2CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
 
         var pathLength = carResult.Path.Count;
 
-        for (int beginIndex = 0; beginIndex < pathLength - 3; beginIndex++)
+        for (int beginIndex = 0; beginIndex < pathLength - 2; beginIndex++)
         {
             for (int endIndex = beginIndex + 3; endIndex < pathLength - 1; endIndex++)
             {

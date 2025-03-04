@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CVRPTW.AlternativePointsDataParser" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Data\Parsers\Stream\AlternativePointsDataParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.DistancesDataParser" Collapsed="true">
+    <Position X="8.5" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Data\Parsers\Stream\DistancesDataParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.LinedStreamDataParser&lt;T&gt;" Collapsed="true">
+    <Position X="7" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Data\Parsers\Stream\LinedStreamDataParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.MainParser" Collapsed="true">
+    <Position X="10" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgBAGAAAAAAAwAgAAIABgIQCAAAAAAAAUAAAAgAAA=</HashCode>
+      <FileName>Data\Parsers\Stream\MainParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.StreamDataParser&lt;T&gt;" Collapsed="true">
+    <Position X="8.5" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Parsers\Stream\StreamDataParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.TariffsDataParser" Collapsed="true">
+    <Position X="10.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Data\Parsers\Stream\TariffsDataParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.TimesDataParser" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Data\Parsers\Stream\TimesDataParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.CarDataParser" Collapsed="true">
+    <Position X="14.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAgIEAAAAAAAEAAAAQBAAAAAQAAAAQACAAgA=</HashCode>
+      <FileName>Data\Parsers\Line\CarDataParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.LineDataParser&lt;T&gt;" Collapsed="true">
+    <Position X="13.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAgABgAAAAEAAACAAAAAAAAAAAAAAAAAAAAAAABAgA=</HashCode>
+      <FileName>Data\Parsers\Line\LineDataParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.PointDataParser" Collapsed="true">
+    <Position X="12" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgACAAAAIAAAAAAgAAAAAAAAAAAQAABAgACAAAEAA=</HashCode>
+      <FileName>Data\Parsers\Line\PointDataParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

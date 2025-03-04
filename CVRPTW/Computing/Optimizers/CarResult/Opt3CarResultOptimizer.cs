@@ -4,7 +4,7 @@ namespace CVRPTW.Computing.Optimizers;
 
 public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOptimizer
 {
-    private readonly List<IPathOptimizerCommand> _commands =
+    private static readonly List<IPathOptimizerCommand> Commands =
     [
         new ABReversePathOptimizerCommand(),
         new BCReversePathOptimizerCommand(),
@@ -56,9 +56,9 @@ public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
         var bestCommand = -1;
         var path = carResult.Path;
         
-        for (var i = 0; i < _commands.Count; i++)
+        for (var i = 0; i < Commands.Count; i++)
         {
-            var command = _commands[i];
+            var command = Commands[i];
             
             command.Do(path, aStart, bStart, cStart);
             
@@ -73,6 +73,6 @@ public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
             command.Undo(path, aStart, bStart, cStart);
         }
 
-        if (bestCommand != -1) _commands[bestCommand].Do(path, aStart, bStart, cStart);
+        if (bestCommand != -1) Commands[bestCommand].Do(path, aStart, bStart, cStart);
     }
 }

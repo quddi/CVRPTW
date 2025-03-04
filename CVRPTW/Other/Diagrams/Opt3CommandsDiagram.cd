@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CVRPTW.Computing.Optimizers.ABReversePathOptimizerCommand" Collapsed="true">
+    <Position X="3" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Computing\Optimizers\CarResult\Commands\ABReversePathOptimizerCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.Computing.Optimizers.ACReversePathOptimizerCommand" Collapsed="true">
+    <Position X="6" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Computing\Optimizers\CarResult\Commands\ACReversePathOptimizerCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.Computing.Optimizers.BCReversePathOptimizerCommand" Collapsed="true">
+    <Position X="9" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Computing\Optimizers\CarResult\Commands\BCReversePathOptimizerCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.Computing.Optimizers.SequentialPathOptimizerCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="3" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Computing\Optimizers\CarResult\Commands\SequentialPathOptimizerCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CVRPTW.Computing.Optimizers.SwapSegmentsPathOptimizerCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="3" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Computing\Optimizers\CarResult\Commands\SwapSegmentsPathOptimizerCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CVRPTW.Computing.Optimizers.SymmetricPathOptimizerCommand" Collapsed="true">
+    <Position X="4.5" Y="3" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAACAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Computing\Optimizers\CarResult\Commands\SymmetricPathOptimizerCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="CVRPTW.Computing.Optimizers.IPathOptimizerCommand" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Computing\Optimizers\CarResult\Commands\IPathOptimizerCommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
