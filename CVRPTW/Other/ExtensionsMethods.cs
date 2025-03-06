@@ -198,11 +198,11 @@ public static class ExtensionsMethods
                secondsPointsCounts.All(pair => firstPointsCounts.ContainsKey(pair.Key) &&  pair.Value == firstPointsCounts[pair.Key]);
     }
 
-    public static void ReEstimate(this CarResult result, PathEstimator estimator)
+    public static void ReEstimate(this CarResult result, PathCostEstimator costEstimator)
     {
         result.Estimation = result.Path.Count == 2 
             ? 0
-            : estimator.Estimate(result.Path);
+            : costEstimator.Estimate(result.Path);
     }
 
     public static void ReEstimate(this MainResult mainResult, MainResultEstimator estimator)

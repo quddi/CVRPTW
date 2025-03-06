@@ -32,17 +32,17 @@ public class StartMainComputer(MainData mainData, MainResultEstimator mainResult
         {
             var nextPointPair = _notVisitedPoints
                 .Where(CanVisit)
-                .MinBy(point => _mainResultEstimator.PathEstimator.Estimate(currentPointId, point.Value.Id));
+                .MinBy(point => _mainData.Distances!.GetDistance(Constants.DefaultMatrixId, currentPointId, point.Value.Id));
 
             _notVisitedPoints.Remove(nextPointPair.Key);
                 
             freeSpace -= nextPointPair.Value.Demand;
                 
-            result.Estimation += _mainResultEstimator.PathEstimator.Estimate(currentPointId, nextPointPair.Value.Id);
             result.Path.AddNextPoint(new(nextPointPair.Value.Id));
         }
             
         result.RemainedFreeSpace = freeSpace;
+        result.ReEstimate(_mainResultEstimator.PathCostEstimator);
             
         return result;
 

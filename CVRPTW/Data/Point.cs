@@ -12,7 +12,9 @@ public class Point
     
     public double Demand { get; set; }
     
-    public List<TimeWindow> TimeWindows { get; set; }
+    public List<TimeWindow>? TimeWindows { get; set; }
+
+    public TimeWindow? TimeWindow => TimeWindows?[0];
     
     public int ServiceTime { get; set; }
     

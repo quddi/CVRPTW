@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class SwapCarResultOptimizer(PathEstimator pathEstimator) : CarResultOptimizer
+public class SwapCarResultOptimizer(PathCostEstimator pathCostEstimator) : CarResultOptimizer
 {
     public override void Optimize(CarResult carResult)
     {
@@ -20,7 +20,7 @@ public class SwapCarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
                 
                 (path[i], path[j]) = (path[j], path[i]);
 
-                var newCost = pathEstimator.Estimate(path);
+                var newCost = pathCostEstimator.Estimate(path);
 
                 if (newCost < cost) cost = newCost;
                 else (path[i], path[j]) = (path[j], path[i]);

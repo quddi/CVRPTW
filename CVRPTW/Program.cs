@@ -17,8 +17,8 @@ static class Program
             mainData = parser.Parse(streamReader);
         }
 
-        var pathEstimator = new DistancePathEstimator(mainData);
-        var mainResultEstimator = new SumMainResultEstimator(mainData, pathEstimator);
+        var pathEstimator = new DistancePathCostEstimator(mainData);
+        var mainResultEstimator = new SumMainResultEstimator(pathEstimator);
         var computer = new StartMainComputer(mainData, mainResultEstimator);
 
         var optimizedResult = computer.Compute();
@@ -83,11 +83,11 @@ static class Program
         mainResultOptimizer.Optimize(optimizedResult);
     }
 
-    private static void Opt2(PathEstimator estimator, MainResult optimizedResult)
+    private static void Opt2(PathCostEstimator costEstimator, MainResult optimizedResult)
     {
         Console.WriteLine("====================== Opt 2 ======================\n");
 
-        var optimizer = new Opt2CarResultOptimizer(estimator);
+        var optimizer = new Opt2CarResultOptimizer(costEstimator);
 
         foreach (var carResult in optimizedResult.Results.Values)
         {
@@ -97,11 +97,11 @@ static class Program
         }
     }
 
-    private static void Opt3(PathEstimator estimator, MainResult optimizedResult)
+    private static void Opt3(PathCostEstimator costEstimator, MainResult optimizedResult)
     {
         Console.WriteLine("====================== Opt 3 ======================\n");
         
-        var optimizer = new Opt3CarResultOptimizer(estimator);
+        var optimizer = new Opt3CarResultOptimizer(costEstimator);
 
         foreach (var carResult in optimizedResult.Results.Values)
         {

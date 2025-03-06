@@ -1,9 +1,8 @@
 ﻿namespace CVRPTW.Computing.Estimators;
 
-public abstract class MainResultEstimator(MainData mainData, PathEstimator pathEstimator)
+public abstract class MainResultEstimator(PathCostEstimator pathCostEstimator)
 {
-   protected readonly MainData _mainData = mainData;
-   public readonly PathEstimator PathEstimator = pathEstimator;
+   public readonly PathCostEstimator PathCostEstimator = pathCostEstimator;
 
    public abstract double Estimate(MainResult mainResult);
 }

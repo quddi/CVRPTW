@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOptimizer
+public class Opt3CarResultOptimizer(PathCostEstimator pathCostEstimator) : CarResultOptimizer
 {
     private static readonly List<IPathOptimizerCommand> Commands =
     [
@@ -62,7 +62,7 @@ public class Opt3CarResultOptimizer(PathEstimator pathEstimator) : CarResultOpti
             
             command.Do(path, aStart, bStart, cStart);
             
-            var estimation = pathEstimator.Estimate(path);
+            var estimation = pathCostEstimator.Estimate(path);
 
             if (estimation < carResult.Estimation)
             {

@@ -14,6 +14,8 @@ public class CarPath : IList<PointVisitResult>
     
     public bool IsReadOnly => false;
 
+    public double TravelTime => EndPoint.VisitTime;
+
     public PointVisitResult this[int index]
     {
         get

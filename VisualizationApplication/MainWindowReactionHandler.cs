@@ -24,7 +24,7 @@ public class MainWindowReactionHandler : IDisposable
     private Dictionary<CarResult, Color>? _resultColors;
     private IOptimizer[]? _optimizers;
 
-    private PathEstimator? PathEstimator => _mainResultEstimator?.PathEstimator;
+    private PathCostEstimator? PathCostEstimator => _mainResultEstimator?.PathCostEstimator;
     
     public MainWindowReactionHandler(MainWindowElements mainWindowElements)
     {
@@ -112,17 +112,17 @@ public class MainWindowReactionHandler : IDisposable
 
     private void SetUpFunctionality()
     {
-        var pathEstimator = new DistancePathEstimator(_mainData!);
-        _mainResultEstimator = new SumMainResultEstimator(_mainData!, pathEstimator);
+        var pathEstimator = new DistancePathCostEstimator(_mainData!);
+        _mainResultEstimator = new SumMainResultEstimator(pathEstimator);
         
         _startMainComputer = new StartMainComputer(_mainData!, _mainResultEstimator);
         
         _optimizers = 
         [
-            new Opt2CarResultOptimizer(PathEstimator!) { Name = "Opt 2"},
-            new Opt3CarResultOptimizer(PathEstimator!) { Name = "Opt 3" },
-            new OrOptCarResultOptimizer(PathEstimator!) { Name = "Or Opt" },
-            new SwapCarResultOptimizer(PathEstimator!) { Name = "Swap" },
+            new Opt2CarResultOptimizer(PathCostEstimator!) { Name = "Opt 2"},
+            new Opt3CarResultOptimizer(PathCostEstimator!) { Name = "Opt 3" },
+            new OrOptCarResultOptimizer(PathCostEstimator!) { Name = "Or Opt" },
+            new SwapCarResultOptimizer(PathCostEstimator!) { Name = "Swap" },
             new AlternativePointsMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Видалення альтернативних"},
             new PointTransposeMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Перекидування точок"}
         ];

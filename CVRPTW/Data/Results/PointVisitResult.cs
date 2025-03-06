@@ -1,28 +1,26 @@
 ﻿namespace CVRPTW;
 
-public struct PointVisitResult
+public struct PointVisitResult(int id, double visitTime)
 {
-    public int Id { get; set; }
-    
-    public double VisitTime { get; set; }
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id, VisitTime);
+    }
+
+    public int Id { get; set; } = id;
+
+    public double VisitTime { get; set; } = visitTime;
 
     public PointVisitResult() : this(0, 0) { }
 
     public PointVisitResult(int id) : this(id, 0) { }
 
-    public PointVisitResult(int id, double visitTime)
-    {
-        Id = id;
-        VisitTime = visitTime;
-    }
+    public static bool operator ==(PointVisitResult left, PointVisitResult right) => left.Id == right.Id && 
+        Math.Abs(left.VisitTime - right.VisitTime) < Constants.DoubleComparisonTolerance;
 
-    public static bool operator ==(PointVisitResult left, PointVisitResult right)
-    {
-        return left.Id == right.Id && Math.Abs(left.VisitTime - right.VisitTime) < Constants.DoubleComparisonTolerance;
-    }
+    public static bool operator !=(PointVisitResult left, PointVisitResult right) => !(left == right);
 
-    public static bool operator !=(PointVisitResult left, PointVisitResult right)
-    {
-        return !(left == right);
-    }
+    public bool Equals(PointVisitResult other) => Id == other.Id && VisitTime.Equals(other.VisitTime);
+
+    public override bool Equals(object? obj) => obj is PointVisitResult other && Equals(other);
 }

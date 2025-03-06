@@ -2,13 +2,13 @@
 
 namespace CVRPTW.Computing.Estimators;
 
-public class SumMainResultEstimator(MainData mainData, PathEstimator pathEstimator) : MainResultEstimator(mainData, pathEstimator)
+public class SumMainResultEstimator(PathCostEstimator pathCostEstimator) : MainResultEstimator(pathCostEstimator)
 {
     public override double Estimate(MainResult mainResult)
     {
         foreach (var (_, carResult) in mainResult.Results)
         {
-            carResult.ReEstimate(pathEstimator);
+            carResult.ReEstimate(PathCostEstimator);
         }
 
         return mainResult.Results.Values.Sum(x => x.Estimation);

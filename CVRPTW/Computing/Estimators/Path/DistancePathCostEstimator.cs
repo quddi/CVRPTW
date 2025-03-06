@@ -1,8 +1,6 @@
 ﻿namespace CVRPTW.Computing.Estimators;
 
-//TODO: Test, no triangles
-
-public class EuclidesPathEstimator(MainData mainData) : PathEstimator(mainData)
+public class DistancePathCostEstimator(MainData mainData) : PathCostEstimator(mainData)
 {
     public override double Estimate(CarPath path)
     {
@@ -19,7 +17,7 @@ public class EuclidesPathEstimator(MainData mainData) : PathEstimator(mainData)
         return sum;
     }
 
-    public override double Estimate(int[] path)
+    private double Estimate(int[] path)
     {
         var sum = 0d;
 
@@ -31,11 +29,11 @@ public class EuclidesPathEstimator(MainData mainData) : PathEstimator(mainData)
         return sum;
     }
 
-    public override double Estimate(int firstPointId, int secondPointId)
+    private double Estimate(int firstPointId, int secondPointId)
     {
-        var firstPoint = _mainData.GetPoint(firstPointId);
-        var secondPoint = _mainData.GetPoint(secondPointId);
-
-        return firstPoint.Coordinates.DistanceTo(secondPoint.Coordinates);
+        var firstPointIndex = _idToIndex[firstPointId];
+        var secondPointIndex = _idToIndex[secondPointId];
+        
+        return _mainData.Distances!.GetDistance(Constants.DefaultMatrixId, firstPointIndex, secondPointIndex);
     }
 }
