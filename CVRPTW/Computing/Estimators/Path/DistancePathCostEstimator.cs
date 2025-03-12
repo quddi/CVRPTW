@@ -1,8 +1,8 @@
 ﻿namespace CVRPTW.Computing.Estimators;
 
-public class DistancePathCostEstimator(MainData mainData) : PathCostEstimator(mainData)
+public class DistancePathCostEstimator(MainData mainData) : IPathCostEstimator
 {
-    public override double Estimate(CarPath path)
+    public double Estimate(CarPath path)
     {
         var sum = 0d;
 
@@ -17,23 +17,11 @@ public class DistancePathCostEstimator(MainData mainData) : PathCostEstimator(ma
         return sum;
     }
 
-    private double Estimate(int[] path)
-    {
-        var sum = 0d;
-
-        for (int i = 0; i < path.Length - 1; i++)
-        {
-            sum += Estimate(path[i], path[i + 1]);
-        }
-
-        return sum;
-    }
-
     private double Estimate(int firstPointId, int secondPointId)
     {
-        var firstPointIndex = _idToIndex[firstPointId];
-        var secondPointIndex = _idToIndex[secondPointId];
+        var firstPointIndex = mainData.GetPoint(firstPointId).Index;
+        var secondPointIndex = mainData.GetPoint(secondPointId).Index;
         
-        return _mainData.Distances!.GetDistance(Constants.DefaultMatrixId, firstPointIndex, secondPointIndex);
+        return mainData.Distances!.GetDistance(Constants.DefaultMatrixId, firstPointIndex, secondPointIndex);
     }
 }

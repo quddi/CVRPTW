@@ -75,8 +75,8 @@ public class PointDataParser : LineDataParser<Point>
             (
                 new TimeWindow
                 {
-                    Start = int.Parse(_split![_splitIndex!.Value + i * 2]),
-                    End = int.Parse(_split![_splitIndex!.Value + i * 2 + 1])
+                    Start = int.Parse(_split![_splitIndex!.Value + i * 2]).FromMinutesToSeconds(),
+                    End = int.Parse(_split![_splitIndex!.Value + i * 2 + 1]).FromMinutesToSeconds()
                 }
             );
         }
@@ -93,14 +93,14 @@ public class PointDataParser : LineDataParser<Point>
     
     private void ParseLatePenalty()
     {
-        _result!.LatePenalty = int.Parse(_split![_splitIndex!.Value]);
+        _result!.LatePenalty = int.Parse(_split![_splitIndex!.Value]).FromMinutesToSeconds();
 
         _splitIndex++;
     }
     
     private void ParseWaitPenalty()
     {
-        _result!.Demand = int.Parse(_split![_splitIndex!.Value]);
+        _result!.WaitPenalty = int.Parse(_split![_splitIndex!.Value]).FromMinutesToSeconds();
 
         _splitIndex++;
     }

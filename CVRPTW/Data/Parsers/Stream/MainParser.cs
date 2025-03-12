@@ -66,12 +66,14 @@ public class MainParser : StreamDataParser<MainData>
             var line = streamReader.ReadLine();
 
             if (string.IsNullOrEmpty(line) || line.IsDividerLine()) 
-                return;
+                break;
 
             var point = _pointDataParser.Parse(line, parserParameters);
 
             point.Index = index;
             index++;
+            
+            result.Points.Add(point);
             
             if (point.Id == Constants.DepoPointId) result.DepoPoint = point;
             else result.PointsByIds.Add(point.Index, point);

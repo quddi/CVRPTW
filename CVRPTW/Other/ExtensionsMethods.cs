@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using CVRPTW.Computing.Estimators;
+using CVRPTW.Computing.Estimators.Time;
 using CVRPTW.Computing.Optimizers;
 
 namespace CVRPTW;
@@ -198,16 +199,21 @@ public static class ExtensionsMethods
                secondsPointsCounts.All(pair => firstPointsCounts.ContainsKey(pair.Key) &&  pair.Value == firstPointsCounts[pair.Key]);
     }
 
-    public static void ReEstimate(this CarResult result, PathCostEstimator costEstimator)
+    public static void ReEstimateCost(this CarResult result, IPathCostEstimator costEstimator)
     {
         result.Estimation = result.Path.Count == 2 
             ? 0
             : costEstimator.Estimate(result.Path);
     }
 
-    public static void ReEstimate(this MainResult mainResult, MainResultEstimator estimator)
+    public static void ReEstimateCost(this MainResult mainResult, MainResultEstimator estimator)
     {
         mainResult.Estimation = estimator.Estimate(mainResult);
+    }
+
+    public static void ReEstimateTime(this CarResult result, ITimeEstimator timeEstimator, Car car)
+    {
+        timeEstimator.Estimate(result.Path, car);
     }
     
     public static T TakeAt<T>(this IList<T> list, int index)
@@ -267,6 +273,8 @@ public static class ExtensionsMethods
             throw new ArgumentException($"Unknown optimizer type: {optimizer.GetType()}");
         }
         
-        mainResult.ReEstimate(mainResultEstimator);
+        mainResult.ReEstimateCost(mainResultEstimator);
     }
+    
+    public static int FromMinutesToSeconds(this int perMinute) => perMinute * 60;
 }

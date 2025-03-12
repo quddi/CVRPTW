@@ -67,7 +67,7 @@ public class PointTransposeMainResultOptimizer(MainResultEstimator mainResultEst
                 }
 
                 //ReEstimate both
-                _mainResult.ReEstimate(mainResultEstimator);
+                _mainResult.ReEstimateCost(mainResultEstimator);
             }
         }
         
@@ -90,13 +90,13 @@ public class PointTransposeMainResultOptimizer(MainResultEstimator mainResultEst
         
         sourceResult.Path.RemoveAt(sourcePointIndex);
         
-        _mainResult.ReEstimate(mainResultEstimator);
+        _mainResult.ReEstimateCost(mainResultEstimator);
         
         for (int i = 1; i < targetPath.Count; i++)
         {
             targetPath.Insert(i, sourcePointResult);
             
-            _mainResult.ReEstimate(mainResultEstimator);
+            _mainResult.ReEstimateCost(mainResultEstimator);
 
             if (_mainResult.Estimation < bestEstimation)
             {
@@ -106,12 +106,12 @@ public class PointTransposeMainResultOptimizer(MainResultEstimator mainResultEst
             
             targetPath.RemoveAt(i);
             
-            _mainResult.ReEstimate(mainResultEstimator);
+            _mainResult.ReEstimateCost(mainResultEstimator);
         }
         
         sourceResult.Path.Insert(sourcePointIndex, sourcePointResult);
         
-        _mainResult.ReEstimate(mainResultEstimator);
+        _mainResult.ReEstimateCost(mainResultEstimator);
         
         return (targetCar, bestPositionIndex, bestEstimation);
     }

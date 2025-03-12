@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class Opt2CarResultOptimizer(PathCostEstimator pathCostEstimator) : CarResultOptimizer
+public class Opt2CarResultOptimizer(IPathCostEstimator pathCostEstimator) : CarResultOptimizer
 {
     public override void Optimize(CarResult carResult)
     {
@@ -25,7 +25,7 @@ public class Opt2CarResultOptimizer(PathCostEstimator pathCostEstimator) : CarRe
         
         result.Path.Invert(fromIndex + 1, toIndex - 1);
         
-        result.ReEstimate(pathCostEstimator);
+        result.ReEstimateCost(pathCostEstimator);
 
         var newEstimation = result.Estimation;
         
@@ -34,6 +34,6 @@ public class Opt2CarResultOptimizer(PathCostEstimator pathCostEstimator) : CarRe
         
         result.Path.Invert(fromIndex + 1, toIndex - 1);
         
-        result.ReEstimate(pathCostEstimator);
+        result.ReEstimateCost(pathCostEstimator);
     }
 }

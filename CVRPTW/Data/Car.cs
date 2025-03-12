@@ -13,7 +13,6 @@ public class Car
     
     public List<PointVisitData> PointsDatas { get; set; }
     
-    //TODO : per minute, transform to seconds
     public int DriverOvertimePenalty { get; set; }
     
     public int MaxCapacity { get; set; }

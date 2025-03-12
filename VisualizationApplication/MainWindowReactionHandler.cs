@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using CVRPTW;
 using CVRPTW.Computing;
 using CVRPTW.Computing.Estimators;
+using CVRPTW.Computing.Estimators.Time;
 using CVRPTW.Computing.Optimizers;
 using ScottPlot;
 using VisualizationApplication.Other;
@@ -24,7 +25,7 @@ public class MainWindowReactionHandler : IDisposable
     private Dictionary<CarResult, Color>? _resultColors;
     private IOptimizer[]? _optimizers;
 
-    private PathCostEstimator? PathCostEstimator => _mainResultEstimator?.PathCostEstimator;
+    private IPathCostEstimator? PathCostEstimator => _mainResultEstimator?.PathCostEstimator;
     
     public MainWindowReactionHandler(MainWindowElements mainWindowElements)
     {
@@ -113,7 +114,8 @@ public class MainWindowReactionHandler : IDisposable
     private void SetUpFunctionality()
     {
         var pathEstimator = new DistancePathCostEstimator(_mainData!);
-        _mainResultEstimator = new SumMainResultEstimator(pathEstimator);
+        var timeEstimator = new SimpleTimeEstimator(_mainData!);
+        _mainResultEstimator = new ComplexMainResultEstimator(_mainData!, pathEstimator, timeEstimator);
         
         _startMainComputer = new StartMainComputer(_mainData!, _mainResultEstimator);
         

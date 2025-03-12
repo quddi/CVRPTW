@@ -53,7 +53,7 @@ static class Program
     {
         Console.WriteLine("====================== ReEstimation ======================\n");
 
-        result.ReEstimate(mainResultEstimator);
+        result.ReEstimateCost(mainResultEstimator);
     }
 
     private static void CheckPermutations(MainResult optimizedResult, MainResult startResult)
@@ -83,7 +83,7 @@ static class Program
         mainResultOptimizer.Optimize(optimizedResult);
     }
 
-    private static void Opt2(PathCostEstimator costEstimator, MainResult optimizedResult)
+    private static void Opt2(IPathCostEstimator costEstimator, MainResult optimizedResult)
     {
         Console.WriteLine("====================== Opt 2 ======================\n");
 
@@ -97,7 +97,7 @@ static class Program
         }
     }
 
-    private static void Opt3(PathCostEstimator costEstimator, MainResult optimizedResult)
+    private static void Opt3(IPathCostEstimator costEstimator, MainResult optimizedResult)
     {
         Console.WriteLine("====================== Opt 3 ======================\n");
         

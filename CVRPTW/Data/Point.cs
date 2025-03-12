@@ -18,10 +18,8 @@ public class Point
     
     public int ServiceTime { get; set; }
     
-    //TODO : per minute, transform to seconds
     public int LatePenalty { get; set; }
     
-    //TODO : per minute, transform to seconds
     public int WaitPenalty { get; set; }
 
     public override string ToString()

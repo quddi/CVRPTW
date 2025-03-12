@@ -57,8 +57,8 @@ public class CarDataParser : LineDataParser<Car>
     {
         _result!.TimeWindow = new TimeWindow
         {
-            Start = int.Parse(_split![_splitIndex!.Value]),
-            End = int.Parse(_split![_splitIndex!.Value + 1])
+            Start = int.Parse(_split![_splitIndex!.Value]).FromMinutesToSeconds(),
+            End = int.Parse(_split![_splitIndex!.Value + 1]).FromMinutesToSeconds()
         };
 
         _splitIndex += 2;
@@ -90,7 +90,7 @@ public class CarDataParser : LineDataParser<Car>
 
     private void ParseDriverOvertimePenalty()
     {
-        _result!.DriverOvertimePenalty = int.Parse(_split![_splitIndex!.Value]);
+        _result!.DriverOvertimePenalty = int.Parse(_split![_splitIndex!.Value]).FromMinutesToSeconds();
 
         _splitIndex++;
     }

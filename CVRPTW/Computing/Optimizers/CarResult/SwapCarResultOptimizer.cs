@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class SwapCarResultOptimizer(PathCostEstimator pathCostEstimator) : CarResultOptimizer
+public class SwapCarResultOptimizer(IPathCostEstimator pathCostEstimator) : CarResultOptimizer
 {
     public override void Optimize(CarResult carResult)
     {

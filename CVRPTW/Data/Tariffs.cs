@@ -6,19 +6,19 @@ public class Tariffs
 
     public int MatricesCount => _tariffs.Count;
     
-    public int GetTariff(int matrixIndex, int firstPointId, int secondPointId)
+    public int GetTariff(int matrixIndex, int firstPointIndex, int secondPointIndex)
     {
-        return _tariffs[matrixIndex][firstPointId][secondPointId];
+        return _tariffs[matrixIndex][firstPointIndex][secondPointIndex];
     }
 
-    public void AddTariff(int matrixIndex, int firstPointId, int secondPointId, int tariff)
+    public void AddTariff(int matrixIndex, int firstPointIndex, int secondPointIndex, int tariff)
     {
         if (!_tariffs.ContainsKey(matrixIndex))
             _tariffs[matrixIndex] = new();
 
-        if (!_tariffs[matrixIndex].ContainsKey(firstPointId))
-            _tariffs[matrixIndex][firstPointId] = new();
+        if (!_tariffs[matrixIndex].ContainsKey(firstPointIndex))
+            _tariffs[matrixIndex][firstPointIndex] = new();
 
-        _tariffs[matrixIndex][firstPointId][secondPointId] = tariff;
+        _tariffs[matrixIndex][firstPointIndex][secondPointIndex] = tariff;
     }
 }

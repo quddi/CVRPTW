@@ -32,7 +32,7 @@ public class StartMainComputer(MainData mainData, MainResultEstimator mainResult
         {
             var nextPointPair = _notVisitedPoints
                 .Where(CanVisit)
-                .MinBy(point => _mainData.Distances!.GetDistance(Constants.DefaultMatrixId, currentPointId, point.Value.Id));
+                .MinBy(Distance);
 
             _notVisitedPoints.Remove(nextPointPair.Key);
                 
@@ -42,13 +42,21 @@ public class StartMainComputer(MainData mainData, MainResultEstimator mainResult
         }
             
         result.RemainedFreeSpace = freeSpace;
-        result.ReEstimate(_mainResultEstimator.PathCostEstimator);
+        result.ReEstimateCost(_mainResultEstimator.PathCostEstimator);
             
-        return result;
 
         bool CanVisit(KeyValuePair<int, Point> pair)
         {
             return pair.Value.Demand <= freeSpace;
         }
+
+        double Distance(KeyValuePair<int, Point> pair)
+        {
+            var firstPointIndex = _mainData.GetPoint(currentPointId).Index;
+            var secondPointIndex = _mainData.GetPoint(pair.Value.Id).Index;
+            return _mainData.Distances!.GetDistance(Constants.DefaultMatrixId, firstPointIndex, secondPointIndex);
+        }
+        
+        return result;
     }
 }

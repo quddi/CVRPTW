@@ -22,7 +22,7 @@ public class AlternativePointsMainResultOptimizer(MainResultEstimator mainResult
             
             var secondTaken = secondPath.TakeAt(secondIndex);
             
-            mainResult.ReEstimate(mainResultEstimator);
+            mainResult.ReEstimateCost(mainResultEstimator);
             
             if (mainResult.Estimation < firstEstimation) continue;
             
@@ -30,7 +30,7 @@ public class AlternativePointsMainResultOptimizer(MainResultEstimator mainResult
             
             firstPath.RemoveAt(firstIndex);
             
-            mainResult.ReEstimate(mainResultEstimator);
+            mainResult.ReEstimateCost(mainResultEstimator);
         } 
     }
     

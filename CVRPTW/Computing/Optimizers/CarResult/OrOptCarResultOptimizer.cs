@@ -2,13 +2,13 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class OrOptCarResultOptimizer(PathCostEstimator pathCostEstimator) : CarResultOptimizer
+public class OrOptCarResultOptimizer(IPathCostEstimator pathCostEstimator) : CarResultOptimizer
 {
     public override void Optimize(CarResult carResult)
     {
         if (carResult.Path.Count < 4) return;
         
-        carResult.ReEstimate(pathCostEstimator);
+        carResult.ReEstimateCost(pathCostEstimator);
         
         CheckPointsTranspose(carResult, 1);
         
@@ -36,7 +36,7 @@ public class OrOptCarResultOptimizer(PathCostEstimator pathCostEstimator) : CarR
                     path.Insert(toIndex, point);
                 }
                 
-                carResult.ReEstimate(pathCostEstimator);
+                carResult.ReEstimateCost(pathCostEstimator);
 
                 if (carResult.Estimation < currentEstimation)
                 {
@@ -50,7 +50,7 @@ public class OrOptCarResultOptimizer(PathCostEstimator pathCostEstimator) : CarR
                         path.Insert(fromIndex, point);
                     }
                     
-                    carResult.ReEstimate(pathCostEstimator);
+                    carResult.ReEstimateCost(pathCostEstimator);
                 }
             }
         }

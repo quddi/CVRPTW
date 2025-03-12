@@ -8,10 +8,10 @@ public class TariffsDataParser : LinedStreamDataParser<Tariffs>
     {
         var split = lastReadLine.Split(Constants.DefaultSplitDividers);
         var matrixIndex = int.Parse(split[0]);
-        var firstPointId = int.Parse(split[1]);
-        var secondPointId = int.Parse(split[2]);
+        var firstPointIndex = int.Parse(split[1]);
+        var secondPointIndex = int.Parse(split[2]);
         var distance = int.Parse(split[3]);
             
-        tariffs.AddTariff(matrixIndex, firstPointId, secondPointId, distance);
+        tariffs.AddTariff(matrixIndex, firstPointIndex, secondPointIndex, distance);
     }
 }

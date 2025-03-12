@@ -6,5 +6,5 @@ public class TimeWindow
     
     public int End { get; set; }
     
-    public bool Contains(int time) => Start <= time && time <= End;
+    public bool Contains(double time) => Start <= time && time <= End;
 }

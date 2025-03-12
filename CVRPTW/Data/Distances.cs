@@ -6,25 +6,25 @@ public class Distances
 
     public int MatricesCount => Matrix.Count;
     
-    public double GetDistance(int matrixIndex, int firstPointId, int secondPointId)
+    public double GetDistance(int matrixIndex, int firstPointIndex, int secondPointIndex)
     {
-        return Matrix[matrixIndex][firstPointId][secondPointId];
+        return Matrix[matrixIndex][firstPointIndex][secondPointIndex];
     }
 
-    public void AddDistance(int matrixIndex, int firstPointId, int secondPointId, double distance)
+    public void AddDistance(int matrixIndex, int firstPointIndex, int secondPointIndex, double distance)
     {
         if (!Matrix.ContainsKey(matrixIndex)) 
             Matrix[matrixIndex] = new();
         
-        if (!Matrix[matrixIndex].ContainsKey(firstPointId)) 
-            Matrix[matrixIndex][firstPointId] = new();
+        if (!Matrix[matrixIndex].ContainsKey(firstPointIndex)) 
+            Matrix[matrixIndex][firstPointIndex] = new();
         
-        Matrix[matrixIndex][firstPointId][secondPointId] = distance;
+        Matrix[matrixIndex][firstPointIndex][secondPointIndex] = distance;
     }
 
-    public int GetNearestPointId(int matrixIndex, int fromPointId)
+    public int GetNearestPointId(int matrixIndex, int fromPointIndex)
     {
-        var toPointsDistances = Matrix[matrixIndex][fromPointId];
+        var toPointsDistances = Matrix[matrixIndex][fromPointIndex];
 
         return toPointsDistances.MinBy(pair => pair.Value).Key;
     }

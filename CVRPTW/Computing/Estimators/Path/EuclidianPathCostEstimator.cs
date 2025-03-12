@@ -2,9 +2,9 @@
 
 //TODO: Test, no triangles
 
-public class EuclidesPathCostEstimator(MainData mainData) : PathCostEstimator(mainData)
+public class EuclidesPathCostEstimator(MainData mainData) : IPathCostEstimator
 {
-    public override double Estimate(CarPath path)
+    public double Estimate(CarPath path)
     {
         var sum = 0d;
 
@@ -19,22 +19,10 @@ public class EuclidesPathCostEstimator(MainData mainData) : PathCostEstimator(ma
         return sum;
     }
 
-    private double Estimate(int[] path)
-    {
-        var sum = 0d;
-
-        for (int i = 0; i < path.Length - 1; i++)
-        {
-            sum += Estimate(path[i], path[i + 1]);
-        }
-
-        return sum;
-    }
-
     private double Estimate(int firstPointId, int secondPointId)
     {
-        var firstPoint = _mainData.GetPoint(firstPointId);
-        var secondPoint = _mainData.GetPoint(secondPointId);
+        var firstPoint = mainData.GetPoint(firstPointId);
+        var secondPoint = mainData.GetPoint(secondPointId);
 
         return firstPoint.Coordinates.DistanceTo(secondPoint.Coordinates);
     }

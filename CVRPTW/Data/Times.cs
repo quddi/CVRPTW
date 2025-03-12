@@ -6,19 +6,19 @@ public class Times
 
     public int MatricesCount => _times.Count;
     
-    public int GetTime(int matrixIndex, int firstPointId, int secondPointId)
+    public int GetTime(int matrixIndex, int firstPointIndex, int secondPointIndex)
     {
-        return _times[matrixIndex][firstPointId][secondPointId];
+        return _times[matrixIndex][firstPointIndex][secondPointIndex];
     }
     
-    public void AddTime(int matrixIndex, int firstPointId, int secondPointId, int time)
+    public void AddTime(int matrixIndex, int firstPointIndex, int secondPointIndex, int time)
     {
         if (!_times.ContainsKey(matrixIndex))
             _times[matrixIndex] = new();
 
-        if (!_times[matrixIndex].ContainsKey(firstPointId))
-            _times[matrixIndex][firstPointId] = new();
+        if (!_times[matrixIndex].ContainsKey(firstPointIndex))
+            _times[matrixIndex][firstPointIndex] = new();
 
-        _times[matrixIndex][firstPointId][secondPointId] = time;
+        _times[matrixIndex][firstPointIndex][secondPointIndex] = time;
     }
 }

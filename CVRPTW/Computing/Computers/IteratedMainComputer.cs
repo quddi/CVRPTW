@@ -13,7 +13,7 @@ public abstract class IteratedMainComputer(MainData mainData, MainResultEstimato
             result.Results.Add(car, GetCarResult(car));
         }
 
-        result.ReEstimate(mainResultEstimator);
+        result.ReEstimateCost(mainResultEstimator);
         
         return result;
     }
