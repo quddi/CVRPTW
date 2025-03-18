@@ -1,8 +1,14 @@
 ﻿namespace CVRPTW.Computing.Optimizers;
 
-public abstract class CarResultOptimizer : IOptimizer
+public abstract class CarResultOptimizer : MainResultOptimizer
 {
-    public string Name { get; set; } = string.Empty;
-    
-    public abstract void Optimize(CarResult carResult);
+    public override void Optimize(MainResult mainResult)
+    {
+        foreach (var car in mainResult.Results.Keys)
+        {
+            Optimize(mainResult, car);
+        }
+    }
+
+    protected abstract void Optimize(MainResult mainResult, Car car);
 }

@@ -4,7 +4,7 @@ namespace CVRPTW.Computing.Optimizers;
 
 using SubResult = (Car targetCar, int targetIndex, double estimation);
 
-public class PointTransposeMainResultOptimizer(MainResultEstimator mainResultEstimator,  MainData mainData) : MainResultOptimizer
+public class PointTransposeMainResultOptimizer(IMainResultEstimator mainResultEstimator,  MainData mainData) : MainResultOptimizer
 {
     private MainResult? _mainResult;
     private MainData? _mainData;

@@ -199,14 +199,7 @@ public static class ExtensionsMethods
                secondsPointsCounts.All(pair => firstPointsCounts.ContainsKey(pair.Key) &&  pair.Value == firstPointsCounts[pair.Key]);
     }
 
-    public static void ReEstimateCost(this CarResult result, IPathCostEstimator costEstimator)
-    {
-        result.Estimation = result.Path.Count == 2 
-            ? 0
-            : costEstimator.Estimate(result.Path);
-    }
-
-    public static void ReEstimateCost(this MainResult mainResult, MainResultEstimator estimator)
+    public static void ReEstimateCost(this MainResult mainResult, IMainResultEstimator estimator)
     {
         mainResult.Estimation = estimator.Estimate(mainResult);
     }
@@ -253,27 +246,6 @@ public static class ExtensionsMethods
         }
 
         Console.WriteLine();
-    }
-
-    public static void Optimize(this MainResult mainResult, IOptimizer optimizer, MainResultEstimator mainResultEstimator)
-    {
-        if (optimizer is CarResultOptimizer carResultOptimizer)
-        {
-            foreach (var (_, carResult) in mainResult.Results)
-            {
-                carResultOptimizer.Optimize(carResult);
-            }
-        }
-        else if (optimizer is MainResultOptimizer mainResultOptimizer)
-        {
-            mainResultOptimizer.Optimize(mainResult);
-        }
-        else
-        {
-            throw new ArgumentException($"Unknown optimizer type: {optimizer.GetType()}");
-        }
-        
-        mainResult.ReEstimateCost(mainResultEstimator);
     }
     
     public static int FromMinutesToSeconds(this int perMinute) => perMinute * 60;

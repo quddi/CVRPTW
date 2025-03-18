@@ -1,9 +1,18 @@
 ﻿namespace CVRPTW.Computing.Estimators;
 
-public class DistancePathCostEstimator(MainData mainData) : IPathCostEstimator
+public class DistancePathCostEstimator(MainData mainData) : PathsIteratedMainResultEstimator
 {
+    protected override double Estimate(Car _, CarResult carResult)
+    {
+        carResult.Estimation = Estimate(carResult.Path);
+        
+        return carResult.Estimation;
+    }
+
     public double Estimate(CarPath path)
     {
+        if (path.Count <= 2) return 0d;
+        
         var sum = 0d;
 
         for (int i = 0; i < path.Count - 1; i++)

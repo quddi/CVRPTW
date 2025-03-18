@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class AlternativePointsMainResultOptimizer(MainResultEstimator mainResultEstimator, MainData mainData) : MainResultOptimizer
+public class AlternativePointsMainResultOptimizer(IMainResultEstimator mainResultEstimator, MainData mainData) : MainResultOptimizer
 {
     public override void Optimize(MainResult mainResult)
     {

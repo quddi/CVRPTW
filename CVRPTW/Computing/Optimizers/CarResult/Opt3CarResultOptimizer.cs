@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class Opt3CarResultOptimizer(IPathCostEstimator pathCostEstimator) : CarResultOptimizer
+public class Opt3CarResultOptimizer(IMainResultEstimator mainResultEstimator) : CarResultOptimizer
 {
     private static readonly List<IPathOptimizerCommand> Commands =
     [
@@ -33,9 +33,11 @@ public class Opt3CarResultOptimizer(IPathCostEstimator pathCostEstimator) : CarR
             ]
         )
     ];
-    
-    public override void Optimize(CarResult carResult)
+
+    protected override void Optimize(MainResult mainResult, Car car)
     {
+        var carResult = mainResult.Results[car];
+        
         var pathLength = carResult.Path.Count;
 
         for (int aStart = 0; aStart < pathLength - 5; aStart++)
@@ -44,29 +46,31 @@ public class Opt3CarResultOptimizer(IPathCostEstimator pathCostEstimator) : CarR
             {
                 for (int cStart = bStart + 2; cStart < pathLength - 1; cStart++)
                 {
-                    CheckAllVariants(carResult, aStart, bStart, cStart);
+                    CheckAllVariants(mainResult, carResult, aStart, bStart, cStart);
                 }
             }
         }
     }
 
     // a, b, c - edges
-    private void CheckAllVariants(CarResult carResult, int aStart, int bStart, int cStart)
+
+    private void CheckAllVariants(MainResult mainResult, CarResult carResult, int aStart, int bStart, int cStart)
     {
         var bestCommand = -1;
         var path = carResult.Path;
+        var minEstimation = mainResultEstimator.Estimate(mainResult);
         
         for (var i = 0; i < Commands.Count; i++)
         {
             var command = Commands[i];
             
             command.Do(path, aStart, bStart, cStart);
-            
-            var estimation = pathCostEstimator.Estimate(path);
 
-            if (estimation < carResult.Estimation)
+            var newEstimation = mainResultEstimator.Estimate(mainResult);
+
+            if (newEstimation < minEstimation)
             {
-                carResult.Estimation = estimation;
+                minEstimation = newEstimation;
                 bestCommand = i;
             }
             

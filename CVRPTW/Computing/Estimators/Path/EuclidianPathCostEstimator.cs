@@ -1,9 +1,13 @@
 ﻿namespace CVRPTW.Computing.Estimators;
 
-//TODO: Test, no triangles
-
-public class EuclidesPathCostEstimator(MainData mainData) : IPathCostEstimator
+public class EuclidesPathCostEstimator(MainData mainData) : PathsIteratedMainResultEstimator
 {
+    protected override double Estimate(Car car, CarResult carResult)
+    {
+        carResult.Estimation = Estimate(carResult.Path);
+        return carResult.Estimation;
+    }
+
     public double Estimate(CarPath path)
     {
         var sum = 0d;

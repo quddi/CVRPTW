@@ -2,13 +2,13 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class CompositeMainResultOptimizer(List<IOptimizer> optimizers, MainResultEstimator mainResultEstimator, bool report) : MainResultOptimizer
+public class CompositeMainResultOptimizer(List<MainResultOptimizer> optimizers, IMainResultEstimator mainResultEstimator, bool report) : MainResultOptimizer
 {
     public override void Optimize(MainResult mainResult)
     {
         foreach (var optimizer in optimizers)
         {
-            mainResult.Optimize(optimizer, mainResultEstimator);
+            optimizer.Optimize(mainResult);
 
             if (!report) continue;
             

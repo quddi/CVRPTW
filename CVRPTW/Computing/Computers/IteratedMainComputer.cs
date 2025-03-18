@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing;
 
-public abstract class IteratedMainComputer(MainData mainData, MainResultEstimator mainResultEstimator) : MainComputer(mainData)
+public abstract class IteratedMainComputer(MainData mainData, IMainResultEstimator mainResultEstimator) : MainComputer(mainData)
 {
     public override MainResult Compute()
     {

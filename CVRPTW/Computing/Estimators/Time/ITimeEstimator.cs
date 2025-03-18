@@ -2,5 +2,5 @@
 
 public interface ITimeEstimator
 {
-    void Estimate(CarPath path, Car car);
+    double Estimate(CarPath path, Car car);
 }

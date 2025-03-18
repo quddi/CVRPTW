@@ -8,7 +8,7 @@ static class Program
 {
     private static void Main()
     {
-        var path = @"C:\Users\Admin\Desktop\Диплом\original.txt";
+        /*var path = @"C:\Users\Admin\Desktop\Диплом\original.txt";
         MainData mainData;
         var parser = new MainParser();
 
@@ -46,10 +46,10 @@ static class Program
         
         ReEstimate(optimizedResult, mainResultEstimator);
 
-        Console.WriteLine(optimizedResult);
+        Console.WriteLine(optimizedResult);*/
     }
 
-    private static void ReEstimate(MainResult result, MainResultEstimator mainResultEstimator)
+    /*private static void ReEstimate(MainResult result, IMainResultEstimator mainResultEstimator)
     {
         Console.WriteLine("====================== ReEstimation ======================\n");
 
@@ -74,7 +74,7 @@ static class Program
         Console.ResetColor();
     }
 
-    private static void PointTranspose(MainResultEstimator estimator, MainResult optimizedResult, MainData mainData)
+    private static void PointTranspose(IMainResultEstimator estimator, MainResult optimizedResult, MainData mainData)
     {
         Console.WriteLine("====================== Point Transpose ======================\n");
         
@@ -111,7 +111,7 @@ static class Program
         }
     }
 
-    private static void AlternativePoints(MainResultEstimator estimator, MainData mainData, MainResult result)
+    private static void AlternativePoints(IMainResultEstimator estimator, MainData mainData, MainResult result)
     {
         Console.WriteLine("====================== Alternative Points ======================\n");
 
@@ -125,5 +125,5 @@ static class Program
         return optimizedResult.Results.Select(pair => pair.Value.Path)
             .Zip(startResult.Results.Select(pair => pair.Value.Path))
             .All(pair => ExtensionsMethods.ArePermutations(pair.First, pair.Second));
-    }
+    }*/
 }

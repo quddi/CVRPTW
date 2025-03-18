@@ -2,14 +2,16 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class SwapCarResultOptimizer(IPathCostEstimator pathCostEstimator) : CarResultOptimizer
+public class SwapCarResultOptimizer(IMainResultEstimator mainResultEstimator) : CarResultOptimizer
 {
-    public override void Optimize(CarResult carResult)
+    protected override void Optimize(MainResult mainResult, Car car)
     {
+        var carResult = mainResult.Results[car];
+        
         if (carResult.Path.Count < 4) return;
         
         var path = carResult.Path;
-        var cost = carResult.Estimation;
+        var cost = mainResult.Estimation;
         var pathLength = carResult.Path.Count;
         
         for (var i = 1; i < pathLength - 1; i++)
@@ -20,10 +22,17 @@ public class SwapCarResultOptimizer(IPathCostEstimator pathCostEstimator) : CarR
                 
                 (path[i], path[j]) = (path[j], path[i]);
 
-                var newCost = pathCostEstimator.Estimate(path);
+                var newCost = mainResultEstimator.Estimate(mainResult);
 
-                if (newCost < cost) cost = newCost;
-                else (path[i], path[j]) = (path[j], path[i]);
+                if (newCost < cost)
+                {
+                    cost = newCost;
+                }
+                else
+                {
+                    (path[i], path[j]) = (path[j], path[i]);
+                    mainResultEstimator.Estimate(mainResult);
+                }
             }
         }
 

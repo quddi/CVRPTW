@@ -2,7 +2,7 @@
 
 public class SimpleTimeEstimator(MainData mainData) : ITimeEstimator
 {
-    public void Estimate(CarPath path, Car car)
+    public double Estimate(CarPath path, Car car)
     {
         var timeSum = car.TimeWindow.Start;
         
@@ -15,5 +15,7 @@ public class SimpleTimeEstimator(MainData mainData) : ITimeEstimator
 
             timeSum += mainData.Times!.GetTime(Constants.DefaultMatrixId, firstPointIndex, secondPointIndex);
         }
+        
+        return timeSum;
     }
 }

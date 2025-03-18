@@ -2,10 +2,10 @@
 
 namespace CVRPTW.Computing;
 
-public class StartMainComputer(MainData mainData, MainResultEstimator mainResultEstimator) : IteratedMainComputer(mainData, mainResultEstimator)
+public class StartMainComputer(MainData mainData, IMainResultEstimator mainResultEstimator) : IteratedMainComputer(mainData, mainResultEstimator)
 {
     private Dictionary<int, Point> _notVisitedPoints = new();
-    private readonly MainResultEstimator _mainResultEstimator = mainResultEstimator;
+    private readonly IMainResultEstimator _mainResultEstimator = mainResultEstimator;
 
     public override MainResult Compute()
     {
@@ -42,9 +42,7 @@ public class StartMainComputer(MainData mainData, MainResultEstimator mainResult
         }
             
         result.RemainedFreeSpace = freeSpace;
-        result.ReEstimateCost(_mainResultEstimator.PathCostEstimator);
-            
-
+        
         bool CanVisit(KeyValuePair<int, Point> pair)
         {
             return pair.Value.Demand <= freeSpace;

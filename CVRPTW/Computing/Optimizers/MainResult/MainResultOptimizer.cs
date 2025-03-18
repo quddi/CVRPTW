@@ -2,7 +2,7 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public abstract class MainResultOptimizer : IOptimizer
+public abstract class MainResultOptimizer : INamed
 {
     public string Name { get; set; } = string.Empty;
     

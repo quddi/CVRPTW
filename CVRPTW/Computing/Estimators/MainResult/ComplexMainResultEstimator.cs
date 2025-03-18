@@ -2,19 +2,16 @@
 
 namespace CVRPTW.Computing.Estimators;
 
-public class ComplexMainResultEstimator(MainData mainData, IPathCostEstimator pathCostEstimator, ITimeEstimator timeEstimator) 
-    : MainResultEstimator(pathCostEstimator)
+public class ComplexMainResultEstimator(MainData mainData, IMainResultEstimator baseEstimator, ITimeEstimator timeEstimator) 
+    : IMainResultEstimator
 {
-    public override double Estimate(MainResult mainResult)
+    public double Estimate(MainResult mainResult)
     {
-        var sum = 0d;
+        var sum = baseEstimator.Estimate(mainResult);
         
         foreach (var (car, carResult) in mainResult.Results)
         {
-            carResult.ReEstimateCost(PathCostEstimator);
-
-            sum += carResult.Estimation;
-            //sum += GetTimePenalty(mainResult, car);
+            sum += GetTimePenalty(mainResult, car);
         }
 
         return sum;

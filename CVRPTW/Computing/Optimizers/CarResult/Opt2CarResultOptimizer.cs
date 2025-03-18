@@ -2,10 +2,12 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class Opt2CarResultOptimizer(IPathCostEstimator pathCostEstimator) : CarResultOptimizer
+public class Opt2CarResultOptimizer(IMainResultEstimator mainResultEstimator) : CarResultOptimizer
 {
-    public override void Optimize(CarResult carResult)
+    protected override void Optimize(MainResult mainResult, Car car)
     {
+        var carResult = mainResult.Results[car];
+        
         if (carResult.Path.Count < 4) return;
 
         var pathLength = carResult.Path.Count;
@@ -14,26 +16,24 @@ public class Opt2CarResultOptimizer(IPathCostEstimator pathCostEstimator) : CarR
         {
             for (int endIndex = beginIndex + 3; endIndex < pathLength - 1; endIndex++)
             {
-                TryOptimize(carResult, beginIndex, endIndex);
+                TryOptimize(mainResult, carResult, beginIndex, endIndex);
             }
         }
     }
     
-    private void TryOptimize(CarResult result, int fromIndex, int toIndex)
+    private void TryOptimize(MainResult mainResult, CarResult result, int fromIndex, int toIndex)
     {
-        var previousEstimation = result.Estimation;
+        var previousEstimation = mainResult.Estimation;
         
         result.Path.Invert(fromIndex + 1, toIndex - 1);
-        
-        result.ReEstimateCost(pathCostEstimator);
 
-        var newEstimation = result.Estimation;
+        var newEstimation = mainResultEstimator.Estimate(mainResult);
         
         if (newEstimation < previousEstimation)
             return;
         
         result.Path.Invert(fromIndex + 1, toIndex - 1);
         
-        result.ReEstimateCost(pathCostEstimator);
+        mainResult.ReEstimateCost(mainResultEstimator);
     }
 }

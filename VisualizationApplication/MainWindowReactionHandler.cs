@@ -20,12 +20,10 @@ public class MainWindowReactionHandler : IDisposable
     private MainData? _mainData;
     private MainResult? _mainResult;
     private MainComputer? _startMainComputer;
-    private MainResultEstimator? _mainResultEstimator;
+    private IMainResultEstimator? _mainResultEstimator;
 
     private Dictionary<CarResult, Color>? _resultColors;
-    private IOptimizer[]? _optimizers;
-
-    private IPathCostEstimator? PathCostEstimator => _mainResultEstimator?.PathCostEstimator;
+    private MainResultOptimizer[]? _optimizers;
     
     public MainWindowReactionHandler(MainWindowElements mainWindowElements)
     {
@@ -121,10 +119,10 @@ public class MainWindowReactionHandler : IDisposable
         
         _optimizers = 
         [
-            new Opt2CarResultOptimizer(PathCostEstimator!) { Name = "Opt 2"},
-            new Opt3CarResultOptimizer(PathCostEstimator!) { Name = "Opt 3" },
-            new OrOptCarResultOptimizer(PathCostEstimator!) { Name = "Or Opt" },
-            new SwapCarResultOptimizer(PathCostEstimator!) { Name = "Swap" },
+            new Opt2CarResultOptimizer(_mainResultEstimator!) { Name = "Opt 2"},
+            new Opt3CarResultOptimizer(_mainResultEstimator!) { Name = "Opt 3" },
+            new OrOptCarResultOptimizer(_mainResultEstimator!) { Name = "Or Opt" },
+            new SwapCarResultOptimizer(_mainResultEstimator!) { Name = "Swap" },
             new AlternativePointsMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Видалення альтернативних"},
             new PointTransposeMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Перекидування точок"}
         ];
@@ -143,7 +141,7 @@ public class MainWindowReactionHandler : IDisposable
 
         var selectedOptimizer = _optimizers[_mainWindowElements.OptimizationComboBox.SelectedIndex];
         
-        _mainResult.Optimize(selectedOptimizer, _mainResultEstimator!);
+        selectedOptimizer.Optimize(_mainResult);
         
         _resetHandler.ResetAll(_mainResult, _optimizers);
     }

@@ -2,28 +2,31 @@
 
 namespace CVRPTW.Computing.Optimizers;
 
-public class OrOptCarResultOptimizer(IPathCostEstimator pathCostEstimator) : CarResultOptimizer
+public class OrOptCarResultOptimizer(IMainResultEstimator resultEstimator) : CarResultOptimizer
 {
-    public override void Optimize(CarResult carResult)
+    protected override void Optimize(MainResult mainResult, Car car)
     {
+        var carResult = mainResult.Results[car];
+        
         if (carResult.Path.Count < 4) return;
+
+        resultEstimator.Estimate(mainResult);
         
-        carResult.ReEstimateCost(pathCostEstimator);
-        
-        CheckPointsTranspose(carResult, 1);
+        CheckPointsTranspose(mainResult, car, 1);
         
         if (carResult.Path.Count < 5) return;
         
-        CheckPointsTranspose(carResult, 2);
+        CheckPointsTranspose(mainResult, car, 2);
         
         if (carResult.Path.Count < 6) return;
         
-        CheckPointsTranspose(carResult, 3);
+        CheckPointsTranspose(mainResult, car, 3);
     }
 
-    private void CheckPointsTranspose(CarResult carResult, int pointsCount)
+    private void CheckPointsTranspose(MainResult mainResult, Car car, int pointsCount)
     {
-        var currentEstimation = carResult.Estimation;
+        var carResult = mainResult.Results[car];
+        var minEstimation = resultEstimator.Estimate(mainResult);
         var path = carResult.Path;
         
         for (int fromIndex = 1; fromIndex < carResult.Path.Count - 2; fromIndex++)
@@ -36,11 +39,11 @@ public class OrOptCarResultOptimizer(IPathCostEstimator pathCostEstimator) : Car
                     path.Insert(toIndex, point);
                 }
                 
-                carResult.ReEstimateCost(pathCostEstimator);
+                var newEstimation = resultEstimator.Estimate(mainResult);
 
-                if (carResult.Estimation < currentEstimation)
+                if (newEstimation < minEstimation)
                 {
-                    currentEstimation = carResult.Estimation;
+                    minEstimation = carResult.Estimation;
                 }
                 else
                 {
@@ -49,8 +52,8 @@ public class OrOptCarResultOptimizer(IPathCostEstimator pathCostEstimator) : Car
                         var point = path.TakeAt(toIndex);
                         path.Insert(fromIndex, point);
                     }
-                    
-                    carResult.ReEstimateCost(pathCostEstimator);
+
+                    resultEstimator.Estimate(mainResult);
                 }
             }
         }
