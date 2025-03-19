@@ -12,7 +12,7 @@
         <ComboBox x:Name="VisualizationComboBox" HorizontalAlignment="Left" Margin="132,10,0,0" VerticalAlignment="Top" Width="120" Height="30" SelectedIndex="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <ComboBoxItem Content="Тільки точки"/>
         </ComboBox>
-        <Button x:Name="ComputeButton" Content="Оптимізувати" HorizontalAlignment="Left" Margin="257,10,0,0" VerticalAlignment="Top" Width="120" Height="30"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Button x:Name="OptimizeButton" Content="Оптимізувати" HorizontalAlignment="Left" Margin="257,10,0,0" VerticalAlignment="Top" Width="120" Height="30"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Label x:Name="PathCostLabel" Content="Вартість шляху: 100000000" HorizontalAlignment="Left" Margin="37,55,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="OptimizationMethodComboBox" HorizontalAlignment="Left" Margin="382,10,0,0" VerticalAlignment="Top" Width="192" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>

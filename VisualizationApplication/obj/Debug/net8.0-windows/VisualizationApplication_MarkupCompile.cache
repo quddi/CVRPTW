@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 D:\CSharpProjects\CVRPTW\VisualizationApplication\App.xaml
-11407045341
+2-386066570
 
-10-1481068488
+11809715483
 2171598030418
-MainWindow.xaml;
+MainWindow.xaml;ProgressWindow.xaml;
 
 False
 

@@ -63,3 +63,5 @@ D:\CSharpProjects\CVRPTW\VisualizationApplication\bin\Debug\net8.0-windows\CVRPT
 D:\CSharpProjects\CVRPTW\VisualizationApplication\bin\Debug\net8.0-windows\CVRPTW.exe
 D:\CSharpProjects\CVRPTW\VisualizationApplication\bin\Debug\net8.0-windows\CVRPTW.dll
 D:\CSharpProjects\CVRPTW\VisualizationApplication\bin\Debug\net8.0-windows\CVRPTW.pdb
+D:\CSharpProjects\CVRPTW\VisualizationApplication\obj\Debug\net8.0-windows\ProgressWindow.g.cs
+D:\CSharpProjects\CVRPTW\VisualizationApplication\obj\Debug\net8.0-windows\ProgressWindow.baml

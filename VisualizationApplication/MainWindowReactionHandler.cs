@@ -128,7 +128,7 @@ public class MainWindowReactionHandler : IDisposable
         ];
     }
 
-    private void ComputeButtonClickHandler(object _, RoutedEventArgs __)
+    private async void OptimizeButtonClickHandler(object _, RoutedEventArgs __)
     {
         if (_optimizers == null || _mainResult == null || _mainResultEstimator == null) return;
 
@@ -140,8 +140,8 @@ public class MainWindowReactionHandler : IDisposable
         }
 
         var selectedOptimizer = _optimizers[_mainWindowElements.OptimizationComboBox.SelectedIndex];
-        
-        selectedOptimizer.Optimize(_mainResult);
+
+        await VisualizationExtensions.StartAsProgress(() => selectedOptimizer.Optimize(_mainResult));
         
         _resetHandler.ResetAll(_mainResult, _optimizers);
     }
@@ -177,14 +177,14 @@ public class MainWindowReactionHandler : IDisposable
     private void FollowUiEvents()
     {
         _mainWindowElements.LoadDataButton.Click += LoadDataButtonClickHandler;
-        _mainWindowElements.ComputeButton.Click += ComputeButtonClickHandler;
+        _mainWindowElements.OptimizeButton.Click += OptimizeButtonClickHandler;
         _mainWindowElements.VisualizationComboBox.SelectionChanged += VisualizationComboBoxSelectionChangedHandler;
     }
 
     private void UnfollowUiEvents()
     {
         _mainWindowElements.LoadDataButton.Click -= LoadDataButtonClickHandler;
-        _mainWindowElements.ComputeButton.Click -= ComputeButtonClickHandler;
+        _mainWindowElements.OptimizeButton.Click -= OptimizeButtonClickHandler;
         _mainWindowElements.VisualizationComboBox.SelectionChanged -= VisualizationComboBoxSelectionChangedHandler;
     }
 

@@ -11,7 +11,7 @@ public class ComplexMainResultEstimator(MainData mainData, IMainResultEstimator 
         
         foreach (var (car, carResult) in mainResult.Results)
         {
-            sum += GetTimePenalty(mainResult, car);
+            //sum += GetTimePenalty(mainResult, car);
         }
 
         return sum;
