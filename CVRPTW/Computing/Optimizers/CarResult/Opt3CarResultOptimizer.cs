@@ -75,8 +75,12 @@ public class Opt3CarResultOptimizer(IMainResultEstimator mainResultEstimator) : 
             }
             
             command.Undo(path, aStart, bStart, cStart);
+
+            mainResultEstimator.Estimate(mainResult);
         }
 
         if (bestCommand != -1) Commands[bestCommand].Do(path, aStart, bStart, cStart);
+
+        mainResultEstimator.Estimate(mainResult);
     }
 }
