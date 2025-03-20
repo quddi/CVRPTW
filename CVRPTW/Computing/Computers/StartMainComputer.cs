@@ -5,13 +5,16 @@ namespace CVRPTW.Computing;
 public class StartMainComputer(MainData mainData, IMainResultEstimator mainResultEstimator) : IteratedMainComputer(mainData, mainResultEstimator)
 {
     private Dictionary<int, Point> _notVisitedPoints = new();
-    private readonly IMainResultEstimator _mainResultEstimator = mainResultEstimator;
 
     public override MainResult Compute()
     {
         _notVisitedPoints = new Dictionary<int, Point>(_mainData!.PointsByIds);
+
+        var mainResult = base.Compute();
         
-        return base.Compute();
+        mainResultEstimator.Estimate(mainResult);
+        
+        return mainResult;
     }
 
     protected override CarResult GetCarResult(Car car)
