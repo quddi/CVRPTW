@@ -45,6 +45,11 @@ public class CarPath : IList<PointVisitResult>
     {
         PathPoints.Add(result);
     }
+    
+    public void RemovePenultimatePoint()
+    {
+        PathPoints.RemoveAt(PathPoints.Count - 1);
+    }
 
     public void SetPath(params PointVisitResult[] totalPath)
     {

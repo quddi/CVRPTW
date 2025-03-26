@@ -2,9 +2,9 @@
 
 namespace CVRPTW.Computing;
 
-public class StartMainComputer(MainData mainData, IMainResultEstimator mainResultEstimator) : IteratedMainComputer(mainData, mainResultEstimator)
+public abstract class ByPairsMainComputer(MainData mainData, IMainResultEstimator mainResultEstimator) : IteratedMainComputer(mainData, mainResultEstimator)
 {
-    private Dictionary<int, Point> _notVisitedPoints = new();
+    protected Dictionary<int, Point> _notVisitedPoints = new();
 
     public override MainResult Compute()
     {
@@ -33,9 +33,11 @@ public class StartMainComputer(MainData mainData, IMainResultEstimator mainResul
 
         while (_notVisitedPoints.Any(CanVisit))
         {
+            PreEstimate(result.Path);
+            
             var nextPointPair = _notVisitedPoints
                 .Where(CanVisit)
-                .MinBy(Distance);
+                .MinBy(pair => EstimatePair(pair.Value.Id, currentPointId));
 
             _notVisitedPoints.Remove(nextPointPair.Key);
                 
@@ -50,14 +52,11 @@ public class StartMainComputer(MainData mainData, IMainResultEstimator mainResul
         {
             return pair.Value.Demand <= freeSpace;
         }
-
-        double Distance(KeyValuePair<int, Point> pair)
-        {
-            var firstPointIndex = _mainData.GetPoint(currentPointId).Index;
-            var secondPointIndex = _mainData.GetPoint(pair.Value.Id).Index;
-            return _mainData.Distances!.GetDistance(Constants.DefaultMatrixId, firstPointIndex, secondPointIndex);
-        }
         
         return result;
     }
+    
+    protected virtual void PreEstimate(CarPath carPath) { }
+
+    protected abstract double EstimatePair(int checkedPointId, int currentPointId);
 }

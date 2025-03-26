@@ -115,7 +115,7 @@ public class MainWindowReactionHandler : IDisposable
         var timeEstimator = new SimpleTimeEstimator(_mainData!);
         _mainResultEstimator = new ComplexMainResultEstimator(_mainData!, pathEstimator, timeEstimator);
         
-        _startMainComputer = new StartMainComputer(_mainData!, _mainResultEstimator);
+        _startMainComputer = new DistanceMainComputer(_mainData!, _mainResultEstimator);
         
         _optimizers = 
         [
