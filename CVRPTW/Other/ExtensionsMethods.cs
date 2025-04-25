@@ -249,4 +249,11 @@ public static class ExtensionsMethods
     }
     
     public static int FromMinutesToSeconds(this int perMinute) => perMinute * 60;
+    
+    public static double FromMinutesToSeconds(this double perMinute) => perMinute * 60;
+
+    public static string ToText(this CarPath carPath)
+    {
+        return string.Join(" ", carPath.Select(point => point.Id.ToString()));
+    }
 }

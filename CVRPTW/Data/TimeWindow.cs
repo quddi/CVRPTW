@@ -2,9 +2,9 @@
 
 public class TimeWindow
 {
-    public int Start { get; set; }
+    public double Start { get; set; }
     
-    public int End { get; set; }
+    public double End { get; set; }
     
     public bool Contains(double time) => Start <= time && time <= End;
 }

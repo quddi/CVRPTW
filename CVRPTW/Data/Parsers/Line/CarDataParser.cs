@@ -1,4 +1,6 @@
-﻿namespace CVRPTW;
+﻿using System.Globalization;
+
+namespace CVRPTW;
 
 /*
  * id\capacity (* demand)\tw open\tw close\overload penalty\
@@ -57,8 +59,8 @@ public class CarDataParser : LineDataParser<Car>
     {
         _result!.TimeWindow = new TimeWindow
         {
-            Start = int.Parse(_split![_splitIndex!.Value]).FromMinutesToSeconds(),
-            End = int.Parse(_split![_splitIndex!.Value + 1]).FromMinutesToSeconds()
+            Start = double.Parse(_split![_splitIndex!.Value], CultureInfo.InvariantCulture).FromMinutesToSeconds(),
+            End = double.Parse(_split![_splitIndex!.Value + 1], CultureInfo.InvariantCulture).FromMinutesToSeconds()
         };
 
         _splitIndex += 2;
@@ -97,7 +99,7 @@ public class CarDataParser : LineDataParser<Car>
     
     private void ParseMaxCapacity()
     {
-        _result!.MaxCapacity = int.Parse(_split![_splitIndex!.Value]);
+        _result!.MaxCapacity = long.Parse(_split![_splitIndex!.Value]);
 
         _splitIndex++;
     }
@@ -118,14 +120,14 @@ public class CarDataParser : LineDataParser<Car>
     
     private void ParseMaxTripsCount()
     {
-        _result!.MaxTripsCount = int.Parse(_split![_splitIndex!.Value]);
+        _result!.MaxTripsCount = 1;
 
         _splitIndex++;
     }
     
     private void ParseWaitBetweenTrips()
     {
-        _result!.WaitBetweenTrips = int.Parse(_split![_splitIndex!.Value]);
+        _result!.WaitBetweenTrips = 0;
 
         _splitIndex++;
     }

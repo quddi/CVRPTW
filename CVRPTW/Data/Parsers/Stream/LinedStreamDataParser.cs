@@ -4,15 +4,17 @@ namespace CVRPTW;
 
 public abstract class LinedStreamDataParser<T> : StreamDataParser<T> where T : class, new()
 {
+    public string LastReadLine { get; private set; } = string.Empty;
+    
     public override T Parse(StreamReader streamReader)
     {
         var t = new T();
-        var lastReadLine = streamReader.ReadLine();
+        LastReadLine = streamReader.ReadLine()!;
 
-        while (!string.IsNullOrEmpty(lastReadLine) && !lastReadLine.IsDividerLine())
+        while (!string.IsNullOrEmpty(LastReadLine) && !LastReadLine.IsDividerLine())
         {
-            ManageLine(lastReadLine, t);
-            lastReadLine = streamReader.ReadLine();
+            ManageLine(LastReadLine, t);
+            LastReadLine = streamReader.ReadLine()!;
         }
 
         return t;

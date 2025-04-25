@@ -14,7 +14,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         
         _elements = new MainWindowElements(LoadDataButton, MainPlot, OptimizeButton, VisualizationComboBox, 
-            PathCostLabel, OptimizationMethodComboBox); 
+            PathCostTextBox, OptimizationMethodComboBox); 
         
         _reactionHandler = new MainWindowReactionHandler(_elements);
     }

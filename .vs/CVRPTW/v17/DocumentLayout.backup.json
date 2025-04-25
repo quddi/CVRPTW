@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\CSharpProjects\\CVRPTW\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\opt3commandsdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\opt3commandsdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\processdiagram.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\processdiagram.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
@@ -103,6 +107,18 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Opt3CommandsDiagram.cd",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\Opt3CommandsDiagram.cd",
+              "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\Opt3CommandsDiagram.cd",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\Opt3CommandsDiagram.cd",
+              "RelativeToolTip": "CVRPTW\\Other\\Diagrams\\Opt3CommandsDiagram.cd",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
+              "WhenOpened": "2025-02-28T07:04:20.816Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ProcessDiagram.svg",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ProcessDiagram.svg",
               "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\ProcessDiagram.svg",
@@ -115,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ComputersDiagram.cd",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ComputersDiagram.cd",
               "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\ComputersDiagram.cd",
@@ -126,7 +142,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "PathEstimator.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\Path\\PathEstimator.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\Path\\PathEstimator.cs",
@@ -139,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "EuclidianPathEstimator.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\Path\\EuclidianPathEstimator.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\Path\\EuclidianPathEstimator.cs",
@@ -152,7 +168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "DistancePathEstimator.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\Path\\DistancePathEstimator.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\Path\\DistancePathEstimator.cs",
@@ -165,7 +181,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MainResultEstimator.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\MainResultEstimator.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\MainResult\\MainResultEstimator.cs",
@@ -178,7 +194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "SumMainResultEstimator.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\SumMainResultEstimator.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\MainResult\\SumMainResultEstimator.cs",
@@ -191,7 +207,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "DistancesDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Stream\\DistancesDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Stream\\DistancesDataParser.cs",
@@ -204,7 +220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "AlternativePointsDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Stream\\AlternativePointsDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Stream\\AlternativePointsDataParser.cs",
@@ -217,7 +233,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "StreamDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Stream\\StreamDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Stream\\StreamDataParser.cs",
@@ -230,7 +246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "LinedStreamDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Stream\\LinedStreamDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Stream\\LinedStreamDataParser.cs",
@@ -243,7 +259,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "LineDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Line\\LineDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Line\\LineDataParser.cs",
@@ -256,7 +272,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "PointDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Line\\PointDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Line\\PointDataParser.cs",
@@ -269,7 +285,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "CarDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Line\\CarDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Line\\CarDataParser.cs",
@@ -282,7 +298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "ParsersDiagram.cd",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ParsersDiagram.cd",
               "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\ParsersDiagram.cd",
@@ -293,7 +309,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\MainWindow.xaml",
               "RelativeDocumentMoniker": "VisualizationApplication\\MainWindow.xaml",

@@ -15,7 +15,7 @@ public class Car
     
     public int DriverOvertimePenalty { get; set; }
     
-    public int MaxCapacity { get; set; }
+    public long MaxCapacity { get; set; }
     
     public int MaxCapacityPenalty { get; set; }
     

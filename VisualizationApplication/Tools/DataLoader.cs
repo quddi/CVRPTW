@@ -20,11 +20,12 @@ public static class DataLoader
         
         var filePath = openFileDialog.FileName;
 
+        using var streamReader = new StreamReader(filePath);
+                
+        return Parser.Parse(streamReader);
+        
         try
         {
-            using var streamReader = new StreamReader(filePath);
-                
-            return Parser.Parse(streamReader);
         }
         catch (Exception ex)
         {

@@ -75,8 +75,8 @@ public class PointDataParser : LineDataParser<Point>
             (
                 new TimeWindow
                 {
-                    Start = int.Parse(_split![_splitIndex!.Value + i * 2]).FromMinutesToSeconds(),
-                    End = int.Parse(_split![_splitIndex!.Value + i * 2 + 1]).FromMinutesToSeconds()
+                    Start = double.Parse(_split![_splitIndex!.Value + i * 2], CultureInfo.InvariantCulture).FromMinutesToSeconds(),
+                    End = double.Parse(_split![_splitIndex!.Value + i * 2 + 1], CultureInfo.InvariantCulture).FromMinutesToSeconds()
                 }
             );
         }

@@ -155,21 +155,22 @@ public class MainWindowReactionHandler : IDisposable
             case Constants.OnlyPointsIndex:
                 _resetHandler.ResetMainPlot();
                 SetPoints();
-                _mainWindowElements.PathCostLabel.Content = string.Empty;
+                _mainWindowElements.PathCostTextBox.Text = string.Empty;
                 break;
 
             case Constants.AllResultsIndex:
                 _resetHandler.ResetMainPlot();
                 SetAllResults();
-                _mainWindowElements.PathCostLabel.Content = $"Загальна вартість шляхів: {_mainResult!.Estimation}";
+                _mainWindowElements.PathCostTextBox.Text = $"Загальна вартість шляхів: {_mainResult!.Estimation}";
                 break;
             
             case not Constants.NotSelectedIndex:
                 _resetHandler.ResetMainPlot();
                 SetPoints();
-                var chosenResult = _mainResult!.Results.Values.ElementAt(comboBoxSelectionIndex - Constants.ServiceIndexesCount);
+                var (chosenCar, chosenResult) = _mainResult!.Results.ElementAt(comboBoxSelectionIndex - Constants.ServiceIndexesCount);
                 SetResult(chosenResult);
-                _mainWindowElements.PathCostLabel.Content = $"Вартість шляху: {chosenResult.Estimation}";
+                _mainWindowElements.PathCostTextBox.Text = $"Вартість шляху: {chosenResult.Estimation}. Вага {(chosenCar.Capacity - chosenResult.RemainedFreeSpace).ToFormattedString()}/{chosenCar.Capacity}" +
+                                                           $"\nШлях ({chosenResult.Path.Count} точок): {chosenResult.Path.ToText()}";
                 break;
         }
     }

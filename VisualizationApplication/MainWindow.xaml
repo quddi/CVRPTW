@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <wpf:WpfPlot x:Name="MainPlot" FontSize="20" Margin="0,45,0,0"/>
-        <Button x:Name="LoadDataButton" Content="Заватнажити дані" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="30" Width="117"/>
-        <ComboBox x:Name="VisualizationComboBox" HorizontalAlignment="Left" Margin="132,10,0,0" VerticalAlignment="Top" Width="120" Height="30" SelectedIndex="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+        <wpf:WpfPlot x:Name="MainPlot" FontSize="20" Margin="0,60,0,0"/>
+        <Button x:Name="LoadDataButton" Content="Заватнажити дані" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="45" Width="117"/>
+        <ComboBox x:Name="VisualizationComboBox" HorizontalAlignment="Left" Margin="132,10,0,0" VerticalAlignment="Top" Width="120" Height="45" SelectedIndex="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <ComboBoxItem Content="Тільки точки"/>
         </ComboBox>
-        <Button x:Name="OptimizeButton" Content="Оптимізувати" HorizontalAlignment="Left" Margin="257,10,0,0" VerticalAlignment="Top" Width="120" Height="30"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <Label x:Name="PathCostLabel" Content="Вартість шляху: 100000000" HorizontalAlignment="Left" Margin="37,55,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="OptimizationMethodComboBox" HorizontalAlignment="Left" Margin="382,10,0,0" VerticalAlignment="Top" Width="192" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="OptimizeButton" Content="Оптимізувати" HorizontalAlignment="Left" Margin="257,10,0,0" VerticalAlignment="Top" Width="120" Height="45"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="PathCostTextBox" Text="Вартість шляху: 100000000" Margin="579,10,10,0" VerticalAlignment="Top" Height="45"/>
+        <ComboBox x:Name="OptimizationMethodComboBox" HorizontalAlignment="Left" Margin="382,10,0,0" VerticalAlignment="Top" Width="192" Height="45" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>

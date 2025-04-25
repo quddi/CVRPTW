@@ -6,9 +6,9 @@ public class MainData
     
     public int TimeWindows { get; set; }
     
-    public int MaxOverload { get; set; }
+    public long MaxOverload { get; set; }
     
-    public int MaxCompsOverload { get; set; }
+    public long MaxCompsOverload { get; set; }
     
     public Distances? Distances { get; set; }
     
