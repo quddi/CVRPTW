@@ -60,9 +60,13 @@ public class PointDataParser : LineDataParser<Point>
     
     private void ParseDemand()
     {
-        _result!.Demand = double.Parse(_split![_splitIndex!.Value], CultureInfo.InvariantCulture);
+        var hasDemand = _parameters!.Value.Demand != 0;
+        
+        _result!.Demand = hasDemand
+            ? double.Parse(_split![_splitIndex!.Value], CultureInfo.InvariantCulture)
+            : Constants.MissingPointDemand;
 
-        _splitIndex++;
+        if (hasDemand) _splitIndex++;
     }
 
     private void ParseTimeWindows()

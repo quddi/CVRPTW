@@ -51,8 +51,12 @@ public class CarDataParser : LineDataParser<Car>
             var capacity = int.Parse(_split![i]);
             _result.Capacities.Add(capacity);
         }
-
-        _splitIndex += _parameters!.Value.Demand;
+        
+        var hasDemand = _parameters!.Value.Demand != 0;
+        
+        if (!hasDemand) _result.Capacities.Add(Constants.MissingCarCapacity);
+        
+        _splitIndex += hasDemand ? _parameters!.Value.Demand : 0;
     }
 
     private void ParseTimeWindow()

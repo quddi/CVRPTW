@@ -14,7 +14,7 @@ public class Point
     
     public List<TimeWindow>? TimeWindows { get; set; }
 
-    public TimeWindow? TimeWindow => TimeWindows?[0];
+    public TimeWindow? TimeWindow => TimeWindows?.FirstOrDefault();
     
     public int ServiceTime { get; set; }
     

@@ -34,6 +34,8 @@ public class ComplexMainResultEstimator(MainData mainData, IMainResultEstimator 
             var pointVisitResult = carResult.Path[i];
             var pointId = pointVisitResult.Id;
             var point = mainData.PointsByIds[pointId];
+            
+            if (point.TimeWindow == null) continue;
 
             if (pointVisitResult.VisitTime < point.TimeWindow!.Start)
             {

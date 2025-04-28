@@ -16,6 +16,8 @@ public class PointTransposeMainResultOptimizer(IMainResultEstimator mainResultEs
         _mainData = mainData;
         _mainResult = mainResult;
         
+        if (mainData.Cars.Count == 1) return;
+        
         for (var i = 0; i < _mainData.Cars.Count; i++)
         {
             var sourceCar = _mainData.Cars[i];

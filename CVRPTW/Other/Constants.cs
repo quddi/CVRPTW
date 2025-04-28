@@ -13,6 +13,8 @@ public static class Constants
     public const int AllResultsIndex = 1;
     public const int ServiceIndexesCount = 2;
     public const double DoubleComparisonTolerance = 0.000001;
+    public const int MissingPointDemand = 1;
+    public const int MissingCarCapacity = 50;
         
     public static readonly char[] DefaultSplitDividers = [','];
     public static readonly char[] PointsSplitDividers = ['(', ';', ')'];
