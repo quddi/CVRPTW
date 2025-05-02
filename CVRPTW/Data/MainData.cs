@@ -16,10 +16,9 @@ public class MainData
     
     public Times? Times { get; set; }
     
-    public Point? DepoPoint { get; set; }
-    
     public List<Point> Points { get; set; } = new();
 
+    public Dictionary<int, Point> DepoPointsByIds { get; set; } = new();
     public Dictionary<int, Point> PointsByIds { get; set; } = new();
     
     public AlternativePoints? AlternativePoints { get; set; }
@@ -28,8 +27,6 @@ public class MainData
 
     public Point GetPoint(int id)
     {
-        if (id == Constants.DepoPointId) return DepoPoint!;
-
-        return PointsByIds[id];
+        return id.IsDepoId() ? DepoPointsByIds[id] : PointsByIds[id];
     }
 }

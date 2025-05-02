@@ -208,6 +208,10 @@ public static class ExtensionsMethods
     {
         timeEstimator.Estimate(result.Path, car);
     }
+
+    public static bool IsDepo(this Point point) => point.Id.IsDepoId();
+
+    public static bool IsDepoId(this int id) => id < 0;
     
     public static T TakeAt<T>(this IList<T> list, int index)
     {

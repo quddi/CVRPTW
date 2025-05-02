@@ -20,7 +20,6 @@ public abstract class ByPairsMainComputer(MainData mainData, IMainResultEstimato
     protected override CarResult GetCarResult(Car car)
     {
         var freeSpace = car.Capacity * 1.0;
-        var currentPointId = _mainData!.DepoPoint!.Id;
         var result = new CarResult(car)
         {
             Estimation = 0,
@@ -30,6 +29,7 @@ public abstract class ByPairsMainComputer(MainData mainData, IMainResultEstimato
                 EndPoint = new(car.PointsDatas.Last().Id!.Value)
             }
         };
+        var currentPointId = result.Path.StartPoint.Id;
 
         while (_notVisitedPoints.Any(CanVisit))
         {

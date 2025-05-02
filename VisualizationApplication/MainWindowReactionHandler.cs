@@ -43,7 +43,7 @@ public class MainWindowReactionHandler : IDisposable
         var xs = points.Select(point => point.Coordinates.Latitude).ToArray();
         var ys = points.Select(point => point.Coordinates.Longitude).ToArray();
 
-        AddDepoPoint();
+        AddDepoPoints();
         
         _mainWindowElements.FilterPlot.Plot.Add.Scatter(xs, ys, VisualizationConstants.DefaultPointsColor).LineWidth = 0;
 
@@ -51,16 +51,18 @@ public class MainWindowReactionHandler : IDisposable
         _mainWindowElements.FilterPlot.Plot.Axes.AutoScale();
     }
 
-    private void AddDepoPoint()
+    private void AddDepoPoints()
     {
-        var depoPoint = _mainData!.DepoPoint;
-        var depoCoordinates = depoPoint!.Coordinates.ToScottCoordinates();
+        foreach (var depoPoint in _mainData!.DepoPointsByIds.Values)
+        {
+            var depoCoordinates = depoPoint!.Coordinates.ToScottCoordinates();
         
-        var circle = _mainWindowElements.FilterPlot.Plot.Add.Ellipse(depoCoordinates, 
-            VisualizationConstants.DepoPointRadiusX, VisualizationConstants.DepoPointRadiusY);
+            var circle = _mainWindowElements.FilterPlot.Plot.Add.Ellipse(depoCoordinates, 
+                VisualizationConstants.DepoPointRadiusX, VisualizationConstants.DepoPointRadiusY);
         
-        circle.FillColor = VisualizationConstants.DepoPointFillColor;
-        circle.LineColor = VisualizationConstants.DepoPointLineColor;
+            circle.FillColor = VisualizationConstants.DepoPointFillColor;
+            circle.LineColor = VisualizationConstants.DepoPointLineColor;
+        }
     }
 
     private void SetAllResults()
@@ -70,7 +72,7 @@ public class MainWindowReactionHandler : IDisposable
             SetResult(result, addDepoPoint: false);
         }
         
-        AddDepoPoint();
+        AddDepoPoints();
         
         _mainWindowElements.FilterPlot.Refresh();
     }
@@ -83,7 +85,7 @@ public class MainWindowReactionHandler : IDisposable
         var xs = points.Select(point => point.Coordinates.Latitude).ToArray();
         var ys = points.Select(point => point.Coordinates.Longitude).ToArray();
 
-        if (addDepoPoint) AddDepoPoint();
+        if (addDepoPoint) AddDepoPoints();
         
         _mainWindowElements.FilterPlot.Plot.Add.Scatter(xs, ys, color);
         _mainWindowElements.FilterPlot.Refresh();

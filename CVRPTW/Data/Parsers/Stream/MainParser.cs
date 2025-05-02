@@ -113,9 +113,15 @@ public class MainParser : StreamDataParser<MainData>
             index++;
             
             result.Points.Add(point);
-            
-            if (point.Id == Constants.DepoPointId) result.DepoPoint = point;
-            else result.PointsByIds.Add(point.Id, point);
+
+            if (point.IsDepo())
+            {
+                result.DepoPointsByIds.Add(point.Id, point);
+            }
+            else
+            {
+                result.PointsByIds.Add(point.Id, point);
+            } 
         }
 
         return line;
