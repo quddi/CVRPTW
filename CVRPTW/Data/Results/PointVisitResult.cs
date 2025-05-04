@@ -23,4 +23,6 @@ public struct PointVisitResult(int id, double visitTime)
     public bool Equals(PointVisitResult other) => Id == other.Id && VisitTime.Equals(other.VisitTime);
 
     public override bool Equals(object? obj) => obj is PointVisitResult other && Equals(other);
+
+    public override string ToString() => $"{Id} {VisitTime}";
 }

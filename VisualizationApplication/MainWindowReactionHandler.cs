@@ -24,6 +24,8 @@ public class MainWindowReactionHandler : IDisposable
 
     private Dictionary<CarResult, Color>? _resultColors;
     private MainResultOptimizer[]? _optimizers;
+
+    public event Action<string>? FileLoaded;
     
     public MainWindowReactionHandler(MainWindowElements mainWindowElements)
     {
@@ -94,8 +96,14 @@ public class MainWindowReactionHandler : IDisposable
     private void LoadDataButtonClickHandler(object _, RoutedEventArgs __)
     {
         _resetHandler.ResetAll(_mainResult, _optimizers);
-        _mainData = DataLoader.LoadData();
+        (_mainData, var fileName) = DataLoader.LoadData();
 
+        if (_mainData == null)
+        {
+            MessageBox.Show("Файл не було завантажено!");
+            return;
+        }
+        
         SetUpFunctionality();
         SetPoints();
         
@@ -109,6 +117,8 @@ public class MainWindowReactionHandler : IDisposable
         _resetHandler.ResetAll(_mainResult, _optimizers);
 
         _mainWindowElements.VisualizationComboBox.SelectedIndex = Constants.OnlyPointsIndex;
+        
+        FileLoaded?.Invoke(fileName);
     }
 
     private void SetUpFunctionality()

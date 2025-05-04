@@ -6,6 +6,6 @@ public class AlternativePointsDataParser : LinedStreamDataParser<AlternativePoin
     {
         var split = lastReadLine.Split(Constants.DefaultSplitDividers);
         
-        alternativePoints.AddAlternativePoint(int.Parse(split[0]), int.Parse(split[1]));
+        alternativePoints.AddAlternativePoints(split.Select(int.Parse).ToArray());
     }
 }

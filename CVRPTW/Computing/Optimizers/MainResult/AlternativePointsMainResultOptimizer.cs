@@ -6,30 +6,34 @@ public class AlternativePointsMainResultOptimizer(IMainResultEstimator mainResul
 {
     public override void Optimize(MainResult mainResult)
     {
-        foreach (var (firstPointId, secondPointId) in mainData.AlternativePoints!)
+        foreach (var currentAlternativePoints in mainData.AlternativePoints!.AllCorteges)
         {
-            var (firstCar, firstIndex) = GetContainingPath(mainResult, firstPointId);
-            var (secondCar, secondIndex) = GetContainingPath(mainResult, secondPointId);
+            var minEstimation = mainResult.Estimation;
+            var bestPointId = -1;
             
-            var firstPath = mainResult.Results[firstCar].Path;
-            var secondPath = mainResult.Results[secondCar].Path;
-            
-            var firstTaken = firstPath.TakeAt(firstIndex);
+            foreach (var alternativePointId in currentAlternativePoints)
+            {
+                var (car, inPathIndex) = GetContainingPath(mainResult, alternativePointId);
 
-            var firstEstimation = mainResultEstimator.Estimate(mainResult);
+                var taken = mainResult.Results[car].Path.TakeAt(inPathIndex);
+
+                mainResult.ReEstimateCost(mainResultEstimator);
+                
+                if (mainResult.Estimation < minEstimation)
+                {
+                    minEstimation = mainResult.Estimation;
+                    bestPointId = taken.Id;
+                }
+                
+                mainResult.Results[car].Path.Insert(inPathIndex, taken);
+                mainResult.ReEstimateCost(mainResultEstimator);
+            }
             
-            firstPath.Insert(firstIndex, firstTaken);
+            if (bestPointId == -1) 
+                continue;
             
-            var secondTaken = secondPath.TakeAt(secondIndex);
-            
-            mainResult.ReEstimateCost(mainResultEstimator);
-            
-            if (mainResult.Estimation < firstEstimation) continue;
-            
-            secondPath.Insert(secondIndex, secondTaken);
-            
-            firstPath.RemoveAt(firstIndex);
-            
+            var (bestCar, bestInPathIndex) = GetContainingPath(mainResult, bestPointId);
+            mainResult.Results[bestCar].Path.RemoveAt(bestInPathIndex);
             mainResult.ReEstimateCost(mainResultEstimator);
         } 
     }

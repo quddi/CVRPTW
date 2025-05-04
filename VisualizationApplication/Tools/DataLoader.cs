@@ -9,29 +9,19 @@ public static class DataLoader
 {
     private static readonly MainParser Parser = new();
     
-    public static MainData? LoadData()
+    public static (MainData? mainData, string fileName) LoadData()
     {
         var openFileDialog = new OpenFileDialog
         {
             Filter = "Все файлы (*.*)|*.*"
         };
 
-        if (openFileDialog.ShowDialog() != true) return null;
+        if (openFileDialog.ShowDialog() != true) return default;
         
         var filePath = openFileDialog.FileName;
 
         using var streamReader = new StreamReader(filePath);
                 
-        return Parser.Parse(streamReader);
-        
-        try
-        {
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Помилка при читанні файлу: {ex.Message}");
-            
-            throw;
-        }
+        return (Parser.Parse(streamReader), openFileDialog.SafeFileName);
     }
 }

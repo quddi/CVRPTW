@@ -2,29 +2,36 @@
 
 namespace CVRPTW;
 
-public class AlternativePoints : IEnumerable<KeyValuePair<int, int>>
+public class AlternativePoints : IEnumerable<KeyValuePair<int, HashSet<int>>>
 {
-    public readonly Dictionary<int, int> AlternativePoint = new();
-    public readonly Dictionary<int, int> InverseAlternativePoint = new();
+    public readonly Dictionary<int, HashSet<int>> Value = new();
+    public readonly List<HashSet<int>> AllCorteges = new();
 
-    public int? GetAlternativePoint(int point)
+    public HashSet<int>? GetAlternativePoints(int point)
     {
-        if (AlternativePoint.TryGetValue(point, out var value1))
-            return value1;
-
-        if (InverseAlternativePoint.TryGetValue(point, out var value2))
-            return value2;
-        
-        return null;
+        return Value.GetValueOrDefault(point);
     }
 
-    public void AddAlternativePoint(int firstPointId, int secondPointId)
+    public void AddAlternativePoints(params int[] alternativePoints)
     {
-        AlternativePoint.Add(firstPointId, secondPointId);
-        InverseAlternativePoint.Add(secondPointId, firstPointId);
+        for (int i = 0; i < alternativePoints.Length; i++)
+        {
+            var pointId = alternativePoints[i];
+            
+            Value.Add(pointId, new());
+
+            for (int j = 0; j < alternativePoints.Length; j++)
+            {
+                if (i == j) continue;
+
+                Value[pointId].Add(alternativePoints[j]);
+            }
+        }   
+        
+        AllCorteges.Add(alternativePoints.ToHashSet());
     }
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public IEnumerator<KeyValuePair<int, int>> GetEnumerator() => AlternativePoint.GetEnumerator();
+    public IEnumerator<KeyValuePair<int, HashSet<int>>> GetEnumerator() => Value.GetEnumerator();
 }
