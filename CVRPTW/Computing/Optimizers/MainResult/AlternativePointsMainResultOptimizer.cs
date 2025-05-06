@@ -6,6 +6,8 @@ public class AlternativePointsMainResultOptimizer(IMainResultEstimator mainResul
 {
     public override void Optimize(MainResult mainResult)
     {
+        if (mainData?.AlternativePoints == null) return;
+        
         foreach (var currentAlternativePoints in mainData.AlternativePoints!.AllCorteges)
         {
             var minEstimation = mainResult.Estimation;
