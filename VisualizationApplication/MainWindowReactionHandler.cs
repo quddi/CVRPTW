@@ -123,7 +123,7 @@ public class MainWindowReactionHandler : IDisposable
 
     private void SetUpFunctionality()
     {
-        var pathEstimator = new DistancePathCostEstimator(_mainData!);
+        var pathEstimator = new ByDistanceMainResultEstimator(_mainData!);
         var timeEstimator = new SimpleTimeEstimator(_mainData!);
         _mainResultEstimator = new ComplexMainResultEstimator(_mainData!, pathEstimator, timeEstimator);
         
@@ -153,6 +153,14 @@ public class MainWindowReactionHandler : IDisposable
 
         var selectedOptimizer = _optimizers[_mainWindowElements.OptimizationComboBox.SelectedIndex];
 
+        if (selectedOptimizer.GetType() == typeof(AlternativePointsMainResultOptimizer) &&
+            _mainData!.AlternativePoints.AreEmpty())
+        {
+            MessageBox.Show("У вхідних даних відсутня інформація про альтернативні точки!");
+            
+            return;
+        }
+
         await VisualizationExtensions.StartAsProgress(() => selectedOptimizer.Optimize(_mainResult));
         
         _resetHandler.ResetAll(_mainResult, _optimizers);
@@ -173,7 +181,7 @@ public class MainWindowReactionHandler : IDisposable
             case Constants.AllResultsIndex:
                 _resetHandler.ResetMainPlot();
                 SetAllResults();
-                _mainWindowElements.PathCostTextBox.Text = $"Загальна вартість шляхів: {_mainResult!.Estimation}";
+                _mainWindowElements.PathCostTextBox.Text = $"Загальна вартість шляхів: {_mainResult!.Estimation.ToFormattedString()}";
                 break;
             
             case not Constants.NotSelectedIndex:
@@ -181,7 +189,7 @@ public class MainWindowReactionHandler : IDisposable
                 SetPoints();
                 var (chosenCar, chosenResult) = _mainResult!.Results.ElementAt(comboBoxSelectionIndex - Constants.ServiceIndexesCount);
                 SetResult(chosenResult);
-                _mainWindowElements.PathCostTextBox.Text = $"Вартість шляху: {chosenResult.Estimation}. Вага {(chosenCar.Capacity - chosenResult.RemainedFreeSpace).ToFormattedString()}/{chosenCar.Capacity}" +
+                _mainWindowElements.PathCostTextBox.Text = $"Вартість шляху: {chosenResult.Estimation.ToFormattedString()}. Вага {(chosenCar.Capacity - chosenResult.RemainedFreeSpace).ToFormattedString()}/{chosenCar.Capacity}" +
                                                            $"\nШлях ({chosenResult.Path.Count} точок): {chosenResult.Path.ToText()}";
                 break;
         }

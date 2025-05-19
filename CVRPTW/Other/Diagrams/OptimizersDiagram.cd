@@ -1,57 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CVRPTW.Computing.Optimizers.CarResultOptimizer" Collapsed="true">
-    <Position X="5.5" Y="1.75" Width="1.5" />
+    <Position X="10.5" Y="4.25" Width="1.5" />
+    <InheritanceLine Type="CVRPTW.Computing.Optimizers.MainResultOptimizer" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="8.688" Y="3.562" />
+        <Point X="8.688" Y="3.872" />
+        <Point X="11.25" Y="3.872" />
+        <Point X="11.25" Y="4.25" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Computing\Optimizers\CarResult\CarResultOptimizer.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="CVRPTW.Computing.Optimizers.Opt2CarResultOptimizer" Collapsed="true">
-    <Position X="4.25" Y="2.75" Width="2" />
+    <Position X="9" Y="5.25" Width="2" />
+    <InheritanceLine Type="CVRPTW.Computing.Optimizers.CarResultOptimizer" ManuallyRouted="true">
+      <Path>
+        <Point X="11.25" Y="4.941" />
+        <Point X="11.25" Y="5.129" />
+        <Point X="10" Y="5.129" />
+        <Point X="10" Y="5.25" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAEAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Computing\Optimizers\CarResult\Opt2CarResultOptimizer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CVRPTW.Computing.Optimizers.Opt3CarResultOptimizer" Collapsed="true">
-    <Position X="8.75" Y="2.75" Width="2" />
+    <Position X="11.5" Y="6.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAABAAAAABAAAAA=</HashCode>
+      <HashCode>AAAAAgAEAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>Computing\Optimizers\CarResult\Opt3CarResultOptimizer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CVRPTW.Computing.Optimizers.OrOptCarResultOptimizer" Collapsed="true">
-    <Position X="2" Y="2.75" Width="2" />
+    <Position X="9" Y="6.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Computing\Optimizers\CarResult\OrOptCarResultOptimizer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CVRPTW.Computing.Optimizers.SwapCarResultOptimizer" Collapsed="true">
-    <Position X="6.5" Y="2.75" Width="2" />
+    <Position X="11.5" Y="5.25" Width="2" />
+    <InheritanceLine Type="CVRPTW.Computing.Optimizers.CarResultOptimizer" ManuallyRouted="true">
+      <Path>
+        <Point X="11.25" Y="4.941" />
+        <Point X="11.25" Y="5.141" />
+        <Point X="12.5" Y="5.141" />
+        <Point X="12.5" Y="5.25" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Computing\Optimizers\CarResult\SwapCarResultOptimizer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CVRPTW.Computing.Optimizers.AlternativePointsMainResultOptimizer" Collapsed="true">
-    <Position X="4.75" Y="5" Width="2.75" />
+    <Position X="5.75" Y="4.25" Width="2.75" />
+    <InheritanceLine Type="CVRPTW.Computing.Optimizers.MainResultOptimizer" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="8.688" Y="3.562" />
+        <Point X="8.688" Y="3.886" />
+        <Point X="7.125" Y="3.886" />
+        <Point X="7.125" Y="4.25" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Computing\Optimizers\MainResult\AlternativePointsMainResultOptimizer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CVRPTW.Computing.Optimizers.CompositeMainResultOptimizer" Collapsed="true">
-    <Position X="2" Y="5" Width="2.5" />
+    <Position X="5.75" Y="5.25" Width="2.5" />
+    <InheritanceLine Type="CVRPTW.Computing.Optimizers.MainResultOptimizer" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="8.688" Y="3.562" />
+        <Point X="8.688" Y="5.053" />
+        <Point X="7" Y="5.053" />
+        <Point X="7" Y="5.25" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Computing\Optimizers\MainResult\CompositeMainResultOptimizer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CVRPTW.Computing.Optimizers.MainResultOptimizer" Collapsed="true">
-    <Position X="5.25" Y="4" Width="1.75" />
+    <Position X="7.75" Y="3" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Computing\Optimizers\MainResult\MainResultOptimizer.cs</FileName>
@@ -59,7 +98,15 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CVRPTW.Computing.Optimizers.PointTransposeMainResultOptimizer" Collapsed="true">
-    <Position X="7.75" Y="5" Width="2.75" />
+    <Position X="5.75" Y="6.25" Width="2.75" />
+    <InheritanceLine Type="CVRPTW.Computing.Optimizers.MainResultOptimizer" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="8.688" Y="3.562" />
+        <Point X="8.688" Y="6.042" />
+        <Point X="7.125" Y="6.042" />
+        <Point X="7.125" Y="6.25" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAQgAAkAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAA=</HashCode>
       <FileName>Computing\Optimizers\MainResult\PointTransposeMainResultOptimizer.cs</FileName>

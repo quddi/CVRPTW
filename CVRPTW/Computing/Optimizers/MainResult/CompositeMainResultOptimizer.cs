@@ -12,7 +12,6 @@ public class CompositeMainResultOptimizer(List<MainResultOptimizer> optimizers, 
 
             if (!report) continue;
             
-            Console.WriteLine($"===================== {optimizer.GetType().Name} =====================\n");
             Console.WriteLine(mainResult);
         }
     }

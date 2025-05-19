@@ -260,4 +260,9 @@ public static class ExtensionsMethods
     {
         return string.Join(" ", carPath.Select(point => point.Id.ToString()));
     }
+
+    public static bool AreEmpty(this AlternativePoints? alternativePoints)
+    {
+        return alternativePoints == null || alternativePoints!.Value.Values.Count == 0;
+    }
 }

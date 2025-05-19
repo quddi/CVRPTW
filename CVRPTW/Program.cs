@@ -1,129 +1,64 @@
 ﻿using CVRPTW.Computing;
 using CVRPTW.Computing.Estimators;
+using CVRPTW.Computing.Estimators.Time;
 using CVRPTW.Computing.Optimizers;
 
 namespace CVRPTW;
 
 static class Program
 {
+    private static readonly string[] _paths =
+    [
+        @"C:\Users\Admin\Desktop\Диплом\original1.txt",
+        @"C:\Users\Admin\Desktop\Диплом\WC_0202_14_11092024AlternativePoints (2).txt",
+        @"C:\Users\Admin\Desktop\Диплом\0060_319 (3).txt",
+        @"C:\Users\Admin\Desktop\Диплом\WC_0027_51 (4).txt",
+        @"C:\Users\Admin\Desktop\Диплом\WC_0080_test_3542_926_v2 (5).txt",
+        @"C:\Users\Admin\Desktop\Диплом\0065_196 (6).txt",
+    ];
+    
     private static void Main()
     {
-        /*var path = @"C:\Users\Admin\Desktop\Диплом\original.txt";
-        MainData mainData;
-        var parser = new MainParser();
+        var mainParser = new MainParser();
 
-        using (var streamReader = new StreamReader(path))
+        for (var i = 0; i < _paths.Length; i++)
         {
-            mainData = parser.Parse(streamReader);
-        }
+            var path = _paths[i];
+            var mainData = mainParser.Parse(new StreamReader(path));
 
-        var pathEstimator = new DistancePathCostEstimator(mainData);
-        var mainResultEstimator = new SumMainResultEstimator(pathEstimator);
-        var computer = new ByPairsMainComputer(mainData, mainResultEstimator);
+            var pathEstimator = new ByDistanceMainResultEstimator(mainData!);
+            var timeEstimator = new SimpleTimeEstimator(mainData!);
+            var mainResultEstimator = new ComplexMainResultEstimator(mainData!, pathEstimator, timeEstimator);
+            var startMainComputer = new DistanceMainComputer(mainData!, mainResultEstimator);
+            var optimizer = new Opt3CarResultOptimizer(mainResultEstimator);
 
-        var optimizedResult = computer.Compute();
-        var startResult = optimizedResult.Clone();
+            var mainResult = startMainComputer.Compute();
+            
+            new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData).Optimize(mainResult);
 
-        Console.WriteLine(optimizedResult);
+            var estimation = EstimateIterationsEfficiency(mainResult, optimizer);
 
-        Opt2(pathEstimator, optimizedResult);
-        
-        Console.WriteLine(optimizedResult);
-
-        Opt3(pathEstimator, optimizedResult);
-        
-        Console.WriteLine(optimizedResult);
-
-        CheckPermutations(optimizedResult, startResult);
-        
-        PointTranspose(mainResultEstimator, optimizedResult, mainData);
-
-        Console.WriteLine(optimizedResult);
-        
-        AlternativePoints(mainResultEstimator, mainData, optimizedResult);
-        
-        Console.WriteLine(optimizedResult);
-        
-        ReEstimate(optimizedResult, mainResultEstimator);
-
-        Console.WriteLine(optimizedResult);*/
-    }
-
-    /*private static void ReEstimate(MainResult result, IMainResultEstimator mainResultEstimator)
-    {
-        Console.WriteLine("====================== ReEstimation ======================\n");
-
-        result.ReEstimateCost(mainResultEstimator);
-    }
-
-    private static void CheckPermutations(MainResult optimizedResult, MainResult startResult)
-    {
-        Console.WriteLine("====================== Check permutations ======================\n");
-        
-        if (AreResultsPathsPermutations(optimizedResult, startResult))
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Paths are permutations!\n");
-        }
-        else
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Paths are not permutations!\n");
-        }
-
-        Console.ResetColor();
-    }
-
-    private static void PointTranspose(IMainResultEstimator estimator, MainResult optimizedResult, MainData mainData)
-    {
-        Console.WriteLine("====================== Point Transpose ======================\n");
-        
-        var mainResultOptimizer = new PointTransposeMainResultOptimizer(estimator, mainData);
-        
-        mainResultOptimizer.Optimize(optimizedResult);
-    }
-
-    private static void Opt2(IPathCostEstimator costEstimator, MainResult optimizedResult)
-    {
-        Console.WriteLine("====================== Opt 2 ======================\n");
-
-        var optimizer = new Opt2CarResultOptimizer(costEstimator);
-
-        foreach (var carResult in optimizedResult.Results.Values)
-        {
-            if (carResult.Path.Count <= 4) continue;
-
-            optimizer.Optimize(carResult);
+            Console.WriteLine($"=== {i} {estimation} ===");
         }
     }
 
-    private static void Opt3(IPathCostEstimator costEstimator, MainResult optimizedResult)
+    private static int EstimateIterationsEfficiency(MainResult result, MainResultOptimizer optimizer)
     {
-        Console.WriteLine("====================== Opt 3 ======================\n");
-        
-        var optimizer = new Opt3CarResultOptimizer(costEstimator);
+        var current = result.Estimation;
+        var iterations = 0;
 
-        foreach (var carResult in optimizedResult.Results.Values)
+        for (int i = 0; i < 100; i++)
         {
-            if (carResult.Path.Count <= 6) continue;
+            optimizer.Optimize(result);
 
-            optimizer.Optimize(carResult);
+            if (current - result.Estimation < 1) break;
+            
+            iterations++;
+            current = result.Estimation;
+
+            Console.WriteLine(iterations);
         }
-    }
-
-    private static void AlternativePoints(IMainResultEstimator estimator, MainData mainData, MainResult result)
-    {
-        Console.WriteLine("====================== Alternative Points ======================\n");
-
-        var optimizer = new AlternativePointsMainResultOptimizer(estimator, mainData);
         
-        optimizer.Optimize(result);
+        return iterations;
     }
-
-    private static bool AreResultsPathsPermutations(MainResult optimizedResult, MainResult startResult)
-    {
-        return optimizedResult.Results.Select(pair => pair.Value.Path)
-            .Zip(startResult.Results.Select(pair => pair.Value.Path))
-            .All(pair => ExtensionsMethods.ArePermutations(pair.First, pair.Second));
-    }*/
 }

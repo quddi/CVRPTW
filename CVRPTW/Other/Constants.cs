@@ -7,7 +7,6 @@ public static class Constants
     public const string AnyPointElementValue = "*";
     public const char TitleDividerSymbol = '=';
     public const int DefaultMatrixId = 0;
-    public const int DepoPointId = -1;
     public const int NotSelectedIndex = -1;
     public const int OnlyPointsIndex = 0;
     public const int AllResultsIndex = 1;

@@ -6,7 +6,7 @@ public class AlternativePoints : IEnumerable<KeyValuePair<int, HashSet<int>>>
 {
     public readonly Dictionary<int, HashSet<int>> Value = new();
     public readonly List<HashSet<int>> AllCorteges = new();
-
+    
     public HashSet<int>? GetAlternativePoints(int point)
     {
         return Value.GetValueOrDefault(point);

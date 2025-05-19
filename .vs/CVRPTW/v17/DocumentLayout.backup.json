@@ -3,36 +3,60 @@
   "WorkspaceRootPath": "D:\\CSharpProjects\\CVRPTW\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\opt3commandsdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
-      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\opt3commandsdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\processdiagram.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\processdiagram.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\optimizersdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\optimizersdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\parsersdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\parsersdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\computing\\estimators\\mainresult\\pathsiteratedmainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\computing\\estimators\\mainresult\\pathsiteratedmainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\computing\\estimators\\mainresult\\imainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\computing\\estimators\\mainresult\\imainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\computing\\estimators\\mainresult\\euclidianpathcostestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\computing\\estimators\\mainresult\\euclidianpathcostestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\computing\\estimators\\mainresult\\complexmainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\computing\\estimators\\mainresult\\complexmainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\computing\\estimators\\mainresult\\bydistancemainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\computing\\estimators\\mainresult\\bydistancemainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\computing\\optimizers\\mainresult\\mainresultoptimizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\computing\\optimizers\\mainresult\\mainresultoptimizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\computersdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
       "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\computersdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\computing\\estimators\\mainresult\\mainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\computing\\estimators\\mainresult\\mainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\estimatorsdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\estimatorsdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\computing\\estimators\\path\\distancepathestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\computing\\estimators\\path\\distancepathestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{825BA445-95D8-436E-A8A2-C6A493F9C378}|VisualizationApplication\\VisualizationApplication.csproj|d:\\csharpprojects\\cvrptw\\visualizationapplication\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{825BA445-95D8-436E-A8A2-C6A493F9C378}|VisualizationApplication\\VisualizationApplication.csproj|solutionrelative:visualizationapplication\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\computing\\estimators\\path\\pathestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\computing\\estimators\\path\\pathestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\opt3commandsdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\opt3commandsdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\computing\\estimators\\path\\euclidianpathestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\computing\\estimators\\path\\euclidianpathestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\computing\\estimators\\mainresult\\summainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\computing\\estimators\\mainresult\\summainresultestimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\processdiagram.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\processdiagram.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\data\\parsers\\stream\\distancesdataparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -55,10 +79,6 @@
       "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\data\\parsers\\line\\linedataparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\other\\diagrams\\parsersdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
-      "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\other\\diagrams\\parsersdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|d:\\csharpprojects\\cvrptw\\cvrptw\\data\\parsers\\line\\cardataparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\data\\parsers\\line\\cardataparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -67,8 +87,24 @@
       "RelativeMoniker": "D:0:0:{18523B95-ACDB-4A68-9A15-3172D2FC799C}|CVRPTW\\CVRPTW.csproj|solutionrelative:cvrptw\\data\\parsers\\line\\pointdataparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{825BA445-95D8-436E-A8A2-C6A493F9C378}|VisualizationApplication\\VisualizationApplication.csproj|d:\\csharpprojects\\cvrptw\\visualizationapplication\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{825BA445-95D8-436E-A8A2-C6A493F9C378}|VisualizationApplication\\VisualizationApplication.csproj|solutionrelative:visualizationapplication\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\Path\\PathEstimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CVRPTW\\Computing\\Estimators\\Path\\PathEstimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\Path\\EuclidianPathEstimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CVRPTW\\Computing\\Estimators\\Path\\EuclidianPathEstimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\Path\\DistancePathEstimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CVRPTW\\Computing\\Estimators\\Path\\DistancePathEstimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\MainResultEstimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CVRPTW\\Computing\\Estimators\\MainResult\\MainResultEstimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\SumMainResultEstimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CVRPTW\\Computing\\Estimators\\MainResult\\SumMainResultEstimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -78,7 +114,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -105,33 +141,147 @@
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Program.cs",
+              "RelativeDocumentMoniker": "CVRPTW\\Program.cs",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Program.cs",
+              "RelativeToolTip": "CVRPTW\\Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T07:27:59.516Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OptimizersDiagram.cd",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\OptimizersDiagram.cd",
+              "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\OptimizersDiagram.cd",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\OptimizersDiagram.cd",
+              "RelativeToolTip": "CVRPTW\\Other\\Diagrams\\OptimizersDiagram.cd",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
+              "WhenOpened": "2025-05-13T05:41:46.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PathsIteratedMainResultEstimator.cs",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\PathsIteratedMainResultEstimator.cs",
+              "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\MainResult\\PathsIteratedMainResultEstimator.cs",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\PathsIteratedMainResultEstimator.cs",
+              "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\PathsIteratedMainResultEstimator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T18:51:49.958Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IMainResultEstimator.cs",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\IMainResultEstimator.cs",
+              "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\MainResult\\IMainResultEstimator.cs",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\IMainResultEstimator.cs",
+              "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\IMainResultEstimator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T18:51:49.884Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EuclidianPathCostEstimator.cs",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\EuclidianPathCostEstimator.cs",
+              "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\MainResult\\EuclidianPathCostEstimator.cs",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\EuclidianPathCostEstimator.cs",
+              "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\EuclidianPathCostEstimator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T18:51:49.804Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ParsersDiagram.cd",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ParsersDiagram.cd",
+              "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\ParsersDiagram.cd",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ParsersDiagram.cd",
+              "RelativeToolTip": "CVRPTW\\Other\\Diagrams\\ParsersDiagram.cd",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
+              "WhenOpened": "2025-02-26T06:06:08.09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ComplexMainResultEstimator.cs",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\ComplexMainResultEstimator.cs",
+              "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\MainResult\\ComplexMainResultEstimator.cs",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\ComplexMainResultEstimator.cs",
+              "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\ComplexMainResultEstimator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T18:51:49.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ByDistanceMainResultEstimator.cs",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\ByDistanceMainResultEstimator.cs",
+              "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\MainResult\\ByDistanceMainResultEstimator.cs",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\ByDistanceMainResultEstimator.cs",
+              "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\ByDistanceMainResultEstimator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T18:51:49.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MainResultOptimizer.cs",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Optimizers\\MainResult\\MainResultOptimizer.cs",
+              "RelativeDocumentMoniker": "CVRPTW\\Computing\\Optimizers\\MainResult\\MainResultOptimizer.cs",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Optimizers\\MainResult\\MainResultOptimizer.cs",
+              "RelativeToolTip": "CVRPTW\\Computing\\Optimizers\\MainResult\\MainResultOptimizer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T19:37:57.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "EstimatorsDiagram.cd",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\EstimatorsDiagram.cd",
+              "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\EstimatorsDiagram.cd",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\EstimatorsDiagram.cd",
+              "RelativeToolTip": "CVRPTW\\Other\\Diagrams\\EstimatorsDiagram.cd",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
+              "WhenOpened": "2025-05-10T18:17:54.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Opt3CommandsDiagram.cd",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\Opt3CommandsDiagram.cd",
               "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\Opt3CommandsDiagram.cd",
               "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\Opt3CommandsDiagram.cd",
               "RelativeToolTip": "CVRPTW\\Other\\Diagrams\\Opt3CommandsDiagram.cd",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
-              "WhenOpened": "2025-02-28T07:04:20.816Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T07:04:20.816Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProcessDiagram.svg",
-              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ProcessDiagram.svg",
-              "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\ProcessDiagram.svg",
-              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ProcessDiagram.svg",
-              "RelativeToolTip": "CVRPTW\\Other\\Diagrams\\ProcessDiagram.svg",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAT2SURBVEhLtVZ9bBNlHH7uev24dutGyzpG91XZQAaywRwoyARBhUQJ4HAhQ000DKf/yLboP4Z/xJgQJwgBImwJ6uYfzKmIkmim4EwkRFjHhhsCA7fC2LotW7f1u3fn\u002B769knaDhJj4pM/93rv7vc/zfl/xv0JRFE4tJqClpeUICVW0THJoYHF6OY5HKyoq3mIvHwbEgNR5ODidTqW5uVlpamqijZoBXo33BanPKFPKpCzLpExIoyxBkiTcvHkTZWVl9FlVfX39DJP7GlBRFgl9ISLkcSI8eBzS7UIE2mdj6lcRvj8KoAT67uWWl5dTw6qDBw8mmMyYA/Our4SaEmM4MmcBIPVjfdZJFCRdhjh4A3IoAo3tdcj8YvCaAIJ/H0Jr6ENs27YN4XAYwWAQDQ0NMJlMR3fu3MnmJMFgTvW3jjRLSn2RY/Yzzy1Lx2rLPswNN2D8dw3OK1vRjbUwZ5TgjVW5EHgOw5\u002Bno8fRDJfLxcRDoRByc3MxMDCAyspKpi0wZYI51d/l2FKTTj9bujh/Q54HK/QVSBpvRd\u002BFNehctAddwuO4MTSFW3/dxt2xKex5cRF0WRtQXLyMifoDfogGEenp6WhsbFRV1Tmgw2JNTT6xvvSx\u002BeWPunSl\u002Bq1IutaKC6dLsVf6GE0XU\u002BF2jSPbZsbCJQ50eHh88H03tPmvQjQakZmZifx5\u002BbDb7TCS\u002B9i8UDADqzXlhYU5tryNeW6hiN8BbWcXLndshG37D/hsexHqNuejMEnCUHc/zDot0uxpcLr96OWX0RVBFMgK42QqxTDDINkobN5SLFieFCs5obcHl50rUfTmGeRYjSwpw2zAaysyMTY\u002BiRReC17QQDAZ8XX7AHvPQPesKkyXcQxsDrJn6UtWW/eLxonz6Ol7BfusuzF2\u002BALCZJ3T1kQpk\u002BEwIaABRK0GilaLK3dGmCjrA7nEVkx8D5jBrhUXszPlLzlX61KcW/kRlhhs0Ur0JbmwsmokBcm\u002B8AJh0kopIoG2lSMJHMli\u002BQQJBoq3YLV37JDoOatXTq06zY1pZiu/nbnEyZEwzaQ/VpVVIqTdp/dU8AmHhYmzE43lRZFo4BvapLk7qjkl7Q65pVRdKCRNCiGv\u002BafqdQgTEybAUqMtjN5Tw\u002BiQsKfqM04dpHgDXpkYfcpzVT/xs1Q2fL1/lB48JlvOXNR\u002B003G2IMIOYO8ZAd3353AOyc7sfZAG9Z80oZ1n7ah2XmHiVBBKh4TTuiBz8UV6FLkRmeHZ7FuFLOSjQajPS8bwYkp7D3bh\u002BFhD0SdBmZzEhwL8lEyn4d7ZAKTvb3YUpjBWs9mgIjGZBMM5AAky6bw29k1UzZ9IPLLlQ7ZYZ\u002BXY0pPS4ajaCEeUVdfiEyoa8QDz9AoImOj2P9SITTkuLin\u002BgDwHI8f3V/gvf66l91Z6HyeG7/aPtjVgZ72q/iz/Roudf2DK5030Nt1HZ5b/ZgV9uJweRHybCZmHG236hILcT3gOUF5l9Niw\u002B0DUE6kvt/WaKw8s1wcOrfKboLFPwntyCCylACWWwXUPJ2D\u002Bh1LkW2JHgfRKVXBRKPC8Qb3BflwXCRJSjAYUAKUAUq/EvBT\u002Blj0k\u002Bj3Efq9ii8uUtTV1d1zeNAHp5hGnU4PPaWe0gC9gVJk0UCiQSQ0GCHGRbU\u002BixQJvYzh2LFjR0hSFU2kZJtLLU8nxfQywdHa2tqH/xPw3wH8C2\u002BS5E7KNyxKAAAAAElFTkSuQmCC",
-              "WhenOpened": "2025-02-26T19:06:10.034Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "ComputersDiagram.cd",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ComputersDiagram.cd",
               "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\ComputersDiagram.cd",
@@ -142,7 +292,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 21,
               "Title": "PathEstimator.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\Path\\PathEstimator.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\Path\\PathEstimator.cs",
@@ -150,12 +300,11 @@
               "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\Path\\PathEstimator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:52:16.689Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:52:16.689Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 22,
               "Title": "EuclidianPathEstimator.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\Path\\EuclidianPathEstimator.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\Path\\EuclidianPathEstimator.cs",
@@ -163,12 +312,34 @@
               "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\Path\\EuclidianPathEstimator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:52:16.152Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:52:16.152Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "VisualizationApplication\\MainWindow.xaml",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\MainWindow.xaml",
+              "RelativeToolTip": "VisualizationApplication\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-11T19:32:03.433Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ProcessDiagram.svg",
+              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ProcessDiagram.svg",
+              "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\ProcessDiagram.svg",
+              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ProcessDiagram.svg",
+              "RelativeToolTip": "CVRPTW\\Other\\Diagrams\\ProcessDiagram.svg",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAT2SURBVEhLtVZ9bBNlHH7uev24dutGyzpG91XZQAaywRwoyARBhUQJ4HAhQ000DKf/yLboP4Z/xJgQJwgBImwJ6uYfzKmIkmim4EwkRFjHhhsCA7fC2LotW7f1u3fn\u002B769knaDhJj4pM/93rv7vc/zfl/xv0JRFE4tJqClpeUICVW0THJoYHF6OY5HKyoq3mIvHwbEgNR5ODidTqW5uVlpamqijZoBXo33BanPKFPKpCzLpExIoyxBkiTcvHkTZWVl9FlVfX39DJP7GlBRFgl9ISLkcSI8eBzS7UIE2mdj6lcRvj8KoAT67uWWl5dTw6qDBw8mmMyYA/Our4SaEmM4MmcBIPVjfdZJFCRdhjh4A3IoAo3tdcj8YvCaAIJ/H0Jr6ENs27YN4XAYwWAQDQ0NMJlMR3fu3MnmJMFgTvW3jjRLSn2RY/Yzzy1Lx2rLPswNN2D8dw3OK1vRjbUwZ5TgjVW5EHgOw5\u002Bno8fRDJfLxcRDoRByc3MxMDCAyspKpi0wZYI51d/l2FKTTj9bujh/Q54HK/QVSBpvRd\u002BFNehctAddwuO4MTSFW3/dxt2xKex5cRF0WRtQXLyMifoDfogGEenp6WhsbFRV1Tmgw2JNTT6xvvSx\u002BeWPunSl\u002Bq1IutaKC6dLsVf6GE0XU\u002BF2jSPbZsbCJQ50eHh88H03tPmvQjQakZmZifx5\u002BbDb7TCS\u002B9i8UDADqzXlhYU5tryNeW6hiN8BbWcXLndshG37D/hsexHqNuejMEnCUHc/zDot0uxpcLr96OWX0RVBFMgK42QqxTDDINkobN5SLFieFCs5obcHl50rUfTmGeRYjSwpw2zAaysyMTY\u002BiRReC17QQDAZ8XX7AHvPQPesKkyXcQxsDrJn6UtWW/eLxonz6Ol7BfusuzF2\u002BALCZJ3T1kQpk\u002BEwIaABRK0GilaLK3dGmCjrA7nEVkx8D5jBrhUXszPlLzlX61KcW/kRlhhs0Ur0JbmwsmokBcm\u002B8AJh0kopIoG2lSMJHMli\u002BQQJBoq3YLV37JDoOatXTq06zY1pZiu/nbnEyZEwzaQ/VpVVIqTdp/dU8AmHhYmzE43lRZFo4BvapLk7qjkl7Q65pVRdKCRNCiGv\u002BafqdQgTEybAUqMtjN5Tw\u002BiQsKfqM04dpHgDXpkYfcpzVT/xs1Q2fL1/lB48JlvOXNR\u002B003G2IMIOYO8ZAd3353AOyc7sfZAG9Z80oZ1n7ah2XmHiVBBKh4TTuiBz8UV6FLkRmeHZ7FuFLOSjQajPS8bwYkp7D3bh\u002BFhD0SdBmZzEhwL8lEyn4d7ZAKTvb3YUpjBWs9mgIjGZBMM5AAky6bw29k1UzZ9IPLLlQ7ZYZ\u002BXY0pPS4ajaCEeUVdfiEyoa8QDz9AoImOj2P9SITTkuLin\u002BgDwHI8f3V/gvf66l91Z6HyeG7/aPtjVgZ72q/iz/Roudf2DK5030Nt1HZ5b/ZgV9uJweRHybCZmHG236hILcT3gOUF5l9Niw\u002B0DUE6kvt/WaKw8s1wcOrfKboLFPwntyCCylACWWwXUPJ2D\u002Bh1LkW2JHgfRKVXBRKPC8Qb3BflwXCRJSjAYUAKUAUq/EvBT\u002Blj0k\u002Bj3Efq9ii8uUtTV1d1zeNAHp5hGnU4PPaWe0gC9gVJk0UCiQSQ0GCHGRbU\u002BixQJvYzh2LFjR0hSFU2kZJtLLU8nxfQywdHa2tqH/xPw3wH8C2\u002BS5E7KNyxKAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-02-26T19:06:10.034Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "DistancePathEstimator.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\Path\\DistancePathEstimator.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\Path\\DistancePathEstimator.cs",
@@ -176,12 +347,11 @@
               "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\Path\\DistancePathEstimator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:52:15.619Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:52:15.619Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 24,
               "Title": "MainResultEstimator.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\MainResultEstimator.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\MainResult\\MainResultEstimator.cs",
@@ -189,12 +359,11 @@
               "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\MainResultEstimator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:52:13.7Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:52:13.7Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 25,
               "Title": "SumMainResultEstimator.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Computing\\Estimators\\MainResult\\SumMainResultEstimator.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Computing\\Estimators\\MainResult\\SumMainResultEstimator.cs",
@@ -202,12 +371,11 @@
               "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\SumMainResultEstimator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:52:14.397Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:52:14.397Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "DistancesDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Stream\\DistancesDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Stream\\DistancesDataParser.cs",
@@ -220,7 +388,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "AlternativePointsDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Stream\\AlternativePointsDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Stream\\AlternativePointsDataParser.cs",
@@ -233,7 +401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 17,
               "Title": "StreamDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Stream\\StreamDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Stream\\StreamDataParser.cs",
@@ -246,7 +414,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "LinedStreamDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Stream\\LinedStreamDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Stream\\LinedStreamDataParser.cs",
@@ -259,7 +427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "LineDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Line\\LineDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Line\\LineDataParser.cs",
@@ -272,7 +440,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "PointDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Line\\PointDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Line\\PointDataParser.cs",
@@ -285,7 +453,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "CarDataParser.cs",
               "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Data\\Parsers\\Line\\CarDataParser.cs",
               "RelativeDocumentMoniker": "CVRPTW\\Data\\Parsers\\Line\\CarDataParser.cs",
@@ -295,28 +463,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-26T06:13:40.347Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ParsersDiagram.cd",
-              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ParsersDiagram.cd",
-              "RelativeDocumentMoniker": "CVRPTW\\Other\\Diagrams\\ParsersDiagram.cd",
-              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Other\\Diagrams\\ParsersDiagram.cd",
-              "RelativeToolTip": "CVRPTW\\Other\\Diagrams\\ParsersDiagram.cd",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
-              "WhenOpened": "2025-02-26T06:06:08.09Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "VisualizationApplication\\MainWindow.xaml",
-              "ToolTip": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\MainWindow.xaml",
-              "RelativeToolTip": "VisualizationApplication\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-11T19:32:03.433Z"
             }
           ]
         }

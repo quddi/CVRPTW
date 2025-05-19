@@ -37,11 +37,24 @@
       <FileName>Computing\Computers\OptimizedMainComputer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CVRPTW.Computing.StartMainComputer" Collapsed="true">
+  <Class Name="CVRPTW.Computing.ByPairsMainComputer" Collapsed="true">
     <Position X="3.5" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AEAAAAAAAAAAACQAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Computing\Computers\StartMainComputer.cs</FileName>
+      <HashCode>AEAAAAAAAAAAACYAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Computing\Computers\ByPairsMainComputer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVRPTW.Computing.DistanceMainComputer" Collapsed="true">
+    <Position X="3.5" Y="4.75" Width="2.25" />
+    <InheritanceLine Type="CVRPTW.Computing.ByPairsMainComputer" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.375" Y="4.441" />
+        <Point X="4.375" Y="4.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Computing\Computers\DistanceMainComputer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

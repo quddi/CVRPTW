@@ -33,8 +33,6 @@ public abstract class ByPairsMainComputer(MainData mainData, IMainResultEstimato
 
         while (_notVisitedPoints.Any(CanVisit))
         {
-            PreEstimate(result.Path);
-            
             var nextPointPair = _notVisitedPoints
                 .Where(CanVisit)
                 .MinBy(pair => EstimatePair(pair.Value.Id, currentPointId));
@@ -55,8 +53,6 @@ public abstract class ByPairsMainComputer(MainData mainData, IMainResultEstimato
         
         return result;
     }
-    
-    protected virtual void PreEstimate(CarPath carPath) { }
 
     protected abstract double EstimatePair(int checkedPointId, int currentPointId);
 }

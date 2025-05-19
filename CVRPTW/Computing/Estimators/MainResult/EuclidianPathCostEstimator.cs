@@ -1,18 +1,15 @@
 ﻿namespace CVRPTW.Computing.Estimators;
 
-public class DistancePathCostEstimator(MainData mainData) : PathsIteratedMainResultEstimator
+public class EuclidesMainResultEstimator(MainData mainData) : PathsIteratedMainResultEstimator
 {
-    protected override double Estimate(Car _, CarResult carResult)
+    protected override double Estimate(Car car, CarResult carResult)
     {
         carResult.Estimation = Estimate(carResult.Path);
-        
         return carResult.Estimation;
     }
 
     public double Estimate(CarPath path)
     {
-        if (path.Count <= 2) return 0d;
-        
         var sum = 0d;
 
         for (int i = 0; i < path.Count - 1; i++)
@@ -28,9 +25,9 @@ public class DistancePathCostEstimator(MainData mainData) : PathsIteratedMainRes
 
     private double Estimate(int firstPointId, int secondPointId)
     {
-        var firstPointIndex = mainData.GetPoint(firstPointId).Index;
-        var secondPointIndex = mainData.GetPoint(secondPointId).Index;
-        
-        return mainData.Distances!.GetDistance(Constants.DefaultMatrixId, firstPointIndex, secondPointIndex);
+        var firstPoint = mainData.GetPoint(firstPointId);
+        var secondPoint = mainData.GetPoint(secondPointId);
+
+        return firstPoint.Coordinates.DistanceTo(secondPoint.Coordinates);
     }
 }
