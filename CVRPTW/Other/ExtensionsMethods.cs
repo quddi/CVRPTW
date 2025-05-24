@@ -265,4 +265,63 @@ public static class ExtensionsMethods
     {
         return alternativePoints == null || alternativePoints!.Value.Values.Count == 0;
     }
+
+    public static MainResultOptimizer WithName(this MainResultOptimizer mainResultOptimizer, string name)
+    {
+        mainResultOptimizer.Name = name;
+
+        return mainResultOptimizer;
+    }
+    
+    public static CompositeMainResultOptimizer GetBaseOptimizer(IMainResultEstimator mainResultEstimator, MainData mainData)
+    {
+        return new CompositeMainResultOptimizer(
+            [
+                new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData),
+                new Opt2CarResultOptimizer(mainResultEstimator),
+                new SwapCarResultOptimizer(mainResultEstimator),
+                new PointTransposeMainResultOptimizer(mainResultEstimator, mainData),
+                new OrOptCarResultOptimizer(mainResultEstimator)
+            ], 
+            mainResultEstimator, false);
+    }
+
+    public static CompositeMainResultOptimizer GetAlternativeOptimizer(IMainResultEstimator mainResultEstimator, MainData mainData)
+    {
+        return new CompositeMainResultOptimizer(
+            [
+                new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData),
+                new PointTransposeMainResultOptimizer(mainResultEstimator, mainData),
+                new Opt2CarResultOptimizer(mainResultEstimator),
+                new SwapCarResultOptimizer(mainResultEstimator),
+                new OrOptCarResultOptimizer(mainResultEstimator)
+            ], 
+            mainResultEstimator, false);
+    }
+
+    public static CompositeMainResultOptimizer GetAlternativeAdvancedOptimizer(IMainResultEstimator mainResultEstimator, MainData mainData)
+    {
+        return new CompositeMainResultOptimizer(
+            [
+                new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData),
+                new PointTransposeMainResultOptimizer(mainResultEstimator, mainData),
+                new Opt2CarResultOptimizer(mainResultEstimator),
+                new SwapCarResultOptimizer(mainResultEstimator),
+                new OrOptCarResultOptimizer(mainResultEstimator)
+            ], 
+            mainResultEstimator, false);
+    }
+
+    public static CompositeMainResultOptimizer GetBaseAdvancedOptimizer(IMainResultEstimator mainResultEstimator, MainData mainData)
+    {
+        return new CompositeMainResultOptimizer(
+            [
+                new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData),
+                new Opt3CarResultOptimizer(mainResultEstimator),
+                new SwapCarResultOptimizer(mainResultEstimator),
+                new PointTransposeMainResultOptimizer(mainResultEstimator, mainData),
+                new OrOptCarResultOptimizer(mainResultEstimator)
+            ], 
+            mainResultEstimator, false);
+    }
 }

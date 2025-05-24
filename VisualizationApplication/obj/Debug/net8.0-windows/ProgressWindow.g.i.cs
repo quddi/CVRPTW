@@ -53,7 +53,7 @@ namespace VisualizationApplication {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/VisualizationApplication;V1.0.0.0;component/progresswindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/VisualizationApplication;component/progresswindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ProgressWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

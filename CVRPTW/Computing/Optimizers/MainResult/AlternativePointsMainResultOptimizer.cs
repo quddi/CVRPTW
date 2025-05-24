@@ -16,8 +16,10 @@ public class AlternativePointsMainResultOptimizer(IMainResultEstimator mainResul
             foreach (var alternativePointId in currentAlternativePoints)
             {
                 var (car, inPathIndex) = GetContainingPath(mainResult, alternativePointId);
+                
+                if (car == null || inPathIndex == null) continue;
 
-                var taken = mainResult.Results[car].Path.TakeAt(inPathIndex);
+                var taken = mainResult.Results[car].Path.TakeAt(inPathIndex!.Value);
 
                 mainResult.ReEstimateCost(mainResultEstimator);
                 
@@ -27,7 +29,7 @@ public class AlternativePointsMainResultOptimizer(IMainResultEstimator mainResul
                     bestPointId = taken.Id;
                 }
                 
-                mainResult.Results[car].Path.Insert(inPathIndex, taken);
+                mainResult.Results[car].Path.Insert(inPathIndex!.Value, taken);
                 mainResult.ReEstimateCost(mainResultEstimator);
             }
             
@@ -35,16 +37,18 @@ public class AlternativePointsMainResultOptimizer(IMainResultEstimator mainResul
                 continue;
             
             var (bestCar, bestInPathIndex) = GetContainingPath(mainResult, bestPointId);
-            mainResult.Results[bestCar].Path.RemoveAt(bestInPathIndex);
+            mainResult.Results[bestCar!].Path.RemoveAt(bestInPathIndex!.Value);
             mainResult.ReEstimateCost(mainResultEstimator);
         } 
     }
     
-    private (Car car, int inPathIndex) GetContainingPath(MainResult mainResult, int pointId)
+    private (Car? car, int? inPathIndex) GetContainingPath(MainResult mainResult, int pointId)
     {
         var car = mainResult.Results
             .FirstOrDefault(pair => pair.Value.Path.Contains(pointId)).Key;
         
-        return (car, mainResult.Results[car].Path.IndexOf(pointId));
+        return car == null 
+            ? (null, null) 
+            : (car, mainResult.Results[car].Path.IndexOf(pointId));
     }
 }

@@ -59,11 +59,9 @@ public class MainWindowReactionHandler : IDisposable
         {
             var depoCoordinates = depoPoint!.Coordinates.ToScottCoordinates();
         
-            var circle = _mainWindowElements.FilterPlot.Plot.Add.Ellipse(depoCoordinates, 
-                VisualizationConstants.DepoPointRadiusX, VisualizationConstants.DepoPointRadiusY);
+            var circle = _mainWindowElements.FilterPlot.Plot.Add.Marker(depoCoordinates);
         
-            circle.FillColor = VisualizationConstants.DepoPointFillColor;
-            circle.LineColor = VisualizationConstants.DepoPointLineColor;
+            circle.Color = VisualizationConstants.DepoPointFillColor;
         }
     }
 
@@ -136,7 +134,11 @@ public class MainWindowReactionHandler : IDisposable
             new OrOptCarResultOptimizer(_mainResultEstimator!) { Name = "Or Opt" },
             new SwapCarResultOptimizer(_mainResultEstimator!) { Name = "Swap" },
             new AlternativePointsMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Видалення альтернативних"},
-            new PointTransposeMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Перекидування точок"}
+            new PointTransposeMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Перекидування точок"},
+            ExtensionsMethods.GetBaseOptimizer(_mainResultEstimator, _mainData!).WithName("Базовий"),
+            ExtensionsMethods.GetAlternativeOptimizer(_mainResultEstimator, _mainData!).WithName("Альтернативний"),
+            ExtensionsMethods.GetBaseAdvancedOptimizer(_mainResultEstimator, _mainData!).WithName("Базовий покращений"),
+            ExtensionsMethods.GetAlternativeAdvancedOptimizer(_mainResultEstimator, _mainData!).WithName("Альтернативний покращений"),
         ];
     }
 

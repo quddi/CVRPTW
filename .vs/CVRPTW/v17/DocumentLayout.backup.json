@@ -152,7 +152,7 @@
               "RelativeDocumentMoniker": "CVRPTW\\Program.cs",
               "ToolTip": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\Program.cs",
               "RelativeToolTip": "CVRPTW\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwCEAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-19T07:27:59.516Z",
               "EditorCaption": ""
@@ -178,8 +178,7 @@
               "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\PathsIteratedMainResultEstimator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T18:51:49.958Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T18:51:49.958Z"
             },
             {
               "$type": "Document",
@@ -191,8 +190,7 @@
               "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\IMainResultEstimator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T18:51:49.884Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T18:51:49.884Z"
             },
             {
               "$type": "Document",
@@ -204,8 +202,7 @@
               "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\EuclidianPathCostEstimator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T18:51:49.804Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T18:51:49.804Z"
             },
             {
               "$type": "Document",
@@ -228,8 +225,7 @@
               "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\ComplexMainResultEstimator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T18:51:49.719Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T18:51:49.719Z"
             },
             {
               "$type": "Document",
@@ -241,8 +237,7 @@
               "RelativeToolTip": "CVRPTW\\Computing\\Estimators\\MainResult\\ByDistanceMainResultEstimator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T18:51:49.599Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T18:51:49.599Z"
             },
             {
               "$type": "Document",
@@ -254,8 +249,7 @@
               "RelativeToolTip": "CVRPTW\\Computing\\Optimizers\\MainResult\\MainResultOptimizer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T19:37:57.021Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-10T19:37:57.021Z"
             },
             {
               "$type": "Document",
@@ -383,8 +377,7 @@
               "RelativeToolTip": "CVRPTW\\Data\\Parsers\\Stream\\DistancesDataParser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:27:44.705Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:27:44.705Z"
             },
             {
               "$type": "Document",
@@ -396,8 +389,7 @@
               "RelativeToolTip": "CVRPTW\\Data\\Parsers\\Stream\\AlternativePointsDataParser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:27:41.161Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:27:41.161Z"
             },
             {
               "$type": "Document",
@@ -409,8 +401,7 @@
               "RelativeToolTip": "CVRPTW\\Data\\Parsers\\Stream\\StreamDataParser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:22:23.376Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:22:23.376Z"
             },
             {
               "$type": "Document",
@@ -422,8 +413,7 @@
               "RelativeToolTip": "CVRPTW\\Data\\Parsers\\Stream\\LinedStreamDataParser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:19:49.211Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:19:49.211Z"
             },
             {
               "$type": "Document",
@@ -435,8 +425,7 @@
               "RelativeToolTip": "CVRPTW\\Data\\Parsers\\Line\\LineDataParser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:13:39.698Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:13:39.698Z"
             },
             {
               "$type": "Document",
@@ -448,8 +437,7 @@
               "RelativeToolTip": "CVRPTW\\Data\\Parsers\\Line\\PointDataParser.cs",
               "ViewState": "AgIAADoAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:13:42.661Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:13:42.661Z"
             },
             {
               "$type": "Document",
@@ -461,8 +449,7 @@
               "RelativeToolTip": "CVRPTW\\Data\\Parsers\\Line\\CarDataParser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:13:40.347Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:13:40.347Z"
             }
           ]
         }

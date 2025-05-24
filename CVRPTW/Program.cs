@@ -19,6 +19,18 @@ static class Program
     
     private static void Main()
     {
+        Console.WriteLine("=====================================");
+        Console.WriteLine("==========Базовий покращений=========");
+        Console.WriteLine("=====================================");
+        EstimateIterationsEfficiency1();
+        Console.WriteLine("=====================================");
+        Console.WriteLine("======Альтернативний покращений======");
+        Console.WriteLine("=====================================");
+        EstimateIterationsEfficiency2();
+    }
+    
+    private static void EstimateOneIterationEfficiency()
+    {
         var mainParser = new MainParser();
 
         for (var i = 0; i < _paths.Length; i++)
@@ -30,11 +42,60 @@ static class Program
             var timeEstimator = new SimpleTimeEstimator(mainData!);
             var mainResultEstimator = new ComplexMainResultEstimator(mainData!, pathEstimator, timeEstimator);
             var startMainComputer = new DistanceMainComputer(mainData!, mainResultEstimator);
-            var optimizer = new Opt3CarResultOptimizer(mainResultEstimator);
+            var optimizer = new PointTransposeMainResultOptimizer(mainResultEstimator, mainData);
 
             var mainResult = startMainComputer.Compute();
-            
-            new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData).Optimize(mainResult);
+            var startEstimation = mainResult.Estimation;
+
+            optimizer.Optimize(mainResult);
+
+            var obtainedEstimation = mainResult.Estimation;
+
+            Console.WriteLine($"=== Вхiднi данi: {i + 1} Зменшилося на {((1 - obtainedEstimation / startEstimation) * 100).ToFormattedString()} % ===");
+        }
+    }
+
+    private static void EstimateIterationsEfficiency1()
+    {
+        var mainParser = new MainParser();
+
+        for (var i = 0; i < _paths.Length; i++)
+        {
+            var path = _paths[i];
+            var mainData = mainParser.Parse(new StreamReader(path));
+
+            var pathEstimator = new ByDistanceMainResultEstimator(mainData!);
+            var timeEstimator = new SimpleTimeEstimator(mainData!);
+            var mainResultEstimator = new ComplexMainResultEstimator(mainData!, pathEstimator, timeEstimator);
+            var startMainComputer = new DistanceMainComputer(mainData!, mainResultEstimator);
+            var optimizer = ExtensionsMethods.GetBaseAdvancedOptimizer(mainResultEstimator, mainData);
+            optimizer.Optimizers.RemoveAt(optimizer.Optimizers.Count - 1);
+
+            var mainResult = startMainComputer.Compute();
+
+            var estimation = EstimateIterationsEfficiency(mainResult, optimizer);
+
+            Console.WriteLine($"=== {i} {estimation} ===");
+        }
+    }
+    
+    private static void EstimateIterationsEfficiency2()
+    {
+        var mainParser = new MainParser();
+
+        for (var i = 0; i < _paths.Length; i++)
+        {
+            var path = _paths[i];
+            var mainData = mainParser.Parse(new StreamReader(path));
+
+            var pathEstimator = new ByDistanceMainResultEstimator(mainData!);
+            var timeEstimator = new SimpleTimeEstimator(mainData!);
+            var mainResultEstimator = new ComplexMainResultEstimator(mainData!, pathEstimator, timeEstimator);
+            var startMainComputer = new DistanceMainComputer(mainData!, mainResultEstimator);
+            var optimizer = ExtensionsMethods.GetAlternativeAdvancedOptimizer(mainResultEstimator, mainData);
+            optimizer.Optimizers.RemoveAt(optimizer.Optimizers.Count - 1);
+
+            var mainResult = startMainComputer.Compute();
 
             var estimation = EstimateIterationsEfficiency(mainResult, optimizer);
 
