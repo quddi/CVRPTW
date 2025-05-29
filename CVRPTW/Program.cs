@@ -19,14 +19,43 @@ static class Program
     
     private static void Main()
     {
-        Console.WriteLine("=====================================");
-        Console.WriteLine("==========Базовий покращений=========");
-        Console.WriteLine("=====================================");
-        EstimateIterationsEfficiency1();
-        Console.WriteLine("=====================================");
-        Console.WriteLine("======Альтернативний покращений======");
-        Console.WriteLine("=====================================");
-        EstimateIterationsEfficiency2();
+        GetAlternativePoints(5);
+    }
+
+    private static void GetAlternativePoints(int pathIndex)
+    {
+        var path = _paths[pathIndex];
+        
+        var mainParser = new MainParser();
+        var mainData = mainParser.Parse(new StreamReader(path));
+
+        var alternativePoints = mainData.Cars.Select(_ => new List<int>()).ToList();
+        var notUsedPoints = mainData.Points.Select(point => point.Id).Where(id => id > 0).ToList();
+        var currentCarIndex = 0;
+        var maxAlternativePointsCount = 4;
+
+        while (notUsedPoints.Count != 0)
+        {
+            if (alternativePoints[currentCarIndex].Count > maxAlternativePointsCount) break;
+            
+            alternativePoints[currentCarIndex].Add(notUsedPoints.SnatchRandom());
+            
+            currentCarIndex = (currentCarIndex + 1) % mainData.Cars.Count;
+        }
+        
+        Console.WriteLine("======ALTERNATIVE_POINTS=====");
+        
+        foreach (var alternativePointsList in alternativePoints)
+        {
+            for (var i = 0; i < alternativePointsList.Count; i++)
+            {
+                Console.Write(alternativePointsList[i]);
+                
+                if (i != alternativePointsList.Count - 1) Console.Write(",");
+            }
+            
+            Console.WriteLine();
+        }
     }
     
     private static void EstimateOneIterationEfficiency()

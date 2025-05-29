@@ -57,6 +57,16 @@ public static class ExtensionsMethods
 
         return first;
     }
+    
+    public static T SnatchRandom<T>(this List<T> list)
+    {
+        var index = System.Random.Shared.Next(0, list.Count);
+        var random = list[index];
+
+        list.RemoveAt(index);
+
+        return random;
+    }
 
     public static string ToString<T>(this IList<T> array)
     {
