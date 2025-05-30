@@ -14,6 +14,8 @@ public class SimpleTimeEstimator(MainData mainData) : ITimeEstimator
             path[i] = path[i] with { VisitTime = timeSum };
 
             timeSum += mainData.Times!.GetTime(Constants.DefaultMatrixId, firstPointIndex, secondPointIndex);
+            
+            path[i + 1] = path[i + 1] with { VisitTime = timeSum };
         }
         
         return timeSum;

@@ -19,7 +19,7 @@ static class Program
     
     private static void Main()
     {
-        GetAlternativePoints(5);
+        EstimateIterationsEfficiency();
     }
 
     private static void GetAlternativePoints(int pathIndex)
@@ -84,7 +84,7 @@ static class Program
         }
     }
 
-    private static void EstimateIterationsEfficiency1()
+    private static void EstimateIterationsEfficiency()
     {
         var mainParser = new MainParser();
 
@@ -97,34 +97,11 @@ static class Program
             var timeEstimator = new SimpleTimeEstimator(mainData!);
             var mainResultEstimator = new ComplexMainResultEstimator(mainData!, pathEstimator, timeEstimator);
             var startMainComputer = new DistanceMainComputer(mainData!, mainResultEstimator);
-            var optimizer = ExtensionsMethods.GetBaseAdvancedOptimizer(mainResultEstimator, mainData);
-            optimizer.Optimizers.RemoveAt(optimizer.Optimizers.Count - 1);
+            var optimizer = new PointTransposeMainResultOptimizer(mainResultEstimator, mainData);
 
             var mainResult = startMainComputer.Compute();
-
-            var estimation = EstimateIterationsEfficiency(mainResult, optimizer);
-
-            Console.WriteLine($"=== {i} {estimation} ===");
-        }
-    }
-    
-    private static void EstimateIterationsEfficiency2()
-    {
-        var mainParser = new MainParser();
-
-        for (var i = 0; i < _paths.Length; i++)
-        {
-            var path = _paths[i];
-            var mainData = mainParser.Parse(new StreamReader(path));
-
-            var pathEstimator = new ByDistanceMainResultEstimator(mainData!);
-            var timeEstimator = new SimpleTimeEstimator(mainData!);
-            var mainResultEstimator = new ComplexMainResultEstimator(mainData!, pathEstimator, timeEstimator);
-            var startMainComputer = new DistanceMainComputer(mainData!, mainResultEstimator);
-            var optimizer = ExtensionsMethods.GetAlternativeAdvancedOptimizer(mainResultEstimator, mainData);
-            optimizer.Optimizers.RemoveAt(optimizer.Optimizers.Count - 1);
-
-            var mainResult = startMainComputer.Compute();
+            
+            (new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData!)).Optimize(mainResult);
 
             var estimation = EstimateIterationsEfficiency(mainResult, optimizer);
 

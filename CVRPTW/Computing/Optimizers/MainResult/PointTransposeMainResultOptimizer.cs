@@ -43,22 +43,18 @@ public class PointTransposeMainResultOptimizer(IMainResultEstimator mainResultEs
                 results.Add((sourceIndex, subResults.MinBy(x => x.estimation)));
             }
             
-            //Apply
             for (var j = 0; j < results.Count; j++)
             {
                 var (sourceIndex, (targetCar, targetIndex, _)) = results[j];
                 
-                if (targetCar == sourceCar || targetIndex == SameBestPointIndex) continue;
+                if (targetCar == sourceCar || targetIndex == SameBestPointIndex || results[j].sub.targetIndex == 0) continue;
 
                 var targetResult = _mainResult.Results[targetCar];
 
-                //Take from source
                 var pointId = sourceResult.Path.TakeAt(sourceIndex);
 
-                //Put to target
                 targetResult.Path.Insert(targetIndex, pointId);
 
-                //Shift nextIndices
                 for (int k = j + 1; k < results.Count; k++)
                 {
                     var sub = targetCar == results[k].sub.targetCar
@@ -68,7 +64,6 @@ public class PointTransposeMainResultOptimizer(IMainResultEstimator mainResultEs
                     results[k] = (results[k].sourceIndex - 1, sub);
                 }
 
-                //ReEstimate both
                 _mainResult.ReEstimateCost(mainResultEstimator);
             }
         }
