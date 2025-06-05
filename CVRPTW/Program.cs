@@ -1,4 +1,5 @@
-﻿using CVRPTW.Computing;
+﻿using System.Diagnostics;
+using CVRPTW.Computing;
 using CVRPTW.Computing.Estimators;
 using CVRPTW.Computing.Estimators.Time;
 using CVRPTW.Computing.Optimizers;
@@ -20,6 +21,7 @@ static class Program
     private static void Main()
     {
         EstimateIterationsEfficiency();
+
     }
 
     private static void GetAlternativePoints(int pathIndex)
@@ -71,16 +73,17 @@ static class Program
             var timeEstimator = new SimpleTimeEstimator(mainData!);
             var mainResultEstimator = new ComplexMainResultEstimator(mainData!, pathEstimator, timeEstimator);
             var startMainComputer = new DistanceMainComputer(mainData!, mainResultEstimator);
-            var optimizer = new PointTransposeMainResultOptimizer(mainResultEstimator, mainData);
+            var optimizer = new Opt3CarResultOptimizer(mainResultEstimator);
 
             var mainResult = startMainComputer.Compute();
-            var startEstimation = mainResult.Estimation;
 
+            var stopwatch = Stopwatch.StartNew();
+            
             optimizer.Optimize(mainResult);
+            
+            stopwatch.Stop();
 
-            var obtainedEstimation = mainResult.Estimation;
-
-            Console.WriteLine($"=== Вхiднi данi: {i + 1} Зменшилося на {((1 - obtainedEstimation / startEstimation) * 100).ToFormattedString()} % ===");
+            Console.WriteLine($"=== {i} {stopwatch.ElapsedMilliseconds} ===");
         }
     }
 
@@ -97,12 +100,11 @@ static class Program
             var timeEstimator = new SimpleTimeEstimator(mainData!);
             var mainResultEstimator = new ComplexMainResultEstimator(mainData!, pathEstimator, timeEstimator);
             var startMainComputer = new DistanceMainComputer(mainData!, mainResultEstimator);
-            var optimizer = new PointTransposeMainResultOptimizer(mainResultEstimator, mainData);
-
+            var optimizer = ExtensionsMethods.GetAlternativeOptimizer(mainResultEstimator, mainData);
+            optimizer.Optimizers.RemoveLast();
+            
             var mainResult = startMainComputer.Compute();
             
-            (new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData!)).Optimize(mainResult);
-
             var estimation = EstimateIterationsEfficiency(mainResult, optimizer);
 
             Console.WriteLine($"=== {i} {estimation} ===");

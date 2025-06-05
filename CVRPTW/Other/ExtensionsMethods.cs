@@ -282,6 +282,11 @@ public static class ExtensionsMethods
 
         return mainResultOptimizer;
     }
+
+    public static void RemoveLast<T>(this IList<T> list)
+    {
+        list.RemoveAt(list.Count-1);
+    }
     
     public static CompositeMainResultOptimizer GetBaseOptimizer(IMainResultEstimator mainResultEstimator, MainData mainData)
     {
@@ -315,7 +320,7 @@ public static class ExtensionsMethods
             [
                 new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData),
                 new PointTransposeMainResultOptimizer(mainResultEstimator, mainData),
-                new Opt2CarResultOptimizer(mainResultEstimator),
+                new Opt3CarResultOptimizer(mainResultEstimator),
                 new SwapCarResultOptimizer(mainResultEstimator),
                 new OrOptCarResultOptimizer(mainResultEstimator)
             ], 
