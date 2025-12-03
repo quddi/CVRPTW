@@ -135,6 +135,8 @@ public class MainWindowReactionHandler : IDisposable
             new SwapCarResultOptimizer(_mainResultEstimator!) { Name = "Swap" },
             new AlternativePointsMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Видалення альтернативних"},
             new PointTransposeMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Перекидування точок"},
+            new TabuSearchMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Табу пошук"},
+            new DeterministicAnnealingOptimizer(_mainResultEstimator, _mainData!, VisualizationConstants.DeterministicAnnealingConfig) { Name = "Deterministic Annealing" },
             ExtensionsMethods.GetBaseOptimizer(_mainResultEstimator, _mainData!).WithName("Базовий"),
             ExtensionsMethods.GetAlternativeOptimizer(_mainResultEstimator, _mainData!).WithName("Альтернативний"),
             ExtensionsMethods.GetBaseAdvancedOptimizer(_mainResultEstimator, _mainData!).WithName("Базовий покращений"),
