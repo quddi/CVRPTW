@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\VisualizationApplication.csproj": {}
+    "/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication/VisualizationApplication.csproj": {}
   },
   "projects": {
-    "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\CVRPTW.csproj": {
+    "/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/CVRPTW.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\CVRPTW.csproj",
+        "projectUniqueName": "/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/CVRPTW.csproj",
         "projectName": "CVRPTW",
-        "projectPath": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\CVRPTW.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\obj\\",
+        "projectPath": "/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/CVRPTW.csproj",
+        "packagesPath": "/Users/quddi/.nuget/packages/",
+        "outputPath": "/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/quddi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -60,45 +54,53 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.17, 9.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.osx-arm64",
+              "version": "[9.0.17, 9.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.17, 9.0.17]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\Admin\\.dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\VisualizationApplication.csproj": {
+    "/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication/VisualizationApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\VisualizationApplication.csproj",
+        "projectUniqueName": "/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication/VisualizationApplication.csproj",
         "projectName": "VisualizationApplication",
-        "projectPath": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\VisualizationApplication.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\CSharpProjects\\CVRPTW\\VisualizationApplication\\obj\\",
+        "projectPath": "/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication/VisualizationApplication.csproj",
+        "packagesPath": "/Users/quddi/.nuget/packages/",
+        "outputPath": "/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/quddi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0-windows7.0": {
             "targetAlias": "net9.0-windows",
             "projectReferences": {
-              "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\CVRPTW.csproj": {
-                "projectPath": "D:\\CSharpProjects\\CVRPTW\\CVRPTW\\CVRPTW.csproj"
+              "/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/CVRPTW.csproj": {
+                "projectPath": "/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/CVRPTW.csproj"
               }
             }
           }
@@ -113,7 +115,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net9.0-windows7.0": {
@@ -143,7 +145,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\Admin\\.dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

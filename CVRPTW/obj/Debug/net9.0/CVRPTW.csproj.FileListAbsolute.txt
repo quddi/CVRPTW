@@ -1,0 +1,15 @@
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/bin/Debug/net9.0/CVRPTW
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/bin/Debug/net9.0/CVRPTW.deps.json
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/bin/Debug/net9.0/CVRPTW.runtimeconfig.json
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/bin/Debug/net9.0/CVRPTW.dll
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/bin/Debug/net9.0/CVRPTW.pdb
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/obj/Debug/net9.0/CVRPTW.GeneratedMSBuildEditorConfig.editorconfig
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/obj/Debug/net9.0/CVRPTW.AssemblyInfoInputs.cache
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/obj/Debug/net9.0/CVRPTW.AssemblyInfo.cs
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/obj/Debug/net9.0/CVRPTW.csproj.CoreCompileInputs.cache
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/obj/Debug/net9.0/CVRPTW.sourcelink.json
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/obj/Debug/net9.0/CVRPTW.dll
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/obj/Debug/net9.0/refint/CVRPTW.dll
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/obj/Debug/net9.0/CVRPTW.pdb
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/obj/Debug/net9.0/CVRPTW.genruntimeconfig.cache
+/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/obj/Debug/net9.0/ref/CVRPTW.dll
