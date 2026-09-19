@@ -9,7 +9,7 @@ build_property.AvaloniaNameGeneratorAttachDevTools = true
 build_property.AvaloniaUseCompiledBindingsByDefault = true
 build_property.AvaloniaMainPackageVersion = 12.1.2
 build_property.AvaloniaPreviewerNetCoreToolPath = /Users/quddi/.nuget/packages/avalonia/12.1.2/buildTransitive//../tools/net8.0/designer/Avalonia.Designer.HostApp.dll
-build_property.AvaloniaResourcePaths = /Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication.Avalonia/App.axaml,/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication.Avalonia/MainWindow.axaml,/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication.Avalonia/ProgressWindow.axaml
+build_property.AvaloniaResourcePaths = /Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication.Avalonia/App.axaml,/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication.Avalonia/MainWindow.axaml,/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication.Avalonia/ProgressWindow.axaml,/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication.Avalonia/Tools/MessageBoxWindow.axaml
 build_property.TargetFramework = net9.0
 build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v9.0
@@ -35,4 +35,7 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication.Avalonia/ProgressWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/Users/quddi/CSharpProjects/CVRPTW/VisualizationApplication.Avalonia/Tools/MessageBoxWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

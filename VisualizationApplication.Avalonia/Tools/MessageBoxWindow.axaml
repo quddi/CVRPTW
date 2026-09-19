@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="VisualizationApplication.Avalonia.Tools.MessageBoxWindow"
+        Title="Повідомлення"
+        Width="380" Height="160"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+    <Grid RowDefinitions="*,Auto" Margin="20">
+        <TextBlock x:Name="MessageTextBlock"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center"
+                   FontSize="14"/>
+        <Button Grid.Row="1"
+                Content="OK"
+                HorizontalAlignment="Center"
+                Width="90"
+                Height="32"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Click="OkButton_Click"/>
+    </Grid>
+</Window>
