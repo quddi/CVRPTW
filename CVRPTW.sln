@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVRPTW", "CVRPTW\CVRPTW.csproj", "{18523B95-ACDB-4A68-9A15-3172D2FC799C}"
 EndProject
@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualizationApplication", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualizationApplication.Avalonia", "VisualizationApplication.Avalonia\VisualizationApplication.Avalonia.csproj", "{1447C369-2881-4F20-8125-2722D4E08ED1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPUComputing", "GPUComputing\GPUComputing.csproj", "{D8B2F409-FF32-4BED-91E3-A9AB265982FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceMatrixComputing", "DistanceMatrixComputing\DistanceMatrixComputing.csproj", "{D8B2F409-FF32-4BED-91E3-A9AB265982FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

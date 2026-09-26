@@ -1,0 +1,13 @@
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/bin/Debug/net10.0/GPUComputing.deps.json
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/bin/Debug/net10.0/GPUComputing.dll
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/bin/Debug/net10.0/GPUComputing.pdb
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/obj/Debug/net10.0/GPUComputing.csproj.AssemblyReference.cache
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/obj/Debug/net10.0/GPUComputing.GeneratedMSBuildEditorConfig.editorconfig
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/obj/Debug/net10.0/GPUComputing.AssemblyInfoInputs.cache
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/obj/Debug/net10.0/GPUComputing.AssemblyInfo.cs
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/obj/Debug/net10.0/GPUComputing.csproj.CoreCompileInputs.cache
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/obj/Debug/net10.0/GPUComputing.sourcelink.json
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/obj/Debug/net10.0/GPUComputing.dll
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/obj/Debug/net10.0/refint/GPUComputing.dll
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/obj/Debug/net10.0/GPUComputing.pdb
+/Users/quddi/CSharpProjects/CVRPTW/GPUComputing/obj/Debug/net10.0/ref/GPUComputing.dll
