@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CVRPTW")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d60160bd041b1f2a66ba4157697d5b938587cbc2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b5caf9a36a77bb83d1e0347d190ca56c6f2735a")]
 [assembly: System.Reflection.AssemblyProductAttribute("CVRPTW")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CVRPTW")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
