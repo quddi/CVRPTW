@@ -3,7 +3,6 @@ using Benchmarks.Common;
 using DistanceMatrixComputing;
 using DistanceMatrixComputing.Cpu;
 using DistanceMatrixComputing.Gpu;
-using DistanceMatrixComputing.Metal;
 
 namespace Benchmarks.Cases;
 
@@ -13,7 +12,6 @@ public class DistanceMatrixBenchmark : BenchmarkBase
     private CpuDistanceCalculator _cpuSequential = null!;
     private CpuDistanceCalculator _cpuParallel = null!;
     private GpuDistanceCalculator _gpu = null!;
-    private IlgpuDistanceCalculator _ilgpu = null!;
 
     [Params(100, 500, 1000)]
     public int PointsCount { get; set; }
@@ -25,14 +23,12 @@ public class DistanceMatrixBenchmark : BenchmarkBase
         _cpuSequential = new CpuDistanceCalculator(useParallel: false);
         _cpuParallel = new CpuDistanceCalculator(useParallel: true);
         _gpu = new GpuDistanceCalculator();
-        _ilgpu = new IlgpuDistanceCalculator();
     }
 
     [GlobalCleanup]
     public void Cleanup()
     {
         _gpu.Dispose();
-        _ilgpu.Dispose();
     }
 
     [Benchmark(Baseline = true)]
@@ -51,11 +47,5 @@ public class DistanceMatrixBenchmark : BenchmarkBase
     public float[,] Gpu()
     {
         return _gpu.ComputeDistanceMatrix(_points);
-    }
-
-    [Benchmark]
-    public float[,] Ilgpu()
-    {
-        return _ilgpu.ComputeDistanceMatrix(_points);
     }
 }
