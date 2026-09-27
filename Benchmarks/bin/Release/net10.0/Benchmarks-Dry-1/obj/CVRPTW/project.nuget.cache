@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "tcATeEzUL4Q=",
+  "success": true,
+  "projectFilePath": "/Users/quddi/CSharpProjects/CVRPTW/CVRPTW/CVRPTW.csproj",
+  "expectedPackageFiles": [
+    "/Users/quddi/.nuget/packages/microsoft.netcore.app.ref/9.0.17/microsoft.netcore.app.ref.9.0.17.nupkg.sha512",
+    "/Users/quddi/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.17/microsoft.aspnetcore.app.ref.9.0.17.nupkg.sha512",
+    "/Users/quddi/.nuget/packages/microsoft.netcore.app.host.osx-arm64/9.0.17/microsoft.netcore.app.host.osx-arm64.9.0.17.nupkg.sha512"
+  ],
+  "logs": []
+}

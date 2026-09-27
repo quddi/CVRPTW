@@ -1,0 +1,545 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 20 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore --nodeReuse:false /p:UseSharedCompilation=false /p:Deterministic=true /p:Optimize=true /p:ArtifactsPath="/Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/" /p:OutDir="/Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0/" /p:OutputPath="/Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0/" /p:PublishDir="/Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/publish/" in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1
+// command took 0.69 sec and exited with 0
+// start dotnet  build -c Release --no-restore --nodeReuse:false /p:UseSharedCompilation=false /p:Deterministic=true /p:Optimize=true /p:ArtifactsPath="/Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/" /p:OutDir="/Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0/" /p:OutputPath="/Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0/" /p:PublishDir="/Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/publish/" --output "/Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0/" in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1
+// command took 2.64 sec and exited with 0
+// ***** Done, took 00:00:03 (3.37 sec)   *****
+// Found 20 benchmarks:
+//   DistanceMatrixBenchmark.CpuSequential: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=100]
+//   DistanceMatrixBenchmark.CpuParallel: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=100]
+//   DistanceMatrixBenchmark.Gpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=100]
+//   DistanceMatrixBenchmark.Ilgpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=100]
+//   DistanceMatrixBenchmark.CpuSequential: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=500]
+//   DistanceMatrixBenchmark.CpuParallel: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=500]
+//   DistanceMatrixBenchmark.Gpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=500]
+//   DistanceMatrixBenchmark.Ilgpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=500]
+//   DistanceMatrixBenchmark.CpuSequential: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=1000]
+//   DistanceMatrixBenchmark.CpuParallel: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=1000]
+//   DistanceMatrixBenchmark.Gpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=1000]
+//   DistanceMatrixBenchmark.Ilgpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=1000]
+//   DistanceMatrixBenchmark.CpuSequential: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=10000]
+//   DistanceMatrixBenchmark.CpuParallel: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=10000]
+//   DistanceMatrixBenchmark.Gpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=10000]
+//   DistanceMatrixBenchmark.Ilgpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=10000]
+//   DistanceMatrixBenchmark.CpuSequential: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=20000]
+//   DistanceMatrixBenchmark.CpuParallel: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=20000]
+//   DistanceMatrixBenchmark.Gpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=20000]
+//   DistanceMatrixBenchmark.Ilgpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=20000]
+
+// **************************
+// Benchmark: DistanceMatrixBenchmark.CpuSequential: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=100]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 141 142 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.CpuSequential(PointsCount: 100)" --job Dry --benchmarkId 0 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 454833.00 ns, 454.8330 us/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 454833.00 ns, 454.8330 us/op
+// GC:  0 0 0 40080 1
+// Threading:  0 0 1
+
+// AfterAll
+// Benchmark Process 3541 has exited with code 0.
+
+Mean = 454.833 μs, StdErr = 0.000 μs (0.00%), N = 1, StdDev = 0.000 μs
+Min = 454.833 μs, Q1 = 454.833 μs, Median = 454.833 μs, Q3 = 454.833 μs, Max = 454.833 μs
+IQR = 0.000 μs, LowerFence = 454.833 μs, UpperFence = 454.833 μs
+ConfidenceInterval = [NaN μs; NaN μs] (CI 99.9%), Margin = NaN μs (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 19 (95,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.CpuParallel: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=100]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 141 142 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.CpuParallel(PointsCount: 100)" --job Dry --benchmarkId 1 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 658875.00 ns, 658.8750 us/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 658875.00 ns, 658.8750 us/op
+// GC:  0 0 0 43912 1
+// Threading:  7 0 1
+
+// AfterAll
+// Benchmark Process 3543 has exited with code 0.
+
+Mean = 658.875 μs, StdErr = 0.000 μs (0.00%), N = 1, StdDev = 0.000 μs
+Min = 658.875 μs, Q1 = 658.875 μs, Median = 658.875 μs, Q3 = 658.875 μs, Max = 658.875 μs
+IQR = 0.000 μs, LowerFence = 658.875 μs, UpperFence = 658.875 μs
+ConfidenceInterval = [NaN μs; NaN μs] (CI 99.9%), Margin = NaN μs (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 18 (90,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.Gpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=100]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 141 142 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.Gpu(PointsCount: 100)" --job Dry --benchmarkId 2 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+No Workload Results were obtained from the run.
+// Benchmark Process 3545 has exited with code 139.
+
+// ** Remained 17 (85,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.Ilgpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=100]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 141 142 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.Ilgpu(PointsCount: 100)" --job Dry --benchmarkId 3 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 12186333.00 ns, 12.1863 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 12186333.00 ns, 12.1863 ms/op
+// GC:  0 0 0 40864 1
+// Threading:  0 38 1
+
+// AfterAll
+// Benchmark Process 3546 has exited with code 0.
+
+Mean = 12.186 ms, StdErr = 0.000 ms (0.00%), N = 1, StdDev = 0.000 ms
+Min = 12.186 ms, Q1 = 12.186 ms, Median = 12.186 ms, Q3 = 12.186 ms, Max = 12.186 ms
+IQR = 0.000 ms, LowerFence = 12.186 ms, UpperFence = 12.186 ms
+ConfidenceInterval = [NaN ms; NaN ms] (CI 99.9%), Margin = NaN ms (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 16 (80,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.CpuSequential: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=500]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 141 142 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.CpuSequential(PointsCount: 500)" --job Dry --benchmarkId 4 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 1023500.00 ns, 1.0235 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 1023500.00 ns, 1.0235 ms/op
+// GC:  0 0 0 1000080 1
+// Threading:  0 0 1
+
+// AfterAll
+// Benchmark Process 3551 has exited with code 0.
+
+Mean = 1.024 ms, StdErr = 0.000 ms (0.00%), N = 1, StdDev = 0.000 ms
+Min = 1.024 ms, Q1 = 1.024 ms, Median = 1.024 ms, Q3 = 1.024 ms, Max = 1.024 ms
+IQR = 0.000 ms, LowerFence = 1.024 ms, UpperFence = 1.024 ms
+ConfidenceInterval = [NaN ms; NaN ms] (CI 99.9%), Margin = NaN ms (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 15 (75,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.CpuParallel: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=500]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.CpuParallel(PointsCount: 500)" --job Dry --benchmarkId 5 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 1444000.00 ns, 1.4440 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 1444000.00 ns, 1.4440 ms/op
+// GC:  0 0 0 1005088 1
+// Threading:  15 0 1
+
+// AfterAll
+// Benchmark Process 3557 has exited with code 0.
+
+Mean = 1.444 ms, StdErr = 0.000 ms (0.00%), N = 1, StdDev = 0.000 ms
+Min = 1.444 ms, Q1 = 1.444 ms, Median = 1.444 ms, Q3 = 1.444 ms, Max = 1.444 ms
+IQR = 0.000 ms, LowerFence = 1.444 ms, UpperFence = 1.444 ms
+ConfidenceInterval = [NaN ms; NaN ms] (CI 99.9%), Margin = NaN ms (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 14 (70,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.Gpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=500]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.Gpu(PointsCount: 500)" --job Dry --benchmarkId 6 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+No Workload Results were obtained from the run.
+// Benchmark Process 3558 has exited with code 139.
+
+// ** Remained 13 (65,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.Ilgpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=500]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.Ilgpu(PointsCount: 500)" --job Dry --benchmarkId 7 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 38322250.00 ns, 38.3223 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 38322250.00 ns, 38.3223 ms/op
+// GC:  0 0 0 1000792 1
+// Threading:  0 43 1
+
+// AfterAll
+// Benchmark Process 3560 has exited with code 0.
+
+Mean = 38.322 ms, StdErr = 0.000 ms (0.00%), N = 1, StdDev = 0.000 ms
+Min = 38.322 ms, Q1 = 38.322 ms, Median = 38.322 ms, Q3 = 38.322 ms, Max = 38.322 ms
+IQR = 0.000 ms, LowerFence = 38.322 ms, UpperFence = 38.322 ms
+ConfidenceInterval = [NaN ms; NaN ms] (CI 99.9%), Margin = NaN ms (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 12 (60,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.CpuSequential: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.CpuSequential(PointsCount: 1000)" --job Dry --benchmarkId 8 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 1601375.00 ns, 1.6014 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 1601375.00 ns, 1.6014 ms/op
+// GC:  0 0 0 4000080 1
+// Threading:  0 0 1
+
+// AfterAll
+// Benchmark Process 3561 has exited with code 0.
+
+Mean = 1.601 ms, StdErr = 0.000 ms (0.00%), N = 1, StdDev = 0.000 ms
+Min = 1.601 ms, Q1 = 1.601 ms, Median = 1.601 ms, Q3 = 1.601 ms, Max = 1.601 ms
+IQR = 0.000 ms, LowerFence = 1.601 ms, UpperFence = 1.601 ms
+ConfidenceInterval = [NaN ms; NaN ms] (CI 99.9%), Margin = NaN ms (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 11 (55,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.CpuParallel: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.CpuParallel(PointsCount: 1000)" --job Dry --benchmarkId 9 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 2368625.00 ns, 2.3686 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 2368625.00 ns, 2.3686 ms/op
+// GC:  0 0 0 4005432 1
+// Threading:  17 0 1
+
+// AfterAll
+// Benchmark Process 3562 has exited with code 0.
+
+Mean = 2.369 ms, StdErr = 0.000 ms (0.00%), N = 1, StdDev = 0.000 ms
+Min = 2.369 ms, Q1 = 2.369 ms, Median = 2.369 ms, Q3 = 2.369 ms, Max = 2.369 ms
+IQR = 0.000 ms, LowerFence = 2.369 ms, UpperFence = 2.369 ms
+ConfidenceInterval = [NaN ms; NaN ms] (CI 99.9%), Margin = NaN ms (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 10 (50,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.Gpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.Gpu(PointsCount: 1000)" --job Dry --benchmarkId 10 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+No Workload Results were obtained from the run.
+// Benchmark Process 3563 has exited with code 139.
+
+// ** Remained 9 (45,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.Ilgpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.Ilgpu(PointsCount: 1000)" --job Dry --benchmarkId 11 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 110245833.00 ns, 110.2458 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 110245833.00 ns, 110.2458 ms/op
+// GC:  0 0 0 4000792 1
+// Threading:  0 75 1
+
+// AfterAll
+// Benchmark Process 3564 has exited with code 0.
+
+Mean = 110.246 ms, StdErr = 0.000 ms (0.00%), N = 1, StdDev = 0.000 ms
+Min = 110.246 ms, Q1 = 110.246 ms, Median = 110.246 ms, Q3 = 110.246 ms, Max = 110.246 ms
+IQR = 0.000 ms, LowerFence = 110.246 ms, UpperFence = 110.246 ms
+ConfidenceInterval = [NaN ms; NaN ms] (CI 99.9%), Margin = NaN ms (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 8 (40,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.CpuSequential: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.CpuSequential(PointsCount: 10000)" --job Dry --benchmarkId 12 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 157788875.00 ns, 157.7889 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 157788875.00 ns, 157.7889 ms/op
+// GC:  0 0 0 400000080 1
+// Threading:  0 0 1
+
+// AfterAll
+// Benchmark Process 3565 has exited with code 0.
+
+Mean = 157.789 ms, StdErr = 0.000 ms (0.00%), N = 1, StdDev = 0.000 ms
+Min = 157.789 ms, Q1 = 157.789 ms, Median = 157.789 ms, Q3 = 157.789 ms, Max = 157.789 ms
+IQR = 0.000 ms, LowerFence = 157.789 ms, UpperFence = 157.789 ms
+ConfidenceInterval = [NaN ms; NaN ms] (CI 99.9%), Margin = NaN ms (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 7 (35,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.CpuParallel: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.CpuParallel(PointsCount: 10000)" --job Dry --benchmarkId 13 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 32383125.00 ns, 32.3831 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 32383125.00 ns, 32.3831 ms/op
+// GC:  0 0 0 400006912 1
+// Threading:  20 0 1
+
+// AfterAll
+// Benchmark Process 3566 has exited with code 0.
+
+Mean = 32.383 ms, StdErr = 0.000 ms (0.00%), N = 1, StdDev = 0.000 ms
+Min = 32.383 ms, Q1 = 32.383 ms, Median = 32.383 ms, Q3 = 32.383 ms, Max = 32.383 ms
+IQR = 0.000 ms, LowerFence = 32.383 ms, UpperFence = 32.383 ms
+ConfidenceInterval = [NaN ms; NaN ms] (CI 99.9%), Margin = NaN ms (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 6 (30,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.Gpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.Gpu(PointsCount: 10000)" --job Dry --benchmarkId 14 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+No Workload Results were obtained from the run.
+// Benchmark Process 3567 has exited with code 139.
+
+// ** Remained 5 (25,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:53 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.Ilgpu: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.Ilgpu(PointsCount: 10000)" --job Dry --benchmarkId 15 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 12257194667.00 ns, 12.2572 s/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 12257194667.00 ns, 12.2572 s/op
+// GC:  0 0 0 400000856 1
+// Threading:  0 1918 1
+
+// AfterAll
+// Benchmark Process 3568 has exited with code 0.
+
+Mean = 12.257 s, StdErr = 0.000 s (0.00%), N = 1, StdDev = 0.000 s
+Min = 12.257 s, Q1 = 12.257 s, Median = 12.257 s, Q3 = 12.257 s, Max = 12.257 s
+IQR = 0.000 s, LowerFence = 12.257 s, UpperFence = 12.257 s
+ConfidenceInterval = [NaN s; NaN s] (CI 99.9%), Margin = NaN s (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 4 (20,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:54 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.CpuSequential: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=20000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.CpuSequential(PointsCount: 20000)" --job Dry --benchmarkId 16 in /Users/quddi/CSharpProjects/CVRPTW/Benchmarks/bin/Release/net10.0/Benchmarks-Dry-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+// GC=Concurrent Workstation
+// HardwareIntrinsics=ArmBase+AdvSimd,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1)
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 615151750.00 ns, 615.1518 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 615151750.00 ns, 615.1518 ms/op
+// GC:  0 0 0 1600000080 1
+// Threading:  0 0 1
+
+// AfterAll
+// Benchmark Process 3572 has exited with code 0.
+
+Mean = 615.152 ms, StdErr = 0.000 ms (0.00%), N = 1, StdDev = 0.000 ms
+Min = 615.152 ms, Q1 = 615.152 ms, Median = 615.152 ms, Q3 = 615.152 ms, Max = 615.152 ms
+IQR = 0.000 ms, LowerFence = 615.152 ms, UpperFence = 615.152 ms
+ConfidenceInterval = [NaN ms; NaN ms] (CI 99.9%), Margin = NaN ms (NaN% of Mean)
+Skewness = NaN, Kurtosis = NaN, MValue = 2
+
+// ** Remained 3 (15,0%) benchmark(s) to run. Estimated finish 2026-09-27 18:54 (0h 0m from now) **
+// **************************
+// Benchmark: DistanceMatrixBenchmark.CpuParallel: Dry(IterationCount=1, LaunchCount=1, RunStrategy=ColdStart, UnrollFactor=1, WarmupCount=1) [PointsCount=20000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet Benchmarks-Dry-1.dll --anonymousPipes 108 109 --benchmarkName "Benchmarks.Cases.DistanceMatrixBenchmark.CpuParallel(PointsCount: 20000)" --job Dry --benchmarkId 17 in /Users/quddi/CSharpProjects/CVRPTW/Ben

@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "dJ1ykDOhik4=",
+  "success": true,
+  "projectFilePath": "/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/DistanceMatrixComputing.csproj",
+  "expectedPackageFiles": [
+    "/Users/quddi/.nuget/packages/ilgpu/1.5.3/ilgpu.1.5.3.nupkg.sha512",
+    "/Users/quddi/.nuget/packages/sharpmetal/1.1.0/sharpmetal.1.1.0.nupkg.sha512",
+    "/Users/quddi/.nuget/packages/microsoft.netcore.app.ref/9.0.17/microsoft.netcore.app.ref.9.0.17.nupkg.sha512",
+    "/Users/quddi/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.17/microsoft.aspnetcore.app.ref.9.0.17.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,57 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "DistanceMatrixComputing/1.0.0": {
+        "dependencies": {
+          "ILGPU": "1.5.3",
+          "SharpMetal": "1.1.0"
+        },
+        "runtime": {
+          "DistanceMatrixComputing.dll": {}
+        }
+      },
+      "ILGPU/1.5.3": {
+        "runtime": {
+          "lib/net7.0/ILGPU.dll": {
+            "assemblyVersion": "1.5.3.0",
+            "fileVersion": "1.5.3.0"
+          }
+        }
+      },
+      "SharpMetal/1.1.0": {
+        "runtime": {
+          "lib/net9.0/SharpMetal.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DistanceMatrixComputing/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ILGPU/1.5.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VhAfQqnp/qTcQla5zcBPQIoUJox8T1EuZLuKrynFFE1BQvOOUCksiCb9IQAJa2MSJf6QDi5YIoG45K0I+GWcgg==",
+      "path": "ilgpu/1.5.3",
+      "hashPath": "ilgpu.1.5.3.nupkg.sha512"
+    },
+    "SharpMetal/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hxBlTOIQhtyAXuARAVTh6cXR/nJ9JmE+vygFFwaY2Y2NoWdiB9zGiDLGmzFMAx8WzVvJubLQRYKriO5hKaYkWw==",
+      "path": "sharpmetal/1.1.0",
+      "hashPath": "sharpmetal.1.1.0.nupkg.sha512"
+    }
+  }
+}

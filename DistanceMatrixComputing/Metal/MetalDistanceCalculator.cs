@@ -19,6 +19,11 @@ public sealed class MetalDistanceCalculator : DistanceMatrixCalculatorBase, IDis
     private readonly object _lock = new();
     private bool _disposed;
 
+    private MTLBuffer? _pointsBuffer;
+    private MTLBuffer? _matrixBuffer;
+    private MTLBuffer? _nBuffer;
+    private int _allocatedCapacity;
+
     public string DeviceName => _device.Name.ToString() ?? "Apple Metal Device";
 
     private const string ShaderSource = @"
@@ -104,14 +109,16 @@ kernel void compute_distances(
     private float[,] ComputeInternal(Point2D[] points)
     {
         int n = points.Length;
-        ulong pointsByteLength = (ulong)(n * sizeof(float) * 2);
-        ulong matrixByteLength = (ulong)(n * n * sizeof(float));
+        ulong pointsByteLength = (ulong)n * sizeof(float) * 2;
+        ulong matrixByteLength = (ulong)n * (ulong)n * sizeof(float);
 
         lock (_lock)
         {
-            var pointsBuffer = _device.NewBuffer(pointsByteLength, MTLResourceOptions.ResourceStorageModeShared);
-            var matrixBuffer = _device.NewBuffer(matrixByteLength, MTLResourceOptions.ResourceStorageModeShared);
-            var nBuffer = _device.NewBuffer(sizeof(uint), MTLResourceOptions.ResourceStorageModeShared);
+            EnsureBuffers(n);
+
+            var pointsBuffer = _pointsBuffer!.Value;
+            var matrixBuffer = _matrixBuffer!.Value;
+            var nBuffer = _nBuffer!.Value;
 
             unsafe
             {
@@ -154,6 +161,24 @@ kernel void compute_distances(
         }
     }
 
+    private void EnsureBuffers(int n)
+    {
+        if (_allocatedCapacity >= n && _pointsBuffer.HasValue && _matrixBuffer.HasValue && _nBuffer.HasValue)
+            return;
+
+        if (_pointsBuffer.HasValue) _pointsBuffer.Value.Dispose();
+        if (_matrixBuffer.HasValue) _matrixBuffer.Value.Dispose();
+        if (_nBuffer.HasValue) _nBuffer.Value.Dispose();
+
+        _allocatedCapacity = Math.Max(n, 256);
+        ulong pointsByteLength = (ulong)_allocatedCapacity * sizeof(float) * 2;
+        ulong matrixByteLength = (ulong)_allocatedCapacity * (ulong)_allocatedCapacity * sizeof(float);
+
+        _pointsBuffer = _device.NewBuffer(pointsByteLength, MTLResourceOptions.ResourceStorageModeShared);
+        _matrixBuffer = _device.NewBuffer(matrixByteLength, MTLResourceOptions.ResourceStorageModeShared);
+        _nBuffer = _device.NewBuffer(sizeof(uint), MTLResourceOptions.ResourceStorageModeShared);
+    }
+
     private void ThrowIfDisposed()
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
@@ -163,5 +188,15 @@ kernel void compute_distances(
     {
         if (_disposed) return;
         _disposed = true;
+
+        lock (_lock)
+        {
+            if (_pointsBuffer.HasValue) _pointsBuffer.Value.Dispose();
+            if (_matrixBuffer.HasValue) _matrixBuffer.Value.Dispose();
+            if (_nBuffer.HasValue) _nBuffer.Value.Dispose();
+            _commandQueue.Dispose();
+            _pipelineState.Dispose();
+            _device.Dispose();
+        }
     }
 }

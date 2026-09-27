@@ -24,9 +24,7 @@ public sealed class IlgpuDistanceCalculator : DistanceMatrixCalculatorBase, IDis
     {
         _context = Context.Create(builder =>
         {
-            try { builder.OpenCL(); } catch { }
-            try { builder.Cuda(); } catch { }
-            builder.CPU();
+            builder.AllAccelerators();
             builder.Optimize(OptimizationLevel.O2);
         });
 
@@ -43,17 +41,14 @@ public sealed class IlgpuDistanceCalculator : DistanceMatrixCalculatorBase, IDis
         if (preferCpu)
             return context.GetPreferredDevice(preferCPU: true);
 
-        // 1. CUDA (NVIDIA GPU - fastest when available)
         var cudaDevices = context.GetCudaDevices();
         if (cudaDevices.Count > 0)
             return cudaDevices[0];
 
-        // 2. OpenCL (AMD / Intel / NVIDIA GPU)
         var clDevices = context.GetCLDevices();
         if (clDevices.Count > 0)
             return clDevices[0];
 
-        // 3. Fallback (CPU accelerator or default)
         return context.GetPreferredDevice(preferCPU: false);
     }
 
