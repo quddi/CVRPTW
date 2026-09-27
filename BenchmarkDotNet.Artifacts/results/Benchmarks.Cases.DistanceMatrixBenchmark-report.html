@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Benchmarks.Cases.DistanceMatrixBenchmark-20260927-183915</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, macOS Tahoe 26.6.2 (25G83) [Darwin 25.6.0]
+Apple M5 Pro, 1 CPU, 18 logical and 18 physical cores
+.NET SDK 10.0.301
+  [Host] : .NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+  Dry    : .NET 10.0.9 (10.0.9, 10.0.926.27113), Arm64 RyuJIT armv8.0-a
+</code></pre>
+<pre><code>Job=Dry  IterationCount=1  LaunchCount=1  
+RunStrategy=ColdStart  UnrollFactor=1  WarmupCount=1  
+</code></pre>
+
+<table>
+<thead><tr><th>Method </th><th>PointsCount</th><th>Mean  </th><th>Error</th><th>Ratio</th><th>Rank</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>CpuSequential</td><td>100</td><td>416.7 &mu;s</td><td>NA</td><td>1.00</td><td>1</td><td>39.14 KB</td><td>1.00</td>
+</tr><tr><td>CpuParallel</td><td>100</td><td>631.1 &mu;s</td><td>NA</td><td>1.51</td><td>2</td><td>42.37 KB</td><td>1.08</td>
+</tr><tr><td>Gpu</td><td>100</td><td>2,635.4 &mu;s</td><td>NA</td><td>6.32</td><td>3</td><td>39.1 KB</td><td>1.00</td>
+</tr><tr><td>Ilgpu</td><td>100</td><td>7,880.9 &mu;s</td><td>NA</td><td>18.91</td><td>4</td><td>39.86 KB</td><td>1.02</td>
+</tr><tr><td>CpuSequential</td><td>500</td><td>999.0 &mu;s</td><td>NA</td><td>1.00</td><td>1</td><td>976.64 KB</td><td>1.00</td>
+</tr><tr><td>CpuParallel</td><td>500</td><td>1,494.2 &mu;s</td><td>NA</td><td>1.50</td><td>2</td><td>980.44 KB</td><td>1.00</td>
+</tr><tr><td>Gpu</td><td>500</td><td>2,757.1 &mu;s</td><td>NA</td><td>2.76</td><td>3</td><td>976.6 KB</td><td>1.00</td>
+</tr><tr><td>Ilgpu</td><td>500</td><td>35,437.0 &mu;s</td><td>NA</td><td>35.47</td><td>4</td><td>977.34 KB</td><td>1.00</td>
+</tr><tr><td>CpuSequential</td><td>1000</td><td>1,583.2 &mu;s</td><td>NA</td><td>1.00</td><td>1</td><td>3906.33 KB</td><td>1.00</td>
+</tr><tr><td>CpuParallel</td><td>1000</td><td>2,353.0 &mu;s</td><td>NA</td><td>1.49</td><td>2</td><td>3911.58 KB</td><td>1.00</td>
+</tr><tr><td>Gpu</td><td>1000</td><td>5,493.9 &mu;s</td><td>NA</td><td>3.47</td><td>3</td><td>3906.29 KB</td><td>1.00</td>
+</tr><tr><td>Ilgpu</td><td>1000</td><td>109,984.1 &mu;s</td><td>NA</td><td>69.47</td><td>4</td><td>3907.02 KB</td><td>1.00</td>
+</tr></tbody></table>
+</body>
+</html>

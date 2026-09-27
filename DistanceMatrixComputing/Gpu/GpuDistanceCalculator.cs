@@ -1,5 +1,4 @@
-using ILGPU;
-using ILGPU.Runtime;
+using DistanceMatrixComputing.Metal;
 
 namespace DistanceMatrixComputing.Gpu;
 
@@ -8,79 +7,68 @@ public sealed class GpuDistanceCalculator : DistanceMatrixCalculatorBase, IDispo
     private static readonly Lazy<GpuDistanceCalculator> LazyShared = new(() => new GpuDistanceCalculator());
     public static GpuDistanceCalculator Shared => LazyShared.Value;
 
-    private readonly Context _context;
-    private readonly Accelerator _accelerator;
-    private readonly Action<Index2D, ArrayView1D<Point2D, Stride1D.Dense>, ArrayView2D<double, Stride2D.DenseY>> _kernel;
-    private readonly object _lock = new();
+    private readonly IDistanceMatrixCalculator _underlying;
+    private readonly IDisposable? _disposable;
     private bool _disposed;
 
-    public string DeviceName => _accelerator.Name;
-    public AcceleratorType AcceleratorType => _accelerator.AcceleratorType;
+    public GpuBackend ActiveBackend { get; }
 
-    public GpuDistanceCalculator(bool preferCpu = false)
+    public string DeviceName
     {
-        _context = Context.CreateDefault();
-        var device = _context.GetPreferredDevice(preferCPU: preferCpu);
-        _accelerator = device.CreateAccelerator(_context);
-        _kernel = _accelerator.LoadAutoGroupedStreamKernel<
-            Index2D,
-            ArrayView1D<Point2D, Stride1D.Dense>,
-            ArrayView2D<double, Stride2D.DenseY>>(ComputeDistanceMatrixKernel);
+        get
+        {
+            if (OperatingSystem.IsMacOS() && _underlying is MetalDistanceCalculator metal)
+                return metal.DeviceName;
+            if (_underlying is IlgpuDistanceCalculator ilgpu)
+                return ilgpu.DeviceName;
+            return "GPU Device";
+        }
     }
 
-    public static double[,] Calculate(IReadOnlyList<Point2D> points) =>
+    public GpuDistanceCalculator(GpuBackend backend = GpuBackend.Auto)
+    {
+        if (backend == GpuBackend.Metal || (backend == GpuBackend.Auto && OperatingSystem.IsMacOS()))
+        {
+            if (!OperatingSystem.IsMacOS())
+                throw new PlatformNotSupportedException("Metal backend is only supported on macOS.");
+
+            var metal = new MetalDistanceCalculator();
+            _underlying = metal;
+            _disposable = metal;
+            ActiveBackend = GpuBackend.Metal;
+            return;
+        }
+
+        var ilgpu = new IlgpuDistanceCalculator();
+        _underlying = ilgpu;
+        _disposable = ilgpu;
+        ActiveBackend = GpuBackend.Ilgpu;
+    }
+
+    public static float[,] Calculate(IReadOnlyList<Point2D> points) =>
         Shared.ComputeDistanceMatrix(points);
 
-    public static double[,] Calculate(IReadOnlyList<(double X, double Y)> points) =>
+    public static float[,] Calculate(IReadOnlyList<(float X, float Y)> points) =>
         Shared.ComputeDistanceMatrix(points);
 
-    public static double[,] Calculate<T>(IReadOnlyList<T> items, Func<T, Point2D> pointSelector) =>
+    public static float[,] Calculate(IReadOnlyList<(double X, double Y)> points) =>
+        Shared.ComputeDistanceMatrix(points);
+
+    public static float[,] Calculate<T>(IReadOnlyList<T> items, Func<T, Point2D> pointSelector) =>
         Shared.ComputeDistanceMatrix(items, pointSelector);
 
-    public static double[,] Calculate<T>(IReadOnlyList<T> items, Func<T, (double X, double Y)> coordinateSelector) =>
+    public static float[,] Calculate<T>(IReadOnlyList<T> items, Func<T, (float X, float Y)> coordinateSelector) =>
         Shared.ComputeDistanceMatrix(items, coordinateSelector);
 
-    public override double[,] ComputeDistanceMatrix(IReadOnlyList<Point2D> points)
+    public static float[,] Calculate<T>(IReadOnlyList<T> items, Func<T, (double X, double Y)> coordinateSelector) =>
+        Shared.ComputeDistanceMatrix(items, coordinateSelector);
+
+    public override float[,] ComputeDistanceMatrix(IReadOnlyList<Point2D> points)
     {
         ArgumentNullException.ThrowIfNull(points);
         ThrowIfDisposed();
 
-        int n = points.Count;
-        if (n == 0) return new double[0, 0];
-        if (n == 1) return new double[1, 1] { { 0.0 } };
-
-        Point2D[] array = points as Point2D[] ?? [.. points];
-        return ComputeInternal(array);
-    }
-
-    private double[,] ComputeInternal(Point2D[] points)
-    {
-        int n = points.Length;
-        lock (_lock)
-        {
-            using var bufPoints = _accelerator.Allocate1D<Point2D>(n);
-            using var bufDist = _accelerator.Allocate2DDenseY<double>(new Index2D(n, n));
-
-            bufPoints.CopyFromCPU(points);
-            _kernel(new Index2D(n, n), bufPoints.View, bufDist.View);
-            _accelerator.Synchronize();
-
-            return bufDist.GetAsArray2D();
-        }
-    }
-
-    private static void ComputeDistanceMatrixKernel(
-        Index2D index,
-        ArrayView1D<Point2D, Stride1D.Dense> points,
-        ArrayView2D<double, Stride2D.DenseY> distances)
-    {
-        int i = index.X;
-        int j = index.Y;
-        var p1 = points[i];
-        var p2 = points[j];
-        double dx = p1.X - p2.X;
-        double dy = p1.Y - p2.Y;
-        distances[index] = Math.Sqrt(dx * dx + dy * dy);
+        return _underlying.ComputeDistanceMatrix(points);
     }
 
     private void ThrowIfDisposed()
@@ -92,7 +80,6 @@ public sealed class GpuDistanceCalculator : DistanceMatrixCalculatorBase, IDispo
     {
         if (_disposed) return;
         _disposed = true;
-        _accelerator.Dispose();
-        _context.Dispose();
+        _disposable?.Dispose();
     }
 }

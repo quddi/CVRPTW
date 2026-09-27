@@ -1,0 +1,13 @@
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/bin/Release/net10.0/DistanceMatrixComputing.deps.json
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/bin/Release/net10.0/DistanceMatrixComputing.dll
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/bin/Release/net10.0/DistanceMatrixComputing.pdb
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/obj/Release/net10.0/DistanceMatrixComputing.csproj.AssemblyReference.cache
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/obj/Release/net10.0/DistanceMatrixComputing.GeneratedMSBuildEditorConfig.editorconfig
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/obj/Release/net10.0/DistanceMatrixComputing.AssemblyInfoInputs.cache
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/obj/Release/net10.0/DistanceMatrixComputing.AssemblyInfo.cs
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/obj/Release/net10.0/DistanceMatrixComputing.csproj.CoreCompileInputs.cache
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/obj/Release/net10.0/DistanceMatrixComputing.sourcelink.json
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/obj/Release/net10.0/DistanceMatrixComputing.dll
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/obj/Release/net10.0/refint/DistanceMatrixComputing.dll
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/obj/Release/net10.0/DistanceMatrixComputing.pdb
+/Users/quddi/CSharpProjects/CVRPTW/DistanceMatrixComputing/obj/Release/net10.0/ref/DistanceMatrixComputing.dll

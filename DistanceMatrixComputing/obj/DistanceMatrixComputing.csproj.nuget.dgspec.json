@@ -56,6 +56,10 @@
             "ILGPU": {
               "target": "Package",
               "version": "[1.5.3, )"
+            },
+            "SharpMetal": {
+              "target": "Package",
+              "version": "[1.1.0, )"
             }
           },
           "imports": [
@@ -357,6 +361,10 @@
             "ILGPU": {
               "target": "Package",
               "version": "[1.5.3, )"
+            },
+            "SharpMetal": {
+              "target": "Package",
+              "version": "[1.1.0, )"
             }
           },
           "imports": [
