@@ -13,7 +13,7 @@ public class DistanceMatrixBenchmark : BenchmarkBase
     private CpuDistanceCalculator _cpuParallel = null!;
     private GpuDistanceCalculator _gpu = null!;
 
-    [Params(100, 500, 1000)]
+    [Params(40000)]
     public int PointsCount { get; set; }
 
     [GlobalSetup]

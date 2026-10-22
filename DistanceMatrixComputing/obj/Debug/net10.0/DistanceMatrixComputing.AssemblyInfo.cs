@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DistanceMatrixComputing")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a22dd86d44b69209a10ad7a9ab7a4e0d922699b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+999febaf7254a8be0f16998fdea0491d55ae8dd8")]
 [assembly: System.Reflection.AssemblyProductAttribute("DistanceMatrixComputing")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DistanceMatrixComputing")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
