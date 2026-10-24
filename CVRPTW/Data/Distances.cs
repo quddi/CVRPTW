@@ -21,11 +21,4 @@ public class Distances
         
         Matrix[matrixIndex][firstPointIndex][secondPointIndex] = distance;
     }
-
-    public int GetNearestPointId(int matrixIndex, int fromPointIndex)
-    {
-        var toPointsDistances = Matrix[matrixIndex][fromPointIndex];
-
-        return toPointsDistances.MinBy(pair => pair.Value).Key;
-    }
 }
