@@ -39,6 +39,7 @@ public class Opt3CarResultOptimizer(IMainResultEstimator mainResultEstimator) : 
         var carResult = mainResult.Results[car];
         
         var pathLength = carResult.Path.Count;
+        var currentEstimation = mainResultEstimator.Estimate(mainResult);
 
         for (int aStart = 0; aStart < pathLength - 5; aStart++)
         {
@@ -46,7 +47,7 @@ public class Opt3CarResultOptimizer(IMainResultEstimator mainResultEstimator) : 
             {
                 for (int cStart = bStart + 2; cStart < pathLength - 1; cStart++)
                 {
-                    CheckAllVariants(mainResult, carResult, aStart, bStart, cStart);
+                    currentEstimation = CheckAllVariants(mainResult, carResult, aStart, bStart, cStart, currentEstimation);
                 }
             }
         }
@@ -54,12 +55,12 @@ public class Opt3CarResultOptimizer(IMainResultEstimator mainResultEstimator) : 
 
     // a, b, c - edges
 
-    private void CheckAllVariants(MainResult mainResult, CarResult carResult, int aStart, int bStart, int cStart)
+    private double CheckAllVariants(MainResult mainResult, CarResult carResult, int aStart, int bStart, int cStart, double currentEstimation)
     {
         var bestCommand = -1;
         var path = carResult.Path;
-        var minEstimation = mainResultEstimator.Estimate(mainResult);
-        
+        var minEstimation = currentEstimation;
+
         for (var i = 0; i < Commands.Count; i++)
         {
             var command = Commands[i];
@@ -75,12 +76,10 @@ public class Opt3CarResultOptimizer(IMainResultEstimator mainResultEstimator) : 
             }
             
             command.Undo(path, aStart, bStart, cStart);
-
-            mainResultEstimator.Estimate(mainResult);
         }
 
         if (bestCommand != -1) Commands[bestCommand].Do(path, aStart, bStart, cStart);
 
-        mainResultEstimator.Estimate(mainResult);
+        return mainResultEstimator.Estimate(mainResult);
     }
 }
