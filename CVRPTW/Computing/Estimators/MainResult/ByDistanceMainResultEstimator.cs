@@ -55,12 +55,6 @@ public class ByDistanceMainResultEstimator(MainData mainData) : PathsIteratedMai
     {
         if (mainData.Distances is null) return 0d;
 
-        var maxDistance = mainData.Distances.Matrix.Values
-            .SelectMany(firstPointsDistances => firstPointsDistances.Values)
-            .SelectMany(secondPointsDistances => secondPointsDistances.Values)
-            .DefaultIfEmpty(0d)
-            .Max();
-
-        return maxDistance * (mainData.Points.Count + 1);
+        return mainData.Distances.GetMaxDistance() * (mainData.Points.Count + 1);
     }
 }

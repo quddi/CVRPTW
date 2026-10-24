@@ -4,6 +4,8 @@ namespace CVRPTW;
 
 public class TariffsDataParser : LinedStreamDataParser<Tariffs>
 {
+    protected override Tariffs CreateResult() => new();
+
     protected override void ManageLine(string lastReadLine, Tariffs tariffs)
     {
         var split = lastReadLine.Split(Constants.DefaultSplitDividers);

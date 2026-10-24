@@ -174,6 +174,7 @@ public class MainParser : StreamDataParser<MainData>
 
     private string ParseDistances(MainData mainData, StreamReader streamReader)
     {
+        _distancesDataParser.PointsCount = mainData.Points.Count;
         mainData.Distances = _distancesDataParser.Parse(streamReader);
 
         return _distancesDataParser.LastReadLine;

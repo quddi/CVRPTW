@@ -4,6 +4,10 @@ namespace CVRPTW;
 
 public class DistancesDataParser : LinedStreamDataParser<Distances>
 {
+    public int PointsCount { get; set; }
+
+    protected override Distances CreateResult() => new(PointsCount);
+
     protected override void ManageLine(string lastReadLine, Distances distances)
     {
         var split = lastReadLine.Split(Constants.DefaultSplitDividers);

@@ -2,6 +2,8 @@
 
 public class TimesDataParser : LinedStreamDataParser<Times>
 {
+    protected override Times CreateResult() => new();
+
     protected override void ManageLine(string lastReadLine, Times times)
     {
         var split = lastReadLine.Split(Constants.DefaultSplitDividers);
