@@ -1,0 +1,16 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# IDE
+.vs/
+.idea/
+*.suo
+*.user
+*.DotSettings.user
+
+# Benchmarks
+BenchmarkDotNet.Artifacts/
+
+# OS
+.DS_Store
