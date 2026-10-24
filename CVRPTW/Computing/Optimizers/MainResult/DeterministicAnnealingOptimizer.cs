@@ -25,6 +25,7 @@ public class DeterministicAnnealingOptimizer : MainResultOptimizer
         var currentSolution = mainResult;
         var bestSolution = CloneSolution(mainResult);
         var bestCost = _estimator.Estimate(bestSolution);
+        var currentCost = _estimator.Estimate(currentSolution);
 
         var temperature = _config.InitialTemperature;
         var iteration = 0;
@@ -37,7 +38,6 @@ public class DeterministicAnnealingOptimizer : MainResultOptimizer
                 if (neighbor == null) continue;
                     
                 var neighborCost = _estimator.Estimate(neighbor);
-                var currentCost = _estimator.Estimate(currentSolution);
 
                 var deltaE = neighborCost - currentCost;
                 var acceptanceProbability = CalculateAcceptanceProbability(deltaE, temperature);
@@ -45,6 +45,7 @@ public class DeterministicAnnealingOptimizer : MainResultOptimizer
                 if (!(acceptanceProbability > _random.NextDouble())) continue;
                     
                 currentSolution = neighbor;
+                currentCost = neighborCost;
 
                 if (!(neighborCost < bestCost)) continue;
                     
