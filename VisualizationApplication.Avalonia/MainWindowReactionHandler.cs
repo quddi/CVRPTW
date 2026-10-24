@@ -190,7 +190,8 @@ public class MainWindowReactionHandler : IDisposable
             case Constants.AllResultsIndex:
                 _resetHandler.ResetMainPlot();
                 SetAllResults();
-                _mainWindowElements.PathCostTextBox.Text = $"Загальна вартість шляхів: {_mainResult!.Estimation.ToFormattedString()}";
+                _mainWindowElements.PathCostTextBox.Text = $"Загальна вартість шляхів: {_mainResult!.Estimation.ToFormattedString()}" +
+                                                           (_mainResult.UnreachableEdgesCount > 0 ? $"\nНедосяжних переходів: {_mainResult.UnreachableEdgesCount} (розв'язок недопустимий)" : string.Empty);
                 break;
             
             case not Constants.NotSelectedIndex:
@@ -199,7 +200,8 @@ public class MainWindowReactionHandler : IDisposable
                 var (chosenCar, chosenResult) = _mainResult!.Results.ElementAt(comboBoxSelectionIndex - Constants.ServiceIndexesCount);
                 SetResult(chosenResult);
                 _mainWindowElements.PathCostTextBox.Text = $"Вартість шляху: {chosenResult.Estimation.ToFormattedString()}. Вага {(chosenCar.Capacity - chosenResult.RemainedFreeSpace).ToFormattedString()}/{chosenCar.Capacity}" +
-                                                           $"\nШлях ({chosenResult.Path.Count} точок): {chosenResult.Path.ToText()}";
+                                                           $"\nШлях ({chosenResult.Path.Count} точок): {chosenResult.Path.ToText()}" +
+                                                           (chosenResult.UnreachableEdgesCount > 0 ? $"\nНедосяжних переходів: {chosenResult.UnreachableEdgesCount} (маршрут недопустимий)" : string.Empty);
                 break;
         }
     }

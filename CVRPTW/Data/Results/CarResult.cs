@@ -6,6 +6,8 @@ public class CarResult(Car car)
 
     public double Estimation { get; set; }
 
+    public int UnreachableEdgesCount { get; set; }
+
     public double RemainedFreeSpace { get; set; }
     
     public CarPath Path { get; set; } = new();
@@ -20,6 +22,7 @@ public class CarResult(Car car)
         return new CarResult(Car)
         {
             Estimation = this.Estimation,
+            UnreachableEdgesCount = this.UnreachableEdgesCount,
             Path = this.Path.Clone(),
             Car = this.Car
         };

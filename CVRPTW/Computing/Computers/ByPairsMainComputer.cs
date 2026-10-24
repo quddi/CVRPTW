@@ -31,28 +31,41 @@ public abstract class ByPairsMainComputer(MainData mainData, IMainResultEstimato
         };
         var currentPointId = result.Path.StartPoint.Id;
 
-        while (_notVisitedPoints.Any(CanVisit))
+        while (TryFindNextPoint(currentPointId, freeSpace, out var nextPointPair))
         {
-            var nextPointPair = _notVisitedPoints
-                .Where(CanVisit)
-                .MinBy(pair => EstimatePair(pair.Value.Id, currentPointId));
-
             _notVisitedPoints.Remove(nextPointPair.Key);
-                
+
             freeSpace -= nextPointPair.Value.Demand;
-                
+
             result.Path.AddNextPoint(new(nextPointPair.Value.Id));
+
+            currentPointId = nextPointPair.Value.Id;
         }
-            
+
         result.RemainedFreeSpace = freeSpace;
-        
-        bool CanVisit(KeyValuePair<int, Point> pair)
-        {
-            return pair.Value.Demand <= freeSpace;
-        }
-        
+
         return result;
     }
 
-    protected abstract double EstimatePair(int checkedPointId, int currentPointId);
+    protected bool TryFindNextPoint(int currentPointId, double freeSpace, out KeyValuePair<int, Point> nextPointPair)
+    {
+        var found = false;
+        var bestEstimation = double.MaxValue;
+        nextPointPair = default;
+
+        foreach (var pair in _notVisitedPoints)
+        {
+            if (pair.Value.Demand > freeSpace) continue;
+            if (!TryEstimatePair(pair.Value.Id, currentPointId, out var estimation)) continue;
+            if (found && estimation >= bestEstimation) continue;
+
+            found = true;
+            bestEstimation = estimation;
+            nextPointPair = pair;
+        }
+
+        return found;
+    }
+
+    protected abstract bool TryEstimatePair(int checkedPointId, int currentPointId, out double estimation);
 }
