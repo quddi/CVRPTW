@@ -1,6 +1,7 @@
 using System;
 using Avalonia.Controls;
 using VisualizationApplication.Avalonia.Other;
+using VisualizationApplication.Avalonia.Tools;
 
 namespace VisualizationApplication.Avalonia;
 
@@ -24,6 +25,9 @@ public partial class MainWindow : Window, IDisposable
         _reactionHandler = new MainWindowReactionHandler(_elements, this);
 
         _reactionHandler.FileLoaded += FileLoadedHandler;
+
+        ScenarioButton.Click += (_, _) => new ScenarioWindow().Show(this);
+        LoadOsmButton.Click += async (_, _) => await RoadNetworkLoader.LoadAsync(this);
 
         Closed += (_, _) => Dispose();
     }

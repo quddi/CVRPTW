@@ -8,4 +8,9 @@ public partial class ProgressWindow : Window
     {
         InitializeComponent();
     }
+
+    public void SetMessage(string message)
+    {
+        MessageTextBlock.Text = message;
+    }
 }

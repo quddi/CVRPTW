@@ -5,13 +5,15 @@
         xmlns:ScottPlot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="VisualizationApplication.Avalonia.MainWindow"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="1070">
     <Grid>
         <ScottPlot:AvaPlot x:Name="MainPlot" Margin="0,60,0,0"/>
-        <Button x:Name="LoadDataButton" Content="Заватнажити дані" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="45" Width="117" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <ComboBox x:Name="VisualizationComboBox" HorizontalAlignment="Left" Margin="132,10,0,0" VerticalAlignment="Top" Width="120" Height="45" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="OptimizeButton" Content="Оптимізувати" HorizontalAlignment="Left" Margin="257,10,0,0" VerticalAlignment="Top" Width="120" Height="45" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <TextBox x:Name="PathCostTextBox" Text="Вартість шляху: 100000000" Margin="579,10,10,0" VerticalAlignment="Top" Height="45" VerticalContentAlignment="Center" TextWrapping="Wrap" AcceptsReturn="True"/>
-        <ComboBox x:Name="OptimizationMethodComboBox" HorizontalAlignment="Left" Margin="382,10,0,0" VerticalAlignment="Top" Width="192" Height="45" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="ScenarioButton" Content="Вхідні дані" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="45" Width="117" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="LoadOsmButton" Content="Завантажити OSM" HorizontalAlignment="Left" Margin="137,10,0,0" VerticalAlignment="Top" Height="45" Width="122" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="LoadDataButton" Content="Заватнажити дані" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" Height="45" Width="117" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <ComboBox x:Name="VisualizationComboBox" HorizontalAlignment="Left" Margin="386,10,0,0" VerticalAlignment="Top" Width="120" Height="45" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="OptimizeButton" Content="Оптимізувати" HorizontalAlignment="Left" Margin="511,10,0,0" VerticalAlignment="Top" Width="120" Height="45" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="PathCostTextBox" Text="Вартість шляху: 100000000" Margin="833,10,10,0" VerticalAlignment="Top" Height="45" VerticalContentAlignment="Center" TextWrapping="Wrap" AcceptsReturn="True"/>
+        <ComboBox x:Name="OptimizationMethodComboBox" HorizontalAlignment="Left" Margin="636,10,0,0" VerticalAlignment="Top" Width="192" Height="45" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>
