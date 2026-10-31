@@ -5,6 +5,7 @@ using Avalonia;
 using Point = Avalonia.Point;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using CVRPTW;
 using ScottPlot;
 using ScottPlot.Avalonia;
@@ -28,6 +29,8 @@ public class ScenarioMap : IDisposable
 
     private readonly AvaPlot _plotControl;
     private readonly RoadsPlottable _roads = new();
+    private readonly TileLayer _tiles;
+    private readonly DispatcherTimer _tilesRedrawTimer;
     private readonly List<IPlottable> _dynamic = new();
     private Point? _pressedAt;
     private RoadSpatialIndex? _index;
@@ -36,7 +39,22 @@ public class ScenarioMap : IDisposable
     {
         _plotControl = plotControl;
 
+        var tileDirectory = System.IO.Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CVRPTW", "tiles");
+
+        _tiles = new TileLayer(tileDirectory) { ScaleProvider = () => plotControl.DisplayScale };
+
+        // Нові плитки надходять потоком: перемальовуємо не частіше за раз на 120 мс.
+        _tilesRedrawTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(120) };
+        _tilesRedrawTimer.Tick += (_, _) =>
+        {
+            _tilesRedrawTimer.Stop();
+            _plotControl.Refresh();
+        };
+        _tiles.TilesChanged += OnTilesChanged;
+
         var plot = plotControl.Plot;
+        plot.Add.Plottable(_tiles);
         plot.Add.Plottable(_roads);
         plot.HideGrid();
         plot.Axes.SquareUnits();
@@ -58,6 +76,18 @@ public class ScenarioMap : IDisposable
 
     // Скільки точок (склад і клієнти) лежать далі за поріг від найближчої дороги; оновлюється в Refresh.
     public int SpecialPointsCount { get; private set; }
+
+    // Підкладка з плиток OSM; дороги з OSM тоді малюються поверх лише при близькому масштабі.
+    public bool TilesEnabled
+    {
+        get => _tiles.IsVisible;
+        set
+        {
+            _tiles.IsVisible = value;
+            _roads.OverlayMode = value;
+            _plotControl.Refresh();
+        }
+    }
 
     public event Action<MapClick>? Clicked;
 
@@ -204,6 +234,11 @@ public class ScenarioMap : IDisposable
         AddMarker(snap.Latitude, snap.Longitude, MarkerShape.OpenCircle, 10, SpecialColor).LineWidth = 2;
     }
 
+    private void OnTilesChanged() => Dispatcher.UIThread.Post(() =>
+    {
+        if (!_tilesRedrawTimer.IsEnabled) _tilesRedrawTimer.Start();
+    });
+
     private void OnTooManyEdgesChanged(bool tooMany) => TooManyRoadsChanged?.Invoke(tooMany);
 
     private void PressedHandler(object? sender, PointerPressedEventArgs e)
@@ -251,6 +286,9 @@ public class ScenarioMap : IDisposable
     public void Dispose()
     {
         _roads.TooManyEdgesChanged -= OnTooManyEdgesChanged;
+        _tiles.TilesChanged -= OnTilesChanged;
+        _tilesRedrawTimer.Stop();
+        _tiles.Dispose();
         _plotControl.RemoveHandler(InputElement.PointerPressedEvent, PressedHandler);
         _plotControl.RemoveHandler(InputElement.PointerReleasedEvent, ReleasedHandler);
     }

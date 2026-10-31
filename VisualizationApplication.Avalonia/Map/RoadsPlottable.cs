@@ -21,6 +21,11 @@ public class RoadsPlottable : IPlottable
     // Більше кандидатів не малюємо: користувач має збільшити масштаб.
     public int MaxCandidateEdges { get; set; } = 300_000;
 
+    // Режим поверх плиток карти: лише детальні дороги при близькому масштабі, напівпрозорим кольором.
+    public bool OverlayMode { get; set; }
+
+    private const int OverlayMaxEdges = 40_000;
+
     public bool IsVisible { get; set; } = true;
 
     public IAxes Axes { get; set; } = new Axes();
@@ -44,7 +49,9 @@ public class RoadsPlottable : IPlottable
         var maxLatE7 = (int)(maxLat * scale);
         var maxLonE7 = (int)(maxLon * scale);
 
-        var index = Levels.FirstOrDefault(level => level.EstimateEdgeCount(minLatE7, minLonE7, maxLatE7, maxLonE7, MaxCandidateEdges) <= MaxCandidateEdges);
+        var limit = OverlayMode ? OverlayMaxEdges : MaxCandidateEdges;
+        var index = (OverlayMode ? Levels.Take(1) : Levels)
+            .FirstOrDefault(level => level.EstimateEdgeCount(minLatE7, minLonE7, maxLatE7, maxLonE7, limit) <= limit);
         SetTooManyEdges(index == null);
 
         if (index == null) return;
@@ -52,7 +59,7 @@ public class RoadsPlottable : IPlottable
         using var path = new SKPath();
         using var paint = new SKPaint
         {
-            Color = new SKColor(150, 150, 150),
+            Color = OverlayMode ? new SKColor(40, 90, 210, 150) : new SKColor(150, 150, 150),
             IsAntialias = true,
             Style = SKPaintStyle.Stroke,
             StrokeWidth = 1.2f

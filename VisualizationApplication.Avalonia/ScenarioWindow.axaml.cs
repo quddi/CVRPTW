@@ -33,7 +33,24 @@ public partial class ScenarioWindow : Window
 
         _map = new ScenarioMap(MapPlot) { Clients = _clients };
         _map.Clicked += MapClickedHandler;
-        _map.TooManyRoadsChanged += tooMany => RoadsHintBorder.IsVisible = tooMany;
+        _map.TooManyRoadsChanged += tooMany => RoadsHintBorder.IsVisible = tooMany && TilesCheckBox.IsChecked != true;
+        _map.TilesEnabled = true;
+        _map.Roads.IsVisible = false;
+        TilesCheckBox.IsCheckedChanged += (_, _) =>
+        {
+            _map.TilesEnabled = TilesCheckBox.IsChecked == true;
+
+            // Без плиток карту дають лише дороги з OSM.
+            if (TilesCheckBox.IsChecked != true) RoadsCheckBox.IsChecked = true;
+
+            AttributionBorder.IsVisible = TilesCheckBox.IsChecked == true;
+            RoadsHintBorder.IsVisible = false;
+        };
+        RoadsCheckBox.IsCheckedChanged += (_, _) =>
+        {
+            _map.Roads.IsVisible = RoadsCheckBox.IsChecked == true;
+            _map.Refresh();
+        };
         _map.SetRoads(RoadNetworkLoader.Current, RoadNetworkLoader.CurrentIndexLevels);
 
         _clients.CollectionChanged += (_, _) => RefreshMap();

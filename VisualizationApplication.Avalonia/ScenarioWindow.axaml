@@ -10,7 +10,9 @@
             <Button x:Name="SaveButton" Content="Зберегти у файл" Margin="0,0,24,0"/>
             <Button x:Name="LoadOsmButton" Content="Завантажити OSM" Margin="0,0,8,0"/>
             <Button x:Name="ZoomNetworkButton" Content="Вся карта" Margin="0,0,8,0"/>
-            <Button x:Name="ZoomButton" Content="До точок" Margin="0,0,24,0"/>
+            <Button x:Name="ZoomButton" Content="До точок" Margin="0,0,16,0"/>
+            <CheckBox x:Name="TilesCheckBox" Content="Плитки OSM" IsChecked="True" Margin="0,0,8,0"/>
+            <CheckBox x:Name="RoadsCheckBox" Content="Дороги з OSM" Margin="0,0,24,0"/>
             <TextBlock Text="Клік по карті:" VerticalAlignment="Center" Margin="0,0,8,0"/>
             <RadioButton x:Name="NavigateRadio" GroupName="MapMode" Content="вибрати клієнта" IsChecked="True" Margin="0,0,8,0"/>
             <RadioButton x:Name="DepotRadio" GroupName="MapMode" Content="поставити склад" Margin="0,0,8,0"/>
@@ -23,6 +25,10 @@
         <Grid ColumnDefinitions="*,8,560">
             <Grid Grid.Column="0">
                 <ScottPlot:AvaPlot x:Name="MapPlot"/>
+                <Border x:Name="AttributionBorder" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                        Margin="0,0,34,16" Padding="6,2" Background="#B3FFFFFF">
+                    <TextBlock Text="© учасники OpenStreetMap" Foreground="#333333" FontSize="11"/>
+                </Border>
                 <Border x:Name="RoadsHintBorder" IsVisible="False" VerticalAlignment="Top" HorizontalAlignment="Center"
                         Margin="0,10,0,0" Padding="10,4" CornerRadius="4" Background="#CC000000">
                     <TextBlock Text="Збільште масштаб, щоб побачити дороги" Foreground="White"/>
