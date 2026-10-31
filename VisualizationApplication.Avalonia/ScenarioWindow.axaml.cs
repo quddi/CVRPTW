@@ -8,6 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using CVRPTW;
+using VisualizationApplication.Avalonia.Map;
 using VisualizationApplication.Avalonia.Tools;
 
 namespace VisualizationApplication.Avalonia;
@@ -18,6 +19,8 @@ public partial class ScenarioWindow : Window
 
     private readonly ObservableCollection<ScenarioClient> _clients = new();
     private readonly ObservableCollection<ScenarioCar> _cars = new();
+    private readonly ScenarioMap _map;
+    private bool _suspendRefresh;
 
     public ScenarioWindow()
     {
@@ -25,6 +28,32 @@ public partial class ScenarioWindow : Window
 
         ClientsGrid.ItemsSource = _clients;
         CarsGrid.ItemsSource = _cars;
+
+        _map = new ScenarioMap(MapPlot) { Clients = _clients };
+        _map.Clicked += MapClickedHandler;
+        _map.TooManyRoadsChanged += tooMany => RoadsHintBorder.IsVisible = tooMany;
+        _map.SetRoads(RoadNetworkLoader.Current, RoadNetworkLoader.CurrentIndex);
+
+        _clients.CollectionChanged += (_, _) => RefreshMap();
+        ClientsGrid.CellEditEnded += (_, _) => RefreshMap();
+        ClientsGrid.SelectionChanged += (_, _) =>
+        {
+            _map.SelectedClient = ClientsGrid.SelectedItem as ScenarioClient;
+            RefreshMap();
+        };
+        DepotLatitudeTextBox.TextChanged += (_, _) => RefreshMap();
+        DepotLongitudeTextBox.TextChanged += (_, _) => RefreshMap();
+        SnapThresholdTextBox.TextChanged += (_, _) => RefreshMap();
+
+        LoadOsmButton.Click += async (_, _) => await RoadNetworkLoader.LoadAsync(this);
+        ZoomButton.Click += (_, _) => _map.ZoomToAll();
+
+        RoadNetworkLoader.Changed += RoadsChangedHandler;
+        Closed += (_, _) =>
+        {
+            RoadNetworkLoader.Changed -= RoadsChangedHandler;
+            _map.Dispose();
+        };
 
         NewButton.Click += (_, _) => ShowScenario(new Scenario(), "Створено порожній сценарій.");
         LoadButton.Click += LoadButtonClickHandler;
@@ -46,9 +75,12 @@ public partial class ScenarioWindow : Window
 
     private void ShowScenario(Scenario scenario, string status)
     {
+        _suspendRefresh = true;
+
         DepotLatitudeTextBox.Text = scenario.Depot?.Latitude.ToString(CultureInfo.InvariantCulture);
         DepotLongitudeTextBox.Text = scenario.Depot?.Longitude.ToString(CultureInfo.InvariantCulture);
         AverageSpeedTextBox.Text = scenario.AverageSpeedKmh.ToString(CultureInfo.InvariantCulture);
+        SnapThresholdTextBox.Text = scenario.SnapThresholdMeters.ToString(CultureInfo.InvariantCulture);
         AlternativeGroupsTextBox.Text = string.Join("; ", scenario.AlternativeGroups.Select(group => string.Join(",", group)));
 
         _clients.Clear();
@@ -58,6 +90,64 @@ public partial class ScenarioWindow : Window
         foreach (var car in scenario.Cars) _cars.Add(car);
 
         StatusTextBlock.Text = status;
+
+        _suspendRefresh = false;
+        RefreshMap();
+        _map.ZoomToAll();
+    }
+
+    private void RefreshMap()
+    {
+        if (_suspendRefresh) return;
+
+        _map.Depot = ReadDepot();
+        _map.SnapThresholdMeters = TryParseDouble(SnapThresholdTextBox.Text, out var threshold) && threshold >= 0
+            ? threshold
+            : Constants.DefaultSnapThresholdMeters;
+        _map.Refresh();
+
+        SpecialPointsTextBlock.Text = _map.SpecialPointsCount > 0 ? $"Особливих точок: {_map.SpecialPointsCount}" : string.Empty;
+    }
+
+    private ScenarioDepot? ReadDepot() =>
+        TryParseDouble(DepotLatitudeTextBox.Text, out var latitude) && TryParseDouble(DepotLongitudeTextBox.Text, out var longitude)
+            ? new ScenarioDepot { Latitude = latitude, Longitude = longitude }
+            : null;
+
+    private void RoadsChangedHandler()
+    {
+        _map.SetRoads(RoadNetworkLoader.Current, RoadNetworkLoader.CurrentIndex);
+        RefreshMap();
+        _map.ZoomToAll();
+    }
+
+    private void MapClickedHandler(MapClick click)
+    {
+        var latitude = Math.Round(click.Latitude, 6);
+        var longitude = Math.Round(click.Longitude, 6);
+
+        if (DepotRadio.IsChecked == true)
+        {
+            DepotLatitudeTextBox.Text = latitude.ToString(CultureInfo.InvariantCulture);
+            DepotLongitudeTextBox.Text = longitude.ToString(CultureInfo.InvariantCulture);
+        }
+        else if (ClientRadio.IsChecked == true)
+        {
+            var client = new ScenarioClient { Id = NextId(_clients.Select(existing => existing.Id)), Latitude = latitude, Longitude = longitude };
+            _clients.Add(client);
+            SelectClient(client);
+        }
+        else if (click.NearbyClient != null)
+        {
+            SelectClient(click.NearbyClient);
+        }
+    }
+
+    private void SelectClient(ScenarioClient client)
+    {
+        MainTabs.SelectedIndex = 1;
+        ClientsGrid.SelectedItem = client;
+        ClientsGrid.ScrollIntoView(client, null);
     }
 
     private async void LoadButtonClickHandler(object? sender, RoutedEventArgs e)
@@ -135,6 +225,14 @@ public partial class ScenarioWindow : Window
         }
 
         scenario.AverageSpeedKmh = speed;
+
+        if (!TryParseDouble(SnapThresholdTextBox.Text, out var threshold))
+        {
+            error = "Поріг відстані до дороги: некоректне число.";
+            return false;
+        }
+
+        scenario.SnapThresholdMeters = threshold;
 
         var hasLatitude = !string.IsNullOrWhiteSpace(DepotLatitudeTextBox.Text);
         var hasLongitude = !string.IsNullOrWhiteSpace(DepotLongitudeTextBox.Text);

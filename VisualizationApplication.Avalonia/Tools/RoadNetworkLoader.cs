@@ -17,6 +17,10 @@ public static class RoadNetworkLoader
     // Дорожня мережа, завантажена останньою; null, доки користувач не завантажив OSM.
     public static RoadNetwork? Current { get; private set; }
 
+    public static RoadSpatialIndex? CurrentIndex { get; private set; }
+
+    public static event Action? Changed;
+
     public static async Task LoadAsync(Window owner)
     {
         var files = await owner.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
@@ -36,12 +40,20 @@ public static class RoadNetworkLoader
             return;
         }
 
-        var network = await VisualizationExtensions.StartAsProgress(owner, "Завантаження OSM...",
-            progress => RoadNetworkCache.LoadOrBuild(path, CacheDirectory, progress));
+        var loaded = await VisualizationExtensions.StartAsProgress(owner, "Завантаження OSM...", progress =>
+        {
+            var road = RoadNetworkCache.LoadOrBuild(path, CacheDirectory, progress);
+            progress.Report("Побудова індексу доріг...");
 
-        if (network == null) return;
+            return (Network: road, Index: new RoadSpatialIndex(road));
+        });
 
+        if (loaded.Network == null) return;
+
+        var network = loaded.Network;
         Current = network;
+        CurrentIndex = loaded.Index;
+        Changed?.Invoke();
 
         await MessageBox.Show(owner,
             $"Завантажено: {files[0].Name}\n" +

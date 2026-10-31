@@ -41,6 +41,11 @@ public class RoadNetwork
 
     public int EdgeCount => EdgeFrom.Length;
 
+    // Межі вершин у градусах: (мінімальна широта, мінімальна довгота, максимальна широта, максимальна довгота).
+    public (double MinLatitude, double MinLongitude, double MaxLatitude, double MaxLongitude) GetBounds() =>
+        (NodeLatitudes.Min() / CoordinateScale, NodeLongitudes.Min() / CoordinateScale,
+            NodeLatitudes.Max() / CoordinateScale, NodeLongitudes.Max() / CoordinateScale);
+
     public static long GetTurnKey(int fromEdge, int toEdge) => ((long)fromEdge << 32) | (uint)toEdge;
 
     public bool IsTurnForbidden(int fromEdge, int toEdge) =>

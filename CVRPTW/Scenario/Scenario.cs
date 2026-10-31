@@ -10,6 +10,9 @@ public class Scenario
 
     public double AverageSpeedKmh { get; set; } = Constants.DefaultAverageSpeedKmh;
 
+    // Точка далі за цю відстань від дороги вважається особливою.
+    public double SnapThresholdMeters { get; set; } = Constants.DefaultSnapThresholdMeters;
+
     public List<ScenarioClient> Clients { get; set; } = new();
 
     public List<ScenarioCar> Cars { get; set; } = new();
@@ -23,6 +26,9 @@ public class Scenario
 
         if (AverageSpeedKmh <= 0)
             errors.Add("Середня швидкість має бути більшою за 0.");
+
+        if (SnapThresholdMeters < 0)
+            errors.Add("Поріг відстані до дороги не може бути від'ємним.");
 
         foreach (var duplicate in Clients.GroupBy(client => client.Id).Where(group => group.Count() > 1))
             errors.Add($"Id клієнта {duplicate.Key} повторюється.");

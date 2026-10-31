@@ -1,71 +1,93 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ScottPlot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
         x:Class="VisualizationApplication.Avalonia.ScenarioWindow"
-        Title="Вхідні дані" Height="560" Width="900">
+        Title="Вхідні дані" Height="720" Width="1300">
     <DockPanel Margin="10">
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="8" Margin="0,0,0,10">
-            <Button x:Name="NewButton" Content="Новий"/>
-            <Button x:Name="LoadButton" Content="Завантажити з файлу"/>
-            <Button x:Name="SaveButton" Content="Зберегти у файл"/>
-        </StackPanel>
+        <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+            <Button x:Name="NewButton" Content="Новий" Margin="0,0,8,0"/>
+            <Button x:Name="LoadButton" Content="Завантажити з файлу" Margin="0,0,8,0"/>
+            <Button x:Name="SaveButton" Content="Зберегти у файл" Margin="0,0,24,0"/>
+            <Button x:Name="LoadOsmButton" Content="Завантажити OSM" Margin="0,0,8,0"/>
+            <Button x:Name="ZoomButton" Content="Показати все" Margin="0,0,24,0"/>
+            <TextBlock Text="Клік по карті:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <RadioButton x:Name="NavigateRadio" GroupName="MapMode" Content="вибрати клієнта" IsChecked="True" Margin="0,0,8,0"/>
+            <RadioButton x:Name="DepotRadio" GroupName="MapMode" Content="поставити склад" Margin="0,0,8,0"/>
+            <RadioButton x:Name="ClientRadio" GroupName="MapMode" Content="додати клієнта" Margin="0,0,24,0"/>
+            <TextBlock x:Name="SpecialPointsTextBlock" VerticalAlignment="Center"/>
+        </WrapPanel>
 
         <TextBlock x:Name="StatusTextBlock" DockPanel.Dock="Bottom" Margin="0,10,0,0" TextWrapping="Wrap"/>
 
-        <TabControl>
-            <TabItem Header="Загальне">
-                <StackPanel Spacing="8" Margin="10" MaxWidth="460" HorizontalAlignment="Left">
-                    <TextBlock Text="Склад (широта, довгота; порожньо, якщо не задано)"/>
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <TextBox x:Name="DepotLatitudeTextBox" Width="150" PlaceholderText="Широта"/>
-                        <TextBox x:Name="DepotLongitudeTextBox" Width="150" PlaceholderText="Довгота"/>
-                    </StackPanel>
-                    <TextBlock Text="Середня швидкість, км/год" Margin="0,10,0,0"/>
-                    <TextBox x:Name="AverageSpeedTextBox" Width="150" HorizontalAlignment="Left"/>
-                    <TextBlock Text="Групи альтернативних клієнтів (Id через кому, групи через «;», напр. 1,2,3; 4,5)" Margin="0,10,0,0" TextWrapping="Wrap"/>
-                    <TextBox x:Name="AlternativeGroupsTextBox"/>
-                </StackPanel>
-            </TabItem>
+        <Grid ColumnDefinitions="*,8,560">
+            <Grid Grid.Column="0">
+                <ScottPlot:AvaPlot x:Name="MapPlot"/>
+                <Border x:Name="RoadsHintBorder" IsVisible="False" VerticalAlignment="Top" HorizontalAlignment="Center"
+                        Margin="0,10,0,0" Padding="10,4" CornerRadius="4" Background="#CC000000">
+                    <TextBlock Text="Збільште масштаб, щоб побачити дороги" Foreground="White"/>
+                </Border>
+            </Grid>
 
-            <TabItem Header="Клієнти">
-                <DockPanel>
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="8" Margin="0,8">
-                        <Button x:Name="AddClientButton" Content="Додати клієнта"/>
-                        <Button x:Name="RemoveClientButton" Content="Видалити вибраного"/>
-                        <TextBlock Text="Час — хвилини від початку доби; штрафи — за хвилину" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <DataGrid x:Name="ClientsGrid" x:CompileBindings="False" AutoGenerateColumns="False" CanUserSortColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                            <DataGridTextColumn Header="Широта" Binding="{Binding Latitude}"/>
-                            <DataGridTextColumn Header="Довгота" Binding="{Binding Longitude}"/>
-                            <DataGridTextColumn Header="Попит" Binding="{Binding Demand}"/>
-                            <DataGridTextColumn Header="Вікно: початок" Binding="{Binding TimeWindowStart}"/>
-                            <DataGridTextColumn Header="Вікно: кінець" Binding="{Binding TimeWindowEnd}"/>
-                            <DataGridTextColumn Header="Обслуговування" Binding="{Binding ServiceTime}"/>
-                            <DataGridTextColumn Header="Штраф запізнення" Binding="{Binding LatePenalty}"/>
-                            <DataGridTextColumn Header="Штраф очікування" Binding="{Binding WaitPenalty}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </DockPanel>
-            </TabItem>
+            <GridSplitter Grid.Column="1"/>
 
-            <TabItem Header="Автомобілі">
-                <DockPanel>
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="8" Margin="0,8">
-                        <Button x:Name="AddCarButton" Content="Додати авто"/>
-                        <Button x:Name="RemoveCarButton" Content="Видалити вибране"/>
-                        <TextBlock Text="Час — хвилини від початку доби" VerticalAlignment="Center"/>
+            <TabControl x:Name="MainTabs" Grid.Column="2">
+                <TabItem Header="Загальне">
+                    <StackPanel Spacing="8" Margin="10" HorizontalAlignment="Left">
+                        <TextBlock Text="Склад (широта, довгота; порожньо, якщо не задано)"/>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBox x:Name="DepotLatitudeTextBox" Width="150" PlaceholderText="Широта"/>
+                            <TextBox x:Name="DepotLongitudeTextBox" Width="150" PlaceholderText="Довгота"/>
+                        </StackPanel>
+                        <TextBlock Text="Середня швидкість, км/год" Margin="0,10,0,0"/>
+                        <TextBox x:Name="AverageSpeedTextBox" Width="150" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Поріг відстані до дороги, м (далі — особлива точка)" Margin="0,10,0,0" TextWrapping="Wrap"/>
+                        <TextBox x:Name="SnapThresholdTextBox" Width="150" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Групи альтернативних клієнтів (Id через кому, групи через «;», напр. 1,2,3; 4,5)" Margin="0,10,0,0" TextWrapping="Wrap" MaxWidth="420"/>
+                        <TextBox x:Name="AlternativeGroupsTextBox" Width="420"/>
                     </StackPanel>
-                    <DataGrid x:Name="CarsGrid" x:CompileBindings="False" AutoGenerateColumns="False" CanUserSortColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                            <DataGridTextColumn Header="Місткість" Binding="{Binding Capacity}"/>
-                            <DataGridTextColumn Header="Зміна: початок" Binding="{Binding TimeWindowStart}"/>
-                            <DataGridTextColumn Header="Зміна: кінець" Binding="{Binding TimeWindowEnd}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </DockPanel>
-            </TabItem>
-        </TabControl>
+                </TabItem>
+
+                <TabItem Header="Клієнти">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="8" Margin="0,8">
+                            <Button x:Name="AddClientButton" Content="Додати клієнта"/>
+                            <Button x:Name="RemoveClientButton" Content="Видалити вибраного"/>
+                        </StackPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Час — хвилини від початку доби; штрафи — за хвилину" Margin="0,0,0,6" TextWrapping="Wrap"/>
+                        <DataGrid x:Name="ClientsGrid" x:CompileBindings="False" AutoGenerateColumns="False" CanUserSortColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Header="Широта" Binding="{Binding Latitude}"/>
+                                <DataGridTextColumn Header="Довгота" Binding="{Binding Longitude}"/>
+                                <DataGridTextColumn Header="Попит" Binding="{Binding Demand}"/>
+                                <DataGridTextColumn Header="Вікно: початок" Binding="{Binding TimeWindowStart}"/>
+                                <DataGridTextColumn Header="Вікно: кінець" Binding="{Binding TimeWindowEnd}"/>
+                                <DataGridTextColumn Header="Обслуговування" Binding="{Binding ServiceTime}"/>
+                                <DataGridTextColumn Header="Штраф запізнення" Binding="{Binding LatePenalty}"/>
+                                <DataGridTextColumn Header="Штраф очікування" Binding="{Binding WaitPenalty}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </TabItem>
+
+                <TabItem Header="Автомобілі">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="8" Margin="0,8">
+                            <Button x:Name="AddCarButton" Content="Додати авто"/>
+                            <Button x:Name="RemoveCarButton" Content="Видалити вибране"/>
+                        </StackPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Час — хвилини від початку доби" Margin="0,0,0,6"/>
+                        <DataGrid x:Name="CarsGrid" x:CompileBindings="False" AutoGenerateColumns="False" CanUserSortColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Header="Місткість" Binding="{Binding Capacity}"/>
+                                <DataGridTextColumn Header="Зміна: початок" Binding="{Binding TimeWindowStart}"/>
+                                <DataGridTextColumn Header="Зміна: кінець" Binding="{Binding TimeWindowEnd}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </TabItem>
+            </TabControl>
+        </Grid>
     </DockPanel>
 </Window>

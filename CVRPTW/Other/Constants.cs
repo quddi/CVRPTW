@@ -16,6 +16,7 @@ public static class Constants
     public const int MissingCarCapacity = 50;
     public const int MinutesInDay = 1440;
     public const double DefaultAverageSpeedKmh = 40;
+    public const double DefaultSnapThresholdMeters = 100;
         
     public static readonly char[] DefaultSplitDividers = [','];
     public static readonly char[] PointsSplitDividers = ['(', ';', ')'];
