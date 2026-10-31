@@ -4,14 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="100"
         x:Class="VisualizationApplication.Avalonia.ProgressWindow"
-        Title="Оптимізація в процесі..." Height="100" Width="300"
+        Title="Оптимізація в процесі..." Height="100" Width="380"
         WindowStartupLocation="CenterOwner">
     <Grid>
         <StackPanel VerticalAlignment="Center" Margin="10">
             <TextBlock x:Name="MessageTextBlock" Text="Оптимізація в процесі..." 
                        HorizontalAlignment="Center" 
                        Margin="0,0,0,10"/>
-            <ProgressBar Height="20" 
+            <ProgressBar x:Name="Bar" Minimum="0" Maximum="1" Height="20" 
                          IsIndeterminate="True"
                          Foreground="Green"/>
         </StackPanel>

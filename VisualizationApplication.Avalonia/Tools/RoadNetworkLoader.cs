@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using Avalonia.Platform.Storage;
 using CVRPTW;
 using VisualizationApplication.Avalonia.Other;
 
@@ -11,7 +10,11 @@ namespace VisualizationApplication.Avalonia.Tools;
 
 public static class RoadNetworkLoader
 {
-    private static readonly string CacheDirectory =
+    private const string OsmUrl = "https://download.geofabrik.de/europe/ukraine-latest.osm.pbf";
+    private const string OsmFileName = "ukraine-latest.osm.pbf";
+    private const double BytesInMegabyte = 1024 * 1024;
+
+    private static readonly string DataDirectory =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CVRPTW");
 
     // Дорожня мережа, завантажена останньою; null, доки користувач не завантажив OSM.
@@ -21,31 +24,39 @@ public static class RoadNetworkLoader
 
     public static event Action? Changed;
 
+    /// <summary>
+    /// Завантажує свіжий файл OSM України з інтернету поверх наявного й будує дорожню мережу.
+    /// Якщо завантажити не вдалося, а старий файл є, використовується він.
+    /// </summary>
     public static async Task LoadAsync(Window owner)
     {
-        var files = await owner.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        var path = Path.Combine(DataDirectory, "osm", OsmFileName);
+
+        var loaded = await VisualizationExtensions.StartAsProgress(owner, "Завантаження OSM...", async (messages, fractions) =>
         {
-            Title = "Оберіть файл OSM (.osm.pbf)",
-            AllowMultiple = false,
-            FileTypeFilter = [new FilePickerFileType("OSM (*.pbf)") { Patterns = ["*.pbf"] }]
-        });
+            string? downloadError = null;
 
-        if (files.Count == 0) return;
+            try
+            {
+                await OsmDownloader.DownloadAsync(OsmUrl, path, (received, total) =>
+                {
+                    messages.Report(total == null
+                        ? $"Завантаження OSM: {received / BytesInMegabyte:F0} МБ"
+                        : $"Завантаження OSM: {received / BytesInMegabyte:F0} / {total / BytesInMegabyte:F0} МБ");
+                    fractions.Report(total == null ? null : (double)received / total.Value);
+                });
+            }
+            catch (Exception exception) when (File.Exists(path))
+            {
+                downloadError = exception.Message;
+            }
 
-        var path = files[0].TryGetLocalPath();
+            fractions.Report(null);
 
-        if (path == null)
-        {
-            await MessageBox.Show(owner, "Файл має бути на локальному диску.");
-            return;
-        }
+            var road = RoadNetworkCache.LoadOrBuild(path, DataDirectory, messages);
+            messages.Report("Побудова індексу доріг...");
 
-        var loaded = await VisualizationExtensions.StartAsProgress(owner, "Завантаження OSM...", progress =>
-        {
-            var road = RoadNetworkCache.LoadOrBuild(path, CacheDirectory, progress);
-            progress.Report("Побудова індексу доріг...");
-
-            return (Network: road, Index: new RoadSpatialIndex(road));
+            return (Network: road, Index: new RoadSpatialIndex(road), DownloadError: downloadError);
         });
 
         if (loaded.Network == null) return;
@@ -56,7 +67,7 @@ public static class RoadNetworkLoader
         Changed?.Invoke();
 
         await MessageBox.Show(owner,
-            $"Завантажено: {files[0].Name}\n" +
+            (loaded.DownloadError == null ? "Файл OSM оновлено.\n" : $"Не вдалося оновити файл ({loaded.DownloadError}), використано наявний.\n") +
             $"Вершин: {network.NodeCount}, напрямлених ребер: {network.EdgeCount}\n" +
             $"Довжина доріг: {network.EdgeLength.Sum(length => (double)length) / 1000:F1} км\n" +
             $"Заборон поворотів: {network.ForbiddenTurns.Length} (обмежень застосовано: {network.RestrictionsApplied}, " +

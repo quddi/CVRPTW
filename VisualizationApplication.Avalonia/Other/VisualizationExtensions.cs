@@ -12,8 +12,8 @@ public static class VisualizationExtensions
         return new ScottPlot.Coordinates(coordinates.Latitude, coordinates.Longitude);
     }
 
-    // work отримує IProgress<string>, повідомлення якого показуються у вікні прогресу.
-    public static async Task<T?> StartAsProgress<T>(Window? owner, string message, Func<IProgress<string>, T> work)
+    // work отримує IProgress<string> (повідомлення) і IProgress<double?> (частка виконаного 0..1 або null).
+    public static async Task<T?> StartAsProgress<T>(Window? owner, string message, Func<IProgress<string>, IProgress<double?>, Task<T>> work)
     {
         var progressWindow = new ProgressWindow
         {
@@ -30,9 +30,10 @@ public static class VisualizationExtensions
             else
                 progressWindow.Show();
 
-            var progress = new Progress<string>(progressWindow.SetMessage);
+            var messages = new Progress<string>(progressWindow.SetMessage);
+            var fractions = new Progress<double?>(progressWindow.SetFraction);
 
-            return await Task.Run(() => work(progress));
+            return await Task.Run(() => work(messages, fractions));
         }
         catch (Exception ex)
         {
@@ -44,6 +45,9 @@ public static class VisualizationExtensions
             progressWindow.Close();
         }
     }
+
+    public static Task<T?> StartAsProgress<T>(Window? owner, string message, Func<IProgress<string>, T> work) =>
+        StartAsProgress(owner, message, (messages, _) => Task.FromResult(work(messages)));
 
     public static async Task StartAsProgress(Window? owner, Action action)
     {
