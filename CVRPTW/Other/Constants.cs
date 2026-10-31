@@ -14,6 +14,8 @@ public static class Constants
     public const double DoubleComparisonTolerance = 0.000001;
     public const int MissingPointDemand = 1;
     public const int MissingCarCapacity = 50;
+    public const int MinutesInDay = 1440;
+    public const double DefaultAverageSpeedKmh = 40;
         
     public static readonly char[] DefaultSplitDividers = [','];
     public static readonly char[] PointsSplitDividers = ['(', ';', ')'];
