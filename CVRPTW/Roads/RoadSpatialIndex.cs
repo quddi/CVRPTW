@@ -6,25 +6,30 @@ namespace CVRPTW;
 /// </summary>
 public class RoadSpatialIndex
 {
-    // 0,01° ≈ 1,1 км по широті.
-    private const int CellSize = 100_000;
     private const double MetersPerDegree = 111_320;
 
     private readonly RoadNetwork _network;
+    private readonly int _cellSize;
     private readonly Dictionary<long, List<int>> _cells = new();
     private readonly int[] _visited;
     private readonly int _minCellX, _maxCellX, _minCellY, _maxCellY;
     private int _stamp;
 
-    public RoadSpatialIndex(RoadNetwork network)
+    /// <param name="network">Дорожня мережа.</param>
+    /// <param name="maxRank">До індексу потрапляють лише ребра з важливістю не більше цієї (2 — усі дороги).</param>
+    /// <param name="cellSize">Розмір комірки в 1e-7 градуса; 100 000 ≈ 1,1 км по широті.</param>
+    public RoadSpatialIndex(RoadNetwork network, int maxRank = 2, int cellSize = 100_000)
     {
         _network = network;
+        _cellSize = cellSize;
         _visited = new int[network.EdgeCount];
         _minCellX = _minCellY = int.MaxValue;
         _maxCellX = _maxCellY = int.MinValue;
 
         for (var edge = 0; edge < network.EdgeCount; edge++)
         {
+            if (network.EdgeRank[edge] > maxRank) continue;
+
             int minLat = int.MaxValue, maxLat = int.MinValue, minLon = int.MaxValue, maxLon = int.MinValue;
 
             for (var i = network.EdgeGeometryStart[edge]; i < network.EdgeGeometryStart[edge + 1]; i++)
@@ -50,19 +55,24 @@ public class RoadSpatialIndex
         }
     }
 
-    private static int GetCell(int coordinate) => (int)Math.Floor(coordinate / (double)CellSize);
+    private int GetCell(int coordinate) => (int)Math.Floor(coordinate / (double)_cellSize);
 
     private static long GetKey(int cellX, int cellY) => ((long)cellX << 32) | (uint)cellY;
 
     // Скільки ребер (з повторами) лежить у комірках області; дешевша оцінка перед QueryEdges.
-    public int EstimateEdgeCount(int minLat, int minLon, int maxLat, int maxLon)
+    // Підрахунок зупиняється, щойно перевищено limit, тож перевірка «надто багато» лишається швидкою.
+    public int EstimateEdgeCount(int minLat, int minLon, int maxLat, int maxLon, int limit = int.MaxValue)
     {
         var count = 0;
 
         lock (_cells)
         {
             foreach (var list in GetCellLists(minLat, minLon, maxLat, maxLon))
+            {
                 count += list.Count;
+
+                if (count > limit) break;
+            }
         }
 
         return count;
@@ -115,7 +125,7 @@ public class RoadSpatialIndex
         var centerY = GetCell((int)latE7);
 
         var metersPerLon = MetersPerDegree * Math.Cos(latitude * Math.PI / 180);
-        var minCellMeters = CellSize / RoadNetwork.CoordinateScale * Math.Min(MetersPerDegree, metersPerLon);
+        var minCellMeters = _cellSize / RoadNetwork.CoordinateScale * Math.Min(MetersPerDegree, metersPerLon);
         var maxRing = Math.Max(Math.Max(Math.Abs(centerX - _minCellX), Math.Abs(centerX - _maxCellX)),
             Math.Max(Math.Abs(centerY - _minCellY), Math.Abs(centerY - _maxCellY)));
 

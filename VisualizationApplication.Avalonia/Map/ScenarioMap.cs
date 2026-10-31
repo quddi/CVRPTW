@@ -63,12 +63,15 @@ public class ScenarioMap : IDisposable
 
     public event Action<bool>? TooManyRoadsChanged;
 
-    public void SetRoads(RoadNetwork? network, RoadSpatialIndex? index)
+    // levels[0] — повний індекс (для прив'язки точок), далі грубіші рівні для малювання на малих масштабах.
+    public void SetRoads(RoadNetwork? network, IReadOnlyList<RoadSpatialIndex>? levels)
     {
         _roads.Network = network;
-        _roads.Index = index;
-        _index = index;
+        _roads.Levels = levels ?? Array.Empty<RoadSpatialIndex>();
+        _index = levels?.FirstOrDefault();
     }
+
+    public RoadsPlottable Roads => _roads;
 
     public void Refresh()
     {
@@ -109,18 +112,27 @@ public class ScenarioMap : IDisposable
         _plotControl.Refresh();
     }
 
+    // Показує всі точки сценарію; без точок — усю дорожню мережу.
     public void ZoomToAll()
     {
         var points = Clients.Select(client => (client.Latitude, client.Longitude)).ToList();
         if (Depot != null) points.Add((Depot.Latitude, Depot.Longitude));
 
-        if (points.Count == 0 && _roads.Network != null)
-        {
-            var (minLat, minLon, maxLat, maxLon) = _roads.Network.GetBounds();
-            points.Add((minLat, minLon));
-            points.Add((maxLat, maxLon));
-        }
+        if (points.Count == 0) ZoomToNetwork();
+        else ZoomTo(points);
+    }
 
+    // Вміщує всю завантажену дорожню мережу у вікно карти.
+    public void ZoomToNetwork()
+    {
+        if (_roads.Network == null) return;
+
+        var (minLat, minLon, maxLat, maxLon) = _roads.Network.GetBounds();
+        ZoomTo([(minLat, minLon), (maxLat, maxLon)]);
+    }
+
+    private void ZoomTo(List<(double Latitude, double Longitude)> points)
+    {
         if (points.Count == 0) return;
 
         var mapPoints = points.Select(point => MapProjection.ToMap(point.Latitude, point.Longitude)).ToList();

@@ -10,7 +10,7 @@ public static class RoadNetworkCache
     private const string Magic = "CVRPTWRN";
 
     // Збільшувати при зміні профілю доріг або формату, щоб старі кеші відкидалися.
-    private const int FormatVersion = 1;
+    private const int FormatVersion = 2;
 
     public static RoadNetwork LoadOrBuild(string pbfPath, string cacheDirectory, IProgress<string>? progress = null)
     {
@@ -57,6 +57,7 @@ public static class RoadNetworkCache
                 EdgeTo = ReadArray<int>(stream),
                 EdgeLength = ReadArray<float>(stream),
                 EdgeReverse = ReadArray<int>(stream),
+                EdgeRank = ReadArray<byte>(stream),
                 EdgeGeometryStart = ReadArray<int>(stream),
                 GeometryLatitudes = ReadArray<int>(stream),
                 GeometryLongitudes = ReadArray<int>(stream),
@@ -95,6 +96,7 @@ public static class RoadNetworkCache
             WriteArray(stream, network.EdgeTo);
             WriteArray(stream, network.EdgeLength);
             WriteArray(stream, network.EdgeReverse);
+            WriteArray(stream, network.EdgeRank);
             WriteArray(stream, network.EdgeGeometryStart);
             WriteArray(stream, network.GeometryLatitudes);
             WriteArray(stream, network.GeometryLongitudes);

@@ -27,7 +27,12 @@ public partial class MainWindow : Window, IDisposable
         _reactionHandler.FileLoaded += FileLoadedHandler;
 
         ScenarioButton.Click += (_, _) => new ScenarioWindow().Show(this);
-        LoadOsmButton.Click += async (_, _) => await RoadNetworkLoader.LoadAsync(this);
+
+        // Раніше завантажений OSM підхоплюється автоматично; без файлу кнопка завантаження у «Вхідні дані» підсвічується зеленим.
+        Opened += async (_, _) =>
+        {
+            if (RoadNetworkLoader.IsOsmFilePresent) await RoadNetworkLoader.LoadAsync(this, download: false);
+        };
 
         Closed += (_, _) => Dispose();
     }

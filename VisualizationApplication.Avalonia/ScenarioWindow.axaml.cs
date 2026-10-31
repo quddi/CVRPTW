@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Media;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using CVRPTW;
@@ -32,7 +34,7 @@ public partial class ScenarioWindow : Window
         _map = new ScenarioMap(MapPlot) { Clients = _clients };
         _map.Clicked += MapClickedHandler;
         _map.TooManyRoadsChanged += tooMany => RoadsHintBorder.IsVisible = tooMany;
-        _map.SetRoads(RoadNetworkLoader.Current, RoadNetworkLoader.CurrentIndex);
+        _map.SetRoads(RoadNetworkLoader.Current, RoadNetworkLoader.CurrentIndexLevels);
 
         _clients.CollectionChanged += (_, _) => RefreshMap();
         ClientsGrid.CellEditEnded += (_, _) => RefreshMap();
@@ -47,7 +49,10 @@ public partial class ScenarioWindow : Window
 
         LoadOsmButton.Click += async (_, _) => await RoadNetworkLoader.LoadAsync(this);
         ZoomButton.Click += (_, _) => _map.ZoomToAll();
+        ZoomNetworkButton.Click += (_, _) => _map.ZoomToNetwork();
+        Opened += (_, _) => _map.ZoomToAll();
 
+        UpdateOsmButton();
         RoadNetworkLoader.Changed += RoadsChangedHandler;
         Closed += (_, _) =>
         {
@@ -116,9 +121,27 @@ public partial class ScenarioWindow : Window
 
     private void RoadsChangedHandler()
     {
-        _map.SetRoads(RoadNetworkLoader.Current, RoadNetworkLoader.CurrentIndex);
+        _map.SetRoads(RoadNetworkLoader.Current, RoadNetworkLoader.CurrentIndexLevels);
         RefreshMap();
-        _map.ZoomToAll();
+        _map.ZoomToNetwork();
+        UpdateOsmButton();
+    }
+
+    // Зелена кнопка підказує, що файлу OSM ще немає й його треба завантажити.
+    private void UpdateOsmButton()
+    {
+        if (RoadNetworkLoader.IsOsmFilePresent)
+        {
+            LoadOsmButton.ClearValue(TemplatedControl.BackgroundProperty);
+            LoadOsmButton.ClearValue(TemplatedControl.ForegroundProperty);
+            ToolTip.SetTip(LoadOsmButton, null);
+        }
+        else
+        {
+            LoadOsmButton.Background = Brushes.SeaGreen;
+            LoadOsmButton.Foreground = Brushes.White;
+            ToolTip.SetTip(LoadOsmButton, "Файл OSM ще не завантажено");
+        }
     }
 
     private void MapClickedHandler(MapClick click)

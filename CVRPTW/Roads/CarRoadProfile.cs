@@ -61,6 +61,19 @@ public static class CarRoadProfile
         return impliedOneway ? RoadDirection.Forward : RoadDirection.Both;
     }
 
+    // Важливість дороги для малювання на малих масштабах: 0 — траси, 1 — районні, 2 — решта.
+    public static byte GetRank(TagsCollectionBase tags)
+    {
+        tags.TryGetValue("highway", out var highway);
+
+        return highway switch
+        {
+            "motorway" or "motorway_link" or "trunk" or "trunk_link" or "primary" or "primary_link" => 0,
+            "secondary" or "secondary_link" or "tertiary" or "tertiary_link" => 1,
+            _ => 2
+        };
+    }
+
     // Обмеження, що не стосується автомобілів («except=motorcar» тощо), пропускаємо.
     public static bool AppliesToCars(TagsCollectionBase tags) =>
         !tags.TryGetValue("except", out var except) ||

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Avalonia.Threading;
 using CVRPTW;
 using ScottPlot;
@@ -10,14 +11,15 @@ namespace VisualizationApplication.Avalonia.Map;
 /// <summary>Малює лише ті дороги, що потрапили у видиму область.</summary>
 public class RoadsPlottable : IPlottable
 {
-    // Більше кандидатів не малюємо: користувач має збільшити масштаб.
-    private const int MaxCandidateEdges = 300_000;
-
     private bool _tooManyEdges;
 
     public RoadNetwork? Network { get; set; }
 
-    public RoadSpatialIndex? Index { get; set; }
+    // Індекси від найдетальнішого до найгрубішого (лише важливі дороги); малюється перший, що не надто великий.
+    public IReadOnlyList<RoadSpatialIndex> Levels { get; set; } = Array.Empty<RoadSpatialIndex>();
+
+    // Більше кандидатів не малюємо: користувач має збільшити масштаб.
+    public int MaxCandidateEdges { get; set; } = 300_000;
 
     public bool IsVisible { get; set; } = true;
 
@@ -31,7 +33,7 @@ public class RoadsPlottable : IPlottable
 
     public void Render(RenderPack rp)
     {
-        if (Network == null || Index == null) return;
+        if (Network == null || Levels.Count == 0) return;
 
         var (minLat, minLon) = MapProjection.ToLatLon(Axes.XAxis.Min, Axes.YAxis.Min);
         var (maxLat, maxLon) = MapProjection.ToLatLon(Axes.XAxis.Max, Axes.YAxis.Max);
@@ -42,10 +44,10 @@ public class RoadsPlottable : IPlottable
         var maxLatE7 = (int)(maxLat * scale);
         var maxLonE7 = (int)(maxLon * scale);
 
-        var tooMany = Index.EstimateEdgeCount(minLatE7, minLonE7, maxLatE7, maxLonE7) > MaxCandidateEdges;
-        SetTooManyEdges(tooMany);
+        var index = Levels.FirstOrDefault(level => level.EstimateEdgeCount(minLatE7, minLonE7, maxLatE7, maxLonE7, MaxCandidateEdges) <= MaxCandidateEdges);
+        SetTooManyEdges(index == null);
 
-        if (tooMany) return;
+        if (index == null) return;
 
         using var path = new SKPath();
         using var paint = new SKPaint
@@ -56,7 +58,7 @@ public class RoadsPlottable : IPlottable
             StrokeWidth = 1.2f
         };
 
-        foreach (var edge in Index.QueryEdges(minLatE7, minLonE7, maxLatE7, maxLonE7))
+        foreach (var edge in index.QueryEdges(minLatE7, minLonE7, maxLatE7, maxLonE7))
         {
             // Двосторонню дорогу малюємо один раз.
             if (Network.EdgeReverse[edge] is var reverse and >= 0 && reverse < edge) continue;

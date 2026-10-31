@@ -19,6 +19,9 @@ public class RoadNetwork
     // Довжина ребра в метрах.
     public required float[] EdgeLength { get; init; }
 
+    // Важливість дороги (див. CarRoadProfile.GetRank).
+    public required byte[] EdgeRank { get; init; }
+
     // Ребро в протилежному напрямку тієї самої ділянки або -1 для односторонніх.
     public required int[] EdgeReverse { get; init; }
 

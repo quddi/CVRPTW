@@ -17,20 +17,27 @@ public static class RoadNetworkLoader
     private static readonly string DataDirectory =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CVRPTW");
 
+    private static readonly string OsmPath = Path.Combine(DataDirectory, "osm", OsmFileName);
+
+    // Чи є на диску раніше завантажений файл OSM.
+    public static bool IsOsmFilePresent => File.Exists(OsmPath);
+
     // Дорожня мережа, завантажена останньою; null, доки користувач не завантажив OSM.
     public static RoadNetwork? Current { get; private set; }
 
-    public static RoadSpatialIndex? CurrentIndex { get; private set; }
+    // Індекси від повного до грубого (лише траси); [0] придатний для пошуку найближчої дороги.
+    public static RoadSpatialIndex[] CurrentIndexLevels { get; private set; } = [];
 
     public static event Action? Changed;
 
     /// <summary>
-    /// Завантажує свіжий файл OSM України з інтернету поверх наявного й будує дорожню мережу.
-    /// Якщо завантажити не вдалося, а старий файл є, використовується він.
+    /// Будує дорожню мережу з файлу OSM України. Із download = true спершу завантажує свіжий файл з інтернету
+    /// поверх наявного; якщо завантажити не вдалося, а старий файл є, використовується він.
+    /// З download = false використовується лише наявний файл (кеш графа, якщо файл не змінився).
     /// </summary>
-    public static async Task LoadAsync(Window owner)
+    public static async Task LoadAsync(Window owner, bool download = true)
     {
-        var path = Path.Combine(DataDirectory, "osm", OsmFileName);
+        var path = OsmPath;
 
         var loaded = await VisualizationExtensions.StartAsProgress(owner, "Завантаження OSM...", async (messages, fractions) =>
         {
@@ -38,7 +45,7 @@ public static class RoadNetworkLoader
 
             try
             {
-                await OsmDownloader.DownloadAsync(OsmUrl, path, (received, total) =>
+                if (download) await OsmDownloader.DownloadAsync(OsmUrl, path, (received, total) =>
                 {
                     messages.Report(total == null
                         ? $"Завантаження OSM: {received / BytesInMegabyte:F0} МБ"
@@ -56,15 +63,24 @@ public static class RoadNetworkLoader
             var road = RoadNetworkCache.LoadOrBuild(path, DataDirectory, messages);
             messages.Report("Побудова індексу доріг...");
 
-            return (Network: road, Index: new RoadSpatialIndex(road), DownloadError: downloadError);
+            RoadSpatialIndex[] levels =
+            [
+                new RoadSpatialIndex(road),
+                new RoadSpatialIndex(road, maxRank: 1, cellSize: 500_000),
+                new RoadSpatialIndex(road, maxRank: 0, cellSize: 1_000_000)
+            ];
+
+            return (Network: road, Levels: levels, DownloadError: downloadError);
         });
 
         if (loaded.Network == null) return;
 
         var network = loaded.Network;
         Current = network;
-        CurrentIndex = loaded.Index;
+        CurrentIndexLevels = loaded.Levels;
         Changed?.Invoke();
+
+        if (!download) return;
 
         await MessageBox.Show(owner,
             (loaded.DownloadError == null ? "Файл OSM оновлено.\n" : $"Не вдалося оновити файл ({loaded.DownloadError}), використано наявний.\n") +

@@ -11,7 +11,7 @@ public static class RoadNetworkBuilder
 
     private enum RestrictionTurn { Other, UTurn }
 
-    private readonly record struct RawWay(long Id, long[] Nodes, RoadDirection Direction);
+    private readonly record struct RawWay(long Id, long[] Nodes, RoadDirection Direction, byte Rank);
 
     private readonly record struct RawRestriction(RestrictionKind Kind, RestrictionTurn Turn, long FromWay, long ViaNode, long ToWay);
 
@@ -43,7 +43,7 @@ public static class RoadNetworkBuilder
             {
                 case Way way when way.Id != null && way.Nodes is { Length: >= 2 }:
                     var direction = CarRoadProfile.GetDirection(way.Tags);
-                    if (direction != RoadDirection.None) ways.Add(new RawWay(way.Id.Value, way.Nodes, direction));
+                    if (direction != RoadDirection.None) ways.Add(new RawWay(way.Id.Value, way.Nodes, direction, CarRoadProfile.GetRank(way.Tags)));
                     break;
                 case Relation relation:
                     var parsed = TryParseRestriction(relation, out var restriction);
@@ -179,6 +179,7 @@ public static class RoadNetworkBuilder
         var edgeTo = new List<int>();
         var edgeLength = new List<float>();
         var edgeReverse = new List<int>();
+        var edgeRank = new List<byte>();
         var geometryStart = new List<int>();
         var geometryLatitudes = new List<int>();
         var geometryLongitudes = new List<int>();
@@ -195,7 +196,7 @@ public static class RoadNetworkBuilder
             return node;
         }
 
-        int AddEdge(int from, int to, List<int> points, bool reversed, long wayId)
+        int AddEdge(int from, int to, List<int> points, bool reversed, long wayId, byte rank)
         {
             var edge = edgeFrom.Count;
             var length = 0.0;
@@ -219,6 +220,7 @@ public static class RoadNetworkBuilder
             edgeTo.Add(to);
             edgeLength.Add((float)length);
             edgeReverse.Add(-1);
+            edgeRank.Add(rank);
 
             if (restrictionWays.Contains(wayId))
             {
@@ -229,14 +231,14 @@ public static class RoadNetworkBuilder
             return edge;
         }
 
-        void AddSegment(List<int> points, RoadDirection direction, long wayId)
+        void AddSegment(List<int> points, RoadDirection direction, long wayId, byte rank)
         {
             if (points.Count < 2) return;
 
             var from = GetGraphNode(points[0]);
             var to = GetGraphNode(points[^1]);
-            var forward = direction is RoadDirection.Both or RoadDirection.Forward ? AddEdge(from, to, points, false, wayId) : -1;
-            var backward = direction is RoadDirection.Both or RoadDirection.Backward ? AddEdge(to, from, points, true, wayId) : -1;
+            var forward = direction is RoadDirection.Both or RoadDirection.Forward ? AddEdge(from, to, points, false, wayId, rank) : -1;
+            var backward = direction is RoadDirection.Both or RoadDirection.Backward ? AddEdge(to, from, points, true, wayId, rank) : -1;
 
             if (forward < 0 || backward < 0) return;
 
@@ -264,7 +266,7 @@ public static class RoadNetworkBuilder
                 var isEnd = nodeUses[index] >= 2 || nodeId == way.Nodes[^1];
                 if (!isEnd || segment.Count < 2) continue;
 
-                AddSegment(segment, way.Direction, way.Id);
+                AddSegment(segment, way.Direction, way.Id, way.Rank);
                 segment = new List<int> { index };
             }
         }
@@ -281,6 +283,7 @@ public static class RoadNetworkBuilder
             EdgeTo = edgeTo.ToArray(),
             EdgeLength = edgeLength.ToArray(),
             EdgeReverse = edgeReverse.ToArray(),
+            EdgeRank = edgeRank.ToArray(),
             EdgeGeometryStart = geometryStart.ToArray(),
             GeometryLatitudes = geometryLatitudes.ToArray(),
             GeometryLongitudes = geometryLongitudes.ToArray(),
