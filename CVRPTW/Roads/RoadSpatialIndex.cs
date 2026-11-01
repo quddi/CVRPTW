@@ -175,6 +175,8 @@ public class RoadSpatialIndex
         snap = default;
         var best = double.MaxValue;
         var scale = RoadNetwork.CoordinateScale;
+        var bestSegment = 0;
+        var bestT = 0.0;
 
         for (var i = _network.EdgeGeometryStart[edge]; i + 1 < _network.EdgeGeometryStart[edge + 1]; i++)
         {
@@ -196,9 +198,42 @@ public class RoadSpatialIndex
             if (distance >= best) continue;
 
             best = distance;
-            snap = new RoadSnap(edge, latitude + py / MetersPerDegree, longitude + px / metersPerLon, distance);
+            bestSegment = i;
+            bestT = t;
+            snap = new RoadSnap(edge, latitude + py / MetersPerDegree, longitude + px / metersPerLon, distance, 0);
         }
 
-        return best < double.MaxValue;
+        if (best == double.MaxValue) return false;
+
+        snap = WithFraction(edge, bestSegment, bestT, snap);
+
+        return true;
+    }
+
+    // Частка довжини ребра до знайденої позиції: сума відрізків геометрії до неї, поділена на довжину всієї геометрії.
+    private RoadSnap WithFraction(int edge, int segment, double t, RoadSnap found)
+    {
+        double before = 0, total = 0;
+
+        for (var i = _network.EdgeGeometryStart[edge]; i + 1 < _network.EdgeGeometryStart[edge + 1]; i++)
+        {
+            var length = GetSegmentLength(i);
+            if (i < segment) before += length;
+            else if (i == segment) before += length * t;
+
+            total += length;
+        }
+
+        return found with { Fraction = total == 0 ? 0 : before / total };
+    }
+
+    private double GetSegmentLength(int i)
+    {
+        var scale = RoadNetwork.CoordinateScale;
+        var metersPerLon = MetersPerDegree * Math.Cos(_network.GeometryLatitudes[i] / scale * Math.PI / 180);
+        var dx = (_network.GeometryLongitudes[i + 1] - _network.GeometryLongitudes[i]) / scale * metersPerLon;
+        var dy = (_network.GeometryLatitudes[i + 1] - _network.GeometryLatitudes[i]) / scale * MetersPerDegree;
+
+        return Math.Sqrt(dx * dx + dy * dy);
     }
 }

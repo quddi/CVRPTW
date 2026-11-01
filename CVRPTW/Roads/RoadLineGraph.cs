@@ -14,6 +14,11 @@ public class RoadLineGraph
 
     public required RoadNetwork Network { get; init; }
 
+    // Ребра, що виходять з вершини дорожньої мережі n: NodeOutEdges[NodeOutStart[n] .. NodeOutStart[n + 1]).
+    public required int[] NodeOutStart { get; init; }
+
+    public required int[] NodeOutEdges { get; init; }
+
     public int VertexCount => Network.EdgeCount;
 
     public int TransitionCount => Targets.Length;
@@ -47,6 +52,6 @@ public class RoadLineGraph
             offsets[edge + 1] = targets.Count;
         }
 
-        return new RoadLineGraph { Offsets = offsets, Targets = targets.ToArray(), Network = network };
+        return new RoadLineGraph { Offsets = offsets, Targets = targets.ToArray(), Network = network, NodeOutStart = outStart, NodeOutEdges = outEdges };
     }
 }
