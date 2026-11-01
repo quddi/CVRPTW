@@ -1,5 +1,6 @@
 using System;
 using Avalonia.Controls;
+using CVRPTW;
 using VisualizationApplication.Avalonia.Other;
 using VisualizationApplication.Avalonia.Tools;
 
@@ -36,6 +37,9 @@ public partial class MainWindow : Window, IDisposable
 
         Closed += (_, _) => Dispose();
     }
+
+    // Розрахунок за сценарієм, складеним у вікні «Вхідні дані».
+    public void LoadScenarioData(MainData mainData) => _reactionHandler.LoadMainData(mainData, "Сценарій");
 
     private void FileLoadedHandler(string fileName)
     {

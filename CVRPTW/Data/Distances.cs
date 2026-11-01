@@ -43,6 +43,9 @@ public class Distances(int pointsCount)
         matrix.IsReachable[position] = true;
     }
 
+    public int CountUnreachable(int matrixIndex) =>
+        _matrices.TryGetValue(matrixIndex, out var matrix) ? matrix.IsReachable.Count(reachable => !reachable) : 0;
+
     public double GetMaxDistance()
     {
         var maxDistance = 0d;

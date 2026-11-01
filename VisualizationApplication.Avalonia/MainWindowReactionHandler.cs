@@ -107,6 +107,14 @@ public class MainWindowReactionHandler : IDisposable
             return;
         }
 
+        LoadMainData(mainData, fileName);
+    }
+
+    // Джерело даних — файл вводу або сценарій з карти: далі розрахунок однаковий.
+    public void LoadMainData(MainData mainData, string title)
+    {
+        _resetHandler.ResetAll(_mainResult, _optimizers);
+
         _mainData = mainData;
         
         SetUpFunctionality();
@@ -123,7 +131,7 @@ public class MainWindowReactionHandler : IDisposable
 
         _mainWindowElements.VisualizationComboBox.SelectedIndex = Constants.OnlyPointsIndex;
         
-        FileLoaded?.Invoke(fileName);
+        FileLoaded?.Invoke(title);
     }
 
     private void SetUpFunctionality()

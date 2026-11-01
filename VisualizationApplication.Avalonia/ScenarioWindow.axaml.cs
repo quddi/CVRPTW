@@ -11,6 +11,7 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using CVRPTW;
 using VisualizationApplication.Avalonia.Map;
+using VisualizationApplication.Avalonia.Other;
 using VisualizationApplication.Avalonia.Tools;
 
 namespace VisualizationApplication.Avalonia;
@@ -80,6 +81,7 @@ public partial class ScenarioWindow : Window
         NewButton.Click += (_, _) => ShowScenario(new Scenario(), "Створено порожній сценарій.");
         LoadButton.Click += LoadButtonClickHandler;
         SaveButton.Click += SaveButtonClickHandler;
+        CalculateButton.Click += CalculateButtonClickHandler;
         AddClientButton.Click += (_, _) => _clients.Add(new ScenarioClient { Id = NextId(_clients.Select(client => client.Id)) });
         AddCarButton.Click += (_, _) => _cars.Add(new ScenarioCar { Id = NextId(_cars.Select(car => car.Id)) });
         RemoveClientButton.Click += (_, _) => Remove(ClientsGrid, _clients);
@@ -251,6 +253,49 @@ public partial class ScenarioWindow : Window
         {
             await MessageBox.Show(this, $"Не вдалося зберегти файл: {exception.Message}");
         }
+    }
+
+    private async void CalculateButtonClickHandler(object? sender, RoutedEventArgs e)
+    {
+        if (Owner is not MainWindow mainWindow) return;
+
+        if (RoadNetworkLoader.CurrentLineGraph is not { } lineGraph || RoadNetworkLoader.CurrentIndexLevels.Length == 0)
+        {
+            await MessageBox.Show(this, "Спершу завантажте OSM.");
+            return;
+        }
+
+        if (!TryReadScenario(out var scenario, out var error))
+        {
+            await MessageBox.Show(this, error);
+            return;
+        }
+
+        var calculator = new RoadMatrixCalculator(lineGraph, RoadNetworkLoader.CurrentIndexLevels[0]);
+
+        var result = await VisualizationExtensions.StartAsProgress(this, "Розрахунок дорожньої матриці...", _ =>
+        {
+            try
+            {
+                return (Data: ScenarioMainDataBuilder.Build(scenario, calculator), Error: (string?)null);
+            }
+            catch (ArgumentException exception)
+            {
+                return (Data: null, Error: exception.Message);
+            }
+        });
+
+        if (result.Data == null)
+        {
+            if (result.Error != null) await MessageBox.Show(this, "Розрахунок неможливий:\n" + result.Error);
+            return;
+        }
+
+        mainWindow.LoadScenarioData(result.Data);
+
+        var unreachable = result.Data.Distances!.CountUnreachable(Constants.DefaultMatrixId);
+        await MessageBox.Show(this, "Початковий розв'язок побудовано, перейдіть до головного вікна." +
+            (unreachable > 0 ? $"\nНедосяжних пар точок: {unreachable} (їх буде враховано штрафом)." : string.Empty));
     }
 
     private bool TryReadScenario(out Scenario scenario, out string error)
