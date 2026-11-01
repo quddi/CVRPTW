@@ -41,6 +41,10 @@ public partial class MainWindow : Window, IDisposable
     // Розрахунок за сценарієм, складеним у вікні «Вхідні дані».
     public void LoadScenarioData(MainData mainData) => _reactionHandler.LoadMainData(mainData, "Сценарій");
 
+    public MainData? CurrentData => _reactionHandler.CurrentData;
+
+    public MainResult? CurrentResult => _reactionHandler.CurrentResult;
+
     private void FileLoadedHandler(string fileName)
     {
         Title = fileName;

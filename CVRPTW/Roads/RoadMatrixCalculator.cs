@@ -159,6 +159,182 @@ public class RoadMatrixCalculator(RoadLineGraph graph, RoadSpatialIndex index)
         return row;
     }
 
+    private readonly object _pathLock = new();
+    private PathBuffers? _pathBuffers;
+
+    /// <summary>
+    /// Метод M3: найкоротший шлях між двома точками з геометрією доріг. Довжина збігається зі значенням матриці.
+    /// Повертає null, якщо шляху немає.
+    /// </summary>
+    public RoadPath? FindPath(RoadMatrixPoint from, RoadMatrixPoint to)
+    {
+        if (!index.TryFindNearest(from.Latitude, from.Longitude, out var fromSnap) ||
+            !index.TryFindNearest(to.Latitude, to.Longitude, out var toSnap)) return null;
+
+        var sources = GetPositions(fromSnap);
+        var targets = GetPositions(toSnap);
+
+        lock (_pathLock)
+        {
+            var buffers = _pathBuffers ??= new PathBuffers(graph.VertexCount);
+            var stamp = ++buffers.Stamp;
+            var queue = buffers.Queue;
+            queue.Clear();
+            buffers.Seeds.Clear();
+
+            void Relax(int vertex, double value, int parent, int pieceEdge = -1, double pieceFrom = 0)
+            {
+                if (buffers.Seen[vertex] == stamp && buffers.Distance[vertex] <= value) return;
+
+                buffers.Seen[vertex] = stamp;
+                buffers.Distance[vertex] = value;
+                buffers.Parent[vertex] = parent;
+                if (parent < 0) buffers.Seeds[vertex] = (pieceEdge, pieceFrom);
+                queue.Enqueue(vertex, value);
+            }
+
+            var best = double.PositiveInfinity;
+            (int Edge, double From, double To)? direct = null;
+            var arrivalVertex = -1;
+            var arrivalFraction = 0.0;
+
+            foreach (var start in sources)
+            {
+                var length = _network.EdgeLength[start.Edge];
+                var rest = (1 - start.Fraction) * length;
+
+                if (rest < NodeToleranceMeters)
+                {
+                    var node = _network.EdgeTo[start.Edge];
+
+                    for (var i = graph.NodeOutStart[node]; i < graph.NodeOutStart[node + 1]; i++)
+                        Relax(graph.NodeOutEdges[i], 0, -1);
+                }
+                else
+                {
+                    if (start.Fraction * length < NodeToleranceMeters) Relax(start.Edge, 0, -1);
+
+                    for (var i = graph.Offsets[start.Edge]; i < graph.Offsets[start.Edge + 1]; i++)
+                        Relax(graph.Targets[i], rest, -1, start.Edge, start.Fraction);
+                }
+
+                foreach (var end in targets)
+                {
+                    if (end.Edge != start.Edge || end.Fraction < start.Fraction) continue;
+
+                    var candidate = (end.Fraction - start.Fraction) * length;
+                    if (candidate >= best) continue;
+
+                    best = candidate;
+                    direct = (start.Edge, start.Fraction, end.Fraction);
+                }
+            }
+
+            while (queue.TryDequeue(out var vertex, out var value) && value < best)
+            {
+                if (buffers.Settled[vertex] == stamp || value > buffers.Distance[vertex]) continue;
+
+                buffers.Settled[vertex] = stamp;
+
+                foreach (var end in targets)
+                {
+                    if (end.Edge != vertex) continue;
+
+                    var candidate = value + end.Fraction * _network.EdgeLength[vertex];
+                    if (candidate >= best) continue;
+
+                    best = candidate;
+                    direct = null;
+                    arrivalVertex = vertex;
+                    arrivalFraction = end.Fraction;
+                }
+
+                for (var i = graph.Offsets[vertex]; i < graph.Offsets[vertex + 1]; i++)
+                {
+                    var next = graph.Targets[i];
+                    if (buffers.Settled[next] != stamp) Relax(next, value + _network.EdgeLength[vertex], vertex);
+                }
+            }
+
+            if (double.IsPositiveInfinity(best)) return null;
+
+            var latitudes = new List<double> { fromSnap.Latitude };
+            var longitudes = new List<double> { fromSnap.Longitude };
+
+            if (direct is { } straight)
+            {
+                AppendEdge(straight.Edge, straight.From, straight.To, latitudes, longitudes);
+            }
+            else
+            {
+                var chain = new List<int>();
+                for (var vertex = arrivalVertex; vertex >= 0; vertex = buffers.Parent[vertex]) chain.Add(vertex);
+                chain.Reverse();
+
+                var (pieceEdge, pieceFrom) = buffers.Seeds[chain[0]];
+                if (pieceEdge >= 0) AppendEdge(pieceEdge, pieceFrom, 1, latitudes, longitudes);
+
+                for (var i = 0; i < chain.Count; i++)
+                    AppendEdge(chain[i], 0, i == chain.Count - 1 ? arrivalFraction : 1, latitudes, longitudes);
+            }
+
+            latitudes.Add(toSnap.Latitude);
+            longitudes.Add(toSnap.Longitude);
+
+            return new RoadPath(best, latitudes.ToArray(), longitudes.ToArray());
+        }
+    }
+
+    // Додає частину геометрії ребра між частками довжини from і to (від початку ребра).
+    private void AppendEdge(int edge, double from, double to, List<double> latitudes, List<double> longitudes)
+    {
+        var first = _network.EdgeGeometryStart[edge];
+        var last = _network.EdgeGeometryStart[edge + 1] - 1;
+        var total = 0.0;
+
+        for (var i = first; i < last; i++) total += _network.GetSegmentLength(i);
+
+        if (total == 0 || to <= from) return;
+
+        var passed = 0.0;
+
+        for (var i = first; i < last; i++)
+        {
+            var length = _network.GetSegmentLength(i);
+            var segmentStart = passed / total;
+            var segmentEnd = (passed + length) / total;
+            passed += length;
+
+            if (segmentEnd <= from || segmentStart >= to) continue;
+
+            // Кінці відрізка, обрізані до діапазону [from, to].
+            var a = Math.Max(from, segmentStart);
+            var b = Math.Min(to, segmentEnd);
+
+            AddInterpolated(i, segmentEnd == segmentStart ? 0 : (a - segmentStart) / (segmentEnd - segmentStart), latitudes, longitudes);
+            AddInterpolated(i, segmentEnd == segmentStart ? 1 : (b - segmentStart) / (segmentEnd - segmentStart), latitudes, longitudes);
+        }
+    }
+
+    private void AddInterpolated(int segment, double t, List<double> latitudes, List<double> longitudes)
+    {
+        var scale = RoadNetwork.CoordinateScale;
+
+        latitudes.Add((_network.GeometryLatitudes[segment] + t * (_network.GeometryLatitudes[segment + 1] - _network.GeometryLatitudes[segment])) / scale);
+        longitudes.Add((_network.GeometryLongitudes[segment] + t * (_network.GeometryLongitudes[segment + 1] - _network.GeometryLongitudes[segment])) / scale);
+    }
+
+    private class PathBuffers(int vertexCount)
+    {
+        public readonly double[] Distance = new double[vertexCount];
+        public readonly int[] Seen = new int[vertexCount];
+        public readonly int[] Settled = new int[vertexCount];
+        public readonly int[] Parent = new int[vertexCount];
+        public readonly PriorityQueue<int, double> Queue = new();
+        public readonly Dictionary<int, (int Edge, double From)> Seeds = new();
+        public int Stamp;
+    }
+
     private class SearchBuffers(int vertexCount)
     {
         public readonly double[] Distance = new double[vertexCount];

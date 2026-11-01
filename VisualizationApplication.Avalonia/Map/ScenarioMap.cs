@@ -15,6 +15,9 @@ namespace VisualizationApplication.Avalonia.Map;
 
 public record MapClick(double Latitude, double Longitude, ScenarioClient? NearbyClient);
 
+/// <summary>Маршрут для показу на карті: полілінія по дорогах.</summary>
+public record MapRoute(Color Color, double[] Latitudes, double[] Longitudes);
+
 /// <summary>Карта сценарію: дороги, склад, клієнти й особливі точки (надто далекі від дороги).</summary>
 public class ScenarioMap : IDisposable
 {
@@ -32,6 +35,7 @@ public class ScenarioMap : IDisposable
     private readonly TileLayer _tiles;
     private readonly DispatcherTimer _tilesRedrawTimer;
     private readonly List<IPlottable> _dynamic = new();
+    private readonly List<IPlottable> _routes = new();
     private Point? _pressedAt;
     private RoadSpatialIndex? _index;
 
@@ -141,6 +145,27 @@ public class ScenarioMap : IDisposable
         }
 
         _plotControl.Refresh();
+    }
+
+    // Показує маршрути поверх карти; порожній список їх прибирає.
+    public void SetRoutes(IReadOnlyList<MapRoute> routes)
+    {
+        var plot = _plotControl.Plot;
+
+        foreach (var item in _routes) plot.Remove(item);
+        _routes.Clear();
+
+        foreach (var route in routes)
+        {
+            var points = route.Latitudes.Zip(route.Longitudes, MapProjection.ToMap).ToArray();
+            var line = plot.Add.Scatter(points.Select(point => point.X).ToArray(), points.Select(point => point.Y).ToArray(), route.Color);
+            line.LineWidth = 4;
+            line.MarkerSize = 0;
+            _routes.Add(line);
+        }
+
+        // Склад і клієнти малюються поверх маршрутів.
+        Refresh();
     }
 
     // Показує всі точки сценарію; без точок — усю дорожню мережу.

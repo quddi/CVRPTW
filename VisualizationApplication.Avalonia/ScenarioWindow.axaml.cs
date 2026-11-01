@@ -82,6 +82,7 @@ public partial class ScenarioWindow : Window
         LoadButton.Click += LoadButtonClickHandler;
         SaveButton.Click += SaveButtonClickHandler;
         CalculateButton.Click += CalculateButtonClickHandler;
+        RoutesButton.Click += RoutesButtonClickHandler;
         AddClientButton.Click += (_, _) => _clients.Add(new ScenarioClient { Id = NextId(_clients.Select(client => client.Id)) });
         AddCarButton.Click += (_, _) => _cars.Add(new ScenarioCar { Id = NextId(_cars.Select(car => car.Id)) });
         RemoveClientButton.Click += (_, _) => Remove(ClientsGrid, _clients);
@@ -100,6 +101,7 @@ public partial class ScenarioWindow : Window
     private void ShowScenario(Scenario scenario, string status)
     {
         _suspendRefresh = true;
+        _map.SetRoutes([]);
 
         DepotLatitudeTextBox.Text = scenario.Depot?.Latitude.ToString(CultureInfo.InvariantCulture);
         DepotLongitudeTextBox.Text = scenario.Depot?.Longitude.ToString(CultureInfo.InvariantCulture);
@@ -296,6 +298,71 @@ public partial class ScenarioWindow : Window
         var unreachable = result.Data.Distances!.CountUnreachable(Constants.DefaultMatrixId);
         await MessageBox.Show(this, "Початковий розв'язок побудовано, перейдіть до головного вікна." +
             (unreachable > 0 ? $"\nНедосяжних пар точок: {unreachable} (їх буде враховано штрафом)." : string.Empty));
+    }
+
+    // Будує по дорогах шлях між кожною парою сусідніх точок маршрутів поточного розв'язку й малює їх на карті.
+    private async void RoutesButtonClickHandler(object? sender, RoutedEventArgs e)
+    {
+        if (Owner is not MainWindow { CurrentData: { } data, CurrentResult: { } mainResult }) 
+        {
+            await MessageBox.Show(this, "Спершу натисніть «Розрахувати».");
+            return;
+        }
+
+        if (RoadNetworkLoader.CurrentLineGraph is not { } lineGraph || RoadNetworkLoader.CurrentSnapIndex is not { } snapIndex)
+        {
+            await MessageBox.Show(this, "Спершу завантажте OSM.");
+            return;
+        }
+
+        var calculator = new RoadMatrixCalculator(lineGraph, snapIndex);
+        var cars = mainResult.Results.Select(pair => pair.Value).ToList();
+
+        var routes = await VisualizationExtensions.StartAsProgress(this, "Побудова маршрутів по дорогах...", (messages, fractions) =>
+        {
+            var result = new System.Collections.Generic.List<(int CarId, MapRoute? Route, double Meters, int MissingLegs)>();
+            var legsTotal = cars.Sum(car => Math.Max(0, car.Path.Count - 1));
+            var legsDone = 0;
+
+            foreach (var car in cars)
+            {
+                var latitudes = new System.Collections.Generic.List<double>();
+                var longitudes = new System.Collections.Generic.List<double>();
+                double meters = 0;
+                var missing = 0;
+
+                for (var i = 0; i + 1 < car.Path.Count; i++)
+                {
+                    var from = data.GetPoint(car.Path[i].Id);
+                    var to = data.GetPoint(car.Path[i + 1].Id);
+                    var path = calculator.FindPath(new RoadMatrixPoint(from.Id, from.Coordinates.Latitude, from.Coordinates.Longitude),
+                        new RoadMatrixPoint(to.Id, to.Coordinates.Latitude, to.Coordinates.Longitude));
+
+                    if (path == null) missing++;
+                    else
+                    {
+                        meters += path.DistanceMeters;
+                        latitudes.AddRange(path.Latitudes);
+                        longitudes.AddRange(path.Longitudes);
+                    }
+
+                    fractions.Report((double)++legsDone / legsTotal);
+                    messages.Report($"Побудова маршрутів по дорогах: {legsDone} / {legsTotal}");
+                }
+
+                result.Add((car.Car.Id, latitudes.Count > 1 ? new MapRoute(ScottPlot.Color.RandomHue(), latitudes.ToArray(), longitudes.ToArray()) : null, meters, missing));
+            }
+
+            return Task.FromResult(result);
+        });
+
+        if (routes == null) return;
+
+        _map.SetRoutes(routes.Where(route => route.Route != null).Select(route => route.Route!).ToList());
+
+        var summary = string.Join("\n", routes.Select(route =>
+            $"Авто {route.CarId}: {route.Meters / 1000:F1} км" + (route.MissingLegs > 0 ? $", не знайдено відрізків: {route.MissingLegs}" : string.Empty)));
+        await MessageBox.Show(this, "Маршрути по дорогах:\n" + summary);
     }
 
     private bool TryReadScenario(out Scenario scenario, out string error)

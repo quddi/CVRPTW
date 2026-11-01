@@ -7,6 +7,7 @@ namespace CVRPTW;
 public class RoadNetwork
 {
     public const double CoordinateScale = 1e7;
+    public const double MetersPerDegree = 111_320;
 
     public required int[] NodeLatitudes { get; init; }
 
@@ -48,6 +49,16 @@ public class RoadNetwork
     public (double MinLatitude, double MinLongitude, double MaxLatitude, double MaxLongitude) GetBounds() =>
         (NodeLatitudes.Min() / CoordinateScale, NodeLongitudes.Min() / CoordinateScale,
             NodeLatitudes.Max() / CoordinateScale, NodeLongitudes.Max() / CoordinateScale);
+
+    // Довжина відрізка геометрії від точки i до i + 1 у метрах (рівнопроміжна проєкція достатня для коротких відрізків).
+    public double GetSegmentLength(int i)
+    {
+        var metersPerLon = MetersPerDegree * Math.Cos(GeometryLatitudes[i] / CoordinateScale * Math.PI / 180);
+        var dx = (GeometryLongitudes[i + 1] - GeometryLongitudes[i]) / CoordinateScale * metersPerLon;
+        var dy = (GeometryLatitudes[i + 1] - GeometryLatitudes[i]) / CoordinateScale * MetersPerDegree;
+
+        return Math.Sqrt(dx * dx + dy * dy);
+    }
 
     public static long GetTurnKey(int fromEdge, int toEdge) => ((long)fromEdge << 32) | (uint)toEdge;
 

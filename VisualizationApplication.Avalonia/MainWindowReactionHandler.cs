@@ -30,6 +30,11 @@ public class MainWindowReactionHandler : IDisposable
     private MainResultOptimizer[]? _optimizers;
 
     public event Action<string>? FileLoaded;
+
+    // Поточні дані й результат (після оптимізації вони оновлюються в тих самих об'єктах).
+    public MainData? CurrentData => _mainData;
+
+    public MainResult? CurrentResult => _mainResult;
     
     public MainWindowReactionHandler(MainWindowElements mainWindowElements, Window ownerWindow)
     {
