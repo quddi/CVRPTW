@@ -52,7 +52,7 @@ public partial class ScenarioWindow : Window
             _map.Roads.IsVisible = RoadsCheckBox.IsChecked == true;
             _map.Refresh();
         };
-        _map.SetRoads(RoadNetworkLoader.Current, RoadNetworkLoader.CurrentIndexLevels);
+        _map.SetRoads(RoadNetworkLoader.Current, RoadNetworkLoader.CurrentIndexLevels, RoadNetworkLoader.CurrentSnapIndex);
 
         _clients.CollectionChanged += (_, _) => RefreshMap();
         ClientsGrid.CellEditEnded += (_, _) => RefreshMap();
@@ -140,7 +140,7 @@ public partial class ScenarioWindow : Window
 
     private void RoadsChangedHandler()
     {
-        _map.SetRoads(RoadNetworkLoader.Current, RoadNetworkLoader.CurrentIndexLevels);
+        _map.SetRoads(RoadNetworkLoader.Current, RoadNetworkLoader.CurrentIndexLevels, RoadNetworkLoader.CurrentSnapIndex);
         RefreshMap();
         _map.ZoomToNetwork();
         UpdateOsmButton();
@@ -259,7 +259,7 @@ public partial class ScenarioWindow : Window
     {
         if (Owner is not MainWindow mainWindow) return;
 
-        if (RoadNetworkLoader.CurrentLineGraph is not { } lineGraph || RoadNetworkLoader.CurrentIndexLevels.Length == 0)
+        if (RoadNetworkLoader.CurrentLineGraph is not { } lineGraph || RoadNetworkLoader.CurrentSnapIndex is not { } snapIndex)
         {
             await MessageBox.Show(this, "Спершу завантажте OSM.");
             return;
@@ -271,7 +271,7 @@ public partial class ScenarioWindow : Window
             return;
         }
 
-        var calculator = new RoadMatrixCalculator(lineGraph, RoadNetworkLoader.CurrentIndexLevels[0]);
+        var calculator = new RoadMatrixCalculator(lineGraph, snapIndex);
 
         var result = await VisualizationExtensions.StartAsProgress(this, "Розрахунок дорожньої матриці...", _ =>
         {

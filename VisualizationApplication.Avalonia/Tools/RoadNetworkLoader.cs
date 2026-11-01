@@ -28,6 +28,9 @@ public static class RoadNetworkLoader
     // Індекси від повного до грубого (лише траси); [0] придатний для пошуку найближчої дороги.
     public static RoadSpatialIndex[] CurrentIndexLevels { get; private set; } = [];
 
+    // Індекс лише по основній (сильно зв'язній) частині мережі: до нього прив'язуються точки сценарію.
+    public static RoadSpatialIndex? CurrentSnapIndex { get; private set; }
+
     // Граф M1 для розрахунку матриці відстаней.
     public static RoadLineGraph? CurrentLineGraph { get; private set; }
 
@@ -76,7 +79,10 @@ public static class RoadNetworkLoader
             messages.Report("Побудова графа поворотів...");
             var lineGraph = RoadLineGraph.Build(road);
 
-            return (Network: road, Levels: levels, LineGraph: lineGraph, DownloadError: downloadError);
+            messages.Report("Пошук основної дорожньої мережі...");
+            var snapIndex = new RoadSpatialIndex(road, edgeMask: lineGraph.GetLargestStronglyConnectedComponent());
+
+            return (Network: road, Levels: levels, LineGraph: lineGraph, SnapIndex: snapIndex, DownloadError: downloadError);
         });
 
         if (loaded.Network == null) return;
@@ -85,6 +91,7 @@ public static class RoadNetworkLoader
         Current = network;
         CurrentIndexLevels = loaded.Levels;
         CurrentLineGraph = loaded.LineGraph;
+        CurrentSnapIndex = loaded.SnapIndex;
         Changed?.Invoke();
 
         if (!download) return;

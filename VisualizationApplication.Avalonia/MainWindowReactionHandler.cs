@@ -199,7 +199,8 @@ public class MainWindowReactionHandler : IDisposable
                 _resetHandler.ResetMainPlot();
                 SetAllResults();
                 _mainWindowElements.PathCostTextBox.Text = $"Загальна вартість шляхів: {_mainResult!.Estimation.ToFormattedString()}" +
-                                                           (_mainResult.UnreachableEdgesCount > 0 ? $"\nНедосяжних переходів: {_mainResult.UnreachableEdgesCount} (розв'язок недопустимий)" : string.Empty);
+                                                           (_mainResult.UnreachableEdgesCount > 0 ? $"\nНедосяжних переходів: {_mainResult.UnreachableEdgesCount} (розв'язок недопустимий)" : string.Empty) +
+                                                           GetUnservedText();
                 break;
             
             case not Constants.NotSelectedIndex:
@@ -212,6 +213,19 @@ public class MainWindowReactionHandler : IDisposable
                                                            (chosenResult.UnreachableEdgesCount > 0 ? $"\nНедосяжних переходів: {chosenResult.UnreachableEdgesCount} (маршрут недопустимий)" : string.Empty);
                 break;
         }
+    }
+
+    // Клієнти, яких немає в жодному маршруті (не вмістились у авто або недосяжні).
+    private string GetUnservedText()
+    {
+        var served = _mainResult!.Results.Values
+            .SelectMany(result => result.Path.Select(visit => visit.Id))
+            .Where(id => !id.IsDepoId())
+            .ToHashSet();
+
+        var unserved = _mainData!.PointsByIds.Keys.Count(id => !served.Contains(id));
+
+        return unserved > 0 ? $"\nНе обслужено клієнтів: {unserved}" : string.Empty;
     }
 
     private void FollowUiEvents()

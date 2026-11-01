@@ -93,12 +93,13 @@ public class ScenarioMap : IDisposable
 
     public event Action<bool>? TooManyRoadsChanged;
 
-    // levels[0] — повний індекс (для прив'язки точок), далі грубіші рівні для малювання на малих масштабах.
-    public void SetRoads(RoadNetwork? network, IReadOnlyList<RoadSpatialIndex>? levels)
+    // levels[0] — повний індекс, далі грубіші рівні для малювання на малих масштабах;
+    // snapIndex — індекс основної мережі для прив'язки точок (без нього використовується levels[0]).
+    public void SetRoads(RoadNetwork? network, IReadOnlyList<RoadSpatialIndex>? levels, RoadSpatialIndex? snapIndex = null)
     {
         _roads.Network = network;
         _roads.Levels = levels ?? Array.Empty<RoadSpatialIndex>();
-        _index = levels?.FirstOrDefault();
+        _index = snapIndex ?? levels?.FirstOrDefault();
     }
 
     public RoadsPlottable Roads => _roads;

@@ -54,4 +54,93 @@ public class RoadLineGraph
 
         return new RoadLineGraph { Offsets = offsets, Targets = targets.ToArray(), Network = network, NodeOutStart = outStart, NodeOutEdges = outEdges };
     }
+
+    /// <summary>
+    /// Вершини найбільшої сильно зв'язної компоненти: з будь-якої можна доїхати до будь-якої з урахуванням
+    /// односторонніх доріг і заборонених поворотів. Точки поза нею (острівці доріг, глухі односторонні ділянки)
+    /// недосяжні з основної мережі, тому прив'язувати точки слід лише сюди.
+    /// </summary>
+    public bool[] GetLargestStronglyConnectedComponent()
+    {
+        // Ітеративний алгоритм Тар'яна: рекурсія на мільйонах вершин переповнила б стек.
+        var count = VertexCount;
+        var order = new int[count];
+        var low = new int[count];
+        var component = new int[count];
+        var onStack = new bool[count];
+        var nextTransition = new int[count];
+        var tarjanStack = new Stack<int>();
+        var callStack = new Stack<int>();
+        var componentSizes = new List<int>();
+        var counter = 0;
+
+        Array.Fill(order, -1);
+        Array.Fill(component, -1);
+
+        for (var root = 0; root < count; root++)
+        {
+            if (order[root] != -1) continue;
+
+            callStack.Push(root);
+            order[root] = low[root] = counter++;
+            nextTransition[root] = Offsets[root];
+            tarjanStack.Push(root);
+            onStack[root] = true;
+
+            while (callStack.Count > 0)
+            {
+                var vertex = callStack.Peek();
+
+                if (nextTransition[vertex] < Offsets[vertex + 1])
+                {
+                    var next = Targets[nextTransition[vertex]++];
+
+                    if (order[next] == -1)
+                    {
+                        order[next] = low[next] = counter++;
+                        nextTransition[next] = Offsets[next];
+                        tarjanStack.Push(next);
+                        onStack[next] = true;
+                        callStack.Push(next);
+                    }
+                    else if (onStack[next])
+                    {
+                        low[vertex] = Math.Min(low[vertex], order[next]);
+                    }
+
+                    continue;
+                }
+
+                callStack.Pop();
+
+                if (callStack.Count > 0)
+                {
+                    var parent = callStack.Peek();
+                    low[parent] = Math.Min(low[parent], low[vertex]);
+                }
+
+                if (low[vertex] != order[vertex]) continue;
+
+                var size = 0;
+                int member;
+
+                do
+                {
+                    member = tarjanStack.Pop();
+                    onStack[member] = false;
+                    component[member] = componentSizes.Count;
+                    size++;
+                } while (member != vertex);
+
+                componentSizes.Add(size);
+            }
+        }
+
+        var largest = componentSizes.IndexOf(componentSizes.Max());
+        var mask = new bool[count];
+
+        for (var vertex = 0; vertex < count; vertex++) mask[vertex] = component[vertex] == largest;
+
+        return mask;
+    }
 }

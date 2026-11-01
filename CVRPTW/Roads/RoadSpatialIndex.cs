@@ -18,7 +18,8 @@ public class RoadSpatialIndex
     /// <param name="network">Дорожня мережа.</param>
     /// <param name="maxRank">До індексу потрапляють лише ребра з важливістю не більше цієї (2 — усі дороги).</param>
     /// <param name="cellSize">Розмір комірки в 1e-7 градуса; 100 000 ≈ 1,1 км по широті.</param>
-    public RoadSpatialIndex(RoadNetwork network, int maxRank = 2, int cellSize = 100_000)
+    /// <param name="edgeMask">Якщо задано, до індексу потрапляють лише ребра з true.</param>
+    public RoadSpatialIndex(RoadNetwork network, int maxRank = 2, int cellSize = 100_000, bool[]? edgeMask = null)
     {
         _network = network;
         _cellSize = cellSize;
@@ -28,7 +29,7 @@ public class RoadSpatialIndex
 
         for (var edge = 0; edge < network.EdgeCount; edge++)
         {
-            if (network.EdgeRank[edge] > maxRank) continue;
+            if (network.EdgeRank[edge] > maxRank || edgeMask is { } mask && !mask[edge]) continue;
 
             int minLat = int.MaxValue, maxLat = int.MinValue, minLon = int.MaxValue, maxLon = int.MinValue;
 
