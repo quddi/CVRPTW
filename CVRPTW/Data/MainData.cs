@@ -29,4 +29,26 @@ public class MainData
     {
         return id.IsDepoId() ? DepoPointsByIds[id] : PointsByIds[id];
     }
+
+    // Сумарне перевищення місткості по всіх авто; 0 — усі авто в межах місткості.
+    public double GetExcessLoad(MainResult mainResult)
+    {
+        var excess = 0d;
+
+        foreach (var (car, carResult) in mainResult.Results)
+        {
+            var load = 0d;
+
+            for (var i = 0; i < carResult.Path.Count; i++)
+            {
+                var id = carResult.Path[i].Id;
+
+                if (!id.IsDepoId()) load += PointsByIds[id].Demand;
+            }
+
+            excess += Math.Max(0, load - car.Capacity);
+        }
+
+        return excess;
+    }
 }

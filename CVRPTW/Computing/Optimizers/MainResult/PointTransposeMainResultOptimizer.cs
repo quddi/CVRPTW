@@ -51,6 +51,9 @@ public class PointTransposeMainResultOptimizer(IMainResultEstimator mainResultEs
 
                 var targetResult = _mainResult.Results[targetCar];
 
+                // Раніше застосовані переноси в цьому ж циклі могли вже заповнити цільове авто.
+                if (!CanTranspose(targetCar, sourceResult.Path[sourceIndex].Id)) continue;
+
                 var pointId = sourceResult.Path.TakeAt(sourceIndex);
 
                 targetResult.Path.Insert(targetIndex, pointId);

@@ -35,8 +35,8 @@ public class DeterministicAnnealingOptimizer : MainResultOptimizer
             for (int attempt = 0; attempt < _config.AttemptsPerTemperature; attempt++)
             {
                 var neighbor = GenerateNeighbor(currentSolution);
-                if (neighbor == null) continue;
-                    
+                if (neighbor == null || _mainData.GetExcessLoad(neighbor) > _mainData.GetExcessLoad(currentSolution)) continue;
+
                 var neighborCost = _estimator.Estimate(neighbor);
 
                 var deltaE = neighborCost - currentCost;
@@ -207,8 +207,9 @@ public class DeterministicAnnealingOptimizer : MainResultOptimizer
         if (validSourceIndices.Count == 0) return false;
 
         var sourceIndex = validSourceIndices[_random.Next(validSourceIndices.Count)];
-        var targetIndex = _random.Next(1, targetPath.Count);
         var point = sourcePath.TakeAt(sourceIndex);
+        // Після вилучення з того ж шляху його довжина зменшилась: індекс Count зробив би точку кінцевою.
+        var targetIndex = _random.Next(1, targetPath.Count);
         
         targetPath.Insert(targetIndex, point);
             

@@ -32,10 +32,11 @@ public class TabuSearchMainResultOptimizer : MainResultOptimizer
 
         var currentSolution = mainResult.Clone();
         var currentEstimation = _bestEstimation;
+        var currentExcess = _mainData.GetExcessLoad(currentSolution);
 
         for (int iteration = 0; iteration < _maxIterations; iteration++)
         {
-            var neighbors = GenerateNeighborhood(currentSolution);
+            var neighbors = GenerateNeighborhood(currentSolution, currentExcess);
             
             if (neighbors.Count == 0) break;
 
@@ -47,7 +48,8 @@ public class TabuSearchMainResultOptimizer : MainResultOptimizer
             {
                 currentSolution = bestNeighbor;
                 currentEstimation = bestNeighborEstimation;
-                
+                currentExcess = _mainData.GetExcessLoad(currentSolution);
+
                 AddToTabuList(bestMove, iteration);
 
                 if (currentEstimation < _bestEstimation)
@@ -65,7 +67,7 @@ public class TabuSearchMainResultOptimizer : MainResultOptimizer
         _estimator.Estimate(mainResult);
     }
 
-    private List<(MainResult solution, Move move)> GenerateNeighborhood(MainResult current)
+    private List<(MainResult solution, Move move)> GenerateNeighborhood(MainResult current, double currentExcess)
     {
         var neighbors = new List<(MainResult, Move)>();
         var random = new Random();
@@ -89,7 +91,7 @@ public class TabuSearchMainResultOptimizer : MainResultOptimizer
                 _ => null
             };
 
-            if (move != null)
+            if (move != null && _mainData.GetExcessLoad(neighbor) <= currentExcess)
             {
                 neighbors.Add((neighbor, move));
             }
