@@ -21,6 +21,7 @@ public class RoadMatrixBenchmark : BenchmarkBase
 
     private RoadMatrixCalculator _calculator = null!;
     private RoadMatrixPoint[] _points = null!;
+    private RoadMatrixPoint[] _route = null!;
 
     [Params("Kyiv", "Ukraine")]
     public string Area { get; set; } = "";
@@ -40,21 +41,49 @@ public class RoadMatrixBenchmark : BenchmarkBase
 
         _calculator = new RoadMatrixCalculator(graph, index);
         _points = GeneratePoints(index, Areas[Area], PointsCount);
+        _route = BuildGreedyRoute(_points, _calculator.Calculate(_points));
     }
 
     [Benchmark]
     public RoadDistanceMatrix MatrixM2() => _calculator.Calculate(_points);
 
-    // Шляхи між сусідніми точками в порядку генерації: ті самі відрізки, що малює «Маршрути на карті» для одного маршруту.
+    // Шляхи між сусідніми точками жадібного маршруту (найближчий сусід): відрізки, що малює «Маршрути на карті».
     [Benchmark]
     public int PathsM3()
     {
         var found = 0;
 
-        for (var i = 0; i < _points.Length - 1; i++)
-            if (_calculator.FindPath(_points[i], _points[i + 1]) != null) found++;
+        for (var i = 0; i < _route.Length - 1; i++)
+            if (_calculator.FindPath(_route[i], _route[i + 1]) != null) found++;
 
         return found;
+    }
+
+    private static RoadMatrixPoint[] BuildGreedyRoute(RoadMatrixPoint[] points, RoadDistanceMatrix matrix)
+    {
+        var route = new List<RoadMatrixPoint> { points[0] };
+        var visited = new bool[points.Length];
+        visited[0] = true;
+        var current = 0;
+
+        for (var step = 1; step < points.Length; step++)
+        {
+            var next = -1;
+
+            for (var candidate = 0; candidate < points.Length; candidate++)
+            {
+                if (visited[candidate] || matrix.Values[current, candidate] is not { } distance) continue;
+                if (next == -1 || distance < matrix.Values[current, next]!.Value) next = candidate;
+            }
+
+            if (next == -1) break;
+
+            visited[next] = true;
+            route.Add(points[next]);
+            current = next;
+        }
+
+        return route.ToArray();
     }
 
     private static RoadMatrixPoint[] GeneratePoints(RoadSpatialIndex index, (double MinLat, double MinLon, double MaxLat, double MaxLon) area, int count)
