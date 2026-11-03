@@ -1,4 +1,5 @@
 using CVRPTW;
+using CVRPTW.Computing.Optimizers;
 using Xunit;
 using CVRPTW.Computing.Estimators;
 using CVRPTW.Computing.Estimators.Time;
@@ -96,6 +97,66 @@ public class EstimationTests
         Assert.Equal(3, data.GetLoad(CreateResult(car, 1).Results[car]));
     }
 
+    [Fact]
+    public void AlternativesOptimizer_LeavesExactlyOnePointPerGroup()
+    {
+        var (data, car) = CreateWorld(3);
+        data.AlternativePoints = new AlternativePoints();
+        data.AlternativePoints.AddAlternativePoints(1, 2, 3);
+        var estimator = CreateEstimator(data);
+        var result = CreateResult(car, 1, 2, 3);
+        estimator.Estimate(result);
+
+        new AlternativePointsMainResultOptimizer(estimator, data).Optimize(result);
+
+        Assert.Single(result.Results[car].Path, visit => visit.Id > 0);
+    }
+
+    [Fact]
+    public void AlternativesOptimizer_KeepsLastPointDespiteHugeTimePenalty()
+    {
+        var (data, car) = CreateWorld();
+        data.AlternativePoints = new AlternativePoints();
+        data.AlternativePoints.AddAlternativePoints(1, 2);
+        data.PointsByIds[1].TimeWindows = [new TimeWindow { Start = 0, End = 0 }];
+        data.PointsByIds[1].LatePenalty = 1_000_000;
+        data.PointsByIds[2].TimeWindows = [new TimeWindow { Start = 0, End = 0 }];
+        data.PointsByIds[2].LatePenalty = 1_000_000;
+        var estimator = CreateEstimator(data);
+        var result = CreateResult(car, 1);
+        estimator.Estimate(result);
+
+        new AlternativePointsMainResultOptimizer(estimator, data).Optimize(result);
+
+        Assert.Single(result.Results[car].Path, visit => visit.Id > 0);
+    }
+
+    [Fact]
+    public void CarPath_RemoveOfMissingPointKeepsDepots()
+    {
+        var path = new CarPath(new(Depot), new(1), new(Depot));
+
+        Assert.Equal(-1, path.IndexOf(2));
+        Assert.Equal(-1, path.IndexOf(new PointVisitResult(2)));
+        Assert.False(path.Remove(new PointVisitResult(2)));
+        Assert.Equal(3, path.Count);
+        Assert.Equal(Depot, path[0].Id);
+    }
+
+    [Fact]
+    public void Scenario_RejectsNegativeServiceTimeAndPenalties()
+    {
+        var scenario = new Scenario
+        {
+            Clients = [new ScenarioClient { Id = 1, ServiceTime = -1, LatePenalty = -1 }],
+            Cars = [new ScenarioCar { Id = 1, DriverOvertimePenalty = -1 }]
+        };
+
+        var errors = scenario.Validate();
+
+        Assert.Equal(3, errors.Count);
+    }
+
     private static ComplexMainResultEstimator CreateEstimator(MainData data) =>
         new(data, new ByDistanceMainResultEstimator(data), new SimpleTimeEstimator(data));
 
@@ -109,16 +170,16 @@ public class EstimationTests
         return new MainResult { Results = { [car] = new CarResult(car) { Path = new CarPath(visits) } } };
     }
 
-    private static (MainData data, Car car) CreateWorld()
+    private static (MainData data, Car car) CreateWorld(int clientsCount = 2)
     {
-        var data = new MainData { Distances = new Distances(3), Times = new Times() };
+        var pointsCount = clientsCount + 1;
+        var data = new MainData { Distances = new Distances(pointsCount), Times = new Times() };
 
         AddPoint(data, new Point { Id = Depot, TimeWindows = [] });
-        AddPoint(data, new Point { Id = 1, TimeWindows = [] });
-        AddPoint(data, new Point { Id = 2, TimeWindows = [] });
+        for (var id = 1; id <= clientsCount; id++) AddPoint(data, new Point { Id = id, TimeWindows = [] });
 
-        for (var i = 0; i < 3; i++)
-        for (var j = 0; j < 3; j++)
+        for (var i = 0; i < pointsCount; i++)
+        for (var j = 0; j < pointsCount; j++)
         {
             // Діагональ є в реальній матриці (з нулями): порожній маршрут склад → склад звертається до неї.
             data.Distances.AddDistance(Constants.DefaultMatrixId, i, j, i == j ? 0 : 1000);

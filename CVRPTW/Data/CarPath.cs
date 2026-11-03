@@ -111,14 +111,18 @@ public class CarPath : IList<PointVisitResult>
     {
         if (item == StartPoint) return 0;
         if (item == EndPoint) return Count - 1;
-        return PathPoints.IndexOf(item) + 1;
+        var index = PathPoints.IndexOf(item);
+
+        return index == -1 ? -1 : index + 1;
     }
 
     public int IndexOf(int id)
     {
         if (id == StartPoint.Id) return 0;
         if (id == EndPoint.Id) return Count - 1;
-        return PathPoints.FindIndex(point => point.Id == id) + 1;
+        var index = PathPoints.FindIndex(point => point.Id == id);
+
+        return index == -1 ? -1 : index + 1;
     }
 
     public void Insert(int index, PointVisitResult item)

@@ -43,6 +43,12 @@ public class Scenario
 
             if (client.TimeWindowEnd < client.TimeWindowStart)
                 errors.Add($"Клієнт {client.Id}: кінець часового вікна раніше за початок.");
+
+            if (client.ServiceTime < 0)
+                errors.Add($"Клієнт {client.Id}: час обслуговування не може бути від'ємним.");
+
+            if (client.LatePenalty < 0 || client.WaitPenalty < 0)
+                errors.Add($"Клієнт {client.Id}: штрафи не можуть бути від'ємними.");
         }
 
         foreach (var car in Cars)
@@ -52,6 +58,9 @@ public class Scenario
 
             if (car.TimeWindowEnd < car.TimeWindowStart)
                 errors.Add($"Автомобіль {car.Id}: кінець часового вікна раніше за початок.");
+
+            if (car.DriverOvertimePenalty < 0)
+                errors.Add($"Автомобіль {car.Id}: штраф за понадурочні не може бути від'ємним.");
         }
 
         var clientIds = Clients.Select(client => client.Id).ToHashSet();

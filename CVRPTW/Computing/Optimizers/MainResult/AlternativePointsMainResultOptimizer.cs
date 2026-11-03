@@ -10,35 +10,36 @@ public class AlternativePointsMainResultOptimizer(IMainResultEstimator mainResul
         
         foreach (var currentAlternativePoints in mainData.AlternativePoints!.AllCorteges)
         {
-            var minEstimation = mainResult.Estimation;
-            var bestPointId = -1;
-            
-            foreach (var alternativePointId in currentAlternativePoints)
+            // У групі лишається рівно одна точка; останню не видаляємо ніколи, незалежно від штрафів.
+            while (currentAlternativePoints.Count(id => GetContainingPath(mainResult, id).car != null) > 1)
             {
-                var (car, inPathIndex) = GetContainingPath(mainResult, alternativePointId);
-                
-                if (car == null || inPathIndex == null) continue;
+                var minEstimation = double.MaxValue;
+                var bestPointId = -1;
 
-                var taken = mainResult.Results[car].Path.TakeAt(inPathIndex!.Value);
-
-                mainResult.ReEstimateCost(mainResultEstimator);
-                
-                if (mainResult.Estimation < minEstimation)
+                foreach (var alternativePointId in currentAlternativePoints)
                 {
-                    minEstimation = mainResult.Estimation;
-                    bestPointId = taken.Id;
+                    var (car, inPathIndex) = GetContainingPath(mainResult, alternativePointId);
+
+                    if (car == null || inPathIndex == null) continue;
+
+                    var taken = mainResult.Results[car].Path.TakeAt(inPathIndex!.Value);
+
+                    mainResult.ReEstimateCost(mainResultEstimator);
+
+                    if (mainResult.Estimation < minEstimation)
+                    {
+                        minEstimation = mainResult.Estimation;
+                        bestPointId = taken.Id;
+                    }
+
+                    mainResult.Results[car].Path.Insert(inPathIndex!.Value, taken);
+                    mainResult.ReEstimateCost(mainResultEstimator);
                 }
-                
-                mainResult.Results[car].Path.Insert(inPathIndex!.Value, taken);
+
+                var (bestCar, bestInPathIndex) = GetContainingPath(mainResult, bestPointId);
+                mainResult.Results[bestCar!].Path.RemoveAt(bestInPathIndex!.Value);
                 mainResult.ReEstimateCost(mainResultEstimator);
             }
-            
-            if (bestPointId == -1) 
-                continue;
-            
-            var (bestCar, bestInPathIndex) = GetContainingPath(mainResult, bestPointId);
-            mainResult.Results[bestCar!].Path.RemoveAt(bestInPathIndex!.Value);
-            mainResult.ReEstimateCost(mainResultEstimator);
         } 
     }
     
