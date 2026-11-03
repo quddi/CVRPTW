@@ -30,6 +30,22 @@ public class MainData
         return id.IsDepoId() ? DepoPointsByIds[id] : PointsByIds[id];
     }
 
+    // Група альтернатив рахується за одного клієнта: необслугованою вона вважається, лише якщо в маршрутах немає жодної її точки.
+    public int CountUnserved(MainResult mainResult)
+    {
+        var served = mainResult.Results.Values
+            .SelectMany(result => result.Path.Select(visit => visit.Id))
+            .Where(id => !id.IsDepoId())
+            .ToHashSet();
+
+        var unserved = PointsByIds.Keys.Count(id => !served.Contains(id) && AlternativePoints?.GetAlternativePoints(id) == null);
+
+        if (AlternativePoints != null)
+            unserved += AlternativePoints.AllCorteges.Count(group => !group.Any(served.Contains));
+
+        return unserved;
+    }
+
     // Сумарне перевищення місткості по всіх авто; 0 — усі авто в межах місткості.
     public double GetExcessLoad(MainResult mainResult)
     {

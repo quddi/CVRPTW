@@ -90,21 +90,21 @@ public class PointDataParser : LineDataParser<Point>
     
     private void ParseServiceTime()
     {
-        _result!.ServiceTime = int.Parse(_split![_splitIndex!.Value]);
+        _result!.ServiceTime = int.Parse(_split![_splitIndex!.Value]).FromMinutesToSeconds();
 
         _splitIndex++;
     }
     
     private void ParseLatePenalty()
     {
-        _result!.LatePenalty = int.Parse(_split![_splitIndex!.Value]).FromMinutesToSeconds();
+        _result!.LatePenalty = int.Parse(_split![_splitIndex!.Value]) / 60.0;
 
         _splitIndex++;
     }
     
     private void ParseWaitPenalty()
     {
-        _result!.WaitPenalty = int.Parse(_split![_splitIndex!.Value]).FromMinutesToSeconds();
+        _result!.WaitPenalty = int.Parse(_split![_splitIndex!.Value]) / 60.0;
 
         _splitIndex++;
     }

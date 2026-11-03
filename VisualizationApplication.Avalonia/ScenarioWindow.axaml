@@ -85,13 +85,14 @@
                             <Button x:Name="AddCarButton" Content="Додати авто"/>
                             <Button x:Name="RemoveCarButton" Content="Видалити вибране"/>
                         </StackPanel>
-                        <TextBlock DockPanel.Dock="Top" Text="Час — хвилини від початку доби" Margin="0,0,0,6"/>
+                        <TextBlock DockPanel.Dock="Top" Text="Час — хвилини від початку доби; штраф — за хвилину" Margin="0,0,0,6"/>
                         <DataGrid x:Name="CarsGrid" x:CompileBindings="False" AutoGenerateColumns="False" CanUserSortColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="Місткість" Binding="{Binding Capacity}"/>
                                 <DataGridTextColumn Header="Зміна: початок" Binding="{Binding TimeWindowStart}"/>
                                 <DataGridTextColumn Header="Зміна: кінець" Binding="{Binding TimeWindowEnd}"/>
+                                <DataGridTextColumn Header="Штраф понадурочних" Binding="{Binding DriverOvertimePenalty}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </DockPanel>

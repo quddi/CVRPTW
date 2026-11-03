@@ -43,7 +43,7 @@ public class OrOptCarResultOptimizer(IMainResultEstimator resultEstimator) : Car
 
                 if (newEstimation < minEstimation)
                 {
-                    minEstimation = carResult.Estimation;
+                    minEstimation = newEstimation;
                 }
                 else
                 {

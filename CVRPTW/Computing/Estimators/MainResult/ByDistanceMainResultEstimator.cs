@@ -51,7 +51,7 @@ public class ByDistanceMainResultEstimator(MainData mainData) : PathsIteratedMai
         return mainData.Distances!.TryGetDistance(Constants.DefaultMatrixId, firstPointIndex, secondPointIndex, out distance);
     }
 
-    private static double CalculateUnreachablePenalty(MainData mainData)
+    public static double CalculateUnreachablePenalty(MainData mainData)
     {
         if (mainData.Distances is null) return 0d;
 

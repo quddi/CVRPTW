@@ -44,9 +44,9 @@ public static class ScenarioMainDataBuilder
                 Coordinates = new Coordinates { Latitude = client.Latitude, Longitude = client.Longitude },
                 Demand = client.Demand,
                 TimeWindows = [new TimeWindow { Start = client.TimeWindowStart.FromMinutesToSeconds(), End = client.TimeWindowEnd.FromMinutesToSeconds() }],
-                ServiceTime = client.ServiceTime,
-                LatePenalty = client.LatePenalty.FromMinutesToSeconds(),
-                WaitPenalty = client.WaitPenalty.FromMinutesToSeconds()
+                ServiceTime = client.ServiceTime.FromMinutesToSeconds(),
+                LatePenalty = client.LatePenalty / 60.0,
+                WaitPenalty = client.WaitPenalty / 60.0
             });
         }
 
@@ -58,6 +58,7 @@ public static class ScenarioMainDataBuilder
                 Capacities = [car.Capacity],
                 TimeWindow = new TimeWindow { Start = car.TimeWindowStart.FromMinutesToSeconds(), End = car.TimeWindowEnd.FromMinutesToSeconds() },
                 PointsDatas = [new PointVisitData(DepotId), new PointVisitData(DepotId)],
+                DriverOvertimePenalty = car.DriverOvertimePenalty / 60.0,
                 MaxTripsCount = 1
             });
         }

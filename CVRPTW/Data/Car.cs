@@ -13,7 +13,7 @@ public class Car
     
     public List<PointVisitData> PointsDatas { get; set; }
     
-    public int DriverOvertimePenalty { get; set; }
+    public double DriverOvertimePenalty { get; set; }
     
     public long MaxCapacity { get; set; }
     

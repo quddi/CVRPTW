@@ -18,9 +18,9 @@ public class Point
     
     public int ServiceTime { get; set; }
     
-    public int LatePenalty { get; set; }
+    public double LatePenalty { get; set; }
     
-    public int WaitPenalty { get; set; }
+    public double WaitPenalty { get; set; }
 
     public override string ToString()
     {

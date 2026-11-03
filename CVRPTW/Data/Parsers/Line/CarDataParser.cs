@@ -96,7 +96,7 @@ public class CarDataParser : LineDataParser<Car>
 
     private void ParseDriverOvertimePenalty()
     {
-        _result!.DriverOvertimePenalty = int.Parse(_split![_splitIndex!.Value]).FromMinutesToSeconds();
+        _result!.DriverOvertimePenalty = int.Parse(_split![_splitIndex!.Value]) / 60.0;
 
         _splitIndex++;
     }

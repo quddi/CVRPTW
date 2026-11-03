@@ -5,6 +5,8 @@ namespace CVRPTW.Computing.Estimators;
 public class ComplexMainResultEstimator(MainData mainData, IMainResultEstimator baseEstimator, ITimeEstimator timeEstimator) 
     : IMainResultEstimator
 {
+    private readonly double _unservedPenalty = ByDistanceMainResultEstimator.CalculateUnreachablePenalty(mainData);
+
     public double Estimate(MainResult mainResult)
     {
         var sum = baseEstimator.Estimate(mainResult);
@@ -14,6 +16,8 @@ public class ComplexMainResultEstimator(MainData mainData, IMainResultEstimator 
             sum += GetTimePenalty(mainResult, car);
         }
         
+        sum += mainData.CountUnserved(mainResult) * _unservedPenalty;
+
         mainResult.Estimation = sum;
 
         return sum;
@@ -52,6 +56,11 @@ public class ComplexMainResultEstimator(MainData mainData, IMainResultEstimator 
                 sum += latePenalty;
             }
         }
+
+        var returnTime = carResult.Path[^1].VisitTime;
+
+        if (returnTime > car.TimeWindow.End)
+            sum += (returnTime - car.TimeWindow.End) * car.DriverOvertimePenalty;
         
         return sum;
     }

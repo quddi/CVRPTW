@@ -223,12 +223,7 @@ public class MainWindowReactionHandler : IDisposable
     // Клієнти, яких немає в жодному маршруті (не вмістились у авто або недосяжні).
     private string GetUnservedText()
     {
-        var served = _mainResult!.Results.Values
-            .SelectMany(result => result.Path.Select(visit => visit.Id))
-            .Where(id => !id.IsDepoId())
-            .ToHashSet();
-
-        var unserved = _mainData!.PointsByIds.Keys.Count(id => !served.Contains(id));
+        var unserved = _mainData!.CountUnserved(_mainResult!);
 
         return unserved > 0 ? $"\nНе обслужено клієнтів: {unserved}" : string.Empty;
     }

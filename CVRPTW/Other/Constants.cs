@@ -15,6 +15,7 @@ public static class Constants
     public const int MissingPointDemand = 1;
     public const int MissingCarCapacity = 50;
     public const int MinutesInDay = 1440;
+    public const int DefaultDriverOvertimePenalty = 10;
     public const double DefaultAverageSpeedKmh = 40;
     public const double DefaultSnapThresholdMeters = 100;
         
