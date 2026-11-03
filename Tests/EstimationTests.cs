@@ -1,6 +1,7 @@
 using CVRPTW;
 using CVRPTW.Computing.Optimizers;
 using Xunit;
+using CVRPTW.Computing;
 using CVRPTW.Computing.Estimators;
 using CVRPTW.Computing.Estimators.Time;
 
@@ -155,6 +156,58 @@ public class EstimationTests
         var errors = scenario.Validate();
 
         Assert.Equal(3, errors.Count);
+    }
+
+    [Fact]
+    public void StartComputer_ServesOnlyOnePointPerAlternativeGroup()
+    {
+        var (data, _) = CreateWorld(3);
+        data.AlternativePoints = new AlternativePoints();
+        data.AlternativePoints.AddAlternativePoints(1, 2, 3);
+
+        var result = new DistanceMainComputer(data, CreateEstimator(data)).Compute();
+
+        Assert.Single(result.Results.Values.Single().Path, visit => visit.Id > 0);
+    }
+
+    [Fact]
+    public void CarEstimation_IncludesTimePenalties()
+    {
+        var (data, car) = CreateWorld();
+        data.PointsByIds[2].TimeWindows = [new TimeWindow { Start = 0, End = 100 }];
+        data.PointsByIds[2].LatePenalty = 0.5;
+        var result = CreateResult(car, 1, 2);
+
+        var total = CreateEstimator(data).Estimate(result);
+
+        // Відстань 3000 + запізнення в 2 (200 − 100) × 0.5.
+        Assert.Equal(3050, result.Results[car].Estimation, 6);
+        Assert.Equal(total, result.Results[car].Estimation, 6);
+    }
+
+    [Fact]
+    public void UnservedPenalty_IsPositiveEvenWhenAllDistancesAreZero()
+    {
+        var (data, car) = CreateWorld();
+        for (var i = 0; i < 3; i++)
+        for (var j = 0; j < 3; j++)
+            data.Distances!.AddDistance(Constants.DefaultMatrixId, i, j, 0);
+
+        Assert.True(CreateEstimator(data).Estimate(CreateResult(car, 1)) > 0);
+    }
+
+    [Fact]
+    public void Scenario_RejectsNonFiniteNumbers()
+    {
+        var scenario = new Scenario
+        {
+            AverageSpeedKmh = double.NaN,
+            Clients = [new ScenarioClient { Id = 1, TimeWindowStart = double.PositiveInfinity }],
+            Cars = [new ScenarioCar { Id = 1, TimeWindowEnd = double.NaN }]
+        };
+
+        Assert.Contains(scenario.Validate(), error => error.Contains("скінченн"));
+        Assert.True(scenario.Validate().Count >= 3);
     }
 
     private static ComplexMainResultEstimator CreateEstimator(MainData data) =>

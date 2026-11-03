@@ -55,6 +55,7 @@ public class ByDistanceMainResultEstimator(MainData mainData) : PathsIteratedMai
     {
         if (mainData.Distances is null) return 0d;
 
-        return mainData.Distances.GetMaxDistance() * (mainData.Points.Count + 1);
+        // Мінімум 1, щоб штраф лишався ненульовим навіть коли всі відстані нульові.
+        return Math.Max(mainData.Distances.GetMaxDistance(), 1d) * (mainData.Points.Count + 1);
     }
 }

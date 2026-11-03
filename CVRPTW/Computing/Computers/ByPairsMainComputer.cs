@@ -35,6 +35,10 @@ public abstract class ByPairsMainComputer(MainData mainData, IMainResultEstimato
         {
             _notVisitedPoints.Remove(nextPointPair.Key);
 
+            // Альтернативи вже обраної точки обслуговувати не потрібно.
+            foreach (var alternativeId in _mainData!.AlternativePoints?.GetAlternativePoints(nextPointPair.Key) ?? [])
+                _notVisitedPoints.Remove(alternativeId);
+
             freeSpace -= nextPointPair.Value.Demand;
 
             result.Path.AddNextPoint(new(nextPointPair.Value.Id));

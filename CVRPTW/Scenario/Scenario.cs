@@ -24,6 +24,10 @@ public class Scenario
     {
         var errors = new List<string>();
 
+        if (!double.IsFinite(AverageSpeedKmh) || !double.IsFinite(SnapThresholdMeters)
+            || Depot != null && (!double.IsFinite(Depot.Latitude) || !double.IsFinite(Depot.Longitude)))
+            errors.Add("Швидкість, поріг прив'язки та координати складу мають бути скінченними числами.");
+
         if (AverageSpeedKmh <= 0)
             errors.Add("Середня швидкість має бути більшою за 0.");
 
@@ -38,6 +42,10 @@ public class Scenario
 
         foreach (var client in Clients)
         {
+            if (!double.IsFinite(client.Latitude) || !double.IsFinite(client.Longitude) || !double.IsFinite(client.Demand)
+                || !double.IsFinite(client.TimeWindowStart) || !double.IsFinite(client.TimeWindowEnd))
+                errors.Add($"Клієнт {client.Id}: усі числові значення мають бути скінченними.");
+
             if (client.Demand < 0)
                 errors.Add($"Клієнт {client.Id}: попит не може бути від'ємним.");
 
@@ -53,6 +61,9 @@ public class Scenario
 
         foreach (var car in Cars)
         {
+            if (!double.IsFinite(car.TimeWindowStart) || !double.IsFinite(car.TimeWindowEnd))
+                errors.Add($"Автомобіль {car.Id}: усі числові значення мають бути скінченними.");
+
             if (car.Capacity <= 0)
                 errors.Add($"Автомобіль {car.Id}: місткість має бути більшою за 0.");
 

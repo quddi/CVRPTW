@@ -13,7 +13,10 @@ public class ComplexMainResultEstimator(MainData mainData, IMainResultEstimator 
         
         foreach (var (car, _) in mainResult.Results)
         {
-            sum += GetTimePenalty(mainResult, car);
+            var timePenalty = GetTimePenalty(mainResult, car);
+
+            mainResult.Results[car].Estimation += timePenalty;
+            sum += timePenalty;
         }
         
         sum += mainData.CountUnserved(mainResult) * _unservedPenalty;
