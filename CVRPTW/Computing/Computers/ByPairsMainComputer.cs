@@ -42,8 +42,6 @@ public abstract class ByPairsMainComputer(MainData mainData, IMainResultEstimato
             currentPointId = nextPointPair.Value.Id;
         }
 
-        result.RemainedFreeSpace = freeSpace;
-
         return result;
     }
 

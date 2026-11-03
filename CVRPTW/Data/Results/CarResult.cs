@@ -8,8 +8,6 @@ public class CarResult(Car car)
 
     public int UnreachableEdgesCount { get; set; }
 
-    public double RemainedFreeSpace { get; set; }
-    
     public CarPath Path { get; set; } = new();
     
     public override string ToString()

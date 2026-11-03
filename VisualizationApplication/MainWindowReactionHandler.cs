@@ -193,7 +193,7 @@ public class MainWindowReactionHandler : IDisposable
                 SetPoints();
                 var (chosenCar, chosenResult) = _mainResult!.Results.ElementAt(comboBoxSelectionIndex - Constants.ServiceIndexesCount);
                 SetResult(chosenResult);
-                _mainWindowElements.PathCostTextBox.Text = $"Вартість шляху: {chosenResult.Estimation.ToFormattedString()}. Вага {(chosenCar.Capacity - chosenResult.RemainedFreeSpace).ToFormattedString()}/{chosenCar.Capacity}" +
+                _mainWindowElements.PathCostTextBox.Text = $"Вартість шляху: {chosenResult.Estimation.ToFormattedString()}. Вага {_mainData!.GetLoad(chosenResult).ToFormattedString()}/{chosenCar.Capacity}" +
                                                            $"\nШлях ({chosenResult.Path.Count} точок): {chosenResult.Path.ToText()}";
                 break;
         }

@@ -46,6 +46,15 @@ public class MainData
         return unserved;
     }
 
+    // Поточне завантаження авто за його маршрутом (а не за станом початкової побудови).
+    public double GetLoad(CarResult carResult)
+    {
+        return carResult.Path
+            .Select(visit => visit.Id)
+            .Where(id => !id.IsDepoId())
+            .Sum(id => PointsByIds[id].Demand);
+    }
+
     // Сумарне перевищення місткості по всіх авто; 0 — усі авто в межах місткості.
     public double GetExcessLoad(MainResult mainResult)
     {
