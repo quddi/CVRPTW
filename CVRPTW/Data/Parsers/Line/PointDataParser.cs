@@ -4,7 +4,7 @@ namespace CVRPTW;
 
 /*
  * comps - unic position index\id\latitude\longitude\demand\[open tw\
- * close tw у секундах від початку доби (можуть бути + tw)]\service time\
+ * close tw у хвилинах від початку доби (можуть бути + tw)]\service time (хвилини)\
  * -\late penalty - штраф за одну хвилину запізнення, додається до цільової
  * функції\wait штраф\-\-\-\-
  */
