@@ -226,7 +226,7 @@ public class MainWindowReactionHandler : IDisposable
     {
         var unserved = _mainData!.CountUnserved(_mainResult!);
 
-        return unserved > 0 ? $"\nНе обслужено клієнтів: {unserved}" : string.Empty;
+        return unserved > 0 ? $"\nНе обслужено клієнтів: {unserved} (спробуйте оптимізатор «Вставка необслужених»)" : string.Empty;
     }
 
     private void FollowUiEvents()
