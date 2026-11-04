@@ -293,6 +293,7 @@ public static class ExtensionsMethods
         return new CompositeMainResultOptimizer(
             [
                 new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData),
+                new InsertUnservedMainResultOptimizer(mainResultEstimator, mainData),
                 new Opt2CarResultOptimizer(mainResultEstimator),
                 new SwapCarResultOptimizer(mainResultEstimator),
                 new PointTransposeMainResultOptimizer(mainResultEstimator, mainData),
@@ -306,6 +307,7 @@ public static class ExtensionsMethods
         return new CompositeMainResultOptimizer(
             [
                 new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData),
+                new InsertUnservedMainResultOptimizer(mainResultEstimator, mainData),
                 new PointTransposeMainResultOptimizer(mainResultEstimator, mainData),
                 new Opt2CarResultOptimizer(mainResultEstimator),
                 new SwapCarResultOptimizer(mainResultEstimator),
@@ -319,6 +321,7 @@ public static class ExtensionsMethods
         return new CompositeMainResultOptimizer(
             [
                 new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData),
+                new InsertUnservedMainResultOptimizer(mainResultEstimator, mainData),
                 new PointTransposeMainResultOptimizer(mainResultEstimator, mainData),
                 new Opt3CarResultOptimizer(mainResultEstimator),
                 new SwapCarResultOptimizer(mainResultEstimator),
@@ -332,6 +335,7 @@ public static class ExtensionsMethods
         return new CompositeMainResultOptimizer(
             [
                 new AlternativePointsMainResultOptimizer(mainResultEstimator, mainData),
+                new InsertUnservedMainResultOptimizer(mainResultEstimator, mainData),
                 new Opt3CarResultOptimizer(mainResultEstimator),
                 new SwapCarResultOptimizer(mainResultEstimator),
                 new PointTransposeMainResultOptimizer(mainResultEstimator, mainData),

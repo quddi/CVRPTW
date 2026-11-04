@@ -210,6 +210,66 @@ public class EstimationTests
         Assert.True(scenario.Validate().Count >= 3);
     }
 
+    [Fact]
+    public void AlternativesOptimizer_SwapsToCheaperAlternative()
+    {
+        var (data, car) = CreateWorld();
+        data.AlternativePoints = new AlternativePoints();
+        data.AlternativePoints.AddAlternativePoints(1, 2);
+        SetDistanceBothWays(data, 0, 1, 100);
+        var estimator = CreateEstimator(data);
+        var result = CreateResult(car, 2);
+        estimator.Estimate(result);
+
+        new AlternativePointsMainResultOptimizer(estimator, data).Optimize(result);
+
+        Assert.Equal([Depot, 1, Depot], result.Results[car].Path.Select(visit => visit.Id));
+    }
+
+    [Fact]
+    public void InsertUnserved_InsertsClientWhenCapacityAllows()
+    {
+        var (data, car) = CreateWorld();
+        var estimator = CreateEstimator(data);
+        var result = CreateResult(car, 1);
+        estimator.Estimate(result);
+
+        new InsertUnservedMainResultOptimizer(estimator, data).Optimize(result);
+
+        Assert.Equal(0, data.CountUnserved(result));
+    }
+
+    [Fact]
+    public void InsertUnserved_FreesCapacityBySwappingToLighterAlternative()
+    {
+        // Близька альтернатива 1 з попитом 8 займає авто (місткість 10), і обов'язковий клієнт 3 (попит 4) не вміщається;
+        // легша альтернатива 2 (попит 2) дозволяє обслужити обох.
+        var (data, car) = CreateWorld(3);
+        data.AlternativePoints = new AlternativePoints();
+        data.AlternativePoints.AddAlternativePoints(1, 2);
+        data.PointsByIds[1].Demand = 8;
+        data.PointsByIds[2].Demand = 2;
+        data.PointsByIds[3].Demand = 4;
+        SetDistanceBothWays(data, 0, 1, 100);
+        var estimator = CreateEstimator(data);
+        var result = new DistanceMainComputer(data, estimator).Compute();
+
+        Assert.Equal([Depot, 1, Depot], result.Results[car].Path.Select(visit => visit.Id));
+        Assert.Equal(1, data.CountUnserved(result));
+
+        new InsertUnservedMainResultOptimizer(estimator, data).Optimize(result);
+
+        var served = result.Results[car].Path.Select(visit => visit.Id).Where(id => id > 0).Order().ToArray();
+        Assert.Equal([2, 3], served);
+        Assert.Equal(0, data.CountUnserved(result));
+    }
+
+    private static void SetDistanceBothWays(MainData data, int first, int second, double distance)
+    {
+        data.Distances!.AddDistance(Constants.DefaultMatrixId, first, second, distance);
+        data.Distances.AddDistance(Constants.DefaultMatrixId, second, first, distance);
+    }
+
     private static ComplexMainResultEstimator CreateEstimator(MainData data) =>
         new(data, new ByDistanceMainResultEstimator(data), new SimpleTimeEstimator(data));
 

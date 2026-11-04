@@ -154,6 +154,7 @@ public class MainWindowReactionHandler : IDisposable
             new OrOptCarResultOptimizer(_mainResultEstimator!) { Name = "Or Opt" },
             new SwapCarResultOptimizer(_mainResultEstimator!) { Name = "Swap" },
             new AlternativePointsMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Видалення альтернативних"},
+            new InsertUnservedMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Вставка необслужених"},
             new PointTransposeMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Перекидування точок"},
             new TabuSearchMainResultOptimizer(_mainResultEstimator, _mainData!) { Name = "Табу пошук"},
             new DeterministicAnnealingOptimizer(_mainResultEstimator, _mainData!, VisualizationConstants.DeterministicAnnealingConfig) { Name = "Deterministic Annealing" },

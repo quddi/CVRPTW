@@ -40,7 +40,42 @@ public class AlternativePointsMainResultOptimizer(IMainResultEstimator mainResul
                 mainResult.Results[bestCar!].Path.RemoveAt(bestInPathIndex!.Value);
                 mainResult.ReEstimateCost(mainResultEstimator);
             }
+
+            TrySwapToBetterAlternative(mainResult, currentAlternativePoints);
         } 
+    }
+
+    // Замінює обрану точку групи на іншу альтернативу на тому ж місці, якщо вистачає місткості й оцінка зменшується.
+    private void TrySwapToBetterAlternative(MainResult mainResult, HashSet<int> group)
+    {
+        var chosenId = group.FirstOrDefault(id => GetContainingPath(mainResult, id).car != null);
+        var (car, index) = GetContainingPath(mainResult, chosenId);
+
+        if (car == null || index == null) return;
+
+        var carResult = mainResult.Results[car];
+        var best = mainResultEstimator.Estimate(mainResult);
+
+        foreach (var otherId in group.Where(id => id != chosenId).ToList())
+        {
+            var load = mainData.GetLoad(carResult) - mainData.PointsByIds[chosenId].Demand + mainData.PointsByIds[otherId].Demand;
+
+            if (load > car.Capacity) continue;
+
+            var original = carResult.Path[index.Value];
+            carResult.Path[index.Value] = new PointVisitResult(otherId);
+            var estimation = mainResultEstimator.Estimate(mainResult);
+
+            if (estimation < best)
+            {
+                best = estimation;
+                chosenId = otherId;
+                continue;
+            }
+
+            carResult.Path[index.Value] = original;
+            mainResultEstimator.Estimate(mainResult);
+        }
     }
     
     private (Car? car, int? inPathIndex) GetContainingPath(MainResult mainResult, int pointId)
