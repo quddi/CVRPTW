@@ -5,7 +5,8 @@ namespace CVRPTW.Computing.Optimizers;
 /// <summary>
 /// Вставляє необслужених клієнтів у найдешевшу позицію, де вистачає місткості. Для необслуженої групи альтернатив
 /// пробує кожного її члена. Якщо місця немає ніде, звільняє його заміною обраної точки іншої групи альтернатив
-/// на легшу. Зміна приймається, лише коли загальна оцінка (разом зі штрафом за необслужених) зменшується.
+/// на легшу. Зміна приймається, лише коли загальна оцінка (разом зі штрафом за необслужених) зменшується
+/// і не з'являються нові недосяжні переходи (їхній штраф дорівнює штрафу за необслуженого й інакше «обмінявся» б на нього).
 /// </summary>
 public class InsertUnservedMainResultOptimizer(IMainResultEstimator mainResultEstimator, MainData mainData) : MainResultOptimizer
 {
@@ -43,7 +44,8 @@ public class InsertUnservedMainResultOptimizer(IMainResultEstimator mainResultEs
     private void TryServe(MainResult mainResult, int[] candidates)
     {
         var baseline = mainResult.Estimation;
-        var best = FindBestInsertion(mainResult, candidates);
+        var unreachable = mainResult.UnreachableEdgesCount;
+        var best = FindBestInsertion(mainResult, candidates, unreachable);
         Replacement? bestReplacement = null;
 
         // Звільняємо місце: замінюємо обрану точку групи альтернатив на легшу й дивимось, чи вдається вставити клієнта.
@@ -53,7 +55,7 @@ public class InsertUnservedMainResultOptimizer(IMainResultEstimator mainResultEs
             var original = path[index];
 
             path[index] = new PointVisitResult(lighterId);
-            var insertion = FindBestInsertion(mainResult, candidates);
+            var insertion = FindBestInsertion(mainResult, candidates, unreachable);
             path[index] = original;
 
             if (insertion.Car == null || insertion.Estimation >= (best.Car == null ? baseline : best.Estimation)) continue;
@@ -76,7 +78,7 @@ public class InsertUnservedMainResultOptimizer(IMainResultEstimator mainResultEs
     }
 
     // Найкраща вставка одного з кандидатів у поточний стан; Car == null, якщо вставити ніде.
-    private Insertion FindBestInsertion(MainResult mainResult, int[] candidates)
+    private Insertion FindBestInsertion(MainResult mainResult, int[] candidates, int maxUnreachable)
     {
         var best = new Insertion(double.MaxValue, null, 0, 0);
 
@@ -92,9 +94,10 @@ public class InsertUnservedMainResultOptimizer(IMainResultEstimator mainResultEs
                 {
                     carResult.Path.Insert(index, new PointVisitResult(pointId));
                     var estimation = mainResultEstimator.Estimate(mainResult);
+                    var unreachableCount = mainResult.UnreachableEdgesCount;
                     carResult.Path.RemoveAt(index);
 
-                    if (estimation < best.Estimation) best = new Insertion(estimation, car, index, pointId);
+                    if (unreachableCount <= maxUnreachable && estimation < best.Estimation) best = new Insertion(estimation, car, index, pointId);
                 }
             }
         }

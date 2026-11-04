@@ -55,6 +55,7 @@ public class AlternativePointsMainResultOptimizer(IMainResultEstimator mainResul
 
         var carResult = mainResult.Results[car];
         var best = mainResultEstimator.Estimate(mainResult);
+        var unreachable = mainResult.UnreachableEdgesCount;
 
         foreach (var otherId in group.Where(id => id != chosenId).ToList())
         {
@@ -66,7 +67,7 @@ public class AlternativePointsMainResultOptimizer(IMainResultEstimator mainResul
             carResult.Path[index.Value] = new PointVisitResult(otherId);
             var estimation = mainResultEstimator.Estimate(mainResult);
 
-            if (estimation < best)
+            if (estimation < best && mainResult.UnreachableEdgesCount <= unreachable)
             {
                 best = estimation;
                 chosenId = otherId;

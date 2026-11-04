@@ -264,6 +264,25 @@ public class EstimationTests
         Assert.Equal(0, data.CountUnserved(result));
     }
 
+    [Fact]
+    public void InsertUnserved_DoesNotTradeUnservedForUnreachableEdge()
+    {
+        // 1 → склад близько, але склад → 1 і 1 ↔ 2 недосяжні: вставка 1 після 2 зняла б штраф за необслуженого
+        // і додала б штраф за недосяжний перехід 2 → 1 тієї самої величини, а дорога 2 → склад замінилась би на 1 → склад.
+        var (data, car) = CreateWorld();
+        data.Distances = new Distances(3);
+        SetDistanceBothWays(data, 0, 2, 1000);
+        data.Distances.AddDistance(Constants.DefaultMatrixId, 1, 0, 10);
+        var estimator = CreateEstimator(data);
+        var result = CreateResult(car, 2);
+        estimator.Estimate(result);
+
+        new InsertUnservedMainResultOptimizer(estimator, data).Optimize(result);
+
+        Assert.Equal([Depot, 2, Depot], result.Results[car].Path.Select(visit => visit.Id));
+        Assert.Equal(0, result.UnreachableEdgesCount);
+    }
+
     private static void SetDistanceBothWays(MainData data, int first, int second, double distance)
     {
         data.Distances!.AddDistance(Constants.DefaultMatrixId, first, second, distance);
